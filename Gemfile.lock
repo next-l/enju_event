@@ -38,6 +38,7 @@ GEM
     arel (2.2.1)
     builder (3.0.0)
     erubis (2.7.0)
+    event-calendar (2.3.3)
     hike (1.2.1)
     i18n (0.6.0)
     jquery-rails (1.0.14)
@@ -95,5 +96,6 @@ PLATFORMS
 
 DEPENDENCIES
   enju_event!
+  event-calendar
   jquery-rails
   sqlite3
