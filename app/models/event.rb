@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+require 'event_calendar'
 class Event < ActiveRecord::Base
   scope :closing_days, includes(:event_category).where('event_categories.name = ?', 'closed')
   scope :on, lambda {|datetime| where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1)}
