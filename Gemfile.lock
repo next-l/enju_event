@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     enju_event (0.0.1)
+      event-calendar (~> 2.3.3)
       rails (>= 3.0.10)
 
 GEM
@@ -96,6 +97,5 @@ PLATFORMS
 
 DEPENDENCIES
   enju_event!
-  event-calendar
   jquery-rails
   sqlite3
