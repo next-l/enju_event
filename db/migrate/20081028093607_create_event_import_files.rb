@@ -13,6 +13,7 @@ class CreateEventImportFiles < ActiveRecord::Migration
       t.string :event_import_content_type
       t.integer :event_import_file_size
       t.datetime :event_import_updated_at
+      t.string :edit_mode
 
       t.timestamps
     end
