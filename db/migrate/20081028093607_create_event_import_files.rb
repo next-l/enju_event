@@ -2,7 +2,6 @@ class CreateEventImportFiles < ActiveRecord::Migration
   def self.up
     create_table :event_import_files do |t|
       t.integer :parent_id
-      t.string :filename
       t.string :content_type
       t.integer :size
       t.string :file_hash
