@@ -1,5 +1,4 @@
 class EventImportFilesController < ApplicationController
-  before_filter :check_client_ip_address
   load_and_authorize_resource
 
   # GET /event_import_files
