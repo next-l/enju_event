@@ -2,7 +2,7 @@ class EventImportResultsController < InheritedResources::Base
   respond_to :html, :xml, :csv
   load_and_authorize_resource
   has_scope :file_id
-  actions :index, :show
+  actions :index, :show, :destroy
 
   def index
     @event_import_file = EventImportFile.where(:id => params[:event_import_file_id]).first
