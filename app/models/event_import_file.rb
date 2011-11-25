@@ -108,7 +108,7 @@ class EventImportFile < ActiveRecord::Base
       file.import_start
     end
   rescue
-    logger.info "#{Time.zone.now} importing events failed!"
+    Rails.logger.info "#{Time.zone.now} importing events failed!"
   end
 
   private
