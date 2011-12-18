@@ -1,10 +1,29 @@
+GIT
+  remote: git://github.com/swanandp/acts_as_list.git
+  revision: 7fd29b74eec9327a3d2a3033e1ca249ba04fc7e5
+  specs:
+    acts_as_list (0.1.4)
+
 PATH
   remote: .
   specs:
     enju_event (0.0.2)
+      addressable
+      attribute_normalizer (~> 1.0)
+      cancan
+      configatron
+      devise
       event-calendar (~> 2.3.3)
+      friendly_id (= 4.0.0.beta14)
+      has_scope
+      inherited_resources
+      paperclip
       rails (~> 3.1.3)
       simple_form
+      state_machine
+      sunspot_rails (~> 1.3)
+      sunspot_solr (~> 1.3)
+      will_paginate (~> 3.0)
 
 GEM
   remote: http://rubygems.org/
@@ -37,35 +56,54 @@ GEM
       activesupport (= 3.1.3)
     activesupport (3.1.3)
       multi_json (~> 1.0)
+    addressable (2.2.6)
     arel (2.2.1)
+    attribute_normalizer (1.0.1)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
     cancan (1.6.7)
-    devise (1.5.1)
+    cocaine (0.2.1)
+    configatron (2.9.0)
+      yamler (>= 0.1.0)
+    devise (1.5.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
+    escape (0.0.4)
     event-calendar (2.3.3)
+    factory_girl (2.3.2)
+      activesupport
+    factory_girl_rails (1.4.0)
+      factory_girl (~> 2.3.0)
+      railties (>= 3.0.0)
+    friendly_id (4.0.0.beta14)
     has_scope (0.5.1)
     hike (1.2.1)
     i18n (0.6.0)
     inherited_resources (1.3.0)
       has_scope (~> 0.5.0)
       responders (~> 0.6.0)
-    jquery-rails (1.0.18)
+    jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
-    json (1.6.1)
+    json (1.6.3)
     mail (2.3.0)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.17.2)
-    multi_json (1.0.3)
+    multi_json (1.0.4)
+    nokogiri (1.5.0)
     orm_adapter (0.0.5)
+    paperclip (2.4.5)
+      activerecord (>= 2.3.0)
+      activesupport (>= 2.3.2)
+      cocaine (>= 0.0.2)
+      mime-types
     polyglot (0.3.3)
+    pr_geohash (1.0.0)
     rack (1.3.5)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -91,9 +129,11 @@ GEM
       rdoc (~> 3.4)
       thor (~> 0.14.6)
     rake (0.9.2.2)
-    rdoc (3.11)
+    rdoc (3.12)
       json (~> 1.4)
     responders (0.6.4)
+    rsolr (1.0.6)
+      builder (>= 2.1.2)
     rspec (2.7.0)
       rspec-core (~> 2.7.0)
       rspec-expectations (~> 2.7.0)
@@ -114,7 +154,19 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.4)
+    sqlite3 (1.3.5)
+    state_machine (1.1.0)
+    sunspot (1.3.0)
+      escape (~> 0.0.4)
+      pr_geohash (~> 1.0)
+      rsolr (~> 1.0.6)
+    sunspot-rails-tester (0.0.4)
+      sunspot_rails (~> 1.2)
+    sunspot_rails (1.3.0)
+      nokogiri
+      sunspot (= 1.3.0)
+    sunspot_solr (1.3.0)
+      escape (~> 0.0.4)
     thor (0.14.6)
     tilt (1.3.3)
     treetop (1.4.10)
@@ -123,15 +175,17 @@ GEM
     tzinfo (0.3.31)
     warden (1.1.0)
       rack (>= 1.0)
+    will_paginate (3.0.2)
+    yamler (0.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  cancan
-  devise
+  acts_as_list!
   enju_event!
-  inherited_resources
+  factory_girl_rails (~> 1.4)
   jquery-rails
   rspec-rails
   sqlite3
+  sunspot-rails-tester
