@@ -6,6 +6,7 @@ test/dummy/log/*.log
 test/dummy/tmp/
 spec/dummy/db/*.sqlite3
 spec/dummy/log/*.log
+spec/dummy/private/
 spec/dummy/solr/
 spec/dummy/tmp/
 spec/cassette_library/

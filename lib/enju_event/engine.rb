@@ -9,7 +9,8 @@ require "has_scope"
 require "configatron"
 require "paperclip"
 require "state_machine"
-require 'addressable/uri'
+require "addressable/uri"
+require "nkf"
 
 module EnjuEvent
   class Engine < Rails::Engine

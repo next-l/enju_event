@@ -4,27 +4,36 @@ class Ability
   def initialize(user)
     case user.try(:role).try(:name)
     when 'Administrator'
-      can :manage, Message
-      can [:read, :update, :destroy], MessageRequest
-      can [:read, :update], MessageTemplate
+      can [:read, :create], EventCategory
+      can [:update, :destroy], EventCategory do |event_category|
+        !['unknown', 'closed'].include?(event_category.name)
+      end
+      can :manage, [
+        Event,
+        EventImportFile,
+        Participate
+      ]
+      can :read, EventImportResult
     when 'Librarian'
-      can [:index, :create], Message
-      can [:update], Message do |message|
-        message.sender == user
-      end
-      can [:show, :destroy], Message do |message|
-        message.receiver == user
-      end
-      can [:read, :update, :destroy], MessageRequest
-      can :read, MessageTemplate
+      can :manage, [
+        Event,
+        EventImportFile,
+        Participate
+      ]
+      can :read, [
+        EventCategory,
+        EventImportResult
+      ]
     when 'User'
-      can [:read, :destroy], Message do |message|
-        message.receiver == user
-      end
-      can :index, Message
-      can :show, Message do |message|
-        message.receiver == user
-      end
+      can :read, [
+        Event,
+        EventCategory
+      ]
+    else
+      can :read, [
+        Event,
+        EventCategory
+      ]
     end
   end
 end
