@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = EnjuEvent::VERSION
   s.authors     = ["Kosuke Tanabe"]
   s.email       = ["tanabe@mwr.mediacom.keio.ac.jp"]
-  s.homepage    = "https://github.com/nabeta/enju_subject"
+  s.homepage    = "https://github.com/nabeta/enju_event"
   s.summary     = "enju_event plugin"
   s.description = "Event management for Next-L Enju"
 
