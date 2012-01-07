@@ -1,0 +1,45 @@
+en:
+  activerecord:
+    models:
+      event_category: Event category
+      event: Event
+      event_import_file: Event import file
+      event_import_result: Event Import Result
+
+    attributes:
+      event_category:
+        name: Name
+        display_name: Display name
+        note: Note
+        position: Position
+      event:
+        name: Name
+        note: Note
+        start_at: Start at
+        end_at: End at
+        deleted_at: Deleted at
+        all_day: All day
+        display_name: Display name
+      event_import_file:
+        event_import_file_name: Filename
+        event_import_content_type: Content type
+        event_import_file_size: Size
+        file_hash: File hash
+        note: Note
+        imported_at: Imported at
+        event_import_updated_at: Updated at
+        state: State
+        edit_mode: Edit mode
+      event_import_result:
+        body: Body
+
+  event:
+    library_group_event: "Events at %{library_group_name}"
+    all_libraries: "All libraries"
+    import_event: "Import events"
+    all: "All events"
+    past: "Past events"
+    upcoming: "Upcoming events"
+  calendar:
+    calendar: "Calendar"
+    library_calendar: "Calendar of events at %{library_name}"
