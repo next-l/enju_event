@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "simple_form"
   s.add_dependency "devise"
   s.add_dependency "cancan"
-  s.add_dependency "attribute_normalizer", "~> 1.0"
+  s.add_dependency "attribute_normalizer", "~> 1.1"
   s.add_dependency "inherited_resources"
   s.add_dependency "friendly_id", "~> 4.0"
   s.add_dependency "sunspot_rails"
@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency "paperclip"
   s.add_dependency "state_machine"
   s.add_dependency "addressable"
-  s.add_dependency "enju_message", ">= 0.0.5"
+  s.add_dependency "enju_message", ">= 0.0.9"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"

@@ -10,6 +10,7 @@ require "configatron"
 require "paperclip"
 require "state_machine"
 require "addressable/uri"
+require "csv"
 require "nkf"
 
 module EnjuEvent
