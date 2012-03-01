@@ -12,6 +12,7 @@ require "state_machine"
 require "addressable/uri"
 require "csv"
 require "nkf"
+require "acts_as_list"
 
 module EnjuEvent
   class Engine < Rails::Engine

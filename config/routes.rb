@@ -10,4 +10,5 @@ Rails.application.routes.draw do
     resources :event_import_results, :only => [:index, :show, :destroy]
   end
   resources :event_import_results, :only => [:index, :show, :destroy]
+  resources :participates
 end

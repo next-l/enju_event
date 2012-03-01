@@ -13,6 +13,21 @@
 
 ActiveRecord::Schema.define(:version => 20111201163718) do
 
+  create_table "countries", :force => true do |t|
+    t.string  "name",         :null => false
+    t.text    "display_name"
+    t.string  "alpha_2"
+    t.string  "alpha_3"
+    t.string  "numeric_3"
+    t.text    "note"
+    t.integer "position"
+  end
+
+  add_index "countries", ["alpha_2"], :name => "index_countries_on_alpha_2"
+  add_index "countries", ["alpha_3"], :name => "index_countries_on_alpha_3"
+  add_index "countries", ["name"], :name => "index_countries_on_name"
+  add_index "countries", ["numeric_3"], :name => "index_countries_on_numeric_3"
+
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
     t.integer  "attempts",   :default => 0
