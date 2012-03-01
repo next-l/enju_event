@@ -4,9 +4,8 @@ class EventCategoriesController < InheritedResources::Base
 
   def update
     @event_category = EventCategory.find(params[:id])
-    if params[:position]
-      @event_category.insert_at(params[:position])
-      redirect_to event_categories_url
+    if params[:move]
+      move_position(@event_category, params[:move])
       return
     end
     update!

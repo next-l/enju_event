@@ -93,6 +93,14 @@ class ApplicationController < ActionController::Base
   def store_page
     flash[:page] = params[:page] if params[:page].to_i > 0
   end
+
+  def move_position(resource, direction)
+    if ['higher', 'lower'].include?(direction)
+      resource.send("move_#{direction}")
+      redirect_to url_for(:controller => resource.class.to_s.pluralize.underscore)
+      return
+    end
+  end
 end
 
 class InvalidLocaleError < StandardError

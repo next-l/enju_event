@@ -11,6 +11,7 @@ require "paperclip"
 require "state_machine"
 require "addressable/uri"
 require "nkf"
+require "csv"
 
 module EnjuEvent
   class Engine < Rails::Engine

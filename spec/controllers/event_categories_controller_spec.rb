@@ -335,7 +335,7 @@ describe EventCategoriesController do
         end
 
         it "moves its position when specified" do
-          put :update, :id => @event_category.id, :event_category => @attrs, :position => 2
+          put :update, :id => @event_category.id, :event_category => @attrs, :move => 'lower'
           response.should redirect_to(event_categories_url)
         end
       end
