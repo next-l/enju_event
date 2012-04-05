@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", "~> 3.1"
+  s.add_dependency "rails", "~> 3.2"
   s.add_dependency "event-calendar", "~> 2.3.3"
   s.add_dependency "simple_form"
   s.add_dependency "devise"
@@ -33,10 +33,10 @@ Gem::Specification.new do |s|
   s.add_dependency "state_machine"
   s.add_dependency "addressable"
   s.add_dependency "acts_as_list", "~> 0.1.5"
-  s.add_dependency "enju_message", "~> 0.0.11"
+  s.add_dependency "enju_message", "~> 0.0.13"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "sunspot-rails-tester"
-  s.add_development_dependency "factory_girl_rails", "~> 1.7"
+  s.add_development_dependency "factory_girl_rails", "~> 3.0"
 end
