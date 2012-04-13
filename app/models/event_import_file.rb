@@ -116,6 +116,7 @@ class EventImportFile < ActiveRecord::Base
         event.all_day = true
       end
       event.save!
+      row_num += 1
     end
     sm_complete!
   rescue => e
@@ -133,6 +134,7 @@ class EventImportFile < ActiveRecord::Base
       next if row['dummy'].to_s.strip.present?
       event = Event.find(row['id'].to_s.strip)
       event.destroy
+      row_num += 1
     end
     sm_complete!
   rescue => e
