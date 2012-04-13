@@ -36,6 +36,35 @@ describe EventImportFile do
       Event.order('id DESC').first.end_at.to_s.should eq Time.zone.parse('2011-03-27').end_of_day.to_s
     end
   end
+
+  describe "when its mode is 'update'" do
+    it "should update events" do
+      @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_update_file.tsv")
+      @file.modify
+      event1 = Event.find(1)
+      event1.name.should eq '変更後のイベント名'
+      event1.start_at.should eq Time.zone.parse('2012-04-01').beginning_of_day
+      event1.end_at.to_s.should eq Time.zone.parse('2012-04-02').end_of_day.to_s
+
+      event2 = Event.find(2)
+      event2.end_at.to_s.should eq Time.zone.parse('2012-04-03').beginning_of_day.to_s
+      event2.all_day.should be_false
+      event2.library.name.should eq 'mita'
+
+      event3 = Event.find(3)
+      event3.name.should eq 'ミーティング'
+    end
+  end
+    
+
+  describe "when its mode is 'destroy'" do
+    it "should destroy events" do
+      old_event_count = Event.count
+      @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_destroy_file.tsv")
+      @file.remove
+      Event.count.should eq old_event_count - 2
+    end
+  end
 end
 
 # == Schema Information

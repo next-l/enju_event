@@ -36,7 +36,9 @@ class EventImportFile < ActiveRecord::Base
     when 'create'
       import
     when 'update'
+      modify
     when 'destroy'
+      remove
     else
       import
     end
@@ -48,43 +50,36 @@ class EventImportFile < ActiveRecord::Base
     record = 2
 
     rows = open_import_file
-    field = rows.first
-    if [field['name']].reject{|f| f.to_s.strip == ""}.empty?
-      raise "You should specify a name in the first line"
-    end
-    if [field['start_at'], field['end_at']].reject{|field| field.to_s.strip == ""}.empty?
-      raise "You should specify dates in the first line"
-    end
-    #rows.shift
+    check_field(rows.first)
+
     rows.each do |row|
       next if row['dummy'].to_s.strip.present?
       import_result = EventImportResult.create!(:event_import_file => self, :body => row.fields.join("\t"))
 
       event = Event.new
-      event.name = row['name']
+      event.name = row['name'].to_s.strip
       event.note = row['note']
       event.start_at = row['start_at']
       event.end_at = row['end_at']
       category = row['category'].to_s.strip
-      event.all_day = true
-      library = Library.where(:name => row['library_short_name']).first
+      if row['all_day'].to_s.strip.downcase == 'false'
+        event.all_day = false
+      else
+        event.all_day = true
+      end
+      library = Library.where(:name => row['library']).first
       library = Library.web if library.blank?
       event.library = library
       event_category = EventCategory.where(:name => category).first || EventCategory.where(:name => 'unknown').first
       event.event_category = event_category
 
-      begin
-        if event.save!
-          import_result.event = event
-          num[:imported] += 1
-          if record % 50 == 0
-            Sunspot.commit
-            GC.start
-          end
+      if event.save!
+        import_result.event = event
+        num[:imported] += 1
+        if record % 50 == 0
+          Sunspot.commit
+          GC.start
         end
-      rescue
-        Rails.logger.info("event import failed: column #{record}")
-        num[:failed] += 1
       end
       import_result.save!
       record += 1
@@ -94,6 +89,54 @@ class EventImportFile < ActiveRecord::Base
     rows.close
     sm_complete!
     return num
+  #rescue => e
+  #  self.error_message = e
+  #  sm_fail!
+  end
+
+  def modify
+    sm_start!
+    rows = open_import_file
+    check_field(rows.first)
+
+    rows.each do |row|
+      next if row['dummy'].to_s.strip.present?
+      event = Event.find(row['id'].to_s.strip)
+      event_category = EventCategory.where(:name => row['category'].to_s.strip).first
+      event.event_category = event_category if event_category
+      library = Library.where(:name => row['library'].to_s.strip).first
+      event.library = library if library
+      event.name = row['name'] if row['name'].to_s.strip.present?
+      event.start_at = row['start_at'] if row['start_at'].to_s.strip.present?
+      event.end_at = row['end_at'] if row['end_at'].to_s.strip.present?
+      event.note = row['end_at'] if row['note'].to_s.strip.present?
+      if row['all_day'].to_s.strip.downcase == 'false'
+        event.all_day = false
+      else
+        event.all_day = true
+      end
+      event.save!
+    end
+    sm_complete!
+  #rescue => e
+  #  self.error_message = e
+  #  sm_fail!
+  end
+
+  def remove
+    sm_start!
+    rows = open_import_file
+    rows.shift
+
+    rows.each do |row|
+      next if row['dummy'].to_s.strip.present?
+      event = Event.find(row['id'].to_s.strip)
+      event.destroy
+    end
+    sm_complete!
+  #rescue => e
+  #  self.error_message = e
+  #  sm_fail!
   end
 
   def self.import
@@ -132,6 +175,15 @@ class EventImportFile < ActiveRecord::Base
     tempfile.close(true)
     file.close
     rows
+  end
+
+  def check_field(field)
+    if [field['name']].reject{|f| f.to_s.strip == ""}.empty?
+      raise "You should specify a name in the first line"
+    end
+    if [field['start_at'], field['end_at']].reject{|field| field.to_s.strip == ""}.empty?
+      raise "You should specify dates in the first line"
+    end
   end
 end
 
