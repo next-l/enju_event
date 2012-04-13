@@ -44,8 +44,13 @@
 </p>
 
 <p>
-  <strong><%= t('activerecord.attributes.manifestation_import_file.state') -%>:</strong>
+  <strong><%= t('activerecord.attributes.event_import_file.state') -%>:</strong>
   <%= localized_state(@event_import_file.state) -%>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.event_import_file.error_message') -%>:</strong>
+  <%= @event_import_file.error_message -%>
 </p>
 
 <p>

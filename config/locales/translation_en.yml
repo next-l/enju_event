@@ -30,6 +30,7 @@ en:
         event_import_updated_at: Updated at
         state: State
         edit_mode: Edit mode
+        error_message: Error message
       event_import_result:
         body: Body
 
