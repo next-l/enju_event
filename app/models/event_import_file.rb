@@ -92,6 +92,7 @@ class EventImportFile < ActiveRecord::Base
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     sm_fail!
+    raise e
   end
 
   def modify
@@ -122,6 +123,7 @@ class EventImportFile < ActiveRecord::Base
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     sm_fail!
+    raise e
   end
 
   def remove
@@ -140,6 +142,7 @@ class EventImportFile < ActiveRecord::Base
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     sm_fail!
+    raise e
   end
 
   def self.import
