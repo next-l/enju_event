@@ -47,7 +47,7 @@ class EventImportFile < ActiveRecord::Base
   def import
     self.reload
     num = {:imported => 0, :failed => 0}
-    record = 2
+    row_num = 2
 
     rows = open_import_file
     check_field(rows.first)
@@ -76,22 +76,22 @@ class EventImportFile < ActiveRecord::Base
       if event.save!
         import_result.event = event
         num[:imported] += 1
-        if record % 50 == 0
+        if row_num % 50 == 0
           Sunspot.commit
           GC.start
         end
       end
       import_result.save!
-      record += 1
+      row_num += 1
     end
     self.update_attribute(:imported_at, Time.zone.now)
     Sunspot.commit
     rows.close
     sm_complete!
     return num
-  #rescue => e
-  #  self.error_message = e
-  #  sm_fail!
+  rescue => e
+    self.error_message = "line #{row_num}: #{e.message}"
+    sm_fail!
   end
 
   def modify
@@ -118,15 +118,16 @@ class EventImportFile < ActiveRecord::Base
       event.save!
     end
     sm_complete!
-  #rescue => e
-  #  self.error_message = e
-  #  sm_fail!
+  rescue => e
+    self.error_message = "line #{row_num}: #{e.message}"
+    sm_fail!
   end
 
   def remove
     sm_start!
     rows = open_import_file
     rows.shift
+    row_num = 2
 
     rows.each do |row|
       next if row['dummy'].to_s.strip.present?
@@ -134,9 +135,9 @@ class EventImportFile < ActiveRecord::Base
       event.destroy
     end
     sm_complete!
-  #rescue => e
-  #  self.error_message = e
-  #  sm_fail!
+  rescue => e
+    self.error_message = "line #{row_num}: #{e.message}"
+    sm_fail!
   end
 
   def self.import
