@@ -15,7 +15,6 @@ class EventImportFile < ActiveRecord::Base
   validates_attachment_presence :event_import
   belongs_to :user, :validate => true
   has_many :event_import_results
-  before_create :set_digest
 
   state_machine :initial => :pending do
     event :sm_start do
@@ -28,12 +27,6 @@ class EventImportFile < ActiveRecord::Base
 
     event :sm_fail do
       transition :started => :failed
-    end
-  end
-
-  def set_digest(options = {:type => 'sha1'})
-    if File.exists?(event_import.queued_for_write[:original])
-      self.file_hash = Digest::SHA1.hexdigest(File.open(event_import.queued_for_write[:original].path, 'rb').read)
     end
   end
 
@@ -150,7 +143,6 @@ end
 #  parent_id                 :integer
 #  content_type              :string(255)
 #  size                      :integer
-#  file_hash                 :string(255)
 #  user_id                   :integer
 #  note                      :text
 #  imported_at               :datetime
@@ -162,5 +154,6 @@ end
 #  created_at                :datetime
 #  updated_at                :datetime
 #  edit_mode                 :string(255)
+#  event_import_fingerprint  :string(255)
 #
 

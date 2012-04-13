@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111201163718) do
+ActiveRecord::Schema.define(:version => 20120413051535) do
 
   create_table "countries", :force => true do |t|
     t.string  "name",         :null => false
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
@@ -48,15 +48,14 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "event_import_files", :force => true do |t|
     t.integer  "parent_id"
     t.string   "content_type"
     t.integer  "size"
-    t.string   "file_hash"
     t.integer  "user_id"
     t.text     "note"
     t.datetime "imported_at"
@@ -66,11 +65,11 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.integer  "event_import_file_size"
     t.datetime "event_import_updated_at"
     t.string   "edit_mode"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.string   "event_fingerprint"
   end
 
-  add_index "event_import_files", ["file_hash"], :name => "index_event_import_files_on_file_hash"
   add_index "event_import_files", ["parent_id"], :name => "index_event_import_files_on_parent_id"
   add_index "event_import_files", ["state"], :name => "index_event_import_files_on_state"
   add_index "event_import_files", ["user_id"], :name => "index_event_import_files_on_user_id"
@@ -79,8 +78,8 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.integer  "event_import_file_id"
     t.integer  "event_id"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "events", :force => true do |t|
@@ -93,8 +92,8 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.boolean  "all_day",           :default => false, :null => false
     t.datetime "deleted_at"
     t.text     "display_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   add_index "events", ["event_category_id"], :name => "index_events_on_event_category_id"
@@ -136,9 +135,10 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.integer  "users_count",           :default => 0,   :null => false
     t.integer  "position"
     t.integer  "country_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.datetime "deleted_at"
+    t.string   "isil"
   end
 
   add_index "libraries", ["library_group_id"], :name => "index_libraries_on_library_group_id"
@@ -156,8 +156,8 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.integer  "valid_period_for_new_user",   :default => 365,                      :null => false
     t.boolean  "post_to_union_catalog",       :default => false,                    :null => false
     t.integer  "country_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                        :null => false
+    t.datetime "updated_at",                                                        :null => false
     t.text     "admin_networks"
     t.boolean  "allow_bookmark_external_url", :default => false,                    :null => false
     t.integer  "position"
@@ -170,8 +170,8 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.integer  "patron_id",  :null => false
     t.integer  "event_id",   :null => false
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "participates", ["event_id"], :name => "index_participates_on_event_id"
@@ -182,8 +182,8 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "patrons", :force => true do |t|
@@ -199,8 +199,8 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.string   "full_name"
     t.text     "full_name_transcription"
     t.text     "full_name_alternative"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.datetime "deleted_at"
     t.string   "zip_code_1"
     t.string   "zip_code_2"
@@ -247,8 +247,8 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "shelves", :force => true do |t|
@@ -258,8 +258,8 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.integer  "library_id",   :default => 1, :null => false
     t.integer  "items_count",  :default => 0, :null => false
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.datetime "deleted_at"
   end
 
@@ -270,15 +270,15 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "user_has_roles", :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -288,8 +288,8 @@ ActiveRecord::Schema.define(:version => 20111201163718) do
     t.text     "note"
     t.string   "locale"
     t.string   "user_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.string   "email",                                 :default => "", :null => false
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
