@@ -163,15 +163,9 @@ class EventImportFile < ActiveRecord::Base
     }
     tempfile.close
 
-    if RUBY_VERSION > '1.9'
-      file = CSV.open(tempfile, :col_sep => "\t")
-      header = file.first
-      rows = CSV.open(tempfile, :headers => header, :col_sep => "\t")
-    else
-      file = FasterCSV.open(tempfile.path, :col_sep => "\t")
-      header = file.first
-      rows = FasterCSV.open(tempfile.path, :headers => header, :col_sep => "\t")
-    end
+    file = CSV.open(tempfile, :col_sep => "\t")
+    header = file.first
+    rows = CSV.open(tempfile, :headers => header, :col_sep => "\t")
     EventImportResult.create!(:event_import_file => self, :body => header.join("\t"))
     tempfile.close(true)
     file.close
