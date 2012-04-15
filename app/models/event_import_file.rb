@@ -99,6 +99,7 @@ class EventImportFile < ActiveRecord::Base
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     sm_fail!
+    raise e
   end
 
   def modify
@@ -124,11 +125,13 @@ class EventImportFile < ActiveRecord::Base
         event.all_day = true
       end
       event.save!
+      row_num += 1
     end
     sm_complete!
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     sm_fail!
+    raise e
   end
 
   def remove
@@ -141,11 +144,13 @@ class EventImportFile < ActiveRecord::Base
       next if row['dummy'].to_s.strip.present?
       event = Event.find(row['id'].to_s.strip)
       event.destroy
+      row_num += 1
     end
     sm_complete!
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     sm_fail!
+    raise e
   end
 
   def self.import
