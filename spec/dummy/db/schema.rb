@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413170734) do
+ActiveRecord::Schema.define(:version => 20120415060342) do
 
   create_table "countries", :force => true do |t|
     t.string  "name",         :null => false
@@ -58,13 +58,14 @@ ActiveRecord::Schema.define(:version => 20120413170734) do
     t.integer  "size"
     t.integer  "user_id"
     t.text     "note"
-    t.datetime "imported_at"
+    t.datetime "executed_at"
     t.string   "state"
     t.string   "event_import_file_name"
     t.string   "event_import_content_type"
     t.integer  "event_import_file_size"
     t.datetime "event_import_updated_at"
     t.string   "edit_mode"
+    t.string   "event_import_fingerprint"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
     t.string   "event_fingerprint"
