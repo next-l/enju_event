@@ -28,9 +28,18 @@ class EventImportFile < ActiveRecord::Base
     event :sm_fail do
       transition :started => :failed
     end
+
+    before_transition any => :started do |patron_import_file|
+      patron_import_file.executed_at = Time.zone.now
+    end
+
+    before_transition any => :completed do |patron_import_file|
+      patron_import_file.error_message = nil
+    end
   end
 
   def import_start
+    executed_at = Time.zone.now
     sm_start!
     case edit_mode
     when 'create'
@@ -47,10 +56,9 @@ class EventImportFile < ActiveRecord::Base
   def import
     self.reload
     num = {:imported => 0, :failed => 0}
-    row_num = 2
-
     rows = open_import_file
     check_field(rows.first)
+    row_num = 2
 
     rows.each do |row|
       next if row['dummy'].to_s.strip.present?
@@ -84,7 +92,6 @@ class EventImportFile < ActiveRecord::Base
       import_result.save!
       row_num += 1
     end
-    self.update_attribute(:imported_at, Time.zone.now)
     Sunspot.commit
     rows.close
     sm_complete!
@@ -99,6 +106,7 @@ class EventImportFile < ActiveRecord::Base
     sm_start!
     rows = open_import_file
     check_field(rows.first)
+    row_num = 2
 
     rows.each do |row|
       next if row['dummy'].to_s.strip.present?
