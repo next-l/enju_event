@@ -60,7 +60,7 @@ class ParticipatesController < ApplicationController
       if @participate.update_attributes(params[:participate])
         flash[:notice] = 'Participate was successfully updated.'
         format.html { redirect_to(@participate) }
-        format.json { head :ok }
+        format.json { head :no_content }
       else
         format.html { render :action => "edit" }
         format.json { render :json => @participate.errors, :status => :unprocessable_entity }
@@ -74,8 +74,8 @@ class ParticipatesController < ApplicationController
     @participate.destroy
 
     respond_to do |format|
-      format.html { redirect_to(participates_url) }
-      format.json { head :ok }
+      format.html { redirect_to participates_url }
+      format.json { head :no_content }
     end
   end
 end
