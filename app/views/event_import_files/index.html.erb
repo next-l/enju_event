@@ -6,7 +6,7 @@
   <tr>
     <th>Id</th>
     <th><%= t('activerecord.attributes.event_import_file.event_import_file_name') -%></th>
-    <th><%= t('activerecord.attributes.event_import_file.imported_at') -%></th>
+    <th><%= t('activerecord.attributes.event_import_file.executed_at') -%></th>
     <th><%= t('activerecord.models.user') -%></th>
     <th><%= t('activerecord.attributes.event_import_file.edit_mode') -%></th>
     <th><%= t('activerecord.attributes.event_import_file.state') -%></th>
@@ -17,7 +17,7 @@
   <tr class="line<%= cycle("0", "1") -%>">
     <td><%= link_to (event_import_file.id), event_import_file -%></td>
     <td><%= link_to event_import_file.event_import_file_name, event_import_file -%></td>
-    <td><%= l(event_import_file.imported_at) if event_import_file.imported_at -%></td>
+    <td><%= l(event_import_file.executed_at) if event_import_file.executed_at -%></td>
     <td><%= link_to event_import_file.user.username, event_import_file.user -%></td>
     <td><%= event_import_file.edit_mode -%></td>
     <td><%= localized_state(event_import_file.state) -%></td>

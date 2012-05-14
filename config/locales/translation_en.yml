@@ -26,7 +26,7 @@ en:
         event_import_file_size: Size
         event_import_fingerprint: File hash
         note: Note
-        imported_at: Imported at
+        executed_at: Executed at
         event_import_updated_at: Updated at
         state: State
         edit_mode: Edit mode
