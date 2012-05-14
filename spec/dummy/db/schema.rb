@@ -65,10 +65,9 @@ ActiveRecord::Schema.define(:version => 20120415060342) do
     t.integer  "event_import_file_size"
     t.datetime "event_import_updated_at"
     t.string   "edit_mode"
-    t.string   "event_import_fingerprint"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
-    t.string   "event_fingerprint"
+    t.string   "event_import_fingerprint"
     t.text     "error_message"
   end
 
