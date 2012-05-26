@@ -62,7 +62,9 @@ class EventImportFile < ActiveRecord::Base
 
     rows.each do |row|
       next if row['dummy'].to_s.strip.present?
-      import_result = EventImportResult.create!(:event_import_file => self, :body => row.fields.join("\t"))
+      event_import_result = EventImportResult.new
+      event_import_result.assign_attributes({:event_import_file => self, :body => row.fields.join("\t")}, :as => :admin)
+      event_import_result.save!
 
       event = Event.new
       event.name = row['name'].to_s.strip
@@ -82,14 +84,14 @@ class EventImportFile < ActiveRecord::Base
       event.event_category = event_category
 
       if event.save!
-        import_result.event = event
+        event_import_result.event = event
         num[:imported] += 1
         if row_num % 50 == 0
           Sunspot.commit
           GC.start
         end
       end
-      import_result.save!
+      event_import_result.save!
       row_num += 1
     end
     Sunspot.commit
@@ -185,7 +187,9 @@ class EventImportFile < ActiveRecord::Base
       header = file.first
       rows = FasterCSV.open(tempfile.path, :headers => header, :col_sep => "\t")
     end
-    EventImportResult.create!(:event_import_file => self, :body => header.join("\t"))
+    event_import_result = EventImportResult.new
+    event_import_result.assign_attributes({:event_import_file => self, :body => header.join("\t")}, :as => :admin)
+    event_import_result.save!
     tempfile.close(true)
     file.close
     rows
