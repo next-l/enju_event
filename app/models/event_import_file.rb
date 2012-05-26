@@ -1,4 +1,5 @@
 class EventImportFile < ActiveRecord::Base
+  attr_accessible :event_import
   include ImportFile
   default_scope :order => 'id DESC'
   scope :not_imported, where(:state => 'pending')
