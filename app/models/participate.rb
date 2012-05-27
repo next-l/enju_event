@@ -1,4 +1,5 @@
 class Participate < ActiveRecord::Base
+  attr_accessible :patron_id, :event_id
   belongs_to :patron
   belongs_to :event
 

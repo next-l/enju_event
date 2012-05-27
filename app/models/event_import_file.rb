@@ -1,4 +1,5 @@
 class EventImportFile < ActiveRecord::Base
+  attr_accessible :event_import
   include ImportFile
   default_scope :order => 'id DESC'
   scope :not_imported, where(:state => 'pending')
@@ -63,7 +64,7 @@ class EventImportFile < ActiveRecord::Base
     rows.each do |row|
       next if row['dummy'].to_s.strip.present?
       event_import_result = EventImportResult.new
-      event_import_result.assign_attributes({:event_import_file => self, :body => row.fields.join("\t")}, :as => :admin)
+      event_import_result.assign_attributes({:event_import_file_id => self.id, :body => row.fields.join("\t")}, :as => :admin)
       event_import_result.save!
 
       event = Event.new
@@ -188,7 +189,7 @@ class EventImportFile < ActiveRecord::Base
       rows = FasterCSV.open(tempfile.path, :headers => header, :col_sep => "\t")
     end
     event_import_result = EventImportResult.new
-    event_import_result.assign_attributes({:event_import_file => self, :body => header.join("\t")}, :as => :admin)
+    event_import_result.assign_attributes({:event_import_file_id => self.id, :body => header.join("\t")}, :as => :admin)
     event_import_result.save!
     tempfile.close(true)
     file.close
