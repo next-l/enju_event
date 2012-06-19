@@ -24,7 +24,7 @@
     <td><%= link_to event_import_result.event.display_name.localize, event_import_result.event if event_import_result.event %></td>
     <td>
       <%= link_to t('page.show'), event_import_result %>
-      <%= link_to t('page.destroy'), event_import_result, :confirm => t('page.are_you_sure'), :method => :delete %>
+      <%= link_to t('page.destroy'), event_import_result, :data => {:confirm => t('page.are_you_sure')}, :method => :delete %>
     </td>
   </tr>
 <% end %>
