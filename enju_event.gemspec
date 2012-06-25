@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "configatron"
   s.add_dependency "paperclip"
   s.add_dependency "state_machine"
-  s.add_dependency "enju_message", ">= 0.0.19"
+  s.add_dependency "enju_message", ">= 0.0.24"
   s.add_dependency "enju_core"
 
   s.add_development_dependency "sqlite3"
