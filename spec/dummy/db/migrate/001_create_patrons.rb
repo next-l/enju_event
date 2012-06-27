@@ -1,5 +1,5 @@
 class CreatePatrons < ActiveRecord::Migration
-  def self.up
+  def change
     create_table :patrons do |t|
       t.integer :user_id
       t.string :last_name
@@ -38,11 +38,6 @@ class CreatePatrons < ActiveRecord::Migration
       t.integer :patron_type_id, :default => 1, :null => false
       t.integer :lock_version, :default => 0, :null => false
       t.text :note
-      t.integer :creates_count, :default => 0, :null => false
-      t.integer :realizes_count, :default => 0, :null => false
-      t.integer :produces_count, :default => 0, :null => false
-      t.integer :owns_count, :default => 0, :null => false
-      #t.integer :resource_has_subjects_count, :default => 0, :null => false
       t.integer :required_role_id, :default => 1, :null => false
       t.integer :required_score, :default => 0, :null => false
       t.string :state
@@ -54,9 +49,5 @@ class CreatePatrons < ActiveRecord::Migration
     add_index :patrons, :country_id
     add_index :patrons, :required_role_id
     add_index :patrons, :full_name
-  end
-
-  def self.down
-    drop_table :patrons
   end
 end
