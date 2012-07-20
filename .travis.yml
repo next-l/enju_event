@@ -1,7 +1,6 @@
 language: ruby
 rvm:
   - 1.9.3
-  - 1.8.7
-before_script:
-  - "bundle exec rake db:migrate"
-  - "bundle exec rake sunspot:reindex"
+  - 1.9.2
+  - jruby-19mode
+before_script: "bundle exec rake db:migrate"
