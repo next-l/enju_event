@@ -4,6 +4,10 @@ describe EventsController do
   fixtures :all
 
   describe "GET index", :solr => true do
+    before do
+      Event.reindex
+    end
+
     before(:each) do
       FactoryGirl.create(:event)
     end
