@@ -20,12 +20,10 @@ Gem::Specification.new do |s|
   s.add_dependency "event-calendar", "~> 2.3.3"
   s.add_dependency "simple_form"
   s.add_dependency "inherited_resources"
-  s.add_dependency "sunspot_solr"
   s.add_dependency "has_scope"
-  s.add_dependency "configatron"
   s.add_dependency "paperclip"
   s.add_dependency "state_machine"
-  s.add_dependency "enju_message", ">= 0.0.24"
+  s.add_dependency "enju_message", ">= 0.0.25"
   s.add_dependency "enju_core"
 
   s.add_development_dependency "sqlite3"
@@ -34,4 +32,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "enju_biblio"
   s.add_development_dependency "enju_library"
   s.add_development_dependency "enju_manifestation_viewer"
+  s.add_development_dependency "sunspot_solr", "~> 2.0.0.pre.120720"
 end
