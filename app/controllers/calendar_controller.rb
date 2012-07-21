@@ -23,7 +23,7 @@ class CalendarController < ApplicationController
     date = Time.zone.local(params[:year].to_i, params[:month].to_i, params[:day].to_i) rescue Time.zone.now
     date_string = date.strftime('%Y/%m/%d')
     if Event.search do
-      with(:start_at).less_than date
+      with(:start_at).less_than_or_equal_to date
       with(:end_at).greater_than date
     end.results.empty?
       redirect_to new_event_path(:date => date_string)
