@@ -39,7 +39,7 @@ class EventsController < ApplicationController
     end
 
     page = params[:page] || 1
-    search.query.paginate(page.to_i, Event.per_page)
+    search.query.paginate(page.to_i, Event.default_per_page)
     @events = search.execute!.results
     @count[:query_result] = @events.total_entries
 

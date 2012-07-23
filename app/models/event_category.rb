@@ -4,9 +4,7 @@ class EventCategory < ActiveRecord::Base
   default_scope :order => "position"
   has_many :events
 
-  def self.per_page
-    10
-  end
+  paginates_per 10
 end
 
 # == Schema Information

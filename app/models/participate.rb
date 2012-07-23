@@ -7,9 +7,7 @@ class Participate < ActiveRecord::Base
   validates_uniqueness_of :patron_id, :scope => :event_id
   acts_as_list :scope => :event_id
 
-  def self.per_page
-    10
-  end
+  paginates_per 10
 end
 
 # == Schema Information
