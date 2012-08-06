@@ -5,6 +5,7 @@ ja:
       event: 開館日と催し物
       event_import_file: 催し物のインポート用ファイル
       event_import_result: 催し物インポートの結果
+      participate: 参加
 
     attributes:
       event_category:

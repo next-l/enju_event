@@ -5,6 +5,7 @@ en:
       event: Event
       event_import_file: Event import file
       event_import_result: Event Import Result
+      participate: Participate
 
     attributes:
       event_category:
