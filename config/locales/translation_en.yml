@@ -39,6 +39,9 @@ en:
         error_message: Error message
       event_import_result:
         body: Body
+        error_msg: Message
+        index: Index
+        imported_row: Imported_row
 
   event:
     library_group_event: "Events at %{library_group_name}"

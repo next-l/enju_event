@@ -39,7 +39,9 @@ ja:
         error_message: エラーメッセージ
       event_import_result:
         body: 本文
-
+        error_msg: メッセージ
+        index: 項番
+        imported_row: 処理済み件数
   event:
     library_group_event: "%{library_group_name} での催し物"
     all_libraries: "全ての図書館"
