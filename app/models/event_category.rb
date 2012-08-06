@@ -1,5 +1,5 @@
 class EventCategory < ActiveRecord::Base
-  attr_accessible :name, :display_name, :note
+  attr_accessible :name, :display_name, :note, :checkin_ng, :move_checkin_date 
   include MasterModel
   default_scope :order => "position"
   has_many :events

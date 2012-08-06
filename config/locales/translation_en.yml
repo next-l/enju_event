@@ -13,6 +13,11 @@ en:
         display_name: Display name
         note: Note
         position: Position
+        checkin_ng: Not return checkouts
+        checkin_ng_yes: can checkin
+        checkin_ng_no: can not checkin
+        checkin_ng_pre: Set due date to the previous day
+        checkin_ng_post: Set due date to the next day
       event:
         name: Name
         note: Note

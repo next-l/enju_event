@@ -5,6 +5,8 @@ class CreateEventCategories < ActiveRecord::Migration
       t.text :display_name
       t.text :note
       t.integer :position
+      t.boolean :checkin_ng, :default => false
+      t.integer :move_checkin_date
 
       t.timestamps
     end
