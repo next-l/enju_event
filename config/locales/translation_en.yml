@@ -5,6 +5,7 @@ en:
       event: Event
       event_import_file: Event import file
       event_import_result: Event Import Result
+      participate: Participate
 
     attributes:
       event_category:
@@ -12,6 +13,11 @@ en:
         display_name: Display name
         note: Note
         position: Position
+        checkin_ng: Not return checkouts
+        checkin_ng_yes: can checkin
+        checkin_ng_no: can not checkin
+        checkin_ng_pre: Set due date to the previous day
+        checkin_ng_post: Set due date to the next day
       event:
         name: Name
         note: Note
@@ -33,6 +39,9 @@ en:
         error_message: Error message
       event_import_result:
         body: Body
+        error_msg: Message
+        index: Index
+        imported_row: Imported_row
 
   event:
     library_group_event: "Events at %{library_group_name}"
@@ -44,3 +53,8 @@ en:
   calendar:
     calendar: "Calendar"
     library_calendar: "Calendar of events at %{library_name}"
+  event_import_file:
+    template_download: "Template download"
+    import_request: "Import request"
+    start_importing: "Start importing"
+    unsuccess_start: "Unsuccess start"

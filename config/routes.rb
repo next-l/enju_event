@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :events
   end
   resources :event_import_files do
+    get :import_request, :on => :collection
     resources :event_import_results, :only => [:index, :show, :destroy]
   end
   resources :event_import_results, :only => [:index, :show, :destroy]

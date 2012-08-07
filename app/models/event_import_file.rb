@@ -156,9 +156,16 @@ class EventImportFile < ActiveRecord::Base
     raise e
   end
 
-  def self.import
-    EventImportFile.not_imported.each do |file|
-      file.import_start
+  def self.import(id = nil)
+    #EventImportFile.not_imported.each do |file|
+    #  file.import_start
+    if !id.nil?
+      file = EventImportFile.find(id) rescue nil
+      file.import_start unless file.nil?
+    else
+      EventImportFile.not_imported.each do |file|
+        file.import_start
+      end
     end
   rescue
     Rails.logger.info "#{Time.zone.now} importing events failed!"

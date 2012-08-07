@@ -4,6 +4,7 @@ class CreateEventImportResults < ActiveRecord::Migration
       t.integer :event_import_file_id
       t.integer :event_id
       t.text :body
+      t.string :error_msg
 
       t.timestamps
     end
