@@ -53,3 +53,8 @@ en:
   calendar:
     calendar: "Calendar"
     library_calendar: "Calendar of events at %{library_name}"
+  event_import_file:
+    template_download: "Template download"
+    import_request: "Import request"
+    start_importing: "Start importing"
+    unsuccess_start: "Unsuccess start"
