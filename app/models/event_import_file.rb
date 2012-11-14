@@ -174,7 +174,16 @@ class EventImportFile < ActiveRecord::Base
     end
     open(uploaded_file_path){|f|
       f.each{|line|
-        tempfile.puts(NKF.nkf('-w -Lu', line))
+        if defined?(CharlockHolmes::EncodingDetector)
+          begin
+            string = line.encode('UTF-8', CharlockHolmes::EncodingDetector.detect[:encoding])
+          rescue StandardError
+            string = NKF.nkf('-w -Lu', line)
+          end
+        else
+          string = NKF.nkf('-w -Lu', line)
+        end
+        tempfile.puts(string)
       }
     }
     tempfile.close
