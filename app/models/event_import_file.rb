@@ -12,7 +12,13 @@ class EventImportFile < ActiveRecord::Base
     has_attached_file :event_import,
       :path => ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
   end
-  validates_attachment_content_type :event_import, :content_type => ['text/csv', 'text/plain', 'text/tab-separated-values', 'application/octet-stream']
+  validates_attachment_content_type :event_import, :content_type => [
+    'text/csv',
+    'text/plain',
+    'text/tab-separated-values',
+    'application/octet-stream',
+    'application/vnd.ms-excel'
+  ]
   validates_attachment_presence :event_import
   belongs_to :user, :validate => true
   has_many :event_import_results
