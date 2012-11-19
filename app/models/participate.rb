@@ -14,11 +14,11 @@ end
 #
 # Table name: participates
 #
-#  id         :integer         not null, primary key
-#  patron_id  :integer         not null
-#  event_id   :integer         not null
+#  id         :integer          not null, primary key
+#  patron_id  :integer          not null
+#  event_id   :integer          not null
 #  position   :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
