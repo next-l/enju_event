@@ -40,6 +40,20 @@ describe EventImportFile do
     end
   end
 
+  describe "When it is an invalid file" do
+    before(:each) do
+      @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/invalid_file.tsv")
+    end
+
+    it "should not be imported" do
+      old_event_count = Event.count
+      old_import_results_count = EventImportResult.count
+      lambda{@file.import_start}.should raise_error(RuntimeError)
+      Event.count.should eq Event.count
+      EventImportResult.count.should eq EventImportResult.count
+    end
+  end
+
   describe "when its mode is 'update'" do
     it "should update events" do
       @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_update_file.tsv")
