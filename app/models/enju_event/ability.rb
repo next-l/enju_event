@@ -6,7 +6,7 @@ module EnjuEvent
       case user.try(:role).try(:name)
       when 'Administrator'
         can [:read, :create], EventCategory
-        can [:update, :destroy], EventCategory do |event_category|
+        can [:update, :destroy, :delete], EventCategory do |event_category|
           !['unknown', 'closed'].include?(event_category.name)
         end
         can :manage, [
