@@ -9,7 +9,7 @@ class EventImportResultsController < InheritedResources::Base
     if @event_import_file
       @event_import_results = @event_import_file.event_import_results.page(params[:page])
     else
-      @event_import_results = @event_import_results.page(params[:page])
+      @event_import_results = EventImportResult.page(params[:page])
     end
   end
 end

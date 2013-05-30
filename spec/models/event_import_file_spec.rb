@@ -101,10 +101,9 @@ end
 #  event_import_file_size    :integer
 #  event_import_updated_at   :datetime
 #  edit_mode                 :string(255)
-#  event_import_fingerprint  :string(255)
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
-#  event_fingerprint         :string(255)
+#  event_import_fingerprint  :string(255)
 #  error_message             :text
 #
 
