@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   belongs_to :library, :validate => true
   has_many :picture_files, :as => :picture_attachable
   has_many :participates, :dependent => :destroy
-  has_many :patrons, :through => :participates
+  has_many :agents, :through => :participates
   has_one :event_import_result
 
   has_event_calendar

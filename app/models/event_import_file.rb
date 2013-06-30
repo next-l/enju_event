@@ -36,12 +36,12 @@ class EventImportFile < ActiveRecord::Base
       transition :started => :failed
     end
 
-    before_transition any => :started do |patron_import_file|
-      patron_import_file.executed_at = Time.zone.now
+    before_transition any => :started do |agent_import_file|
+      agent_import_file.executed_at = Time.zone.now
     end
 
-    before_transition any => :completed do |patron_import_file|
-      patron_import_file.error_message = nil
+    before_transition any => :completed do |agent_import_file|
+      agent_import_file.error_message = nil
     end
   end
 

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 class EventsController < ApplicationController
   load_and_authorize_resource
-  before_filter :get_library, :get_patron
+  before_filter :get_library, :get_agent
   before_filter :get_libraries, :except => :destroy
   before_filter :prepare_options
   before_filter :store_page, :only => :index

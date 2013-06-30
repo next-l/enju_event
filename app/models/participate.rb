@@ -1,10 +1,10 @@
 class Participate < ActiveRecord::Base
-  attr_accessible :patron_id, :event_id
-  belongs_to :patron
+  attr_accessible :agent_id, :event_id
+  belongs_to :agent
   belongs_to :event
 
-  validates_presence_of :patron_id, :event_id
-  validates_uniqueness_of :patron_id, :scope => :event_id
+  validates_presence_of :agent_id, :event_id
+  validates_uniqueness_of :agent_id, :scope => :event_id
   acts_as_list :scope => :event_id
 
   paginates_per 10
@@ -15,7 +15,7 @@ end
 # Table name: participates
 #
 #  id         :integer          not null, primary key
-#  patron_id  :integer          not null
+#  agent_id   :integer          not null
 #  event_id   :integer          not null
 #  position   :integer
 #  created_at :datetime         not null

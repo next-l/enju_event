@@ -1,12 +1,12 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  patron_id: 1
+  agent_id: 1
   event_id: 1
   position: 1
 
 two:
-  patron_id: 2
+  agent_id: 2
   event_id: 1
   position: 2
 
@@ -15,7 +15,7 @@ two:
 # Table name: participates
 #
 #  id         :integer          not null, primary key
-#  patron_id  :integer          not null
+#  agent_id   :integer          not null
 #  event_id   :integer          not null
 #  position   :integer
 #  created_at :datetime         not null
