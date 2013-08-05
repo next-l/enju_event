@@ -1,9 +1,9 @@
 class EventImportFile < ActiveRecord::Base
   attr_accessible :event_import, :edit_mode
   include ImportFile
-  default_scope :order => 'event_import_files.id DESC'
-  scope :not_imported, where(:state => 'pending')
-  scope :stucked, where('created_at < ? AND state = ?', 1.hour.ago, 'pending')
+  default_scope {order('event_import_files.id DESC')}
+  scope :not_imported, -> {where(:state => 'pending')}
+  scope :stucked, -> {where('created_at < ? AND state = ?', 1.hour.ago, 'pending')}
 
   if Setting.uploaded_file.storage == :s3
     has_attached_file :event_import, :storage => :s3, :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
