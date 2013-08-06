@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   attr_accessible :library_id, :event_category_id, :name, :note, :start_at,
     :end_at, :all_day, :display_name
 
-  scope :closing_days, includes(:event_category).where('event_categories.name = ?', 'closed')
+  scope :closing_days, -> {includes(:event_category).where('event_categories.name = ?', 'closed')}
   scope :on, lambda {|datetime| where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1)}
   scope :past, lambda {|datetime| where('end_at <= ?', Time.zone.parse(datetime).beginning_of_day)}
   scope :upcoming, lambda {|datetime| where('start_at >= ?', Time.zone.parse(datetime).beginning_of_day)}
