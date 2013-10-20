@@ -32,6 +32,6 @@ Gem::Specification.new do |s|
   #s.add_development_dependency "enju_leaf", "~> 1.1.0.rc5"
   #s.add_development_dependency "sunspot_solr", "~> 2.0.0"
   s.add_development_dependency "simplecov"
-  s.add_development_dependency "mobylette", "~> 3.4"
+  s.add_development_dependency "mobylette", "~> 3.5"
   s.add_development_dependency "sunspot-rails-tester"
 end
