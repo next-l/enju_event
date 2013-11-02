@@ -19,7 +19,7 @@ describe EventCategoriesController do
 
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.all)
+        assigns(:event_categories).should eq(EventCategory.page(1))
       end
     end
 
@@ -28,7 +28,7 @@ describe EventCategoriesController do
 
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.all)
+        assigns(:event_categories).should eq(EventCategory.page(1))
       end
     end
 
@@ -37,14 +37,14 @@ describe EventCategoriesController do
 
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.all)
+        assigns(:event_categories).should eq(EventCategory.page(1))
       end
     end
 
     describe "When not logged in" do
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.all)
+        assigns(:event_categories).should eq(EventCategory.page(1))
       end
     end
   end

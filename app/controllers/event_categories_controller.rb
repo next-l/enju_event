@@ -1,6 +1,7 @@
 class EventCategoriesController < InheritedResources::Base
   respond_to :html, :json
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :index
+  authorize_resource :only => :index
 
   def update
     @event_category = EventCategory.find(params[:id])
@@ -12,6 +13,6 @@ class EventCategoriesController < InheritedResources::Base
   end
 
   def index
-    @event_categories = @event_categories.page(params[:page])
+    @event_categories = EventCategory.page(params[:page])
   end
 end
