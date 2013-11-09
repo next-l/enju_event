@@ -135,7 +135,8 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    @event = Event.find(params[:id])
+    @event.picture_files.destroy_all
+    @event.reload
     @event.destroy
 
     respond_to do |format|
