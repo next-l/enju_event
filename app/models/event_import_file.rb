@@ -152,6 +152,8 @@ class EventImportFile < ActiveRecord::Base
     rows.each do |row|
       next if row['dummy'].to_s.strip.present?
       event = Event.find(row['id'].to_s.strip)
+      event.picture_files.destroy_all # workaround
+      event.reload
       event.destroy
       row_num += 1
     end

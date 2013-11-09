@@ -135,7 +135,7 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    @event.picture_files.destroy_all
+    @event.picture_files.destroy_all # workaround
     @event.reload
     @event.destroy
 
