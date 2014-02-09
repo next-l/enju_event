@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "event-calendar", "~> 2.3.3"
   s.add_dependency "simple_form"
   s.add_dependency "inherited_resources"
-  s.add_dependency "paperclip"
+  s.add_dependency "paperclip", "~> 4.1"
   s.add_dependency "state_machine"
   #s.add_dependency "enju_message", "~> 0.2.0.pre1"
   #s.add_dependency "enju_seed", "~> 0.2.0.pre1"
