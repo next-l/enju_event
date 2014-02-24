@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 class Event < ActiveRecord::Base
-  attr_accessible :library_id, :event_category_id, :name, :note, :start_at,
-    :end_at, :all_day, :display_name
+  #attr_accessible :library_id, :event_category_id, :name, :note, :start_at,
+  #  :end_at, :all_day, :display_name
 
   scope :closing_days, -> {includes(:event_category).where('event_categories.name = ?', 'closed').references(:event_categories)}
   scope :on, lambda {|datetime| where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1)}

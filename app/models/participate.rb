@@ -1,5 +1,5 @@
 class Participate < ActiveRecord::Base
-  attr_accessible :agent_id, :event_id
+  #attr_accessible :agent_id, :event_id
   belongs_to :agent
   belongs_to :event
 
