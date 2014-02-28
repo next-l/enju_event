@@ -1,5 +1,6 @@
 class EventImportFilesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:index, :create]
+  authorize_resource only: [:index, :create]
 
   # GET /event_import_files
   # GET /event_import_files.json
@@ -52,7 +53,7 @@ class EventImportFilesController < ApplicationController
   # POST /event_import_files
   # POST /event_import_files.json
   def create
-    @event_import_file = EventImportFile.new(params[:event_import_file])
+    @event_import_file = EventImportFile.new(event_import_file_params)
     @event_import_file.user = current_user
 
     respond_to do |format|
@@ -71,7 +72,7 @@ class EventImportFilesController < ApplicationController
   # PUT /event_import_files/1.json
   def update
     respond_to do |format|
-      if @event_import_file.update_attributes(params[:event_import_file])
+      if @event_import_file.update_attributes(event_import_file_params)
         flash[:notice] = t('controller.successfully_updated', :model => t('activerecord.models.event_import_file'))
         format.html { redirect_to(@event_import_file) }
         format.json { head :no_content }
@@ -91,5 +92,12 @@ class EventImportFilesController < ApplicationController
       format.html { redirect_to event_import_files_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def event_import_file_params
+    params.require(:event_import_file).permit(
+      :event_import, :edit_mode
+    )
   end
 end

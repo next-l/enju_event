@@ -1,5 +1,4 @@
 class EventCategory < ActiveRecord::Base
-  #attr_accessible :name, :display_name, :note
   include MasterModel
   default_scope lambda{order('event_categories.position')}
   has_many :events

@@ -1,6 +1,6 @@
 class EventImportResultsController < InheritedResources::Base
   respond_to :html, :json, :csv
-  load_and_authorize_resource
+  load_and_authorize_resource except: :index
   has_scope :file_id
   actions :index, :show, :destroy
 
