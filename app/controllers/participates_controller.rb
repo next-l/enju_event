@@ -1,6 +1,7 @@
 class ParticipatesController < ApplicationController
-  load_and_authorize_resource except: [:index, :create]
-  authorize_resource only: [:index, :create]
+  before_action :set_participate, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, :only => :index
 
   # GET /participates
   # GET /participates.json
@@ -25,6 +26,7 @@ class ParticipatesController < ApplicationController
   # GET /participates/new
   # GET /participates/new.json
   def new
+    authorize Participate
     @participate = Participate.new
 
     respond_to do |format|
@@ -40,6 +42,7 @@ class ParticipatesController < ApplicationController
   # POST /participates
   # POST /participates.json
   def create
+    authorize Participate
     @participate = Participate.new(participate_params)
 
     respond_to do |format|
@@ -81,6 +84,11 @@ class ParticipatesController < ApplicationController
   end
 
   private
+  def set_participate
+    @participate = Participate.find(params[:id])
+    authorize @participate
+  end
+
   def participate_params
     params.require(:participate).permit(
       :agent_id, :event_id

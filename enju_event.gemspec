@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/log/*"] - Dir["spec/dummy/solr/{data,pids}/*"]
 
   s.add_dependency "simple_form"
-  s.add_dependency "inherited_resources"
   s.add_dependency "paperclip", "~> 4.1"
   s.add_dependency "state_machine"
   #s.add_dependency "enju_message", "~> 0.2.0.pre1"

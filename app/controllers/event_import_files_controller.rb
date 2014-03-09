@@ -1,16 +1,11 @@
 class EventImportFilesController < ApplicationController
-  load_and_authorize_resource except: [:index, :create]
-  authorize_resource only: [:index, :create]
+  before_action :set_event_import_file, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, :only => :index
 
   # GET /event_import_files
-  # GET /event_import_files.json
   def index
     @event_import_files = EventImportFile.page(params[:page])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @event_import_files }
-    end
   end
 
   # GET /event_import_files/1
@@ -36,14 +31,9 @@ class EventImportFilesController < ApplicationController
   end
 
   # GET /event_import_files/new
-  # GET /event_import_files/new.json
   def new
+    authorize EventImportFile
     @event_import_file = EventImportFile.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @event_import_file }
-    end
   end
 
   # GET /event_import_files/1/edit
@@ -53,6 +43,7 @@ class EventImportFilesController < ApplicationController
   # POST /event_import_files
   # POST /event_import_files.json
   def create
+    authorize EventImportFile
     @event_import_file = EventImportFile.new(event_import_file_params)
     @event_import_file.user = current_user
 
@@ -95,6 +86,11 @@ class EventImportFilesController < ApplicationController
   end
 
   private
+  def set_event_import_file
+    @event_import_file = EventImportFile.find(params[:id])
+    authorize @event_import_file
+  end
+
   def event_import_file_params
     params.require(:event_import_file).permit(
       :event_import, :edit_mode

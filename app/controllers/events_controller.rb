@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 class EventsController < ApplicationController
-  load_and_authorize_resource except: [:index, :create]
-  authorize_resource only: [:index, :create]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, :only => :index
   before_action :get_library, :get_agent
   before_action :get_libraries, :except => :destroy
   before_action :prepare_options
@@ -68,6 +69,7 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
+    authorize Event
      prepare_options
     if params[:date]
       begin
@@ -97,6 +99,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    authorize Event
     @event = Event.new(event_params)
     @event.set_date
 
@@ -147,8 +150,9 @@ class EventsController < ApplicationController
   end
 
   private
-  def prepare_options
-    @event_categories = EventCategory.all
+  def set_event
+    @event = Event.find(params[:id])
+    authorize @event
   end
 
   def event_params
@@ -156,5 +160,9 @@ class EventsController < ApplicationController
       :library_id, :event_category_id, :name, :note, :start_at,
       :end_at, :all_day, :display_name
     )
+  end
+
+  def prepare_options
+    @event_categories = EventCategory.all
   end
 end
