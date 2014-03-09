@@ -1,5 +1,3 @@
-require "inherited_resources"
-require "has_scope"
 require "paperclip"
 require "state_machine"
 require "ri_cal"
