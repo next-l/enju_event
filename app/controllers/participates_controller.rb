@@ -6,6 +6,7 @@ class ParticipatesController < ApplicationController
   # GET /participates
   # GET /participates.json
   def index
+    authorize Participate
     @participates = Participate.page(params[:page])
 
     respond_to do |format|
@@ -26,8 +27,8 @@ class ParticipatesController < ApplicationController
   # GET /participates/new
   # GET /participates/new.json
   def new
-    authorize Participate
     @participate = Participate.new
+    authorize @participate
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,8 +43,8 @@ class ParticipatesController < ApplicationController
   # POST /participates
   # POST /participates.json
   def create
-    authorize Participate
     @participate = Participate.new(participate_params)
+    authorize @participate
 
     respond_to do |format|
       if @participate.save

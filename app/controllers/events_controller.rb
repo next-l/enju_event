@@ -69,8 +69,7 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
-    authorize Event
-     prepare_options
+    prepare_options
     if params[:date]
       begin
         date = Time.zone.parse(params[:date])
@@ -82,6 +81,7 @@ class EventsController < ApplicationController
       date = Time.zone.now.beginning_of_day
     end
     @event = Event.new(:start_at => date, :end_at => date)
+    authorize @event
     @event.library = @library
 
     respond_to do |format|
@@ -99,8 +99,8 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    authorize Event
     @event = Event.new(event_params)
+    authorize @event
     @event.set_date
 
     respond_to do |format|

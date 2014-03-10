@@ -5,6 +5,7 @@ class EventImportFilesController < ApplicationController
 
   # GET /event_import_files
   def index
+    authorize EventImportFile
     @event_import_files = EventImportFile.page(params[:page])
   end
 
@@ -32,8 +33,8 @@ class EventImportFilesController < ApplicationController
 
   # GET /event_import_files/new
   def new
-    authorize EventImportFile
     @event_import_file = EventImportFile.new
+    authorize @event_import_file
   end
 
   # GET /event_import_files/1/edit

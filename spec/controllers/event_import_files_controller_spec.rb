@@ -32,17 +32,17 @@ describe EventImportFilesController do
         sign_in FactoryGirl.create(:user)
       end
 
-      it "assigns empty as @event_import_files" do
+      it "assigns nil as @event_import_files" do
         get :index
-        assigns(:event_import_files).should be_empty
+        assigns(:event_import_files).should be_nil
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
-      it "assigns empty as @event_import_files" do
+      it "assigns nil as @event_import_files" do
         get :index
-        assigns(:event_import_files).should be_empty
+        assigns(:event_import_files).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -233,7 +233,7 @@ describe EventImportFilesController do
       end
 
       it "should update event_import_file" do
-        put :update, :id => event_import_files(:event_import_file_00003).id, :event_import_file => { }
+        put :update, :id => event_import_files(:event_import_file_00003).id, :event_import_file => {:note => 'test'}
         response.should redirect_to event_import_file_url(assigns(:event_import_file))
       end
     end
