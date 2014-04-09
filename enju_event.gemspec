@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = "enju_event"
   s.version     = EnjuEvent::VERSION
   s.authors     = ["Kosuke Tanabe"]
-  s.email       = ["kosuke@e23.jp"]
+  s.email       = ["nabeta@fastmail.fm"]
   s.homepage    = "https://github.com/next-l/enju_event"
   s.summary     = "enju_event plugin"
   s.description = "Event management for Next-L Enju"
@@ -16,11 +16,11 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/log/*"] - Dir["spec/dummy/solr/{data,pids}/*"]
 
-  s.add_dependency "simple_form"
+  #s.add_dependency "enju_message", "~> 0.2.0.pre1"
+  s.add_dependency "enju_seed", "~> 0.2.0.pre5"
+  s.add_dependency "simple_form", "~> 3.0"
   s.add_dependency "paperclip", "~> 4.1"
   s.add_dependency "state_machine"
-  #s.add_dependency "enju_message", "~> 0.2.0.pre1"
-  #s.add_dependency "enju_seed", "~> 0.2.0.pre1"
   s.add_dependency "ri_cal"
   s.add_dependency "rails_autolink"
 

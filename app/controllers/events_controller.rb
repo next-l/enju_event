@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
   before_action :get_library, :get_agent
   before_action :get_libraries, :except => :destroy
   before_action :prepare_options
   before_action :store_page, :only => :index
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, :only => :index
   after_action :solr_commit, :only => [:create, :update, :destroy]
   after_action :convert_charset, :only => :index
 
