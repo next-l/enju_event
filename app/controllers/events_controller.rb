@@ -6,13 +6,13 @@ class EventsController < ApplicationController
   before_action :prepare_options
   before_action :store_page, :only => :index
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
   after_action :solr_commit, :only => [:create, :update, :destroy]
   after_action :convert_charset, :only => :index
 
   # GET /events
   # GET /events.json
   def index
+    authorize Event
     @count = {}
     query = params[:query].to_s.strip
     @query = query.dup
@@ -58,8 +58,6 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @event }

@@ -1,7 +1,6 @@
 class EventImportFilesController < ApplicationController
   before_action :set_event_import_file, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
 
   # GET /event_import_files
   def index

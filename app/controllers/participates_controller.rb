@@ -1,7 +1,6 @@
 class ParticipatesController < ApplicationController
   before_action :set_participate, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
 
   # GET /participates
   # GET /participates.json

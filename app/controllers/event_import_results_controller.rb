@@ -1,7 +1,6 @@
 class EventImportResultsController < ApplicationController
   before_action :set_event_import_result, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
 
   def index
     authorize EventImportResult
