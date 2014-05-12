@@ -1,5 +1,4 @@
 require "enju_event/engine"
-require 'event_calendar'
 
 module EnjuEvent
   def self.included(base)

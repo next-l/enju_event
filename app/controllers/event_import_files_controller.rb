@@ -1,15 +1,11 @@
 class EventImportFilesController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_event_import_file, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
 
   # GET /event_import_files
-  # GET /event_import_files.json
   def index
+    authorize EventImportFile
     @event_import_files = EventImportFile.page(params[:page])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @event_import_files }
-    end
   end
 
   # GET /event_import_files/1
@@ -35,14 +31,9 @@ class EventImportFilesController < ApplicationController
   end
 
   # GET /event_import_files/new
-  # GET /event_import_files/new.json
   def new
     @event_import_file = EventImportFile.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @event_import_file }
-    end
+    authorize @event_import_file
   end
 
   # GET /event_import_files/1/edit
@@ -52,7 +43,8 @@ class EventImportFilesController < ApplicationController
   # POST /event_import_files
   # POST /event_import_files.json
   def create
-    @event_import_file = EventImportFile.new(params[:event_import_file])
+    authorize EventImportFile
+    @event_import_file = EventImportFile.new(event_import_file_params)
     @event_import_file.user = current_user
 
     respond_to do |format|
@@ -71,7 +63,7 @@ class EventImportFilesController < ApplicationController
   # PUT /event_import_files/1.json
   def update
     respond_to do |format|
-      if @event_import_file.update_attributes(params[:event_import_file])
+      if @event_import_file.update_attributes(event_import_file_params)
         flash[:notice] = t('controller.successfully_updated', :model => t('activerecord.models.event_import_file'))
         format.html { redirect_to(@event_import_file) }
         format.json { head :no_content }
@@ -91,5 +83,17 @@ class EventImportFilesController < ApplicationController
       format.html { redirect_to event_import_files_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def set_event_import_file
+    @event_import_file = EventImportFile.find(params[:id])
+    authorize @event_import_file
+  end
+
+  def event_import_file_params
+    params.require(:event_import_file).permit(
+      :event_import, :edit_mode
+    )
   end
 end

@@ -1,12 +1,13 @@
 class EventImportFile < ActiveRecord::Base
-  attr_accessible :event_import, :edit_mode
+  #attr_accessible :event_import, :edit_mode
   include ImportFile
-  default_scope :order => 'event_import_files.id DESC'
-  scope :not_imported, where(:state => 'pending')
-  scope :stucked, where('created_at < ? AND state = ?', 1.hour.ago, 'pending')
+  default_scope {order('event_import_files.id DESC')}
+  scope :not_imported, -> {where(:state => 'pending')}
+  scope :stucked, -> {where('created_at < ? AND state = ?', 1.hour.ago, 'pending')}
 
   if Setting.uploaded_file.storage == :s3
-    has_attached_file :event_import, :storage => :s3, :s3_credentials => "#{Rails.root.to_s}/config/s3.yml",
+    has_attached_file :event_import, :storage => :s3,
+      :s3_credentials => "#{Setting.amazon}",
       :s3_permissions => :private
   else
     has_attached_file :event_import,
@@ -70,7 +71,7 @@ class EventImportFile < ActiveRecord::Base
     rows.each do |row|
       next if row['dummy'].to_s.strip.present?
       event_import_result = EventImportResult.new
-      event_import_result.assign_attributes({:event_import_file_id => id, :body => row.fields.join("\t")}, :as => :admin)
+      event_import_result.assign_attributes({:event_import_file_id => id, :body => row.fields.join("\t")})
       event_import_result.save!
 
       event = Event.new
@@ -152,6 +153,8 @@ class EventImportFile < ActiveRecord::Base
     rows.each do |row|
       next if row['dummy'].to_s.strip.present?
       event = Event.find(row['id'].to_s.strip)
+      event.picture_files.destroy_all # workaround
+      event.reload
       event.destroy
       row_num += 1
     end
@@ -198,7 +201,7 @@ class EventImportFile < ActiveRecord::Base
     header = file.first
     rows = CSV.open(tempfile, :headers => header, :col_sep => "\t")
     event_import_result = EventImportResult.new
-    event_import_result.assign_attributes({:event_import_file_id => id, :body => header.join("\t")}, :as => :admin)
+    event_import_result.assign_attributes({:event_import_file_id => id, :body => header.join("\t")})
     event_import_result.save!
     tempfile.close(true)
     file.close

@@ -1,16 +1,18 @@
 # -*- encoding: utf-8 -*-
 class EventsController < ApplicationController
-  load_and_authorize_resource
-  before_filter :get_library, :get_agent
-  before_filter :get_libraries, :except => :destroy
-  before_filter :prepare_options
-  before_filter :store_page, :only => :index
-  after_filter :solr_commit, :only => [:create, :update, :destroy]
-  after_filter :convert_charset, :only => :index
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :get_library, :get_agent
+  before_action :get_libraries, :except => :destroy
+  before_action :prepare_options
+  before_action :store_page, :only => :index
+  after_action :verify_authorized
+  after_action :solr_commit, :only => [:create, :update, :destroy]
+  after_action :convert_charset, :only => :index
 
   # GET /events
   # GET /events.json
   def index
+    authorize Event
     @count = {}
     query = params[:query].to_s.strip
     @query = query.dup
@@ -56,8 +58,6 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @event }
@@ -67,7 +67,7 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
-     prepare_options
+    prepare_options
     if params[:date]
       begin
         date = Time.zone.parse(params[:date])
@@ -79,6 +79,7 @@ class EventsController < ApplicationController
       date = Time.zone.now.beginning_of_day
     end
     @event = Event.new(:start_at => date, :end_at => date)
+    authorize @event
     @event.library = @library
 
     respond_to do |format|
@@ -96,7 +97,8 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(event_params)
+    authorize @event
     @event.set_date
 
     respond_to do |format|
@@ -119,7 +121,7 @@ class EventsController < ApplicationController
     @event.set_date
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(event_params)
 
         flash[:notice] = t('controller.successfully_updated', :model => t('activerecord.models.event'))
         format.html { redirect_to(@event) }
@@ -135,6 +137,8 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+    @event.picture_files.destroy_all # workaround
+    @event.reload
     @event.destroy
 
     respond_to do |format|
@@ -144,8 +148,19 @@ class EventsController < ApplicationController
   end
 
   private
+  def set_event
+    @event = Event.find(params[:id])
+    authorize @event
+  end
+
+  def event_params
+    params.require(:event).permit(
+      :library_id, :event_category_id, :name, :note, :start_at,
+      :end_at, :all_day, :display_name
+    )
+  end
+
   def prepare_options
     @event_categories = EventCategory.all
   end
-
 end

@@ -31,16 +31,16 @@ describe ParticipatesController do
     describe "When logged in as User" do
       login_user
 
-      it "assigns empty as @participates" do
+      it "assigns nil as @participates" do
         get :index
-        assigns(:participates).should be_empty
+        assigns(:participates).should be_nil
       end
     end
 
     describe "When not logged in" do
-      it "assigns empty as @participates" do
+      it "assigns nil as @participates" do
         get :index
-        assigns(:participates).should be_empty
+        assigns(:participates).should be_nil
       end
     end
   end

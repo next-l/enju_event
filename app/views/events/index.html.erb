@@ -1,4 +1,4 @@
-<div id="content_detail" class="ui-corner-all">
+<div id="content_detail" class="ui-corner-all ui-widget-content">
 <h1 class="title"><%= t('page.listing', :model => t('activerecord.models.event')) -%></h1>
 <div id="content_list">
 
@@ -54,7 +54,7 @@
       <%= l(event.end_at, :format => :short) -%>
     </td>
     <td>
-      <%- if can? :delete, event -%>
+      <%- if policy(event).destroy? -%>
         <%= link_to image_tag('icons/page_white_edit.png', :size => '16x16', :alt => t('page.edit')), edit_event_path(event) -%>
         <%= link_to image_tag('icons/delete.png', :size => '16x16', :alt => t('page.destroy')), event, :data => {:confirm => t('page.are_you_sure')}, :method => :delete -%>
       <%- end -%>
@@ -63,14 +63,11 @@
 <%- end -%>
 </table>
 
-<%= paginate(@events) -%>
+<%= paginate(@events, :theme => 'enju_leaf') -%>
 </div>
 </div>
 
-<div id="submenu" class="ui-corner-all">
-  <ul>
-    <li><%= link_to t('page.calendar'), calendar_path -%></li>
-  </ul>
+<div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
     <%- if user_signed_in? -%>
       <%- if current_user.has_role?('Librarian') -%>
