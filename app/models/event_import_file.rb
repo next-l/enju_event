@@ -2,8 +2,8 @@ class EventImportFile < ActiveRecord::Base
   #attr_accessible :event_import, :edit_mode
   include ImportFile
   default_scope {order('event_import_files.id DESC')}
-  scope :not_imported, -> {where(:state => 'pending')}
-  scope :stucked, -> {where('created_at < ? AND state = ?', 1.hour.ago, 'pending')}
+  scope :not_imported, -> {in_state(:pending)}
+  scope :stucked, -> {in_state(:pending).where('created_at < ?', 1.hour.ago)}
 
   if Setting.uploaded_file.storage == :s3
     has_attached_file :event_import, :storage => :s3,
@@ -24,31 +24,18 @@ class EventImportFile < ActiveRecord::Base
   belongs_to :user, :validate => true
   has_many :event_import_results
 
-  state_machine :initial => :pending do
-    event :sm_start do
-      transition [:pending, :started] => :started
-    end
+  has_many :event_import_file_transitions
 
-    event :sm_complete do
-      transition :started => :completed
-    end
-
-    event :sm_fail do
-      transition :started => :failed
-    end
-
-    before_transition any => :started do |agent_import_file|
-      agent_import_file.executed_at = Time.zone.now
-    end
-
-    before_transition any => :completed do |agent_import_file|
-      agent_import_file.error_message = nil
-    end
+  def state_machine
+    @state_machine ||= EventImportFileStateMachine.new(self, transition_class: EventImportFileTransition)
   end
+
+  delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
+    to: :state_machine
 
   def import_start
     executed_at = Time.zone.now
-    sm_start!
+    transition_to!(:started)
     case edit_mode
     when 'create'
       import
@@ -104,16 +91,16 @@ class EventImportFile < ActiveRecord::Base
     end
     Sunspot.commit
     rows.close
-    sm_complete!
+    transition_to!(:completed)
     return num
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
-    sm_fail!
+    transition_to!(:failed)
     raise e
   end
 
   def modify
-    sm_start!
+    transition_to!(:started)
     rows = open_import_file
     check_field(rows.first)
     row_num = 2
@@ -137,15 +124,15 @@ class EventImportFile < ActiveRecord::Base
       event.save!
       row_num += 1
     end
-    sm_complete!
+    transition_to!(:completed)
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
-    sm_fail!
+    transition_to!(:failed)
     raise e
   end
 
   def remove
-    sm_start!
+    transition_to!(:started)
     rows = open_import_file
     rows.shift
     row_num = 2
@@ -158,10 +145,10 @@ class EventImportFile < ActiveRecord::Base
       event.destroy
       row_num += 1
     end
-    sm_complete!
+    transition_to!(:completed)
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
-    sm_fail!
+    transition_to!(:failed)
     raise e
   end
 
@@ -174,6 +161,10 @@ class EventImportFile < ActiveRecord::Base
   end
 
   private
+  def self.transition_class
+    EventImportFileTransition
+  end
+
   def open_import_file
     tempfile = Tempfile.new('event_import_file')
     if Setting.uploaded_file.storage == :s3

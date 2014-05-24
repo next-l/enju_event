@@ -1,5 +1,5 @@
 require "paperclip"
-require "state_machine"
+require "statesman"
 require "ri_cal"
 require "csv"
 require "nkf"

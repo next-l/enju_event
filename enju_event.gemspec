@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "enju_seed", "~> 0.2.0.pre5"
   s.add_dependency "simple_form", "~> 3.0"
   s.add_dependency "paperclip", "~> 4.1"
-  s.add_dependency "state_machine"
+  s.add_dependency "statesman"
   s.add_dependency "ri_cal"
   s.add_dependency "rails_autolink"
 
