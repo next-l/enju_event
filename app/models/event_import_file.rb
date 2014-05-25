@@ -34,8 +34,6 @@ class EventImportFile < ActiveRecord::Base
     to: :state_machine
 
   def import_start
-    executed_at = Time.zone.now
-    transition_to!(:started)
     case edit_mode
     when 'create'
       import
@@ -49,7 +47,7 @@ class EventImportFile < ActiveRecord::Base
   end
 
   def import
-    self.reload
+    transition_to!(:started)
     num = {:imported => 0, :failed => 0}
     rows = open_import_file
     check_field(rows.first)
