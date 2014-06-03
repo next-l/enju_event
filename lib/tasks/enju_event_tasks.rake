@@ -6,4 +6,9 @@ namespace :enju_event do
       ActiveRecord::Fixtures.create_fixtures('db/fixtures/enju_event', File.basename(file, '.*'))
     end
   end
+
+  desc "import events from a TSV file"
+  task :event_import => :environment do
+    EventImportFile.import
+  end
 end
