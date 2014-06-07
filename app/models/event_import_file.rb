@@ -101,10 +101,10 @@ class EventImportFile < ActiveRecord::Base
       event_import_result.save!
       row_num += 1
     end
-    Sunspot.commit
     rows.close
     sm_complete!
-    return num
+    Sunspot.commit
+    num
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     sm_fail!
