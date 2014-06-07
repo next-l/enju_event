@@ -15,4 +15,3 @@ gem "jquery-rails"
 
 # To use debugger
 # gem 'debugger'
-gem 'enju_leaf', github: 'next-l/enju_leaf', branch: '1.1'
