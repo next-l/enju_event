@@ -5,7 +5,7 @@ module EnjuEvent
     def initialize(user, ip_address = nil)
       case user.try(:role).try(:name)
       when 'Administrator'
-        can [:read, :create], EventCategory
+        can [:read, :create, :update], EventCategory
         can [:destroy, :delete], EventCategory do |event_category|
           !['unknown', 'closed'].include?(event_category.name)
         end
