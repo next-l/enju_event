@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602141129) do
+ActiveRecord::Schema.define(:version => 20140523171309) do
 
   create_table "agent_import_files", :force => true do |t|
     t.integer  "parent_id"
@@ -220,6 +220,18 @@ ActiveRecord::Schema.define(:version => 20120602141129) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "event_import_file_transitions", :force => true do |t|
+    t.string   "to_state"
+    t.text     "metadata",             :default => "{}"
+    t.integer  "sort_key"
+    t.integer  "event_import_file_id"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "event_import_file_transitions", ["event_import_file_id"], :name => "index_event_import_file_transitions_on_event_import_file_id"
+  add_index "event_import_file_transitions", ["sort_key", "event_import_file_id"], :name => "index_event_import_file_transitions_on_sort_key_and_file_id", :unique => true
+
   create_table "event_import_files", :force => true do |t|
     t.integer  "parent_id"
     t.string   "content_type"
@@ -399,7 +411,6 @@ ActiveRecord::Schema.define(:version => 20120602141129) do
     t.text     "login_banner"
     t.text     "note"
     t.integer  "valid_period_for_new_user",   :default => 365,                      :null => false
-    t.boolean  "post_to_union_catalog",       :default => false,                    :null => false
     t.integer  "country_id"
     t.datetime "created_at",                                                        :null => false
     t.datetime "updated_at",                                                        :null => false
