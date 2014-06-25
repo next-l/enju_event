@@ -34,17 +34,22 @@ class Event < ActiveRecord::Base
     if self.start_at.blank?
       self.start_at = Time.zone.today.beginning_of_day
     end
-    if self.end_at.blank?
-      self.end_at = Time.zone.today.end_of_day
-    end
 
-    set_all_day
+    if all_day
+      set_all_day
+    else
+      if self.end_at.blank?
+        self.end_at = start_at.end_of_day
+      end
+    end
   end
 
   def set_all_day
-    if all_day
-      self.start_at = self.start_at.beginning_of_day
-      self.end_at = self.end_at.end_of_day
+    self.start_at = start_at.beginning_of_day
+    if end_at
+      self.end_at = end_at.end_of_day
+    else
+      self.end_at = start_at.end_of_day
     end
   end
 
