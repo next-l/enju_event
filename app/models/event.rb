@@ -17,6 +17,18 @@ class Event < ActiveRecord::Base
 
   index_name "#{name.downcase.pluralize}-#{Rails.env}"
 
+  after_commit on: :create do
+    index_document
+  end
+
+  after_commit on: :update do
+    update_document
+  end
+
+  after_commit on: :destroy do
+    delete_document
+  end
+
   settings do
     mappings dynamic: 'false', _routing: {required: false} do
       indexes :name
