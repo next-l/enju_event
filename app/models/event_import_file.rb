@@ -21,6 +21,7 @@ class EventImportFile < ActiveRecord::Base
     'application/vnd.ms-excel'
   ]
   validates_attachment_presence :event_import
+  #do_not_validate_attachment_file_type :event_import
   belongs_to :user, :validate => true
   has_many :event_import_results
 
@@ -79,15 +80,10 @@ class EventImportFile < ActiveRecord::Base
       if event.save!
         event_import_result.event = event
         num[:imported] += 1
-        if row_num % 50 == 0
-          Sunspot.commit
-          GC.start
-        end
       end
       event_import_result.save!
       row_num += 1
     end
-    Sunspot.commit
     rows.close
     transition_to!(:completed)
     return num

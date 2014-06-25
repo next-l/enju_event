@@ -3,9 +3,10 @@ require 'spec_helper'
 describe EventsController do
   fixtures :all
 
-  describe "GET index", :solr => true do
+  describe "GET index" do
     before do
-      Event.reindex
+      Event.__elasticsearch__.create_index!
+      Event.import
     end
 
     before(:each) do

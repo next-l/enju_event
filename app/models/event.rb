@@ -1,5 +1,7 @@
 # -*- encoding: utf-8 -*-
 class Event < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
   scope :closing_days, -> {includes(:event_category).where('event_categories.name = ?', 'closed').references(:event_categories)}
   scope :on, lambda {|datetime| where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1)}
   scope :past, lambda {|datetime| where('end_at <= ?', Time.zone.parse(datetime).beginning_of_day)}
@@ -13,13 +15,18 @@ class Event < ActiveRecord::Base
   has_many :agents, :through => :participates
   has_one :event_import_result
 
-  searchable do
-    text :name, :note
-    integer :library_id
-    time :created_at
-    time :updated_at
-    time :start_at
-    time :end_at
+  index_name "#{name.downcase.pluralize}-#{Rails.env}"
+
+  settings do
+    mappings dynamic: 'false', _routing: {required: false} do
+      indexes :name
+      indexes :note
+      indexes :library_id, type: 'integer'
+      indexes :created_at, type: 'date'
+      indexes :updated_at, type: 'date'
+      indexes :start_at, type: 'date'
+      indexes :end_at, type: 'date'
+    end
   end
 
   validates_presence_of :name, :library, :event_category

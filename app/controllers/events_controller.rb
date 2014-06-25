@@ -6,7 +6,6 @@ class EventsController < ApplicationController
   before_action :prepare_options
   before_action :store_page, :only => :index
   after_action :verify_authorized
-  after_action :solr_commit, :only => [:create, :update, :destroy]
   after_action :convert_charset, :only => :index
 
   # GET /events
@@ -14,36 +13,56 @@ class EventsController < ApplicationController
   def index
     authorize Event
     @count = {}
-    query = params[:query].to_s.strip
-    @query = query.dup
-    query = query.gsub('　', ' ')
+    if params[:query].to_s.strip == ''
+      user_query = '*'
+    else
+      user_query = params[:query]
+    end
     tag = params[:tag].to_s if params[:tag].present?
     date = params[:date].to_s if params[:date].present?
     mode = params[:mode]
 
-    search = Sunspot.new_search(Event)
-    library = @library
-    search.build do
-      fulltext query if query.present?
-      with(:library_id).equal_to library.id if library
-      #with(:tag).equal_to tag
-      if date
-        with(:start_at).less_than_or_equal_to Time.zone.parse(date)
-        with(:end_at).greater_than Time.zone.parse(date)
-      end
-      case mode
-      when 'upcoming'
-        with(:start_at).greater_than Time.zone.now.beginning_of_day
-      when 'past'
-        with(:start_at).less_than Time.zone.now.beginning_of_day
-      end
-      order_by(:start_at, :desc)
+    query = {
+      query: {
+        filtered: {
+          query: {
+            query_string: {
+              query: user_query, fields: ['_all']
+            }
+          }
+        }
+      }
+    }
+    if @library
+      query[:query][:filtered].merge!(
+        filter: {
+          term: {
+            library_id: @library.id
+          }
+        }
+      )
     end
 
+    #search.build do
+    #  fulltext query if query.present?
+    #  with(:library_id).equal_to library.id if library
+      #with(:tag).equal_to tag
+    #  if date
+    #    with(:start_at).less_than_or_equal_to Time.zone.parse(date)
+    #    with(:end_at).greater_than Time.zone.parse(date)
+    #  end
+    #  case mode
+    #  when 'upcoming'
+    #    with(:start_at).greater_than Time.zone.now.beginning_of_day
+    #  when 'past'
+    #    with(:start_at).less_than Time.zone.now.beginning_of_day
+    #  end
+    #  order_by(:start_at, :desc)
+    #end
+
     page = params[:page] || 1
-    search.query.paginate(page.to_i, Event.default_per_page)
-    @events = search.execute!.results
-    @count[:query_result] = @events.total_entries
+    search = Event.search(query)
+    @events = search.page(params[:page]).records
 
     respond_to do |format|
       format.html # index.html.erb
