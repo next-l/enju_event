@@ -4,3 +4,16 @@ class EventImportFileTransition < ActiveRecord::Base
   
   belongs_to :event_import_file, inverse_of: :event_import_file_transitions
 end
+
+# == Schema Information
+#
+# Table name: event_import_file_transitions
+#
+#  id                   :integer          not null, primary key
+#  to_state             :string(255)
+#  metadata             :text             default("{}")
+#  sort_key             :integer
+#  event_import_file_id :integer
+#  created_at           :datetime
+#  updated_at           :datetime
+#

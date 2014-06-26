@@ -30,4 +30,5 @@ Gem::Specification.new do |s|
   #s.add_development_dependency "enju_leaf", "~> 1.2.0.pre1"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "elasticsearch-extensions"
+  s.add_development_dependency "annotate"
 end
