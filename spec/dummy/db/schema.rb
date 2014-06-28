@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140523171309) do
+ActiveRecord::Schema.define(version: 20140628071719) do
 
   create_table "accepts", force: true do |t|
     t.integer  "basket_id"
@@ -403,6 +403,7 @@ ActiveRecord::Schema.define(version: 20140523171309) do
     t.datetime "updated_at"
     t.string   "event_import_fingerprint"
     t.text     "error_message"
+    t.string   "user_encoding"
   end
 
   add_index "event_import_files", ["parent_id"], name: "index_event_import_files_on_parent_id"

@@ -32,6 +32,7 @@ ja:
         state: 状態
         edit_mode: 編集モード
         error_message: エラーメッセージ
+        user_encoding: 文字コード
       event_import_result:
         body: 本文
 

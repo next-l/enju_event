@@ -105,4 +105,5 @@ end
 #  updated_at                :datetime
 #  event_import_fingerprint  :string(255)
 #  error_message             :text
+#  user_encoding             :string(255)
 #
