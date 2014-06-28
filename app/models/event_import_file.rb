@@ -149,7 +149,7 @@ class EventImportFile < ActiveRecord::Base
   end
 
   def create_import_temp_file
-    tempfile = Tempfile.new(name.underscore)
+    tempfile = Tempfile.new(self.class.name.underscore)
     if Setting.uploaded_file.storage == :s3
       uploaded_file_path = event_import.expiring_url(10)
     else
