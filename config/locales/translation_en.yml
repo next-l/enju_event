@@ -32,6 +32,7 @@ en:
         state: State
         edit_mode: Edit mode
         error_message: Error message
+        user_encoding: Encoding
       event_import_result:
         body: Body
 

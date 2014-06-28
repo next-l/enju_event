@@ -27,6 +27,8 @@ class EventImportFile < ActiveRecord::Base
 
   has_many :event_import_file_transitions
 
+  enju_import_file_model
+
   def state_machine
     @state_machine ||= EventImportFileStateMachine.new(self, transition_class: EventImportFileTransition)
   end
@@ -34,23 +36,10 @@ class EventImportFile < ActiveRecord::Base
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
     to: :state_machine
 
-  def import_start
-    case edit_mode
-    when 'create'
-      import
-    when 'update'
-      modify
-    when 'destroy'
-      remove
-    else
-      import
-    end
-  end
-
   def import
     transition_to!(:started)
     num = {:imported => 0, :failed => 0}
-    rows = open_import_file
+    rows = open_import_file(create_import_temp_file)
     check_field(rows.first)
     row_num = 2
 
@@ -164,8 +153,8 @@ class EventImportFile < ActiveRecord::Base
     EventImportFileTransition
   end
 
-  def open_import_file
-    tempfile = Tempfile.new('event_import_file')
+  def create_import_temp_file
+    tempfile = Tempfile.new(name.underscore)
     if Setting.uploaded_file.storage == :s3
       uploaded_file_path = event_import.expiring_url(10)
     else
@@ -173,20 +162,14 @@ class EventImportFile < ActiveRecord::Base
     end
     open(uploaded_file_path){|f|
       f.each{|line|
-        if defined?(CharlockHolmes::EncodingDetector)
-          begin
-            string = line.encode('UTF-8', CharlockHolmes::EncodingDetector.detect(line)[:encoding], universal_newline: true)
-          rescue StandardError
-            string = NKF.nkf('-w -Lu', line)
-          end
-        else
-          string = NKF.nkf('-w -Lu', line)
-        end
-        tempfile.puts(string)
+        tempfile.puts(convert_encoding(line))
       }
     }
     tempfile.close
+    tempfile
+  end
 
+  def open_import_file(tempfile)
     file = CSV.open(tempfile, :col_sep => "\t")
     header = file.first
     rows = CSV.open(tempfile, :headers => header, :col_sep => "\t")
@@ -228,5 +211,6 @@ end
 #  updated_at                :datetime         not null
 #  event_import_fingerprint  :string(255)
 #  error_message             :text
+#  user_encoding             :string(255)
 #
 
