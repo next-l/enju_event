@@ -239,7 +239,6 @@ ActiveRecord::Schema.define(:version => 20140523171309) do
     t.integer  "user_id"
     t.text     "note"
     t.datetime "executed_at"
-    t.string   "state"
     t.string   "event_import_file_name"
     t.string   "event_import_content_type"
     t.integer  "event_import_file_size"
@@ -252,7 +251,6 @@ ActiveRecord::Schema.define(:version => 20140523171309) do
   end
 
   add_index "event_import_files", ["parent_id"], :name => "index_event_import_files_on_parent_id"
-  add_index "event_import_files", ["state"], :name => "index_event_import_files_on_state"
   add_index "event_import_files", ["user_id"], :name => "index_event_import_files_on_user_id"
 
   create_table "event_import_results", :force => true do |t|

@@ -100,7 +100,7 @@ class EventImportFile < ActiveRecord::Base
 
   def modify
     transition_to!(:started)
-    rows = open_import_file
+    rows = open_import_file(create_import_temp_file)
     check_field(rows.first)
     row_num = 2
 
@@ -132,7 +132,7 @@ class EventImportFile < ActiveRecord::Base
 
   def remove
     transition_to!(:started)
-    rows = open_import_file
+    rows = open_import_file(create_import_temp_file)
     rows.shift
     row_num = 2
 
@@ -219,7 +219,6 @@ end
 #  user_id                   :integer
 #  note                      :text
 #  executed_at               :datetime
-#  state                     :string(255)
 #  event_import_file_name    :string(255)
 #  event_import_content_type :string(255)
 #  event_import_file_size    :integer

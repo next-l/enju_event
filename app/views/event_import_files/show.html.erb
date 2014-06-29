@@ -62,8 +62,14 @@
 </div>
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
+  <%= form_for(@event_import_file) do |f| %>
   <ul>
     <li><%= link_to t('activerecord.models.event_import_result'), event_import_file_event_import_results_path(@event_import_file) -%></li>
     <li><%= back_to_index(flash[:page_info]) -%></li>
+    <li>
+      <%= f.hidden_field :mode, value: 'import' %>
+      <%= f.submit t('page.import') %>
+    </li>
   </ul>
+  <% end %>
 </div>

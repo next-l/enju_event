@@ -34,4 +34,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "simplecov"
   s.add_development_dependency "mobylette", "~> 3.5"
   s.add_development_dependency "sunspot-rails-tester"
+  s.add_development_dependency "annotate"
 end
