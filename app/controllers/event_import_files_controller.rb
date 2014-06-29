@@ -31,6 +31,7 @@ class EventImportFilesController < ApplicationController
   end
 
   # GET /event_import_files/new
+  # GET /event_import_files/new.json
   def new
     @event_import_file = EventImportFile.new
     authorize @event_import_file
@@ -43,14 +44,13 @@ class EventImportFilesController < ApplicationController
   # POST /event_import_files
   # POST /event_import_files.json
   def create
-    authorize EventImportFile
     @event_import_file = EventImportFile.new(event_import_file_params)
+    authorize @event_import_file
     @event_import_file.user = current_user
 
     respond_to do |format|
       if @event_import_file.save
-        flash[:notice] = t('controller.successfully_created', :model => t('activerecord.models.event_import_file'))
-        format.html { redirect_to(@event_import_file) }
+        format.html { redirect_to @event_import_file, :notice => t('controller.successfully_created', :model => t('activerecord.models.event_import_file')) }
         format.json { render :json => @event_import_file, :status => :created, :location => @event_import_file }
       else
         format.html { render :action => "new" }
@@ -62,15 +62,14 @@ class EventImportFilesController < ApplicationController
   # PUT /event_import_files/1
   # PUT /event_import_files/1.json
   def update
-    respond_to do |format|
-      if @event_import_file.update_attributes(event_import_file_params)
-        flash[:notice] = t('controller.successfully_updated', :model => t('activerecord.models.event_import_file'))
-        format.html { redirect_to(@event_import_file) }
-        format.json { head :no_content }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @event_import_file.errors, :status => :unprocessable_entity }
-      end
+    if @event_import_file.mode == 'import'
+      EventImportFileQueue.perform(@event_import_file.id)
+    end
+
+    if @event_import_file.update(event_import_file_params)
+      redirect_to @event_import_file, notice: t('controller.successfully_updated', :model => t('activerecord.models.event_import_file'))
+    else
+      render :edit
     end
   end
 
@@ -78,11 +77,7 @@ class EventImportFilesController < ApplicationController
   # DELETE /event_import_files/1.json
   def destroy
     @event_import_file.destroy
-
-    respond_to do |format|
-      format.html { redirect_to event_import_files_url }
-      format.json { head :no_content }
-    end
+    redirect_to event_import_files_url, notice: t('controller.successfully_destroyed', :model => t('activerecord.models.event_import_file'))
   end
 
   private
@@ -93,7 +88,7 @@ class EventImportFilesController < ApplicationController
 
   def event_import_file_params
     params.require(:event_import_file).permit(
-      :event_import, :edit_mode, :user_encoding
+      :event_import, :edit_mode, :user_encoding, :mode
     )
   end
 end
