@@ -70,6 +70,10 @@ class EventImportFilesController < ApplicationController
   # PUT /event_import_files/1
   # PUT /event_import_files/1.json
   def update
+    if @event_import_file.mode == 'import'
+      EventImportFileQueue.perform(@event_import_file.id)
+    end
+
     respond_to do |format|
       if @event_import_file.update_attributes(params[:event_import_file])
         flash[:notice] = t('controller.successfully_updated', :model => t('activerecord.models.event_import_file'))
