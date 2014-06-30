@@ -75,8 +75,7 @@ class EventImportFilesController < ApplicationController
         if @event_import_file.mode == 'import'
           EventImportFileQueue.perform(@event_import_file.id)
         end
-        flash[:notice] = t('controller.successfully_updated', :model => t('activerecord.models.event_import_file'))
-        format.html { redirect_to(@event_import_file) }
+        format.html { redirect_to @event_import_file, :notice => t('controller.successfully_updated', :model => t('activerecord.models.event_import_file')) }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
