@@ -64,7 +64,7 @@ class EventImportFilesController < ApplicationController
   def update
     if @event_import_file.update(event_import_file_params)
       if @event_import_file.mode == 'import'
-        EventImportFileQueue.perform(@event_import_file.id)
+        Resque.enqueue(EventImportFileQueue, @event_import_file.id)
       end
       redirect_to @event_import_file, notice: t('controller.successfully_updated', :model => t('activerecord.models.event_import_file'))
     else
