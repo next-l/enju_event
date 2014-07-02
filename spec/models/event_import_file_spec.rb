@@ -2,6 +2,7 @@
 require 'spec_helper'
 
 describe EventImportFile do
+  fixtures :users
   #pending "add some examples to (or delete) #{__FILE__}"
 
   describe "When it is written in utf-8" do
@@ -81,6 +82,13 @@ describe EventImportFile do
       @file.remove
       Event.count.should eq old_event_count - 2
     end
+  end
+
+  it "should import in background" do
+    file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv")
+    file.user = users(:admin)
+    file.save
+    EventImportFileQueue.perform(file.id).should be_true
   end
 end
 
