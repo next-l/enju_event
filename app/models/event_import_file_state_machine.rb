@@ -9,7 +9,7 @@ class EventImportFileStateMachine
   transition from: :pending, to: :started
   transition from: :started, to: [:completed, :failed]
 
-  before_transition(from: :pending, to: :started) do |event_import_file|
+  after_transition(from: :pending, to: :started) do |event_import_file|
     event_import_file.update_column(:executed_at, Time.zone.now)
   end
 
