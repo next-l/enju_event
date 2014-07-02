@@ -73,7 +73,7 @@ class EventImportFilesController < ApplicationController
     respond_to do |format|
       if @event_import_file.update_attributes(params[:event_import_file])
         if @event_import_file.mode == 'import'
-          EventImportFileQueue.perform(@event_import_file.id)
+          Resque.enqueue(EventImportFileQueue, @event_import_file.id)
         end
         format.html { redirect_to @event_import_file, :notice => t('controller.successfully_updated', :model => t('activerecord.models.event_import_file')) }
         format.json { head :no_content }
