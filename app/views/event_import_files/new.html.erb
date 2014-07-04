@@ -33,7 +33,8 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.hidden_field :mode, value: 'import' %>
+    <%= f.submit t('page.start_import') %>
   </div>
 <%- end -%>
 
@@ -42,6 +43,6 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.back'), event_import_files_path -%></li>
+    <li><%= back_to_index(flash[:page_info]) %></li>
   </ul>
 </div>
