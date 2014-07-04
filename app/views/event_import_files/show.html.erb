@@ -71,12 +71,6 @@
   <ul>
     <li><%= link_to t('activerecord.models.event_import_result'), event_import_file_event_import_results_path(@event_import_file) -%></li>
     <li><%= back_to_index(flash[:page_info]) -%></li>
-    <% if @event_import_file.current_state == 'pending' %>
-      <li>
-        <%= f.hidden_field :mode, value: 'import' %>
-        <%= f.submit t('page.start_import') %>
-      </li>
-    <% end %>
   </ul>
   <% end %>
 </div>
