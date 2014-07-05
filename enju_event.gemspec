@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails_autolink"
 
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "rspec-rails", "2.99"
+  s.add_development_dependency "rspec-rails", "~> 3.0"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "enju_leaf", "~> 1.1.0.rc10"
   s.add_development_dependency "sunspot_solr", "~> 2.1"
@@ -35,4 +35,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "mobylette", "~> 3.5"
   s.add_development_dependency "sunspot-rails-tester"
   s.add_development_dependency "annotate"
+  s.add_development_dependency "rspec-activemodel-mocks"
 end

@@ -19,8 +19,8 @@ describe EventImportFile do
       Event.closing_days.size.should eq closing_days_size + 1
       EventImportResult.count.should eq old_import_results_count + 4
 
-      @file.event_import_fingerprint.should be_true
-      @file.executed_at.should be_true
+      @file.event_import_fingerprint.should be_truthy
+      @file.executed_at.should be_truthy
     end
   end
 
@@ -66,7 +66,7 @@ describe EventImportFile do
 
       event2 = Event.find(2)
       event2.end_at.to_s.should eq Time.zone.parse('2012-04-03').beginning_of_day.to_s
-      event2.all_day.should be_false
+      event2.all_day.should be_falsy
       event2.library.name.should eq 'mita'
 
       event3 = Event.find(3)
@@ -88,7 +88,7 @@ describe EventImportFile do
     file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv")
     file.user = users(:admin)
     file.save
-    EventImportFileQueue.perform(file.id).should be_true
+    EventImportFileQueue.perform(file.id).should be_truthy
   end
 end
 
