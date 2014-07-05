@@ -68,13 +68,15 @@ class EventImportFile < ActiveRecord::Base
       event_category = EventCategory.where(:name => category).first || EventCategory.where(:name => 'unknown').first
       event.event_category = event_category
 
-      if event.save!
+      if event.save 
         event_import_result.event = event
         num[:imported] += 1
         if row_num % 50 == 0
           Sunspot.commit
           GC.start
         end
+      else
+        num[:failed] += 1
       end
       event_import_result.save!
     end

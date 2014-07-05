@@ -36,20 +36,13 @@ class Event < ActiveRecord::Base
   paginates_per 10
 
   def set_date
-    if self.start_at.blank?
-      self.start_at = Time.zone.today.beginning_of_day
-    end
-
     if all_day
       set_all_day
-    else
-      if self.end_at.blank?
-        self.end_at = start_at.end_of_day
-      end
     end
   end
 
   def set_all_day
+    return false unless start_at
     self.start_at = start_at.beginning_of_day
     if end_at
       self.end_at = end_at.end_of_day
@@ -59,8 +52,8 @@ class Event < ActiveRecord::Base
   end
 
   def check_date
-    if self.start_at and self.end_at
-      if self.start_at >= self.end_at
+    if start_at and end_at
+      if start_at >= end_at
         errors.add(:start_at)
         errors.add(:end_at)
       end
@@ -68,7 +61,7 @@ class Event < ActiveRecord::Base
   end
 
   def set_display_name
-    self.display_name = self.name if self.display_name.blank?
+    self.display_name = name if display_name.blank?
   end
 end
 
