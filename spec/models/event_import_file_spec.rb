@@ -14,10 +14,10 @@ describe EventImportFile do
       closing_days_size = Event.closing_days.size
       old_events_count = Event.count
       old_import_results_count = EventImportResult.count
-      @file.import_start.should eq({:imported => 3, :failed => 0})
+      @file.import_start.should eq({:imported => 3, :failed => 1})
       Event.count.should eq old_events_count + 3
       Event.closing_days.size.should eq closing_days_size + 1
-      EventImportResult.count.should eq old_import_results_count + 4
+      EventImportResult.count.should eq old_import_results_count + 5
 
       @file.event_import_fingerprint.should be_truthy
       @file.executed_at.should be_truthy
