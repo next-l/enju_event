@@ -42,9 +42,10 @@ class EventImportFile < ActiveRecord::Base
     num = {:imported => 0, :failed => 0}
     rows = open_import_file(create_import_temp_file)
     check_field(rows.first)
-    row_num = 2
+    row_num = 1
 
     rows.each do |row|
+      row_num += 1
       next if row['dummy'].to_s.strip.present?
       event_import_result = EventImportResult.new
       event_import_result.assign_attributes({:event_import_file_id => id, :body => row.fields.join("\t")})
@@ -72,7 +73,6 @@ class EventImportFile < ActiveRecord::Base
         num[:imported] += 1
       end
       event_import_result.save!
-      row_num += 1
     end
     rows.close
     transition_to!(:completed)
@@ -87,9 +87,10 @@ class EventImportFile < ActiveRecord::Base
     transition_to!(:started)
     rows = open_import_file(create_import_temp_file)
     check_field(rows.first)
-    row_num = 2
+    row_num = 1
 
     rows.each do |row|
+      row_num += 1
       next if row['dummy'].to_s.strip.present?
       event = Event.find(row['id'].to_s.strip)
       event_category = EventCategory.where(:name => row['category'].to_s.strip).first
@@ -106,7 +107,6 @@ class EventImportFile < ActiveRecord::Base
         event.all_day = true
       end
       event.save!
-      row_num += 1
     end
     transition_to!(:completed)
   rescue => e
@@ -119,15 +119,15 @@ class EventImportFile < ActiveRecord::Base
     transition_to!(:started)
     rows = open_import_file(create_import_temp_file)
     rows.shift
-    row_num = 2
+    row_num = 1
 
     rows.each do |row|
+      row_num += 1
       next if row['dummy'].to_s.strip.present?
       event = Event.find(row['id'].to_s.strip)
       event.picture_files.destroy_all # workaround
       event.reload
       event.destroy
-      row_num += 1
     end
     transition_to!(:completed)
   rescue => e

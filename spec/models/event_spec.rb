@@ -8,7 +8,7 @@ describe Event do
     event = events(:event_00001)
     event.all_day = true
     event.set_all_day
-    event.all_day.should be_true
+    event.all_day.should be_truthy
   end
 
   it "should set all_day and beginning_of_day" do
