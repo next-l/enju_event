@@ -4,6 +4,7 @@ RSpec.configure do |config|
   REDIS_CACHE_PATH = "#{Rails.root}/tmp/cache/"
 
   unless ENV["TRAVIS"]
+    Resque.redis = 'localhost:9736'
     config.before(:suite) do
       redis_options = {
         "daemonize"     => 'yes',
