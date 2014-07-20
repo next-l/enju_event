@@ -33,6 +33,7 @@ en:
         edit_mode: Edit mode
         error_message: Error message
         user_encoding: Encoding
+        default_library_id: Default library
       event_import_result:
         body: Body
 
