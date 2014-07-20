@@ -89,13 +89,13 @@
     <%- if @library -%>
       <%= link_to (image_tag 'icons/feed.png', :size => '16x16', :alt => t('page.feed'), :class => 'icon'), library_events_path(@library, :format => :rss) -%>
       (<%= link_to 'RSS', library_events_path(@library, :format => :rss) -%>)
-      <%= link_to (image_tag 'icons/page_white_excel.png', :size => '16x16', :alt => 'CSV', :class => 'icon'), library_events_path(@library, :format => :csv, :locale => @locale.to_s) -%>
-      (<%= link_to 'CSV', library_events_path(@library, :format => :csv, :locale => @locale.to_s) -%>)
+      <%= link_to (image_tag 'icons/page_white_excel.png', :size => '16x16', :alt => 'TSV', :class => 'icon'), library_events_path(@library, format: :txt, locale: @locale.to_s) -%>
+      (<%= link_to 'TSV', library_events_path(@library, format: :txt, locale: @locale.to_s) -%>)
     <%- else -%>
       <%= link_to (image_tag 'icons/feed.png', :size => '16x16', :alt => t('page.feed'), :class => 'icon'), events_path(:format => :rss) -%>
       (<%= link_to 'RSS', events_path(:format => :rss) -%>)
-      <%= link_to (image_tag 'icons/page_white_excel.png', :size => '16x16', :alt => 'CSV', :class => 'icon'), events_path(:format => :csv, :locale => @locale.to_s) -%>
-      (<%= link_to 'CSV', events_path(:format => :csv, :locale => @locale.to_s) -%>)
+      <%= link_to (image_tag 'icons/page_white_excel.png', :size => '16x16', :alt => 'TSV', :class => 'icon'), events_path(format: :txt, locale: @locale.to_s) -%>
+      (<%= link_to 'TSV', events_path(format: :txt, locale: @locale.to_s) -%>)
     <%- end -%>
   </p>
   <%= render 'page/login' unless current_user -%>

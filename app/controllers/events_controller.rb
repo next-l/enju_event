@@ -68,7 +68,7 @@ class EventsController < ApplicationController
       format.html # index.html.erb
       format.json { render :json => @events }
       format.rss  { render :layout => false }
-      format.csv
+      format.txt
       format.atom
       format.ics
     end
