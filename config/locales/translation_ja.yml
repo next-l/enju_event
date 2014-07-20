@@ -33,6 +33,7 @@ ja:
         edit_mode: 編集モード
         error_message: エラーメッセージ
         user_encoding: 文字コード
+        default_library_id: 既定の図書館
       event_import_result:
         body: 本文
 
