@@ -7,7 +7,7 @@ describe EventImportFile do
 
   describe "When it is written in utf-8" do
     before(:each) do
-      @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv")
+      @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), :default_library_id => 3
     end
 
     it "should be imported" do
@@ -18,6 +18,7 @@ describe EventImportFile do
       Event.count.should eq old_events_count + 3
       Event.closing_days.size.should eq closing_days_size + 1
       EventImportResult.count.should eq old_import_results_count + 5
+      Event.order(:id).last.library.name.should eq 'hachioji'
 
       @file.event_import_fingerprint.should be_truthy
       @file.executed_at.should be_truthy
@@ -113,4 +114,5 @@ end
 #  event_import_fingerprint  :string(255)
 #  error_message             :text
 #  user_encoding             :string(255)
+#  default_library_id        :integer
 #

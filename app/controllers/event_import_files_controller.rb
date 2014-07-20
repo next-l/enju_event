@@ -35,6 +35,8 @@ class EventImportFilesController < ApplicationController
   def new
     @event_import_file = EventImportFile.new
     authorize @event_import_file
+    @event_import_file.default_library = current_user.library
+    prepare_options
   end
 
   # GET /event_import_files/1/edit
@@ -54,6 +56,7 @@ class EventImportFilesController < ApplicationController
       end
       redirect_to @event_import_file, notice: t('controller.successfully_created', :model => t('activerecord.models.event_import_file'))
     else
+      prepare_options
       render action: 'new'
     end
   end
@@ -67,6 +70,7 @@ class EventImportFilesController < ApplicationController
       end
       redirect_to @event_import_file, notice: t('controller.successfully_updated', :model => t('activerecord.models.event_import_file'))
     else
+      prepare_options
       render :edit
     end
   end
@@ -86,7 +90,11 @@ class EventImportFilesController < ApplicationController
 
   def event_import_file_params
     params.require(:event_import_file).permit(
-      :event_import, :edit_mode, :user_encoding, :mode
+      :event_import, :edit_mode, :user_encoding, :mode, :default_library_id
     )
+  end
+
+  def prepare_options
+    @libraries = Library.all
   end
 end
