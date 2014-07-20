@@ -40,5 +40,5 @@ event_import_file_00003:
 #  event_import_fingerprint  :string(255)
 #  error_message             :text
 #  user_encoding             :string(255)
+#  default_library_id        :integer
 #
-

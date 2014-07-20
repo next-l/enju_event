@@ -1,7 +1,8 @@
 class EventImportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordModel
   include ImportFile
-  attr_accessible :event_import, :edit_mode, :user_encoding, :mode
+  attr_accessible :event_import, :edit_mode, :user_encoding, :mode,
+    :default_library_id
   default_scope {order('event_import_files.id DESC')}
   scope :not_imported, -> {in_state(:pending)}
   scope :stucked, -> {in_state(:pending).where('created_at < ?', 1.hour.ago)}
@@ -23,6 +24,7 @@ class EventImportFile < ActiveRecord::Base
   ]
   validates_attachment_presence :event_import
   belongs_to :user, :validate => true
+  belongs_to :default_library, class_name: 'Library'
   has_many :event_import_results
 
   has_many :event_import_file_transitions
@@ -63,7 +65,7 @@ class EventImportFile < ActiveRecord::Base
         event.all_day = true
       end
       library = Library.where(:name => row['library']).first
-      library = Library.web if library.blank?
+      library = default_library || Library.web if library.blank?
       event.library = library
       event_category = EventCategory.where(:name => category).first || EventCategory.where(:name => 'unknown').first
       event.event_category = event_category
@@ -215,5 +217,5 @@ end
 #  event_import_fingerprint  :string(255)
 #  error_message             :text
 #  user_encoding             :string(255)
+#  default_library_id        :integer
 #
-

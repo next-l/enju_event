@@ -38,6 +38,8 @@ class EventImportFilesController < ApplicationController
   # GET /event_import_files/new.json
   def new
     @event_import_file = EventImportFile.new
+    @event_import_file.default_library = current_user.library
+    prepare_options
 
     respond_to do |format|
       format.html # new.html.erb
@@ -64,6 +66,7 @@ class EventImportFilesController < ApplicationController
         format.html { redirect_to(@event_import_file) }
         format.json { render :json => @event_import_file, :status => :created, :location => @event_import_file }
       else
+	prepare_options
         format.html { render :action => "new" }
         format.json { render :json => @event_import_file.errors, :status => :unprocessable_entity }
       end
@@ -81,6 +84,7 @@ class EventImportFilesController < ApplicationController
         format.html { redirect_to @event_import_file, :notice => t('controller.successfully_updated', :model => t('activerecord.models.event_import_file')) }
         format.json { head :no_content }
       else
+        prepare_options
         format.html { render :action => "edit" }
         format.json { render :json => @event_import_file.errors, :status => :unprocessable_entity }
       end
@@ -96,5 +100,9 @@ class EventImportFilesController < ApplicationController
       format.html { redirect_to event_import_files_url }
       format.json { head :no_content }
     end
+  end
+
+  def prepare_options
+    @libraries = Library.all
   end
 end
