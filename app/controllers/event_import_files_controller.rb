@@ -1,5 +1,6 @@
 class EventImportFilesController < ApplicationController
   load_and_authorize_resource
+  before_filter :prepare_options, only: [:new, :edit]
 
   # GET /event_import_files
   # GET /event_import_files.json
@@ -39,7 +40,6 @@ class EventImportFilesController < ApplicationController
   def new
     @event_import_file = EventImportFile.new
     @event_import_file.default_library = current_user.library
-    prepare_options
 
     respond_to do |format|
       format.html # new.html.erb
