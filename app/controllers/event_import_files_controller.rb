@@ -1,5 +1,6 @@
 class EventImportFilesController < ApplicationController
   before_action :set_event_import_file, only: [:show, :edit, :update, :destroy]
+  before_action :prepare_options, only: [:new, :edit]
   after_action :verify_authorized
 
   # GET /event_import_files
@@ -35,8 +36,6 @@ class EventImportFilesController < ApplicationController
   def new
     @event_import_file = EventImportFile.new
     authorize @event_import_file
-    @event_import_file.default_library = current_user.library
-    prepare_options
   end
 
   # GET /event_import_files/1/edit
@@ -96,5 +95,6 @@ class EventImportFilesController < ApplicationController
 
   def prepare_options
     @libraries = Library.all
+    @event_import_file.default_library = current_user.library if @event_import_file.new_record?
   end
 end
