@@ -61,10 +61,10 @@ class EventImportFilesController < ApplicationController
         if @event_import_file.mode == 'import'
           Resque.enqueue(EventImportFileQueue, @event_import_file.id)
         end
-        format.html { redirect_to @event_import_file, notice: t('import.successfully_created', model: t('activerecord.models.event_import_file'))
+        format.html { redirect_to @event_import_file, notice: t('import.successfully_created', model: t('activerecord.models.event_import_file')) }
         format.json { render :json => @event_import_file, :status => :created, :location => @event_import_file }
       else
-	prepare_options
+        prepare_options
         format.html { render :action => "new" }
         format.json { render :json => @event_import_file.errors, :status => :unprocessable_entity }
       end
