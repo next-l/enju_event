@@ -35,17 +35,8 @@ class EventImportFilesController < ApplicationController
   # GET /event_import_files/new.json
   def new
     @event_import_file = EventImportFile.new
-<<<<<<< HEAD
     authorize @event_import_file
-    @event_import_file.library = current_user.library
-=======
     @event_import_file.default_library = current_user.library
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @event_import_file }
-    end
->>>>>>> b38a76d... fixed setting default_library
   end
 
   # GET /event_import_files/1/edit
