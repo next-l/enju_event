@@ -39,6 +39,7 @@ class EventImportFilesController < ApplicationController
   # GET /event_import_files/new.json
   def new
     @event_import_file = EventImportFile.new
+    @event_import_file.library = current_user.library
 
     respond_to do |format|
       format.html # new.html.erb
@@ -102,6 +103,5 @@ class EventImportFilesController < ApplicationController
 
   def prepare_options
     @libraries = Library.all
-    @event_import_file.default_library = current_user.library if @event_import_file.new_record?
   end
 end
