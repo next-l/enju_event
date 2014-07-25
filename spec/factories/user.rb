@@ -15,6 +15,7 @@ FactoryGirl.define do
       user_has_role.save
       user.reload
     end
+    f.library {Library.find(2)}
   end
 
   factory :librarian, :class => User do |f|
@@ -33,6 +34,7 @@ FactoryGirl.define do
       user_has_role.save
       user.reload
     end
+    f.library {Library.find(2)}
   end
 
   factory :user, :class => User do |f|
@@ -52,6 +54,7 @@ FactoryGirl.define do
       user_has_role.save
       user.reload
     end
+    f.library {Library.find(2)}
   end
 
   factory :invalid_user, :class => User do |f|
