@@ -36,6 +36,7 @@ class EventImportFilesController < ApplicationController
   def new
     @event_import_file = EventImportFile.new
     authorize @event_import_file
+    @event_import_file.library = current_user.library
   end
 
   # GET /event_import_files/1/edit
@@ -95,6 +96,5 @@ class EventImportFilesController < ApplicationController
 
   def prepare_options
     @libraries = Library.all
-    @event_import_file.default_library = current_user.library if @event_import_file.new_record?
   end
 end
