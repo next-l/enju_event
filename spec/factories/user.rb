@@ -7,6 +7,7 @@ FactoryGirl.define do
     f.password_confirmation 'adminpassword'
     f.user_group {UserGroup.first}
     f.required_role {Role.find_by_name('User')}
+    f.library {Library.find(2)}
   end
 
   factory :librarian, :class => User do |f|
@@ -17,6 +18,7 @@ FactoryGirl.define do
     f.password_confirmation 'librarianpassword'
     f.user_group {UserGroup.first}
     f.required_role {Role.find_by_name('User')}
+    f.library {Library.find(2)}
   end
 
   factory :user, :class => User do |f|
@@ -27,6 +29,7 @@ FactoryGirl.define do
     f.password_confirmation 'userpassword'
     f.user_group {UserGroup.first}
     f.required_role {Role.find_by_name('User')}
+    f.library {Library.find(2)}
   end
 
   factory :invalid_user, :class => User do |f|
