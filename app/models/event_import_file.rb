@@ -85,11 +85,12 @@ class EventImportFile < ActiveRecord::Base
     Sunspot.commit
     rows.close
     transition_to!(:completed)
-    return num
-  rescue => e
-    self.error_message = "line #{row_num}: #{e.message}"
-    transition_to!(:failed)
-    raise e
+    send_message
+    num
+  #rescue => e
+  #  self.error_message = "line #{row_num}: #{e.message}"
+  #  transition_to!(:failed)
+  #  raise e
   end
 
   def modify
