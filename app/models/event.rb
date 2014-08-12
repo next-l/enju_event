@@ -63,6 +63,29 @@ class Event < ActiveRecord::Base
   def set_display_name
     self.display_name = name if display_name.blank?
   end
+
+  def self.export(options = {format: :txt})
+    header = %w(
+      name
+      library
+      start_at
+      end_at
+      all_day
+    ).join("\t")
+    events = Event.all.map{|e|
+      lines = []
+      lines << e.name
+      lines << e.library.name
+      lines << e.start_at
+      lines << e.end_at
+      lines << e.all_day
+    }
+    if options[:format] == :txt
+      events.map{|e| e.join("\t")}.unshift(header).join("\r\n")
+    else
+      event
+    end
+  end
 end
 
 # == Schema Information

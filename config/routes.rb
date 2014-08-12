@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :event_export_files
+
   resources :events do
     resources :picture_files
   end

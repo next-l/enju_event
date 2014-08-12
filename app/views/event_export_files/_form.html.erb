@@ -1,0 +1,29 @@
+<%= form_for(@event_export_file) do |f| %>
+  <% if @event_export_file.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event_export_file.errors.count, "error") %> prohibited this event_export_file from being saved:</h2>
+
+      <ul>
+      <% @event_export_file.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :event_export %><br>
+    <%= f.text_field :event_export %>
+  </div>
+  <div class="field">
+    <%= f.label :executed_at %><br>
+    <%= f.datetime_select :executed_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

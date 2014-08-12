@@ -1,0 +1,29 @@
+<h1>Listing event_export_files</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Event export</th>
+      <th>Executed at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_export_files.each do |event_export_file| %>
+      <tr>
+        <td><%= event_export_file.user_id %></td>
+        <td><%= event_export_file.event_export %></td>
+        <td><%= event_export_file.executed_at %></td>
+        <td><%= link_to 'Show', event_export_file %></td>
+        <td><%= link_to 'Edit', edit_event_export_file_path(event_export_file) %></td>
+        <td><%= link_to 'Destroy', event_export_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event export file', new_event_export_file_path %>

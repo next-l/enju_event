@@ -12,6 +12,7 @@ module EnjuEvent
         can :manage, [
           Event,
           EventImportFile,
+          EventExportFile,
           Participate
         ]
         can :read, EventImportResult
@@ -19,6 +20,7 @@ module EnjuEvent
         can :manage, [
           Event,
           EventImportFile,
+          EventExportFile,
           Participate
         ]
         can :read, [

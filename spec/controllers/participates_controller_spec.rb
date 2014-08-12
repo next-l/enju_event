@@ -11,7 +11,7 @@ describe ParticipatesController do
 
   describe "GET index" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns all participates as @participates" do
         get :index
@@ -20,7 +20,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns all participates as @participates" do
         get :index
@@ -29,7 +29,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns empty as @participates" do
         get :index
@@ -47,7 +47,7 @@ describe ParticipatesController do
 
   describe "GET show" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested participate as @participate" do
         participate = FactoryGirl.create(:participate)
@@ -57,7 +57,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested participate as @participate" do
         participate = FactoryGirl.create(:participate)
@@ -67,7 +67,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested participate as @participate" do
         participate = FactoryGirl.create(:participate)
@@ -87,7 +87,7 @@ describe ParticipatesController do
 
   describe "GET new" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested participate as @participate" do
         get :new
@@ -96,7 +96,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested participate as @participate" do
         get :new
@@ -105,7 +105,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "should not assign the requested participate as @participate" do
         get :new
@@ -125,7 +125,7 @@ describe ParticipatesController do
 
   describe "GET edit" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested participate as @participate" do
         participate = FactoryGirl.create(:participate)
@@ -135,7 +135,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested participate as @participate" do
         participate = FactoryGirl.create(:participate)
@@ -145,7 +145,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested participate as @participate" do
         participate = FactoryGirl.create(:participate)
@@ -170,7 +170,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "assigns a newly created participate as @participate" do
@@ -198,7 +198,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "assigns a newly created participate as @participate" do
@@ -226,7 +226,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "assigns a newly created participate as @participate" do
@@ -288,7 +288,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "updates the requested participate" do
@@ -315,7 +315,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "updates the requested participate" do
@@ -343,7 +343,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "updates the requested participate" do
@@ -392,7 +392,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "destroys the requested participate" do
         delete :destroy, :id => @participate.id
@@ -405,7 +405,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "destroys the requested participate" do
         delete :destroy, :id => @participate.id
@@ -418,7 +418,7 @@ describe ParticipatesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "destroys the requested participate" do
         delete :destroy, :id => @participate.id

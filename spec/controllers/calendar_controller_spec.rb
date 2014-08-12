@@ -9,7 +9,7 @@ describe CalendarController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns all event_stripss as @event_stripss" do
         get :index
@@ -43,7 +43,7 @@ describe CalendarController do
 
   describe "GET show" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "should redirect to a new event" do
         get :show, :year => '2011', :month => '1', :day => '1'
