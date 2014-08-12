@@ -6,6 +6,7 @@ en:
       event_import_file: Event import file
       event_import_result: Event Import Result
       participate: Participate
+      event_export_file: Event export
 
     attributes:
       event_category:
@@ -36,6 +37,10 @@ en:
         default_library_id: Default library
       event_import_result:
         body: Body
+      event_export_file:
+        event_export_file_name: Filename
+        event_export_file_size: Size
+        state: State
 
   event:
     library_group_event: "Events at %{library_group_name}"
