@@ -1,29 +1,44 @@
-<h1>Listing event_export_files</h1>
+<div id="content_detail" class="ui-corner-all ui-widget-content">
+<h1 class="title"><%= t('page.listing', :model => t('activerecord.models.event_export_file')) -%></h1>
+<div id="content_list">
 
-<table>
+<table class="table table-striped index">
   <thead>
     <tr>
-      <th>User</th>
-      <th>Event export</th>
-      <th>Executed at</th>
-      <th colspan="3"></th>
+      <th>Id</th>
+      <th><%= t('activerecord.models.user') %></th>
+      <th><%= t('activerecord.attributes.event_export_file.event_export_file_name') -%></th>
+      <th><%= t('activerecord.attributes.event_export_file.state') -%></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @event_export_files.each do |event_export_file| %>
-      <tr>
-        <td><%= event_export_file.user_id %></td>
-        <td><%= event_export_file.event_export %></td>
-        <td><%= event_export_file.executed_at %></td>
-        <td><%= link_to 'Show', event_export_file %></td>
-        <td><%= link_to 'Edit', edit_event_export_file_path(event_export_file) %></td>
-        <td><%= link_to 'Destroy', event_export_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <tr class="line<%= cycle("0", "1") -%>">
+        <td><%= link_to event_export_file.id, event_export_file %></td>
+        <td><%= event_export_file.user.try(:username) %></td>
+        <td>
+          <%= link_to event_export_file.event_export_file_name, event_export_file.event_export.url if event_export_file.event_export.path %>
+          <br />
+          <%= event_export_file.created_at %>
+        </td>
+        <td><%= localized_state(event_export_file.current_state) -%></td>
+        <td>
+          <%= link_to t('page.destroy'), event_export_file, method: :delete, data: {confirm: t('page.are_you_sure')}, :method => :delete -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<%= paginate(@event_export_files) %>
 
-<%= link_to 'New Event export file', new_event_export_file_path %>
+</div>
+</div>
+
+<div id="submenu" class="ui-corner-all ui-widget-content">
+  <ul>
+    <li><%= link_to t('page.new', :model => t('activerecord.models.event_export_file')), new_event_export_file_path -%></li>
+  </ul>
+</div>
