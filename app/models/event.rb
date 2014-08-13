@@ -67,6 +67,7 @@ class Event < ActiveRecord::Base
   def self.export(options = {format: :txt})
     header = %w(
       name
+      event_category
       library
       start_at
       end_at
@@ -75,6 +76,7 @@ class Event < ActiveRecord::Base
     events = Event.all.map{|e|
       lines = []
       lines << e.name
+      lines << e.event_category.name
       lines << e.library.name
       lines << e.start_at
       lines << e.end_at
