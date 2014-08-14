@@ -52,3 +52,5 @@ ja:
   calendar:
     calendar: "カレンダー"
     library_calendar: "%{library_name}のカレンダー"
+  event_import_file:
+    default_library: TSVファイルで"library"列が指定されていない場合、この図書館が登録されます。
