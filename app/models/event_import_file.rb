@@ -42,7 +42,7 @@ class EventImportFile < ActiveRecord::Base
   def import
     transition_to!(:started)
     num = {:imported => 0, :failed => 0}
-    rows = open_import_file(create_import_temp_file)
+    rows = open_import_file(create_import_temp_file(event_import))
     check_field(rows.first)
     row_num = 1
 
@@ -96,7 +96,7 @@ class EventImportFile < ActiveRecord::Base
 
   def modify
     transition_to!(:started)
-    rows = open_import_file(create_import_temp_file)
+    rows = open_import_file(create_import_temp_file(event_import))
     check_field(rows.first)
     row_num = 1
 
@@ -128,7 +128,7 @@ class EventImportFile < ActiveRecord::Base
 
   def remove
     transition_to!(:started)
-    rows = open_import_file(create_import_temp_file)
+    rows = open_import_file(create_import_temp_file(event_import))
     rows.shift
     row_num = 1
 
@@ -158,22 +158,6 @@ class EventImportFile < ActiveRecord::Base
   private
   def self.transition_class
     EventImportFileTransition
-  end
-
-  def create_import_temp_file
-    tempfile = Tempfile.new(self.class.name.underscore)
-    if Setting.uploaded_file.storage == :s3
-      uploaded_file_path = event_import.expiring_url(10)
-    else
-      uploaded_file_path = event_import.path
-    end
-    open(uploaded_file_path){|f|
-      f.each{|line|
-        tempfile.puts(convert_encoding(line))
-      }
-    }
-    tempfile.close
-    tempfile
   end
 
   def open_import_file(tempfile)
