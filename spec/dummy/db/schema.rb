@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140812153137) do
+ActiveRecord::Schema.define(:version => 20140814070854) do
 
   create_table "accepts", :force => true do |t|
     t.integer  "basket_id"
@@ -411,6 +411,7 @@ ActiveRecord::Schema.define(:version => 20140812153137) do
     t.text     "error_message"
     t.string   "user_encoding"
     t.integer  "default_library_id"
+    t.integer  "default_event_category_id"
   end
 
   add_index "event_import_files", ["parent_id"], :name => "index_event_import_files_on_parent_id"
@@ -425,8 +426,8 @@ ActiveRecord::Schema.define(:version => 20140812153137) do
   end
 
   create_table "events", :force => true do |t|
-    t.integer  "library_id",        :default => 1,     :null => false
-    t.integer  "event_category_id", :default => 1,     :null => false
+    t.integer  "library_id",                           :null => false
+    t.integer  "event_category_id",                    :null => false
     t.string   "name"
     t.text     "note"
     t.datetime "start_at"

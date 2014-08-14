@@ -41,4 +41,5 @@ event_import_file_00003:
 #  error_message             :text
 #  user_encoding             :string(255)
 #  default_library_id        :integer
+#  default_event_category_id :integer
 #

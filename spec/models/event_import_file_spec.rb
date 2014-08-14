@@ -2,13 +2,14 @@
 require 'spec_helper'
 
 describe EventImportFile do
-  fixtures :users
+  fixtures :all
   #pending "add some examples to (or delete) #{__FILE__}"
 
   describe "When it is written in utf-8" do
     before(:each) do
       @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), :default_library_id => 3
       @file.default_library = Library.find(3)
+      @file.default_event_category = EventCategory.find(3)
       @file.user = users(:admin)
     end
 
@@ -23,7 +24,11 @@ describe EventImportFile do
       Event.order(:id).last.library.name.should eq 'hachioji'
       Event.order(:id).last.name.should eq 'event3'
       Event.where(name: 'event2').first.should be_nil
-      Event.where(name: 'event3').first.display_name.should eq 'イベント3'
+      event3 = Event.where(name: 'event3').first
+      event3.display_name.should eq 'イベント3'
+      event3.event_category.name.should eq 'book_talk'
+      event4 = Event.where(name: '休館日1').first
+      event4.event_category.name.should eq 'closed'
 
       @file.event_import_fingerprint.should be_truthy
       @file.executed_at.should be_truthy
@@ -45,6 +50,7 @@ describe EventImportFile do
     before(:each) do
       @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample2.tsv")
       @file.default_library = Library.find(3)
+      @file.default_event_category = EventCategory.find(3)
       @file.user = users(:admin)
     end
 
@@ -133,4 +139,5 @@ end
 #  error_message             :text
 #  user_encoding             :string(255)
 #  default_library_id        :integer
+#  default_event_category_id :integer
 #

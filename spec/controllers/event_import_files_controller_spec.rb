@@ -132,7 +132,7 @@ describe EventImportFilesController do
 
       it "should import user" do
         old_events_count = Event.count
-        post :create, :event_import_file => {:event_import => fixture_file_upload("/../../examples/event_import_file_sample2.tsv", 'text/csv') }
+        post :create, :event_import_file => {:event_import => fixture_file_upload("/../../examples/event_import_file_sample2.tsv", 'text/csv'), :default_library_id => 3, :default_event_category_id => 3 }
         assigns(:event_import_file).import_start
         Event.count.should eq old_events_count + 2
         response.should redirect_to event_import_file_url(assigns(:event_import_file))
