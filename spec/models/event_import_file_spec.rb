@@ -56,7 +56,7 @@ describe EventImportFile do
       Event.count.should eq old_event_count + 2
       EventImportResult.count.should eq old_import_results_count + 5
       Event.order('id DESC').first.start_at.should eq Time.zone.parse('2014-07-01').beginning_of_day
-      Event.order('id DESC').first.end_at.to_s.should eq Time.zone.parse('2014-07-01').end_of_day.to_s
+      Event.order('id DESC').first.end_at.should eq Time.zone.parse('2014-07-31 14:00')
     end
   end
 
