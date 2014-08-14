@@ -16,14 +16,20 @@ describe EventImportFile do
       closing_days_size = Event.closing_days.size
       old_events_count = Event.count
       old_import_results_count = EventImportResult.count
-      @file.import_start.should eq({:imported => 3, :failed => 1})
-      Event.count.should eq old_events_count + 3
+      @file.import_start.should eq({:imported => 2, :failed => 2})
+      Event.count.should eq old_events_count + 2
       Event.closing_days.size.should eq closing_days_size + 1
       EventImportResult.count.should eq old_import_results_count + 5
       Event.order(:id).last.library.name.should eq 'hachioji'
+      Event.order(:id).last.name.should eq 'event3'
+      Event.where(name: 'event2').first.should be_nil
+      Event.where(name: 'event3').first.display_name.should eq 'イベント3'
 
       @file.event_import_fingerprint.should be_truthy
       @file.executed_at.should be_truthy
+
+      @file.reload
+      @file.error_message.should eq "The follwing column(s) were ignored: invalid"
     end
 
     it "should send message when import is completed" do
@@ -46,11 +52,11 @@ describe EventImportFile do
       old_event_count = Event.count
       old_import_results_count = EventImportResult.count
       @file.import_start
-      Event.order('id DESC').first.name.should eq '日本語の催し物2'
+      Event.order('id DESC').first.name.should eq 'event3'
       Event.count.should eq old_event_count + 2
-      EventImportResult.count.should eq old_import_results_count + 3
-      Event.order('id DESC').first.start_at.should eq Time.zone.parse('2011-03-26').beginning_of_day
-      Event.order('id DESC').first.end_at.to_s.should eq Time.zone.parse('2011-03-27').end_of_day.to_s
+      EventImportResult.count.should eq old_import_results_count + 5
+      Event.order('id DESC').first.start_at.should eq Time.zone.parse('2014-07-01').beginning_of_day
+      Event.order('id DESC').first.end_at.to_s.should eq Time.zone.parse('2014-07-01').end_of_day.to_s
     end
   end
 
@@ -75,10 +81,10 @@ describe EventImportFile do
       event1 = Event.find(1)
       event1.name.should eq '変更後のイベント名'
       event1.start_at.should eq Time.zone.parse('2012-04-01').beginning_of_day
-      event1.end_at.to_s.should eq Time.zone.parse('2012-04-02').end_of_day.to_s
+      event1.end_at.should eq Time.zone.parse('2012-04-02')
 
       event2 = Event.find(2)
-      event2.end_at.to_s.should eq Time.zone.parse('2012-04-03').beginning_of_day.to_s
+      event2.end_at.should eq Time.zone.parse('2012-04-03')
       event2.all_day.should be_falsy
       event2.library.name.should eq 'mita'
 

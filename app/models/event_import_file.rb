@@ -55,19 +55,20 @@ class EventImportFile < ActiveRecord::Base
 
       event = Event.new
       event.name = row['name'].to_s.strip
+      event.display_name = row['display_name']
       event.note = row['note']
-      event.start_at = row['start_at']
-      event.end_at = row['end_at']
-      category = row['category'].to_s.strip
-      if row['all_day'].to_s.strip.downcase == 'false'
-        event.all_day = false
-      else
+      event.start_at = Time.zone.parse(row['start_at']) if row['start_at'].present?
+      event.end_at = Time.zone.parse(row['end_at']) if row['end_at'].present?
+      category = row['event_category'].to_s.strip
+      if %w(t true TRUE).include?(row['all_day'].to_s.strip)
         event.all_day = true
+      else
+        event.all_day = false
       end
-      library = Library.where(:name => row['library']).first
+      library = Library.where(name: row['library']).first
       library = default_library || Library.web if library.blank?
       event.library = library
-      event_category = EventCategory.where(:name => category).first || EventCategory.where(:name => 'unknown').first
+      event_category = EventCategory.where(name: category).first || EventCategory.where(name: 'unknown').first
       event.event_category = event_category
 
       if event.save 
@@ -87,10 +88,10 @@ class EventImportFile < ActiveRecord::Base
     transition_to!(:completed)
     send_message
     num
-  #rescue => e
-  #  self.error_message = "line #{row_num}: #{e.message}"
-  #  transition_to!(:failed)
-  #  raise e
+  rescue => e
+    self.error_message = "line #{row_num}: #{e.message}"
+    transition_to!(:failed)
+    raise e
   end
 
   def modify
@@ -103,18 +104,18 @@ class EventImportFile < ActiveRecord::Base
       row_num += 1
       next if row['dummy'].to_s.strip.present?
       event = Event.find(row['id'].to_s.strip)
-      event_category = EventCategory.where(:name => row['category'].to_s.strip).first
+      event_category = EventCategory.where(name: row['event_category'].to_s.strip).first
       event.event_category = event_category if event_category
-      library = Library.where(:name => row['library'].to_s.strip).first
+      library = Library.where(name: row['library'].to_s.strip).first
       event.library = library if library
       event.name = row['name'] if row['name'].to_s.strip.present?
-      event.start_at = row['start_at'] if row['start_at'].to_s.strip.present?
-      event.end_at = row['end_at'] if row['end_at'].to_s.strip.present?
-      event.note = row['end_at'] if row['note'].to_s.strip.present?
-      if row['all_day'].to_s.strip.downcase == 'false'
-        event.all_day = false
-      else
+      event.start_at = Time.zone.parse(row['start_at']) if row['start_at'].present?
+      event.end_at = Time.zone.parse(row['end_at']) if row['end_at'].present?
+      event.note = row['note'] if row['note'].to_s.strip.present?
+      if %w(t true TRUE).include?(row['all_day'].to_s.strip)
         event.all_day = true
+      else
+        event.all_day = false
       end
       event.save!
     end
@@ -177,7 +178,15 @@ class EventImportFile < ActiveRecord::Base
 
   def open_import_file(tempfile)
     file = CSV.open(tempfile, :col_sep => "\t")
+    header_columns = %w(
+      id name display_name library event_category start_at end_at all_day note dummy
+    )
     header = file.first
+    ignored_columns = header - header_columns
+    unless ignored_columns.empty?
+      self.error_message = I18n.t('import.following_column_were_ignored', column: ignored_columns.join(', '))
+      save!
+    end
     rows = CSV.open(tempfile, :headers => header, :col_sep => "\t")
     event_import_result = EventImportResult.new
     event_import_result.assign_attributes({:event_import_file_id => id, :body => header.join("\t")}, as: :admin)
