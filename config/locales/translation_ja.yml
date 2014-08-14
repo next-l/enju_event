@@ -1,7 +1,7 @@
 ja:
   activerecord:
     models:
-      event_category: 催し物の種類
+      event_category: 催し物の種別
       event: 開館日と催し物
       event_import_file: 催し物のインポート用ファイル
       event_import_result: 催し物インポートの結果
@@ -54,3 +54,4 @@ ja:
     library_calendar: "%{library_name}のカレンダー"
   event_import_file:
     default_library: TSVファイルで"library"列が指定されていない場合、この図書館が登録されます。
+    default_event_category: TSVファイルで"event_category"列が指定されていない場合、この種別が登録されます。

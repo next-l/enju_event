@@ -54,3 +54,4 @@ en:
     library_calendar: "Calendar of events at %{library_name}"
   event_import_file:
     default_library: If "library" column is not set in the TSV file, this library is set to the new event.
+    default_event_category: If "event_category" column is not set in the TSV file, this event category is set to the new event.
