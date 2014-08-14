@@ -104,5 +104,6 @@ class EventImportFilesController < ApplicationController
 
   def prepare_options
     @libraries = Library.all
+    @event_categories = EventCategory.all
   end
 end
