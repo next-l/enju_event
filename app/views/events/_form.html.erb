@@ -1,4 +1,4 @@
-<%= simple_form_for(@event, :validate => true) do |f| -%>
+<%= simple_form_for(@event, validate: true) do |f| -%>
   <%= f.error_messages %>
 
   <div class="field">
@@ -13,29 +13,29 @@
 
   <div class="field">
     <%= f.label :name -%><br />
-    <%= f.text_field :name, :class => 'resource_title' -%>
+    <%= f.text_field :name, class: 'resource_title' -%>
   </div>
 
   <div class="field">
     <%= f.label :display_name -%><br />
-    <%= f.text_area :display_name, :class => 'resource_textarea' -%>
+    <%= f.text_area :display_name, class: 'resource_textarea' -%>
   </div>
 
   <div class="field">
     <%= f.label :start_at -%><br />
-    <%= f.datetime_select :start_at, :use_month_numbers => true -%>
+    <%= f.datetime_select :start_at, use_month_numbers: true -%>
     <%= f.label :all_day -%>
     <%= f.check_box :all_day -%>
   </div>
 
   <div class="field">
     <%= f.label :end_at -%><br />
-    <%= f.datetime_select :end_at, :use_month_numbers => true -%>
+    <%= f.datetime_select :end_at, use_month_numbers: true -%>
   </div>
 
   <div class="field">
     <%= f.label :note -%><br />
-    <%= f.text_area :note, :class => 'resource_textarea' -%>
+    <%= f.text_area :note, class: 'resource_textarea' -%>
   </div>
 
   <div class="actions">

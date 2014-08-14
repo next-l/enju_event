@@ -53,4 +53,4 @@ en:
     calendar: "Calendar"
     library_calendar: "Calendar of events at %{library_name}"
   event_import_file:
-    default_library: If "library" column is not set in the TSV file, this library is set to the new user.
+    default_library: If "library" column is not set in the TSV file, this library is set to the new event.

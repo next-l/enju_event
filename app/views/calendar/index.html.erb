@@ -1,7 +1,7 @@
 <div id="content_detail" class="ui-corner-all ui-widget-content">
   <%- if @library -%>
     <h1 class="title">
-      <%= t('calendar.library_calendar', :library_name => @library.display_name.localize) -%>
+      <%= t('calendar.library_calendar', library_name: @library.display_name.localize) -%>
     </h1>
   <%- else -%>
     <h1 class="title">
@@ -24,9 +24,9 @@
 
     <p>
       <%- if @library -%>
-        (<%= link_to 'iCalendar', library_events_path(@library, :format => :ics) -%>)
+        (<%= link_to 'iCalendar', library_events_path(@library, format: :ics) -%>)
       <%- else -%>
-        (<%= link_to 'iCalendar', events_path(:format => :ics) -%>)
+        (<%= link_to 'iCalendar', events_path(format: :ics) -%>)
       <%- end -%>
     </p>
 
@@ -36,10 +36,10 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.listing', :model => t('activerecord.models.event')), events_path -%></li>
-    <li><%= link_to t('page.show_all'), :controller => :calendar, :action => :index -%></li>
+    <li><%= link_to t('page.listing', model: t('activerecord.models.event')), events_path -%></li>
+    <li><%= link_to t('page.show_all'), controller: :calendar, action: :index -%></li>
     <%- @libraries.each do |library| -%>
-      <li><%= link_to library.display_name.localize, :controller => :calendar, :action => :index, :library_id => library.name -%></li>
+      <li><%= link_to library.display_name.localize, controller: :calendar, action: :index, library_id: library.name -%></li>
     <%- end -%>
   </ul>
 </div>

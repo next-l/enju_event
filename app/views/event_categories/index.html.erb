@@ -1,5 +1,5 @@
 <div id="content_detail" class="ui-corner-all ui-widget-content">
-<h1 class="title"><%= t('page.listing', :model => t('activerecord.models.event_category')) -%></h1>
+<h1 class="title"><%= t('page.listing', model: t('activerecord.models.event_category')) -%></h1>
 <div id="content_list">
 
 <table class="table table-striped index">
@@ -26,7 +26,7 @@
         <%= link_to t('page.edit'), edit_event_category_path(event_category) -%>
       <% end %>
       <%- if can? :delete, event_category -%>
-        <%= link_to t('page.destroy'), event_category, :data => {:confirm => t('page.are_you_sure')}, :method => :delete -%>
+        <%= link_to t('page.destroy'), event_category, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <%- end -%>
     </td>
   </tr>
@@ -40,7 +40,7 @@
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
     <%- if can? :create, EventCategory -%>
-      <li><%= link_to t('page.new', :model => t('activerecord.models.event_category')), new_event_category_path -%></li>
+      <li><%= link_to t('page.new', model: t('activerecord.models.event_category')), new_event_category_path -%></li>
     <%- end -%>
   </ul>
 </div>

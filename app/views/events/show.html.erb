@@ -1,5 +1,5 @@
 <div id="content_detail" class="ui-corner-all ui-widget-content">
-<h1 class="title"><%= t('page.showing', :model => t('activerecord.models.event')) -%></h1>
+<h1 class="title"><%= t('page.showing', model: t('activerecord.models.event')) -%></h1>
 <div id="content_list">
 <p id="notice"><%= notice %></p>
 
@@ -20,22 +20,22 @@
 <%- if @event.all_day -%>
   <p>
     <strong><%= t('activerecord.attributes.event.start_at') -%>:</strong>
-    <%= l(@event.start_at, :format => :only_date) -%>
+    <%= l(@event.start_at, format: :only_date) -%>
   </p>
 
   <p>
     <strong><%= t('activerecord.attributes.event.end_at') -%>:</strong>
-    <%= l(@event.end_at, :format => :only_date) -%>
+    <%= l(@event.end_at, format: :only_date) -%>
   </p>
 <%- else -%>
   <p>
     <strong><%= t('activerecord.attributes.event.start_at') -%>:</strong>
-    <%= l(@event.start_at, :format => :short) -%>
+    <%= l(@event.start_at, format: :short) -%>
   </p>
 
   <p>
     <strong><%= t('activerecord.attributes.event.end_at') -%>:</strong>
-    <%= l(@event.end_at, :format => :short) -%>
+    <%= l(@event.end_at, format: :short) -%>
   </p>
 <%- end -%>
 
