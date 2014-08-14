@@ -35,6 +35,7 @@ ja:
         error_message: エラーメッセージ
         user_encoding: 文字コード
         default_library_id: 既定の図書館
+        default_event_category_id: 既定の催し物の種別
       event_import_result:
         body: 本文
       event_export_file:

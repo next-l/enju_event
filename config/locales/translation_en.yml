@@ -35,6 +35,7 @@ en:
         error_message: Error message
         user_encoding: Encoding
         default_library_id: Default library
+        default_event_category_id: Default event category
       event_import_result:
         body: Body
       event_export_file:
