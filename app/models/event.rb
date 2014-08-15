@@ -42,8 +42,10 @@ class Event < ActiveRecord::Base
   end
 
   def set_all_day
-    self.start_at = start_at.beginning_of_day
-    self.end_at = end_at.end_of_day
+    if start_at and end_at
+      self.start_at = start_at.beginning_of_day
+      self.end_at = end_at.end_of_day
+    end
   end
 
   def check_date
