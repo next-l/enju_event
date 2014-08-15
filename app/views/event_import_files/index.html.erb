@@ -21,7 +21,7 @@
         <td><%= link_to (event_import_file.id), event_import_file -%></td>
         <td><%= link_to event_import_file.event_import_file_name, event_import_file -%></td>
         <td><%= l(event_import_file.executed_at) if event_import_file.executed_at -%></td>
-        <td><%= link_to event_import_file.user.username, event_import_file.user -%></td>
+        <td><%= link_to event_import_file.user.username, event_import_file.user.profile if event_import_file.user.try(:profile) -%></td>
         <td><%= event_import_file.edit_mode -%></td>
         <td><%= localized_state(event_import_file.current_state) -%></td>
         <td>
