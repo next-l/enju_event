@@ -2,11 +2,11 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
   before_filter :get_library, :get_agent
-  before_filter :get_libraries, :except => :destroy
+  before_filter :get_libraries, except: :destroy
   before_filter :prepare_options
-  before_filter :store_page, :only => :index
-  after_filter :solr_commit, :only => [:create, :update, :destroy]
-  after_filter :convert_charset, :only => :index
+  before_filter :store_page, only: :index
+  after_filter :solr_commit, only: [:create, :update, :destroy]
+  after_filter :convert_charset, only: :index
 
   # GET /events
   # GET /events.json
@@ -45,8 +45,8 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @events }
-      format.rss  { render :layout => false }
+      format.json { render json: @events }
+      format.rss  { render layout: false }
       format.txt
       format.atom
       format.ics
@@ -60,7 +60,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @event }
+      format.json { render json: @event }
     end
   end
 
@@ -83,7 +83,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @event }
+      format.json { render json: @event }
     end
   end
 
@@ -101,13 +101,13 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        flash[:notice] = t('controller.successfully_created', :model => t('activerecord.models.event'))
+        flash[:notice] = t('controller.successfully_created', model: t('activerecord.models.event'))
         format.html { redirect_to(@event) }
-        format.json { render :json => @event, :status => :created, :location => @event }
+        format.json { render json: @event, status: :created, location: @event }
       else
         prepare_options
-        format.html { render :action => "new" }
-        format.json { render :json => @event.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -121,13 +121,13 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.update_attributes(params[:event])
 
-        flash[:notice] = t('controller.successfully_updated', :model => t('activerecord.models.event'))
+        flash[:notice] = t('controller.successfully_updated', model: t('activerecord.models.event'))
         format.html { redirect_to(@event) }
         format.json { head :no_content }
       else
         prepare_options
-        format.html { render :action => "edit" }
-        format.json { render :json => @event.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end

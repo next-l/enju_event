@@ -9,11 +9,11 @@ class Event < ActiveRecord::Base
   scope :upcoming, lambda {|datetime| where('start_at >= ?', Time.zone.parse(datetime).beginning_of_day)}
   scope :at, lambda {|library| where(:library_id => library.id)}
 
-  belongs_to :event_category, :validate => true
-  belongs_to :library, :validate => true
-  has_many :picture_files, :as => :picture_attachable
-  has_many :participates, :dependent => :destroy
-  has_many :agents, :through => :participates
+  belongs_to :event_category, validate: true
+  belongs_to :library, validate: true
+  has_many :picture_files, as: :picture_attachable
+  has_many :participates, dependent: :destroy
+  has_many :agents, through: :participates
   has_one :event_import_result
 
   has_event_calendar
@@ -31,7 +31,7 @@ class Event < ActiveRecord::Base
   validates_associated :library, :event_category
   validate :check_date
   before_validation :set_date
-  before_validation :set_display_name, :on => :create
+  before_validation :set_display_name, on: :create
 
   paginates_per 10
 

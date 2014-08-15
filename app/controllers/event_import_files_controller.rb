@@ -9,7 +9,7 @@ class EventImportFilesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @event_import_files }
+      format.json { render json: @event_import_files }
     end
   end
 
@@ -24,12 +24,12 @@ class EventImportFilesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @event_import_file }
+      format.json { render json: @event_import_file }
       format.download {
         if Setting.uploaded_file.storage == :s3
           redirect_to @event_import_file.event_import.expiring_url(10)
         else
-          send_file file, :filename => @event_import_file.event_import_file_name, :type => 'application/octet-stream'
+          send_file file, filename: @event_import_file.event_import_file_name, type: 'application/octet-stream'
         end
       }
     end
@@ -44,7 +44,7 @@ class EventImportFilesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @event_import_file }
+      format.json { render json: @event_import_file }
     end
   end
 
@@ -64,11 +64,11 @@ class EventImportFilesController < ApplicationController
           Resque.enqueue(EventImportFileQueue, @event_import_file.id)
         end
         format.html { redirect_to @event_import_file, notice: t('import.successfully_created', model: t('activerecord.models.event_import_file')) }
-        format.json { render :json => @event_import_file, :status => :created, :location => @event_import_file }
+        format.json { render json: @event_import_file, status: :created, location: @event_import_file }
       else
         prepare_options
-        format.html { render :action => "new" }
-        format.json { render :json => @event_import_file.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @event_import_file.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -81,12 +81,12 @@ class EventImportFilesController < ApplicationController
         if @event_import_file.mode == 'import'
           Resque.enqueue(EventImportFileQueue, @event_import_file.id)
         end
-        format.html { redirect_to @event_import_file, :notice => t('controller.successfully_updated', :model => t('activerecord.models.event_import_file')) }
+        format.html { redirect_to @event_import_file, notice: t('controller.successfully_updated', model: t('activerecord.models.event_import_file')) }
         format.json { head :no_content }
       else
         prepare_options
-        format.html { render :action => "edit" }
-        format.json { render :json => @event_import_file.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @event_import_file.errors, status: :unprocessable_entity }
       end
     end
   end

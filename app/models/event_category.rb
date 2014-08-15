@@ -1,7 +1,7 @@
 class EventCategory < ActiveRecord::Base
   attr_accessible :name, :display_name, :note
   include MasterModel
-  default_scope :order => "position"
+  default_scope order: "position"
   has_many :events
 
   paginates_per 10

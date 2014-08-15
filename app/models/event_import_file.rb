@@ -13,7 +13,7 @@ class EventImportFile < ActiveRecord::Base
       :s3_permissions => :private
   else
     has_attached_file :event_import,
-      :path => ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
+      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
   end
   validates_attachment_content_type :event_import, :content_type => [
     'text/csv',
@@ -23,7 +23,7 @@ class EventImportFile < ActiveRecord::Base
     'application/vnd.ms-excel'
   ]
   validates_attachment_presence :event_import
-  belongs_to :user, :validate => true
+  belongs_to :user, validate: true
   belongs_to :default_library, class_name: 'Library'
   belongs_to :default_event_category, class_name: 'EventCategory'
   has_many :event_import_results
@@ -51,7 +51,7 @@ class EventImportFile < ActiveRecord::Base
       row_num += 1
       next if row['dummy'].to_s.strip.present?
       event_import_result = EventImportResult.new
-      event_import_result.assign_attributes({:event_import_file_id => id, :body => row.fields.join("\t")}, as: :admin)
+      event_import_result.assign_attributes({:event_import_file_id => id, body: row.fields.join("\t")}, as: :admin)
       event_import_result.save!
 
       event = Event.new
@@ -163,7 +163,7 @@ class EventImportFile < ActiveRecord::Base
   end
 
   def open_import_file(tempfile)
-    file = CSV.open(tempfile, :col_sep => "\t")
+    file = CSV.open(tempfile, col_sep: "\t")
     header_columns = %w(
       id name display_name library event_category start_at end_at all_day note dummy
     )
@@ -173,9 +173,9 @@ class EventImportFile < ActiveRecord::Base
       self.error_message = I18n.t('import.following_column_were_ignored', column: ignored_columns.join(', '))
       save!
     end
-    rows = CSV.open(tempfile, :headers => header, :col_sep => "\t")
+    rows = CSV.open(tempfile, headers: header, col_sep: "\t")
     event_import_result = EventImportResult.new
-    event_import_result.assign_attributes({:event_import_file_id => id, :body => header.join("\t")}, as: :admin)
+    event_import_result.assign_attributes({:event_import_file_id => id, body: header.join("\t")}, as: :admin)
     event_import_result.save!
     tempfile.close(true)
     file.close

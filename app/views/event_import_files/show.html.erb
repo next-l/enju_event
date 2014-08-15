@@ -65,7 +65,7 @@
 
 <p>
   <strong><%= t('activerecord.models.user') -%>:</strong>
-  <%= link_to @event_import_file.user.username, @event_import_file.user -%>
+  <%= link_to @event_import_file.user.username, @event_import_file.user.try(:profile) -%>
 </p>
 
 </div>

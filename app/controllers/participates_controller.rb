@@ -8,7 +8,7 @@ class ParticipatesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @participates }
+      format.json { render json: @participates }
     end
   end
 
@@ -17,7 +17,7 @@ class ParticipatesController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @participate }
+      format.json { render json: @participate }
     end
   end
 
@@ -28,7 +28,7 @@ class ParticipatesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @participate }
+      format.json { render json: @participate }
     end
   end
 
@@ -45,10 +45,10 @@ class ParticipatesController < ApplicationController
       if @participate.save
         flash[:notice] = 'Participate was successfully created.'
         format.html { redirect_to(@participate) }
-        format.json { render :json => @participate, :status => :created, :location => @participate }
+        format.json { render json: @participate, status: :created, location: @participate }
       else
-        format.html { render :action => "new" }
-        format.json { render :json => @participate.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @participate.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -62,8 +62,8 @@ class ParticipatesController < ApplicationController
         format.html { redirect_to(@participate) }
         format.json { head :no_content }
       else
-        format.html { render :action => "edit" }
-        format.json { render :json => @participate.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @participate.errors, status: :unprocessable_entity }
       end
     end
   end
