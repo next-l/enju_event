@@ -1,4 +1,5 @@
 require "enju_seed"
+require "enju_message"
 require "inherited_resources"
 require "has_scope"
 require "paperclip"
