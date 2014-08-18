@@ -6,8 +6,11 @@
   <tr>
     <th id="position"></th>
     <th><%= t('activerecord.attributes.event_category.name') -%></th>
-    <th><%= t('activerecord.attributes.event_category.display_name') -%></th>
-    <th><%= t('activerecord.attributes.event_category.note') -%></th>
+    <th>
+      <%= t('activerecord.attributes.event_category.display_name') -%>
+      /
+      <%= t('activerecord.attributes.event_category.note') -%>
+    </th>
     <th></th>
   </tr>
 
@@ -18,22 +21,24 @@
         <%= move_position(event_category) -%>
       <%- end -%>
     </td>
-    <td><%= link_to event_category.name, event_category -%></td>
-    <td><%= link_to event_category.display_name.localize, event_category -%></td>
-    <td><%= event_category.note -%></td>
+    <td><%= event_category.name -%></td>
+    <td>
+      <%= link_to event_category.display_name.localize, event_category -%>
+      <br />
+      <%= event_category.note %>
+    </td>
     <td>
       <%- if can? :update, event_category -%>
         <%= link_to t('page.edit'), edit_event_category_path(event_category) -%>
       <% end %>
       <%- if can? :delete, event_category -%>
-        <%= link_to t('page.destroy'), event_category, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
+        <%= link_to t('page.destroy'), event_category_path(event_category), data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <%- end -%>
     </td>
   </tr>
 <%- end -%>
 </table>
 
-<%= paginate(@event_categories) -%>
 </div>
 </div>
 
