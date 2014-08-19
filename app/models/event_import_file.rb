@@ -5,7 +5,7 @@ class EventImportFile < ActiveRecord::Base
     :default_library_id, :default_event_category_id
   default_scope {order('event_import_files.id DESC')}
   scope :not_imported, -> {in_state(:pending)}
-  scope :stucked, -> {in_state(:pending).where('created_at < ?', 1.hour.ago)}
+  scope :stucked, -> {in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago)}
 
   if Setting.uploaded_file.storage == :s3
     has_attached_file :event_import, :storage => :s3,
