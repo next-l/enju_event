@@ -92,6 +92,7 @@ class EventImportFile < ActiveRecord::Base
     num
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
+    save
     transition_to!(:failed)
     raise e
   end
@@ -124,6 +125,7 @@ class EventImportFile < ActiveRecord::Base
     transition_to!(:completed)
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
+    save
     transition_to!(:failed)
     raise e
   end
@@ -145,6 +147,7 @@ class EventImportFile < ActiveRecord::Base
     transition_to!(:completed)
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
+    save
     transition_to!(:failed)
     raise e
   end
