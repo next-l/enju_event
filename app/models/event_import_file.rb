@@ -34,7 +34,7 @@ class EventImportFile < ActiveRecord::Base
   attr_accessor :mode
 
   def state_machine
-    @state_machine ||= EventImportFileStateMachine.new(self, transition_class: EventImportFileTransition)
+    EventImportFileStateMachine.new(self, transition_class: EventImportFileTransition)
   end
 
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
