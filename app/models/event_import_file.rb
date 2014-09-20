@@ -8,14 +8,14 @@ class EventImportFile < ActiveRecord::Base
   scope :stucked, -> {in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago)}
 
   if Setting.uploaded_file.storage == :s3
-    has_attached_file :event_import, :storage => :s3,
-      :s3_credentials => "#{Setting.amazon}",
-      :s3_permissions => :private
+    has_attached_file :event_import, storage: :s3,
+      s3_credentials: "#{Setting.amazon}",
+      s3_permissions: :private
   else
     has_attached_file :event_import,
       path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
   end
-  validates_attachment_content_type :event_import, :content_type => [
+  validates_attachment_content_type :event_import, content_type: [
     'text/csv',
     'text/plain',
     'text/tab-separated-values',
@@ -42,7 +42,7 @@ class EventImportFile < ActiveRecord::Base
 
   def import
     transition_to!(:started)
-    num = {:imported => 0, :failed => 0}
+    num = { imported: 0, failed: 0 }
     rows = open_import_file(create_import_temp_file(event_import))
     check_field(rows.first)
     row_num = 1
@@ -51,7 +51,7 @@ class EventImportFile < ActiveRecord::Base
       row_num += 1
       next if row['dummy'].to_s.strip.present?
       event_import_result = EventImportResult.new
-      event_import_result.assign_attributes({:event_import_file_id => id, body: row.fields.join("\t")}, as: :admin)
+      event_import_result.assign_attributes({ event_import_file_id: id, body: row.fields.join("\t") }, as: :admin)
       event_import_result.save!
 
       event = Event.new
@@ -178,7 +178,7 @@ class EventImportFile < ActiveRecord::Base
     end
     rows = CSV.open(tempfile, headers: header, col_sep: "\t")
     event_import_result = EventImportResult.new
-    event_import_result.assign_attributes({:event_import_file_id => id, body: header.join("\t")}, as: :admin)
+    event_import_result.assign_attributes({ event_import_file_id: id, body: header.join("\t") }, as: :admin)
     event_import_result.save!
     tempfile.close(true)
     file.close
