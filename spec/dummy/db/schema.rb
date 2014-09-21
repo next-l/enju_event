@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(:version => 20140823095740) do
   create_table "agent_import_results", :force => true do |t|
     t.integer  "agent_import_file_id"
     t.integer  "agent_id"
-    t.integer  "user_id"
     t.text     "body"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
@@ -98,7 +97,6 @@ ActiveRecord::Schema.define(:version => 20140823095740) do
   end
 
   create_table "agents", :force => true do |t|
-    t.integer  "user_id"
     t.string   "last_name"
     t.string   "middle_name"
     t.string   "first_name"
@@ -151,7 +149,6 @@ ActiveRecord::Schema.define(:version => 20140823095740) do
   add_index "agents", ["full_name"], :name => "index_agents_on_full_name"
   add_index "agents", ["language_id"], :name => "index_agents_on_language_id"
   add_index "agents", ["required_role_id"], :name => "index_agents_on_required_role_id"
-  add_index "agents", ["user_id"], :name => "index_agents_on_user_id", :unique => true
 
   create_table "baskets", :force => true do |t|
     t.integer  "user_id"
@@ -426,8 +423,8 @@ ActiveRecord::Schema.define(:version => 20140823095740) do
   end
 
   create_table "events", :force => true do |t|
-    t.integer  "library_id",        :default => 1,     :null => false
-    t.integer  "event_category_id", :default => 1,     :null => false
+    t.integer  "library_id",                           :null => false
+    t.integer  "event_category_id",                    :null => false
     t.string   "name"
     t.text     "note"
     t.datetime "start_at"
@@ -452,15 +449,6 @@ ActiveRecord::Schema.define(:version => 20140823095740) do
 
   add_index "exemplifies", ["item_id"], :name => "index_exemplifies_on_item_id", :unique => true
   add_index "exemplifies", ["manifestation_id"], :name => "index_exemplifies_on_manifestation_id"
-
-  create_table "extents", :force => true do |t|
-    t.string   "name",         :null => false
-    t.text     "display_name"
-    t.text     "note"
-    t.integer  "position"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
 
   create_table "form_of_works", :force => true do |t|
     t.string   "name",         :null => false
@@ -742,7 +730,6 @@ ActiveRecord::Schema.define(:version => 20140823095740) do
     t.string   "access_address"
     t.integer  "language_id",                     :default => 1,     :null => false
     t.integer  "carrier_type_id",                 :default => 1,     :null => false
-    t.integer  "extent_id",                       :default => 1,     :null => false
     t.integer  "start_page"
     t.integer  "end_page"
     t.integer  "height"
@@ -1152,7 +1139,7 @@ ActiveRecord::Schema.define(:version => 20140823095740) do
   end
 
   add_index "series_statement_merges", ["series_statement_id"], :name => "index_series_statement_merges_on_series_statement_id"
-  add_index "series_statement_merges", ["series_statement_merge_list_id"], :name => "index_series_statement_merges_on_series_statement_merge_list_id"
+  add_index "series_statement_merges", ["series_statement_merge_list_id"], :name => "index_series_statement_merges_on_list_id"
 
   create_table "series_statements", :force => true do |t|
     t.text     "original_title"
