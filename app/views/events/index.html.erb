@@ -93,6 +93,7 @@
     <%- end -%>
   </ul>
   <ul>
+    <li><%= link_to t('event.all_libraries'), events_path(mode: params[:mode]) -%></li>
     <%- @libraries.each do |library| -%>
       <li><%= link_to library.display_name.localize, events_path(library_id: library.name, mode: params[:mode]) -%></li>
     <%- end -%>
