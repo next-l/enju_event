@@ -114,7 +114,7 @@
       (<%= link_to 'TSV', events_path(format: :txt, locale: @locale.to_s) -%>)
       <br />
       <%= link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(format: :ics, locale: @locale.to_s) -%>
-      (<%= link_to 'iCalendar', events_path(format: :icalendar, locale: @locale.to_s) -%>)
+      (<%= link_to 'iCalendar', events_path(format: :ics, locale: @locale.to_s) -%>)
     <%- end -%>
   </p>
   <%= render 'page/login' unless current_user -%>
