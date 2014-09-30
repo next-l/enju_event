@@ -50,6 +50,8 @@ ja:
     all: "全ての催し物"
     past: "過去の催し物"
     upcoming: "今後の催し物"
+    table: 一覧表示
+    calendar: カレンダー表示
   calendar:
     calendar: "カレンダー"
     library_calendar: "%{library_name}のカレンダー"

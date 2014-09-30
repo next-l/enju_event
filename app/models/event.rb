@@ -16,8 +16,6 @@ class Event < ActiveRecord::Base
   has_many :agents, through: :participates
   has_one :event_import_result
 
-  has_event_calendar
-
   searchable do
     text :name, :note
     integer :library_id

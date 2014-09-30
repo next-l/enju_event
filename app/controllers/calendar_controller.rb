@@ -11,11 +11,12 @@ class CalendarController < ApplicationController
     @shown_month = Time.zone.local(@year, @month, 1) rescue Time.zone.now
 
     # TODO: Solrを使って取得
-    if get_library
-      @event_strips = Event.at(@library).event_strips_for_month(@shown_month)
-    else
-      @event_strips = Event.event_strips_for_month(@shown_month)
-    end
+    #if get_library
+    #  @event_strips = Event.at(@library).event_strips_for_month(@shown_month)
+    #else
+      #@event_strips = Event.event_strips_for_month(@shown_month)
+      @event_strips = Event.all
+    #end
     get_libraries
   end
 
