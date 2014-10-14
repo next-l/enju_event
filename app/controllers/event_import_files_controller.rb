@@ -40,7 +40,7 @@ class EventImportFilesController < ApplicationController
   def new
     @event_import_file = EventImportFile.new
     @event_import_file.default_library = current_user.profile.library
-    @event_import_file.default_event_category = EventCategory.order(:position).first
+    @event_import_file.default_event_category = @event_categories.first
 
     respond_to do |format|
       format.html # new.html.erb
@@ -104,6 +104,6 @@ class EventImportFilesController < ApplicationController
 
   def prepare_options
     @libraries = Library.all
-    @event_categories = EventCategory.all
+    @event_categories = EventCategory.order(:position)
   end
 end
