@@ -1,5 +1,5 @@
 = EnjuEvent
-{<img src="https://secure.travis-ci.org/nabeta/enju_event.png?branch=1.1" alt="Build Status" />}[http://travis-ci.org/nabeta/enju_event]
+{<img src="https://secure.travis-ci.org/next-l/enju_event.png?branch=1.1" alt="Build Status" />}[http://travis-ci.org/next-l/enju_event]
 {<img src="https://coveralls.io/repos/next-l/enju_event/badge.png?branch=1.1" alt="Coverage Status" />}[https://coveralls.io/r/next-l/enju_event?branch=1.1]
 {<img src="https://hakiri.io/github/next-l/enju_event/1.1.svg" alt="security" />}[https://hakiri.io/github/next-l/enju_event/1.1]
 
