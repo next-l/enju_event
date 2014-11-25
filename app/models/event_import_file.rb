@@ -1,5 +1,5 @@
 class EventImportFile < ActiveRecord::Base
-  include Statesman::Adapters::ActiveRecordModel
+  include Statesman::Adapters::ActiveRecordQueries
   include ImportFile
   attr_accessible :event_import, :edit_mode, :user_encoding, :mode,
     :default_library_id, :default_event_category_id
