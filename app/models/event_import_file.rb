@@ -165,6 +165,10 @@ class EventImportFile < ActiveRecord::Base
     EventImportFileTransition
   end
 
+  def self.initial_state
+    :pending
+  end
+
   def open_import_file(tempfile)
     file = CSV.open(tempfile, col_sep: "\t")
     header_columns = %w(
