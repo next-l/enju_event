@@ -36,4 +36,11 @@ class EventImportResultsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def event_import_result_params
+    params.require(:event_import_result).permit(
+      :event_id, :event_import_file_id, :body #, as: :admin
+    )
+  end
 end

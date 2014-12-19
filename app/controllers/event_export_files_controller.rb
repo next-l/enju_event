@@ -53,7 +53,7 @@ class EventExportFilesController < ApplicationController
   # POST /event_export_files
   # POST /event_export_files.json
   def create
-    @event_export_file = EventExportFile.new(params[:event_export_file])
+    @event_export_file = EventExportFile.new(event_export_file_params)
     @event_export_file.user = current_user
 
     respond_to do |format|
@@ -74,7 +74,7 @@ class EventExportFilesController < ApplicationController
   # PUT /event_export_files/1.json
   def update
     respond_to do |format|
-      if @event_export_file.update_attributes(params[:event_export_file])
+      if @event_export_file.update_attributes(event_export_file_params)
         if @event_export_file.mode == 'export'
           EventExportFileQueue.perform(@event_export_file.id)
         end
@@ -96,5 +96,10 @@ class EventExportFilesController < ApplicationController
       format.html { redirect_to event_export_files_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def event_export_file_params
+    params.require(:event_export_file).permit
   end
 end

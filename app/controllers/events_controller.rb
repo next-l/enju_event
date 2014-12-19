@@ -96,7 +96,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(event_params)
     @event.set_date
 
     respond_to do |format|
@@ -119,7 +119,7 @@ class EventsController < ApplicationController
     @event.set_date
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(event_params)
 
         flash[:notice] = t('controller.successfully_updated', model: t('activerecord.models.event'))
         format.html { redirect_to(@event) }
@@ -144,8 +144,14 @@ class EventsController < ApplicationController
   end
 
   private
+  def event_params
+    params.require(:event).permit(
+      :library_id, :event_category_id, :name, :note, :start_at,
+      :end_at, :all_day, :display_name
+    )
+  end
+
   def prepare_options
     @event_categories = EventCategory.all
   end
-
 end

@@ -39,7 +39,7 @@ class ParticipatesController < ApplicationController
   # POST /participates
   # POST /participates.json
   def create
-    @participate = Participate.new(params[:participate])
+    @participate = Participate.new(participate_params)
 
     respond_to do |format|
       if @participate.save
@@ -57,7 +57,7 @@ class ParticipatesController < ApplicationController
   # PUT /participates/1.json
   def update
     respond_to do |format|
-      if @participate.update_attributes(params[:participate])
+      if @participate.update_attributes(participate_params)
         flash[:notice] = 'Participate was successfully updated.'
         format.html { redirect_to(@participate) }
         format.json { head :no_content }
@@ -77,5 +77,10 @@ class ParticipatesController < ApplicationController
       format.html { redirect_to participates_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def participate_params
+    params.require(:participate).permit(:agent_id, :event_id)
   end
 end

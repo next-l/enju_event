@@ -38,7 +38,7 @@ class EventCategoriesController < ApplicationController
   # POST /event_categories
   # POST /event_categories.json
   def create
-    @event_category = EventCategory.new(params[:event_category])
+    @event_category = EventCategory.new(event_category_params)
 
     respond_to do |format|
       if @event_category.save
@@ -60,7 +60,7 @@ class EventCategoriesController < ApplicationController
     end
 
     respond_to do |format|
-      if @event_category.update_attributes(params[:event_category])
+      if @event_category.update_attributes(event_category_params)
         format.html { redirect_to @event_category, notice:  t('controller.successfully_updated', model:  t('activerecord.models.event_category')) }
         format.json { head :no_content }
       else
@@ -79,5 +79,10 @@ class EventCategoriesController < ApplicationController
       format.html { redirect_to event_categories_url, notice: t('controller.successfully_deleted', model: t('activerecord.models.event_category')) }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def event_category_params
+    params.require(:event_category).permit(:name, :display_name, :note)
   end
 end

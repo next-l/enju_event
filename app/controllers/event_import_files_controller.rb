@@ -55,7 +55,7 @@ class EventImportFilesController < ApplicationController
   # POST /event_import_files
   # POST /event_import_files.json
   def create
-    @event_import_file = EventImportFile.new(params[:event_import_file])
+    @event_import_file = EventImportFile.new(event_import_file_params)
     @event_import_file.user = current_user
 
     respond_to do |format|
@@ -77,7 +77,7 @@ class EventImportFilesController < ApplicationController
   # PUT /event_import_files/1.json
   def update
     respond_to do |format|
-      if @event_import_file.update_attributes(params[:event_import_file])
+      if @event_import_file.update_attributes(event_import_file_params)
         if @event_import_file.mode == 'import'
           Resque.enqueue(EventImportFileQueue, @event_import_file.id)
         end
@@ -100,6 +100,14 @@ class EventImportFilesController < ApplicationController
       format.html { redirect_to event_import_files_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def event_import_file_params
+    params.require(:event_import_file).permit(
+      :event_import, :edit_mode, :user_encoding, :mode,
+      :default_library_id, :default_event_category_id
+    )
   end
 
   def prepare_options

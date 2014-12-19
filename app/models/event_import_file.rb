@@ -1,8 +1,6 @@
 class EventImportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ImportFile
-  attr_accessible :event_import, :edit_mode, :user_encoding, :mode,
-    :default_library_id, :default_event_category_id
   default_scope {order('event_import_files.id DESC')}
   scope :not_imported, -> {in_state(:pending)}
   scope :stucked, -> {in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago)}
@@ -51,7 +49,7 @@ class EventImportFile < ActiveRecord::Base
       row_num += 1
       next if row['dummy'].to_s.strip.present?
       event_import_result = EventImportResult.new
-      event_import_result.assign_attributes({ event_import_file_id: id, body: row.fields.join("\t") }, as: :admin)
+      event_import_result.assign_attributes({ event_import_file_id: id, body: row.fields.join("\t") })
       event_import_result.save!
 
       event = Event.new
@@ -182,7 +180,7 @@ class EventImportFile < ActiveRecord::Base
     end
     rows = CSV.open(tempfile, headers: header, col_sep: "\t")
     event_import_result = EventImportResult.new
-    event_import_result.assign_attributes({ event_import_file_id: id, body: header.join("\t") }, as: :admin)
+    event_import_result.assign_attributes({ event_import_file_id: id, body: header.join("\t") })
     event_import_result.save!
     tempfile.close(true)
     file.close
