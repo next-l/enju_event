@@ -1,5 +1,9 @@
 class EventImportFile < ActiveRecord::Base
-  include Statesman::Adapters::ActiveRecordQueries
+  if Rails::VERSION::MAJOR >= 4
+    include Statesman::Adapters::ActiveRecordQueries
+  else
+    include Statesman::Adapters::ActiveRecordModel
+  end
   include ImportFile
   default_scope {order('event_import_files.id DESC')}
   scope :not_imported, -> {in_state(:pending)}

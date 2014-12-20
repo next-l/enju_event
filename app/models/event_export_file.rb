@@ -1,5 +1,9 @@
 class EventExportFile < ActiveRecord::Base
-  include Statesman::Adapters::ActiveRecordQueries
+  if Rails::VERSION::MAJOR >= 4
+    include Statesman::Adapters::ActiveRecordQueries
+  else
+    include Statesman::Adapters::ActiveRecordModel
+  end
   include ExportFile
   enju_export_file_model
   has_attached_file :event_export
