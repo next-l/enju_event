@@ -201,7 +201,7 @@ describe EventImportFilesController do
       login_fixture_librarian
 
       it "should update event_import_file" do
-        put :update, :id => event_import_files(:event_import_file_00003).id, :event_import_file => { }
+        put :update, :id => event_import_files(:event_import_file_00003).id, :event_import_file => { edit_mode: 'update' }
         response.should redirect_to event_import_file_url(assigns(:event_import_file))
       end
     end

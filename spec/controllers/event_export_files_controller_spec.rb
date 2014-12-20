@@ -126,7 +126,7 @@ describe EventExportFilesController do
       login_fixture_librarian
 
       it "should create agent_export_file" do
-        post :create, :event_export_file => { }
+        post :create, :event_export_file => { event_export_file_name: 'test.txt' }
         assigns(:event_export_file).should be_valid
         assigns(:event_export_file).user.username.should eq @user.username
         response.should redirect_to event_export_file_url(assigns(:event_export_file))
@@ -137,7 +137,7 @@ describe EventExportFilesController do
       login_fixture_user
 
       it "should be forbidden" do
-        post :create, :event_export_file => { }
+        post :create, :event_export_file => { event_export_file_name: 'test.txt' }
         assigns(:event_export_file).user.should be_nil
         response.should be_forbidden
       end
@@ -145,7 +145,7 @@ describe EventExportFilesController do
 
     describe "When not logged in" do
       it "should be redirected to new session url" do
-        post :create, :event_export_file => { }
+        post :create, :event_export_file => { event_export_file_name: 'test.txt' }
         assigns(:event_export_file).user.should be_nil
         response.should redirect_to new_user_session_url
       end
@@ -197,7 +197,7 @@ describe EventExportFilesController do
       login_fixture_admin
 
       it "should update event_export_file" do
-        put :update, :id => event_export_files(:event_export_file_00003).id, :event_export_file => { }
+        put :update, :id => event_export_files(:event_export_file_00003).id, :event_export_file => { event_export_file_name: 'test.txt' }
         response.should redirect_to event_export_file_url(assigns(:event_export_file))
       end
     end
@@ -206,7 +206,7 @@ describe EventExportFilesController do
       login_fixture_librarian
 
       it "should update event_export_file" do
-        put :update, :id => event_export_files(:event_export_file_00003).id, :event_export_file => { }
+        put :update, :id => event_export_files(:event_export_file_00003).id, :event_export_file => { event_export_file_name: 'test.txt' }
         response.should redirect_to event_export_file_url(assigns(:event_export_file))
       end
     end
