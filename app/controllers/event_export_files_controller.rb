@@ -100,6 +100,6 @@ class EventExportFilesController < ApplicationController
 
   private
   def event_export_file_params
-    params.require(:event_export_file).permit
+    params.require(:event_export_file).permit(:mode)
   end
 end
