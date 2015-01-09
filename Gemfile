@@ -12,10 +12,10 @@ gemspec
 gem "enju_leaf", github: "next-l/enju_leaf", branch: "master"
 gem "enju_biblio", github: "next-l/enju_biblio", branch: "master"
 gem "enju_library", github: "next-l/enju_library", branch: "master"
-gem "enju_message", github: "next-l/enju_message", branch: "1.1"
-gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer", branch: "1.1"
+gem "enju_message", github: "next-l/enju_message", branch: "master"
+gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer", branch: "master"
 gem "jquery-rails"
-gem "coveralls", require: false
+gem "coveralls", require: false, group: :test
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
