@@ -1,3 +1,10 @@
-= EnjuEvent {<img src="https://secure.travis-ci.org/nabeta/enju_event.png?branch=master" alt="Build Status" />}[http://travis-ci.org/nabeta/enju_event]
+= EnjuEvent
+{<img src="https://secure.travis-ci.org/next-l/enju_event.png?branch=1.1" alt="Build Status" />}[http://travis-ci.org/next-l/enju_event]
+{<img src="https://coveralls.io/repos/next-l/enju_event/badge.png?branch=1.1" alt="Coverage Status" />}[https://coveralls.io/r/next-l/enju_event?branch=1.1]
+{<img src="https://hakiri.io/github/next-l/enju_event/1.1.svg" alt="security" />}[https://hakiri.io/github/next-l/enju_event/1.1]
 
 This project rocks and uses MIT-LICENSE.
+
+== 製作者・貢献者 (Authors and contributors)
+* {TANABE, Kosuke}[https://github.com/nabeta] ({@nabeta}[https://twitter.com/nabeta])
+* {Project Next-L}[http://www.next-l.jp] ({@ProjectNextL}[https://twitter.com/ProjectNextL])

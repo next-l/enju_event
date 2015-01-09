@@ -1,5 +1,5 @@
 <div id="content_detail" class="ui-corner-all ui-widget-content">
-<h1 class="title"><%= t('page.listing', :model => t('activerecord.models.event_import_result')) -%></h1>
+<h1 class="title"><%= t('page.listing', model: t('activerecord.models.event_import_result')) -%></h1>
 <div id="content_list">
   <% if @event_import_file %>
     <h2 class="event_title">
@@ -24,7 +24,7 @@
     <td><%= link_to event_import_result.event.display_name.localize, event_import_result.event if event_import_result.event %></td>
     <td>
       <%= link_to t('page.show'), event_import_result %>
-      <%= link_to t('page.destroy'), event_import_result, :data => {:confirm => t('page.are_you_sure')}, :method => :delete %>
+      <%= link_to t('page.destroy'), event_import_result, data: {confirm: t('page.are_you_sure')}, method: :delete %>
     </td>
   </tr>
 <% end %>
@@ -39,10 +39,10 @@
   <ul>
     <li>
     <% if @event_import_file %>
-      <%= link_to (image_tag 'icons/page_white_excel.png', :size => '16x16', :alt => 'TSV', :class => 'icon'), event_import_file_event_import_results_path(@event_import_file, format: :txt, locale: @locale.to_s) -%>
-      (<%= link_to 'TSV', event_import_file_event_import_results_path(format: :txt, locale: @locale.to_s) -%>)
+      <%= link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), event_import_results_path(event_import_file_id: @event_import_file.id, format: :txt, locale: @locale.to_s) -%>
+      (<%= link_to 'TSV', event_import_results_path(event_import_file_id: @event_import_file.id, format: :txt, locale: @locale.to_s) -%>)
     <% else %>
-      <%= link_to (image_tag 'icons/page_white_excel.png', :size => '16x16', :alt => 'TSV', :class => 'icon'), event_import_results_path(format: :txt, locale: @locale.to_s) -%>
+      <%= link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), event_import_results_path(format: :txt, locale: @locale.to_s) -%>
       (<%= link_to 'TSV', event_import_results_path(format: :txt, locale: @locale.to_s) -%>)
     <% end %>
     </li>

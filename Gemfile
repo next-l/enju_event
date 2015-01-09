@@ -1,6 +1,6 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-# Declare your gem's dependencies in enju_event.gemspec.
+# Declare your gem's dependencies in enju5.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec
@@ -9,10 +9,13 @@ gemspec
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
-gem "enju_biblio", github: "next-l/enju_biblio"
-gem "enju_library", github: "next-l/enju_library"
-gem "enju_leaf", github: "next-l/enju_leaf"
-gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer"
+gem "enju_leaf", github: "next-l/enju_leaf", branch: "master"
+gem "enju_biblio", github: "next-l/enju_biblio", branch: "master"
+gem "enju_library", github: "next-l/enju_library", branch: "master"
+gem "enju_message", github: "next-l/enju_message", branch: "1.1"
+gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer", branch: "1.1"
+gem "jquery-rails"
+gem "coveralls", require: false
 
-# To use debugger
-# gem 'debugger'
+# To use a debugger
+# gem 'byebug', group: [:development, :test]

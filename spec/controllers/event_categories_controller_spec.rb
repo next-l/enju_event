@@ -1,7 +1,9 @@
 require 'spec_helper'
+require 'sunspot/rails/spec_helper'
 
 describe EventCategoriesController do
   fixtures :all
+  disconnect_sunspot
 
   def valid_attributes
     FactoryGirl.attributes_for(:event_category)
@@ -13,43 +15,43 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.order(:position).page(1))
+        assigns(:event_categories).should eq(EventCategory.all)
       end
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.order(:position).page(1))
+        assigns(:event_categories).should eq(EventCategory.all)
       end
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.order(:position).page(1))
+        assigns(:event_categories).should eq(EventCategory.all)
       end
     end
 
     describe "When not logged in" do
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.order(:position).page(1))
+        assigns(:event_categories).should eq(EventCategory.all)
       end
     end
   end
 
   describe "GET show" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
@@ -59,7 +61,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
@@ -69,7 +71,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
@@ -89,7 +91,7 @@ describe EventCategoriesController do
 
   describe "GET new" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested event_category as @event_category" do
         get :new
@@ -99,7 +101,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "should not assign the requested event_category as @event_category" do
         get :new
@@ -109,7 +111,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "should not assign the requested event_category as @event_category" do
         get :new
@@ -129,7 +131,7 @@ describe EventCategoriesController do
 
   describe "GET edit" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
@@ -139,7 +141,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
@@ -149,7 +151,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
@@ -174,7 +176,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "assigns a newly created event_category as @event_category" do
@@ -202,7 +204,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "assigns a newly created event_category as @event_category" do
@@ -230,7 +232,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "assigns a newly created event_category as @event_category" do
@@ -292,7 +294,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "updates the requested event_category" do
@@ -319,7 +321,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "updates the requested event_category" do
@@ -342,7 +344,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "updates the requested event_category" do
@@ -391,7 +393,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "destroys the requested event_category" do
         delete :destroy, :id => @event_category.id
@@ -404,7 +406,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "destroys the requested event_category" do
         delete :destroy, :id => @event_category.id
@@ -417,7 +419,7 @@ describe EventCategoriesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "destroys the requested event_category" do
         delete :destroy, :id => @event_category.id

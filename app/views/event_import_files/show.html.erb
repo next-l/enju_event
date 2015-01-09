@@ -1,5 +1,5 @@
 <div id="content_detail" class="ui-corner-all ui-widget-content">
-<h1 class="title"><%= t('page.showing', :model => t('activerecord.models.event_import_file')) -%></h1>
+<h1 class="title"><%= t('page.showing', model: t('activerecord.models.event_import_file')) -%></h1>
 <div id="content_list">
 <p id="notice"><%= notice %></p>
 
@@ -10,7 +10,7 @@
 
 <p>
   <strong><%= t('activerecord.attributes.event_import_file.event_import_file_name') -%>:</strong>
-  <%= link_to @event_import_file.event_import_file_name, event_import_file_path(@event_import_file, :format => :download) -%>
+  <%= link_to @event_import_file.event_import_file_name, event_import_file_path(@event_import_file, format: :download) -%>
 </p>
 
 <p>
@@ -49,6 +49,11 @@
 </p>
 
 <p>
+  <strong><%= t('activerecord.attributes.event_import_file.default_event_category_id') -%>:</strong>
+  <%= link_to @event_import_file.default_event_category.display_name.localize, @event_import_file.default_event_category if @event_import_file.default_event_category.try(:display_name) -%>
+</p>
+
+<p>
   <strong><%= t('activerecord.attributes.event_import_file.default_library_id') -%>:</strong>
   <%= link_to @event_import_file.default_library.display_name.localize, @event_import_file.default_library if @event_import_file.default_library.try(:display_name) -%>
 </p>
@@ -65,7 +70,7 @@
 
 <p>
   <strong><%= t('activerecord.models.user') -%>:</strong>
-  <%= link_to @event_import_file.user.username, @event_import_file.user -%>
+  <%= link_to @event_import_file.user.username, @event_import_file.user.profile if @event_import_file.user.try(:profile) -%>
 </p>
 
 </div>
@@ -74,7 +79,7 @@
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <%= form_for(@event_import_file) do |f| %>
   <ul>
-    <li><%= link_to t('activerecord.models.event_import_result'), event_import_file_event_import_results_path(@event_import_file) -%></li>
+    <li><%= link_to t('activerecord.models.event_import_result'), event_import_results_path(event_import_file_id: @event_import_file.id) -%></li>
     <li><%= back_to_index(flash[:page_info]) -%></li>
     <% if current_user.has_role?('Administrator') %>
       <li><%= link_to 'Resque', resque_path %></li>

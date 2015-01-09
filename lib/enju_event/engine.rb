@@ -1,3 +1,5 @@
+require "enju_seed"
+require "enju_message"
 require "paperclip"
 require "statesman"
 require "ri_cal"

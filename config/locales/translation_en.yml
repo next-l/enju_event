@@ -6,6 +6,7 @@ en:
       event_import_file: Event import file
       event_import_result: Event Import Result
       participate: Participate
+      event_export_file: Event export
 
     attributes:
       event_category:
@@ -34,8 +35,13 @@ en:
         error_message: Error message
         user_encoding: Encoding
         default_library_id: Default library
+        default_event_category_id: Default event category
       event_import_result:
         body: Body
+      event_export_file:
+        event_export_file_name: Filename
+        event_export_file_size: Size
+        state: State
 
   event:
     library_group_event: "Events at %{library_group_name}"
@@ -47,3 +53,6 @@ en:
   calendar:
     calendar: "Calendar"
     library_calendar: "Calendar of events at %{library_name}"
+  event_import_file:
+    default_library: If "library" column is not set in the TSV file, this library is set to the new event.
+    default_event_category: If "event_category" column is not set in the TSV file, this event category is set to the new event.

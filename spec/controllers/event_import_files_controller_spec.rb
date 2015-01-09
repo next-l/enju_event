@@ -6,9 +6,7 @@ describe EventImportFilesController do
 
   describe "GET index" do
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       it "assigns all event_import_files as @event_import_files" do
         get :index
@@ -17,9 +15,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "assigns all event_import_files as @event_import_files" do
         get :index
@@ -28,21 +24,19 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
-      it "assigns nil as @event_import_files" do
+      it "assigns empty as @event_import_files" do
         get :index
-        assigns(:event_import_files).should be_nil
+        assigns(:event_import_files).should be_empty
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
-      it "assigns nil as @event_import_files" do
+      it "assigns empty as @event_import_files" do
         get :index
-        assigns(:event_import_files).should be_nil
+        assigns(:event_import_files).should be_empty
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -50,9 +44,7 @@ describe EventImportFilesController do
 
   describe "GET show" do
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       it "assigns the requested event_import_file as @event_import_file" do
         get :show, :id => 1
@@ -61,9 +53,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "assigns the requested event_import_file as @event_import_file" do
         get :show, :id => 1
@@ -72,9 +62,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       it "assigns the requested event_import_file as @event_import_file" do
         get :show, :id => 1
@@ -93,9 +81,7 @@ describe EventImportFilesController do
 
   describe "GET new" do
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       it "assigns the requested event_import_file as @event_import_file" do
         get :new
@@ -105,9 +91,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "should not assign the requested event_import_file as @event_import_file" do
         get :new
@@ -117,9 +101,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       it "should not assign the requested event_import_file as @event_import_file" do
         get :new
@@ -139,10 +121,7 @@ describe EventImportFilesController do
 
   describe "POST create" do
     describe "When logged in as Librarian" do
-      before(:each) do
-        @user = FactoryGirl.create(:librarian)
-        sign_in @user
-      end
+      login_fixture_librarian
 
       it "should create event_import_file" do
         post :create, :event_import_file => {:event_import => fixture_file_upload("/../../examples/event_import_file_sample1.tsv", 'text/csv') }
@@ -153,7 +132,7 @@ describe EventImportFilesController do
 
       it "should import user" do
         old_events_count = Event.count
-        post :create, :event_import_file => {:event_import => fixture_file_upload("/../../examples/event_import_file_sample2.tsv", 'text/csv') }
+        post :create, :event_import_file => {:event_import => fixture_file_upload("/../../examples/event_import_file_sample2.tsv", 'text/csv'), :default_library_id => 3, :default_event_category_id => 3 }
         assigns(:event_import_file).import_start
         Event.count.should eq old_events_count + 2
         response.should redirect_to event_import_file_url(assigns(:event_import_file))
@@ -161,10 +140,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        @user = FactoryGirl.create(:user)
-        sign_in @user
-      end
+      login_fixture_user
 
       it "should be forbidden" do
         post :create, :event_import_file => {:event_import => fixture_file_upload("/../..//examples/event_import_file_sample1.tsv", 'text/csv') }
@@ -182,9 +158,7 @@ describe EventImportFilesController do
 
   describe "GET edit" do
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       it "assigns the requested event_import_file as @event_import_file" do
         event_import_file = event_import_files(:event_import_file_00001)
@@ -194,9 +168,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "assigns the requested event_import_file as @event_import_file" do
         event_import_file = event_import_files(:event_import_file_00001)
@@ -206,9 +178,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       it "assigns the requested event_import_file as @event_import_file" do
         event_import_file = event_import_files(:event_import_file_00001)
@@ -228,20 +198,16 @@ describe EventImportFilesController do
 
   describe "PUT update" do
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "should update event_import_file" do
-        put :update, :id => event_import_files(:event_import_file_00003).id, :event_import_file => {:note => 'test'}
+        put :update, :id => event_import_files(:event_import_file_00003).id, :event_import_file => { edit_mode: 'update' }
         response.should redirect_to event_import_file_url(assigns(:event_import_file))
       end
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       it "should not update event_import_file" do
         put :update, :id => event_import_files(:event_import_file_00003).id, :event_import_file => { }
@@ -263,9 +229,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       it "destroys the requested event_import_file" do
         delete :destroy, :id => @event_import_file.id
@@ -278,9 +242,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "destroys the requested event_import_file" do
         delete :destroy, :id => @event_import_file.id
@@ -293,9 +255,7 @@ describe EventImportFilesController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       it "destroys the requested event_import_file" do
         delete :destroy, :id => @event_import_file.id

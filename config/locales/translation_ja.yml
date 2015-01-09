@@ -1,11 +1,12 @@
 ja:
   activerecord:
     models:
-      event_category: 催し物の種類
+      event_category: 催し物の種別
       event: 開館日と催し物
       event_import_file: 催し物のインポート用ファイル
       event_import_result: 催し物インポートの結果
       participate: 参加
+      event_export_file: 催し物情報のエクスポート
 
     attributes:
       event_category:
@@ -34,8 +35,13 @@ ja:
         error_message: エラーメッセージ
         user_encoding: 文字コード
         default_library_id: 既定の図書館
+        default_event_category_id: 既定の催し物の種別
       event_import_result:
         body: 本文
+      event_export_file:
+        event_export_file_name: ファイル名
+        event_export_file_size: ファイルサイズ
+        state: 状態
 
   event:
     library_group_event: "%{library_group_name} での催し物"
@@ -44,6 +50,11 @@ ja:
     all: "全ての催し物"
     past: "過去の催し物"
     upcoming: "今後の催し物"
+    table: 一覧表示
+    calendar: カレンダー表示
   calendar:
     calendar: "カレンダー"
     library_calendar: "%{library_name}のカレンダー"
+  event_import_file:
+    default_library: TSVファイルで"library"列が指定されていない場合、この図書館が登録されます。
+    default_event_category: TSVファイルで"event_category"列が指定されていない場合、この種別が登録されます。

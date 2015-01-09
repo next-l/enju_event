@@ -24,8 +24,8 @@ end
 # Table name: events
 #
 #  id                :integer          not null, primary key
-#  library_id        :integer          default(1), not null
-#  event_category_id :integer          default(1), not null
+#  library_id        :integer          not null
+#  event_category_id :integer          not null
 #  name              :string(255)
 #  note              :text
 #  start_at          :datetime
@@ -33,6 +33,6 @@ end
 #  all_day           :boolean          default(FALSE), not null
 #  deleted_at        :datetime
 #  display_name      :text
-#  created_at        :datetime
-#  updated_at        :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #

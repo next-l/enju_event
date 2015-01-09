@@ -3,10 +3,9 @@ require 'spec_helper'
 describe EventsController do
   fixtures :all
 
-  describe "GET index" do
+  describe "GET index", :solr => true do
     before do
-      Event.__elasticsearch__.create_index!
-      Event.import
+      Event.reindex
     end
 
     before(:each) do
@@ -14,9 +13,7 @@ describe EventsController do
     end
 
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       it "assigns all events as @events" do
         get :index
@@ -25,9 +22,7 @@ describe EventsController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "assigns all events as @events" do
         get :index
@@ -36,9 +31,7 @@ describe EventsController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       it "assigns all events as @events" do
         get :index
@@ -62,8 +55,8 @@ describe EventsController do
         assigns(:events).should_not be_nil
       end
 
-      it "assigns all events as @events in csv format" do
-        get :index, :format => 'csv'
+      it "assigns all events as @events in txt format" do
+        get :index, :format => 'txt'
         assigns(:events).should_not be_nil
       end
 
@@ -90,9 +83,7 @@ describe EventsController do
 
   describe "GET show" do
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       it "assigns the requested event as @event" do
         event = FactoryGirl.create(:event)
@@ -102,9 +93,7 @@ describe EventsController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "assigns the requested event as @event" do
         event = FactoryGirl.create(:event)
@@ -114,9 +103,7 @@ describe EventsController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       it "assigns the requested event as @event" do
         event = FactoryGirl.create(:event)
@@ -136,9 +123,7 @@ describe EventsController do
 
   describe "GET new" do
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       it "assigns the requested event as @event" do
         get :new
@@ -147,9 +132,7 @@ describe EventsController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "should not assign the requested event as @event" do
         get :new
@@ -158,9 +141,7 @@ describe EventsController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       it "should not assign the requested event as @event" do
         get :new
@@ -180,9 +161,7 @@ describe EventsController do
 
   describe "GET edit" do
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       it "assigns the requested event as @event" do
         event = FactoryGirl.create(:event)
@@ -192,9 +171,7 @@ describe EventsController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "assigns the requested event as @event" do
         event = FactoryGirl.create(:event)
@@ -203,9 +180,7 @@ describe EventsController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       it "assigns the requested event as @event" do
         event = FactoryGirl.create(:event)
@@ -230,9 +205,7 @@ describe EventsController do
     end
 
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       describe "with valid params" do
         it "assigns a newly created event as @event" do
@@ -260,9 +233,7 @@ describe EventsController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       describe "with valid params" do
         it "assigns a newly created event as @event" do
@@ -290,9 +261,7 @@ describe EventsController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       describe "with valid params" do
         it "assigns a newly created event as @event" do
@@ -354,9 +323,7 @@ describe EventsController do
     end
 
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       describe "with valid params" do
         it "updates the requested event" do
@@ -378,9 +345,7 @@ describe EventsController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       describe "with valid params" do
         it "updates the requested event" do
@@ -402,9 +367,7 @@ describe EventsController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       describe "with valid params" do
         it "updates the requested event" do
@@ -453,9 +416,7 @@ describe EventsController do
     end
 
     describe "When logged in as Administrator" do
-      before(:each) do
-        sign_in FactoryGirl.create(:admin)
-      end
+      login_fixture_admin
 
       it "destroys the requested event" do
         delete :destroy, :id => @event.id
@@ -468,9 +429,7 @@ describe EventsController do
     end
 
     describe "When logged in as Librarian" do
-      before(:each) do
-        sign_in FactoryGirl.create(:librarian)
-      end
+      login_fixture_librarian
 
       it "destroys the requested event" do
         delete :destroy, :id => @event.id
@@ -483,9 +442,7 @@ describe EventsController do
     end
 
     describe "When logged in as User" do
-      before(:each) do
-        sign_in FactoryGirl.create(:user)
-      end
+      login_fixture_user
 
       it "destroys the requested event" do
         delete :destroy, :id => @event.id

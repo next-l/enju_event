@@ -1,6 +1,6 @@
 class EventCategory < ActiveRecord::Base
   include MasterModel
-  default_scope lambda{order('event_categories.position')}
+  default_scope { order('position') }
   has_many :events
 
   paginates_per 10
@@ -15,6 +15,7 @@ end
 #  display_name :text
 #  note         :text
 #  position     :integer
-#  created_at   :datetime
-#  updated_at   :datetime
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
+

@@ -1,16 +1,14 @@
 class ParticipatesController < ApplicationController
-  before_action :set_participate, only: [:show, :edit, :update, :destroy]
-  after_action :verify_authorized
+  load_and_authorize_resource
 
   # GET /participates
   # GET /participates.json
   def index
-    authorize Participate
     @participates = Participate.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @participates }
+      format.json { render json: @participates }
     end
   end
 
@@ -19,7 +17,7 @@ class ParticipatesController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @participate }
+      format.json { render json: @participate }
     end
   end
 
@@ -27,11 +25,10 @@ class ParticipatesController < ApplicationController
   # GET /participates/new.json
   def new
     @participate = Participate.new
-    authorize @participate
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @participate }
+      format.json { render json: @participate }
     end
   end
 
@@ -43,16 +40,15 @@ class ParticipatesController < ApplicationController
   # POST /participates.json
   def create
     @participate = Participate.new(participate_params)
-    authorize @participate
 
     respond_to do |format|
       if @participate.save
         flash[:notice] = 'Participate was successfully created.'
         format.html { redirect_to(@participate) }
-        format.json { render :json => @participate, :status => :created, :location => @participate }
+        format.json { render json: @participate, status: :created, location: @participate }
       else
-        format.html { render :action => "new" }
-        format.json { render :json => @participate.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @participate.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,8 +62,8 @@ class ParticipatesController < ApplicationController
         format.html { redirect_to(@participate) }
         format.json { head :no_content }
       else
-        format.html { render :action => "edit" }
-        format.json { render :json => @participate.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @participate.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -84,14 +80,7 @@ class ParticipatesController < ApplicationController
   end
 
   private
-  def set_participate
-    @participate = Participate.find(params[:id])
-    authorize @participate
-  end
-
   def participate_params
-    params.require(:participate).permit(
-      :agent_id, :event_id
-    )
+    params.require(:participate).permit(:agent_id, :event_id)
   end
 end
