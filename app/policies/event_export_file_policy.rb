@@ -1,4 +1,4 @@
-class EventImportFilePolicy < ApplicationPolicy
+class EventExportFilePolicy < ApplicationPolicy
   def index?
     user.try(:has_role?, 'Librarian')
   end

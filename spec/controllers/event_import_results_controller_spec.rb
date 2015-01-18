@@ -28,7 +28,7 @@ describe EventImportResultsController do
 
       it "assigns empty as @event_import_results" do
         get :index
-        assigns(:event_import_results).should be_empty
+        assigns(:event_import_results).should be_nil
         response.should be_forbidden
       end
     end
@@ -36,7 +36,7 @@ describe EventImportResultsController do
     describe "When not logged in" do
       it "assigns empty as @event_import_results" do
         get :index
-        assigns(:event_import_results).should be_empty
+        assigns(:event_import_results).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end

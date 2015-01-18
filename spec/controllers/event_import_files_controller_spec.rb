@@ -28,7 +28,7 @@ describe EventImportFilesController do
 
       it "assigns empty as @event_import_files" do
         get :index
-        assigns(:event_import_files).should be_empty
+        assigns(:event_import_files).should be_nil
         response.should be_forbidden
       end
     end
@@ -36,7 +36,7 @@ describe EventImportFilesController do
     describe "When not logged in" do
       it "assigns empty as @event_import_files" do
         get :index
-        assigns(:event_import_files).should be_empty
+        assigns(:event_import_files).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -105,7 +105,7 @@ describe EventImportFilesController do
 
       it "should not assign the requested event_import_file as @event_import_file" do
         get :new
-        assigns(:event_import_file).should_not be_valid
+        assigns(:event_import_file).should be_nil
         response.should be_forbidden
       end
     end
@@ -113,7 +113,7 @@ describe EventImportFilesController do
     describe "When not logged in" do
       it "should not assign the requested event_import_file as @event_import_file" do
         get :new
-        assigns(:event_import_file).should_not be_valid
+        assigns(:event_import_file).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end

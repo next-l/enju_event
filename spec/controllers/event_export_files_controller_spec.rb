@@ -27,7 +27,7 @@ describe EventExportFilesController do
 
       it "assigns empty as @event_export_files" do
         get :index
-        assigns(:event_export_files).should be_empty
+        assigns(:event_export_files).should be_nil
         response.should be_forbidden
       end
     end
@@ -35,7 +35,7 @@ describe EventExportFilesController do
     describe "When not logged in" do
       it "assigns empty as @event_export_files" do
         get :index
-        assigns(:event_export_files).should be_empty
+        assigns(:event_export_files).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -107,7 +107,7 @@ describe EventExportFilesController do
 
       it "should not assign the requested event_export_file as @event_export_file" do
         get :new
-        assigns(:event_export_file).should_not be_valid
+        assigns(:event_export_file).should be_nil
         response.should be_forbidden
       end
     end
@@ -115,7 +115,7 @@ describe EventExportFilesController do
     describe "When not logged in" do
       it "should not assign the requested event_export_file as @event_export_file" do
         get :new
-        assigns(:event_export_file).should_not be_valid
+        assigns(:event_export_file).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -138,7 +138,7 @@ describe EventExportFilesController do
 
       it "should be forbidden" do
         post :create, :event_export_file => { event_export_file_name: 'test.txt' }
-        assigns(:event_export_file).user.should be_nil
+        assigns(:event_export_file).should be_nil
         response.should be_forbidden
       end
     end
@@ -146,7 +146,7 @@ describe EventExportFilesController do
     describe "When not logged in" do
       it "should be redirected to new session url" do
         post :create, :event_export_file => { event_export_file_name: 'test.txt' }
-        assigns(:event_export_file).user.should be_nil
+        assigns(:event_export_file).should be_nil
         response.should redirect_to new_user_session_url
       end
     end

@@ -33,14 +33,14 @@ describe ParticipatesController do
 
       it "assigns empty as @participates" do
         get :index
-        assigns(:participates).should be_empty
+        assigns(:participates).should be_nil
       end
     end
 
     describe "When not logged in" do
       it "assigns empty as @participates" do
         get :index
-        assigns(:participates).should be_empty
+        assigns(:participates).should be_nil
       end
     end
   end
@@ -109,7 +109,7 @@ describe ParticipatesController do
 
       it "should not assign the requested participate as @participate" do
         get :new
-        assigns(:participate).should_not be_valid
+        assigns(:participate).should be_nil
         response.should be_forbidden
       end
     end
@@ -117,7 +117,7 @@ describe ParticipatesController do
     describe "When not logged in" do
       it "should not assign the requested participate as @participate" do
         get :new
-        assigns(:participate).should_not be_valid
+        assigns(:participate).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -231,7 +231,7 @@ describe ParticipatesController do
       describe "with valid params" do
         it "assigns a newly created participate as @participate" do
           post :create, :participate => @attrs
-          assigns(:participate).should be_valid
+          assigns(:participate).should be_nil
         end
 
         it "should be forbidden" do
@@ -243,7 +243,7 @@ describe ParticipatesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved participate as @participate" do
           post :create, :participate => @invalid_attrs
-          assigns(:participate).should_not be_valid
+          assigns(:participate).should be_nil
         end
 
         it "should be forbidden" do
@@ -257,7 +257,7 @@ describe ParticipatesController do
       describe "with valid params" do
         it "assigns a newly created participate as @participate" do
           post :create, :participate => @attrs
-          assigns(:participate).should be_valid
+          assigns(:participate).should be_nil
         end
 
         it "should be forbidden" do
@@ -269,7 +269,7 @@ describe ParticipatesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved participate as @participate" do
           post :create, :participate => @invalid_attrs
-          assigns(:participate).should_not be_valid
+          assigns(:participate).should be_nil
         end
 
         it "should be forbidden" do
