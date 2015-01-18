@@ -5,12 +5,10 @@ module EnjuEvent
     def initialize(user, ip_address = nil)
       case user.try(:role).try(:name)
       when 'Administrator'
-        can [:read, :create, :update], EventCategory
         can [:destroy, :delete], EventCategory do |event_category|
           !['unknown', 'closed'].include?(event_category.name)
         end
         can :manage, [
-          Event,
           EventImportFile,
           EventExportFile,
           Participate
@@ -18,24 +16,12 @@ module EnjuEvent
         can :read, EventImportResult
       when 'Librarian'
         can :manage, [
-          Event,
           EventImportFile,
           EventExportFile,
           Participate
         ]
         can :read, [
-          EventCategory,
           EventImportResult
-        ]
-      when 'User'
-        can :read, [
-          Event,
-          EventCategory
-        ]
-      else
-        can :read, [
-          Event,
-          EventCategory
         ]
       end
     end

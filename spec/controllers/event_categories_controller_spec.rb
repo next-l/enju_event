@@ -19,7 +19,7 @@ describe EventCategoriesController do
 
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.all)
+        assigns(:event_categories).should eq(EventCategory.order(:position))
       end
     end
 
@@ -28,7 +28,7 @@ describe EventCategoriesController do
 
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.all)
+        assigns(:event_categories).should eq(EventCategory.order(:position))
       end
     end
 
@@ -37,14 +37,14 @@ describe EventCategoriesController do
 
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.all)
+        assigns(:event_categories).should eq(EventCategory.order(:position))
       end
     end
 
     describe "When not logged in" do
       it "assigns all event_categories as @event_categories" do
         get :index
-        assigns(:event_categories).should eq(EventCategory.all)
+        assigns(:event_categories).should eq(EventCategory.order(:position))
       end
     end
   end
@@ -105,7 +105,7 @@ describe EventCategoriesController do
 
       it "should not assign the requested event_category as @event_category" do
         get :new
-        assigns(:event_category).should_not be_valid
+        assigns(:event_category).should be_nil
         response.should be_forbidden
       end
     end
@@ -115,7 +115,7 @@ describe EventCategoriesController do
 
       it "should not assign the requested event_category as @event_category" do
         get :new
-        assigns(:event_category).should_not be_valid
+        assigns(:event_category).should be_nil
         response.should be_forbidden
       end
     end
@@ -123,7 +123,7 @@ describe EventCategoriesController do
     describe "When not logged in" do
       it "should not assign the requested event_category as @event_category" do
         get :new
-        assigns(:event_category).should_not be_valid
+        assigns(:event_category).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -209,7 +209,7 @@ describe EventCategoriesController do
       describe "with valid params" do
         it "assigns a newly created event_category as @event_category" do
           post :create, :event_category => @attrs
-          assigns(:event_category).should be_valid
+          assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
@@ -221,7 +221,7 @@ describe EventCategoriesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved event_category as @event_category" do
           post :create, :event_category => @invalid_attrs
-          assigns(:event_category).should_not be_valid
+          assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
@@ -237,7 +237,7 @@ describe EventCategoriesController do
       describe "with valid params" do
         it "assigns a newly created event_category as @event_category" do
           post :create, :event_category => @attrs
-          assigns(:event_category).should be_valid
+          assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
@@ -249,7 +249,7 @@ describe EventCategoriesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved event_category as @event_category" do
           post :create, :event_category => @invalid_attrs
-          assigns(:event_category).should_not be_valid
+          assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
@@ -263,7 +263,7 @@ describe EventCategoriesController do
       describe "with valid params" do
         it "assigns a newly created event_category as @event_category" do
           post :create, :event_category => @attrs
-          assigns(:event_category).should be_valid
+          assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
@@ -275,7 +275,7 @@ describe EventCategoriesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved event_category as @event_category" do
           post :create, :event_category => @invalid_attrs
-          assigns(:event_category).should_not be_valid
+          assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do

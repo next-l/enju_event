@@ -1,12 +1,13 @@
 # -*- encoding: utf-8 -*-
 class EventsController < ApplicationController
-  load_and_authorize_resource
-  before_filter :get_library, :get_agent
-  before_filter :get_libraries, except: :destroy
-  before_filter :prepare_options
-  before_filter :store_page, only: :index
-  after_filter :solr_commit, only: [:create, :update, :destroy]
-  after_filter :convert_charset, only: :index
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+  before_action :get_library, :get_agent
+  before_action :get_libraries, except: :destroy
+  before_action :prepare_options
+  before_action :store_page, only: :index
+  after_action :solr_commit, only: [:create, :update, :destroy]
+  after_action :convert_charset, only: :index
 
   # GET /events
   # GET /events.json
@@ -144,6 +145,15 @@ class EventsController < ApplicationController
   end
 
   private
+  def set_event
+    @event = Event.find(params[:id])
+    authorize @event
+  end
+
+  def check_policy
+    authorize Event
+  end
+
   def event_params
     params.require(:event).permit(
       :library_id, :event_category_id, :name, :note, :start_at,
