@@ -7,7 +7,7 @@ class EventImportFile < ActiveRecord::Base
 
   if Setting.uploaded_file.storage == :s3
     has_attached_file :event_import, storage: :s3,
-      s3_credentials: "#{Setting.amazon}",
+      s3_credentials: Setting.amazon,
       s3_permissions: :private
   else
     has_attached_file :event_import,
