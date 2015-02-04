@@ -7,7 +7,7 @@ class EventExportFile < ActiveRecord::Base
       s3_credentials: Setting.amazon,
       s3_permissions: :private
   else
-    has_attached_file :event_export
+    has_attached_file :event_export,
       path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
   end
   validates_attachment_content_type :event_export, :content_type => /\Atext\/plain\Z/
