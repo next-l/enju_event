@@ -391,9 +391,9 @@ ActiveRecord::Schema.define(version: 20150305001006) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "event_export_id"
-    t.integer  "event_export_file_name"
+    t.string   "event_export_file_name"
     t.integer  "event_export_size"
-    t.integer  "event_export_content_type"
+    t.string   "event_export_content_type"
   end
 
   add_index "event_export_files", ["event_export_id"], name: "index_event_export_files_on_event_export_id"

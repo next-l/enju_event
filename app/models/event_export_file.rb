@@ -50,7 +50,7 @@ end
 #  created_at                :datetime
 #  updated_at                :datetime
 #  event_export_id           :string
-#  event_export_file_name    :integer
+#  event_export_file_name    :string
 #  event_export_size         :integer
-#  event_export_content_type :integer
+#  event_export_content_type :string
 #
