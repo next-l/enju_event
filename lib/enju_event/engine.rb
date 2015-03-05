@@ -1,9 +1,11 @@
 require "enju_message"
-require "paperclip"
 require "statesman"
 require "ri_cal"
 require "csv"
 require "nkf"
+require "mini_magick"
+require "refile/rails"
+require "refile/image_processing"
 begin
   require 'charlock_holmes/string'
 rescue LoadError

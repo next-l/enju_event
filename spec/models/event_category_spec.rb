@@ -11,11 +11,10 @@ end
 # Table name: event_categories
 #
 #  id           :integer          not null, primary key
-#  name         :string(255)      not null
+#  name         :string           not null
 #  display_name :text
 #  note         :text
 #  position     :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  created_at   :datetime
+#  updated_at   :datetime
 #
-

@@ -5,26 +5,8 @@ class EventImportFile < ActiveRecord::Base
   scope :not_imported, -> {in_state(:pending)}
   scope :stucked, -> {in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago)}
 
-  if ENV['ENJU_STORAGE'] == 's3'
-    has_attached_file :event_import, storage: :s3,
-      s3_credentials: {
-        access_key: ENV['AWS_ACCESS_KEY_ID'],
-        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-        bucket: ENV['S3_BUCKET_NAME']
-      },
-      s3_permissions: :private
-  else
-    has_attached_file :event_import,
-      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
-  end
-  validates_attachment_content_type :event_import, content_type: [
-    'text/csv',
-    'text/plain',
-    'text/tab-separated-values',
-    'application/octet-stream',
-    'application/vnd.ms-excel'
-  ]
-  validates_attachment_presence :event_import
+  attachment :event_import
+  validates :event_import, presence: true, on: :create
   belongs_to :user, validate: true
   belongs_to :default_library, class_name: 'Library'
   belongs_to :default_event_category, class_name: 'EventCategory'
@@ -32,6 +14,7 @@ class EventImportFile < ActiveRecord::Base
 
   has_many :event_import_file_transitions
 
+  before_create :set_fingerprint
   enju_import_file_model
   attr_accessor :mode
 
@@ -45,7 +28,7 @@ class EventImportFile < ActiveRecord::Base
   def import
     transition_to!(:started)
     num = { imported: 0, failed: 0 }
-    rows = open_import_file(create_import_temp_file(event_import))
+    rows = open_import_file(create_import_temp_file(event_import.download))
     check_field(rows.first)
     row_num = 1
 
@@ -101,7 +84,7 @@ class EventImportFile < ActiveRecord::Base
 
   def modify
     transition_to!(:started)
-    rows = open_import_file(create_import_temp_file(event_import))
+    rows = open_import_file(create_import_temp_file(event_import.download))
     check_field(rows.first)
     row_num = 1
 
@@ -134,7 +117,7 @@ class EventImportFile < ActiveRecord::Base
 
   def remove
     transition_to!(:started)
-    rows = open_import_file(create_import_temp_file(event_import))
+    rows = open_import_file(create_import_temp_file(event_import.download))
     rows.shift
     row_num = 1
 
@@ -199,6 +182,10 @@ class EventImportFile < ActiveRecord::Base
       raise "You should specify dates in the first line"
     end
   end
+
+  def set_fingerprint
+    self.event_import_fingerprint = Digest::SHA1.file(event_import.download.path).hexdigest
+  end
 end
 
 # == Schema Information
@@ -207,21 +194,22 @@ end
 #
 #  id                        :integer          not null, primary key
 #  parent_id                 :integer
-#  content_type              :string(255)
+#  content_type              :string
 #  size                      :integer
 #  user_id                   :integer
 #  note                      :text
 #  executed_at               :datetime
-#  event_import_file_name    :string(255)
-#  event_import_content_type :string(255)
-#  event_import_file_size    :integer
+#  event_import_file_name    :string
+#  event_import_content_type :string
+#  event_import_size         :integer
 #  event_import_updated_at   :datetime
-#  edit_mode                 :string(255)
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
-#  event_import_fingerprint  :string(255)
+#  edit_mode                 :string
+#  created_at                :datetime
+#  updated_at                :datetime
+#  event_import_fingerprint  :string
 #  error_message             :text
-#  user_encoding             :string(255)
+#  user_encoding             :string
 #  default_library_id        :integer
 #  default_event_category_id :integer
+#  event_import_id           :string
 #
