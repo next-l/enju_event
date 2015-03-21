@@ -1,0 +1,22 @@
+#content_detail.ui-corner-all.ui-widget-content
+  h1.title
+    = t('page.editing', model: t('activerecord.models.participate'))
+  #content_list
+    = form_for(@participate) do |f|
+      = f.error_messages
+      .field
+        = f.label t('activerecord.models.agent')
+        br
+        = f.text_field :agent_id
+      .field
+        = f.label t('activerecord.models.event')
+        br
+        = f.text_field :event_id
+      .actions
+        = f.submit
+#submenu.ui-corner-all.ui-widget-content
+  ul
+    li
+      = link_to t('page.show'), @participate
+    li
+      = link_to t('page.back'), participates_path

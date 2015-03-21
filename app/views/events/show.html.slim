@@ -1,0 +1,49 @@
+#content_detail.ui-corner-all.ui-widget-content
+  h1.title
+    = t('page.showing', model: t('activerecord.models.event'))
+  #content_list
+    p#notice
+      = notice
+    h2.resource_title
+      = @event.display_name.localize
+    p
+      strong
+        = t('activerecord.attributes.event.name')
+        | :
+      = @event.name
+    p
+      strong
+        = t('activerecord.models.event_category')
+        | :
+      = @event.event_category.display_name.localize
+    p
+      strong
+        = t('activerecord.models.library')
+        | :
+      = link_to @event.library.display_name.localize, @event.library
+    p
+      strong
+        = t('activerecord.attributes.event.start_at')
+        | :
+      = l(@event.start_at, format: :only_date)
+    p
+      strong
+        = t('activerecord.attributes.event.end_at')
+        | :
+      = l(@event.end_at, format: :only_date)
+    p
+      strong
+        = t('activerecord.attributes.event.all_day')
+        | :
+      = localized_boolean(@event.all_day)
+    p
+      strong
+        = t('activerecord.attributes.event.note')
+        | :
+      = raw auto_link(simple_format(h(@event.note)))
+#submenu.ui-corner-all.ui-widget-content
+  ul
+    li
+      = link_to t('page.edit'), edit_event_path(@event)
+    li
+      = back_to_index(flash[:page_info])

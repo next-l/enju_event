@@ -1,0 +1,14 @@
+#content_detail.ui-corner-all.ui-widget-content
+  h1.title
+    = t('page.new', model: t('activerecord.models.event'))
+  #content_list
+    = render 'form'
+    = render 'all_day'
+#submenu.ui-corner-all.ui-widget-content
+  ul
+    - if @library
+      li
+        = link_to t('page.back'), events_path(library_id: @library.name)
+    - else
+      li
+        = link_to t('page.back'), events_path

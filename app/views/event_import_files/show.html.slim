@@ -1,0 +1,85 @@
+#content_detail.ui-corner-all.ui-widget-content
+  h1.title
+    = t('page.showing', model: t('activerecord.models.event_import_file'))
+  #content_list
+    p#notice
+      = notice
+    p
+      strong
+        | Id:
+      = @event_import_file.id
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.event_import_file_name')
+        | :
+      = link_to @event_import_file.event_import_file_name, event_import_file_path(@event_import_file, format: :download) if @event_import_file.event_import_file_name
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.event_import_content_type')
+        | :
+      = @event_import_file.event_import_content_type
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.event_import_file_size')
+        | :
+      = @event_import_file.event_import_file_size
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.event_import_fingerprint')
+        | :
+      = @event_import_file.event_import_fingerprint
+    p
+      strong
+        = t('page.created_at')
+        | :
+      = l(@event_import_file.created_at) if @event_import_file.created_at
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.executed_at')
+        | :
+      = l(@event_import_file.executed_at) if @event_import_file.executed_at
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.edit_mode')
+        | :
+      = @event_import_file.edit_mode
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.user_encoding')
+        | :
+      = @event_import_file.user_encoding
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.default_event_category_id')
+        | :
+      = link_to @event_import_file.default_event_category.display_name.localize, @event_import_file.default_event_category if @event_import_file.default_event_category.try(:display_name)
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.default_library_id')
+        | :
+      = link_to @event_import_file.default_library.display_name.localize, @event_import_file.default_library if @event_import_file.default_library.try(:display_name)
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.state')
+        | :
+      = localized_state(@event_import_file.current_state)
+    p
+      strong
+        = t('activerecord.attributes.event_import_file.error_message')
+        | :
+      = @event_import_file.error_message
+    p
+      strong
+        = t('activerecord.models.user')
+        | :
+      = link_to @event_import_file.user.username, @event_import_file.user.profile if @event_import_file.user.try(:profile)
+#submenu.ui-corner-all.ui-widget-content
+  = form_for(@event_import_file) do |f|
+    ul
+      li
+        = link_to t('activerecord.models.event_import_result'), event_import_results_path(event_import_file_id: @event_import_file.id)
+      li
+        = back_to_index(flash[:page_info])
+      - if current_user.has_role?('Administrator')
+        li
+          = link_to 'Resque', resque_path

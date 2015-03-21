@@ -1,0 +1,18 @@
+#content_detail.ui-corner-all.ui-widget-content
+  h1.title
+    = t('page.editing', model: t('activerecord.models.event_import_file'))
+  #content_list
+    = form_for(@event_import_file) do |f|
+      = f.error_messages
+      .field
+        = f.label :event_import_file_name
+        br
+        = f.text_field :event_import_file_name
+      .actions
+        = f.submit
+#submenu.ui-corner-all.ui-widget-content
+  ul
+    li
+      = link_to t('page.show'), @event_import_file
+    li
+      = link_to t('page.back'), event_import_files_path

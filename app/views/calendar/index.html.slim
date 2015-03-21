@@ -1,0 +1,35 @@
+#content_detail.ui-corner-all.ui-widget-content
+  - if @library
+    h1.title
+      = t('calendar.library_calendar', :library_name => @library.display_name.localize)
+  - else
+    h1.title
+      = t('calendar.calendar')
+    #content_list
+      p#notice
+        = notice
+      - if @library
+        h2.resource_title
+          = link_to @library.display_name.localize, @library
+      - else
+        h2.resource_title
+          = t('event.all_libraries')
+        p
+          - if @library
+            |  (
+            = link_to 'iCalendar', library_events_path(@library, :format => :ics)
+            | ) 
+          - else
+            |  (
+            = link_to 'iCalendar', events_path(:format => :ics)
+            | ) 
+        = raw event_calendar
+#submenu.ui-corner-all.ui-widget-content
+  ul
+    li
+      = link_to t('page.listing', :model => t('activerecord.models.event')), events_path
+    li
+      = link_to t('page.show_all'), :controller => :calendar, :action => :index
+    - @libraries.each do |library|
+      li
+        = link_to library.display_name.localize, :controller => :calendar, :action => :index, :library_id => library.name
