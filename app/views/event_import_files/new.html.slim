@@ -1,7 +1,7 @@
 .row
   h1.title
     = t('page.new', model: t('activerecord.models.event_import_file'))
-  #content_list
+  #content_list.col-md-9
     = form_for(@event_import_file, html: { multipart: true }) do |f|
       = f.error_messages
       .field
@@ -41,7 +41,7 @@
       .actions
         = f.hidden_field :mode, value: 'import'
         = f.submit t('page.start_import')
-#submenu.col-md-3
+  #submenu.col-md-3
   ul
     li
       = back_to_index(flash[:page_info])

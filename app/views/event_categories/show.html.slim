@@ -1,7 +1,7 @@
 .row
-  h1.title
-    = t('page.showing', model: t('activerecord.models.event_category'))
-  #content_list
+  #content_list.col-md-9
+    h1.title
+      = t('page.showing', model: t('activerecord.models.event_category'))
     p#notice
       = notice
     p
@@ -19,9 +19,9 @@
         = t('activerecord.attributes.event_category.note')
         | :
       = @event_category.note
-#submenu.col-md-3
-  ul
-    li
-      = link_to t('page.edit'), edit_event_category_path(@event_category)
-    li
-      = back_to_index(flash[:page_info])
+  #submenu.col-md-3
+    ul
+      li
+        = link_to t('page.edit'), edit_event_category_path(@event_category)
+      li
+        = back_to_index(flash[:page_info])

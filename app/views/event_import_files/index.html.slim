@@ -1,7 +1,7 @@
 .row
   h1.title
     = t('page.listing', model: t('activerecord.models.event_import_file'))
-  #content_list
+  #content_list.col-md-9
     p#notice
       = notice
     table.table.table-striped.index
@@ -41,7 +41,7 @@
             = link_to t('page.show'), event_import_file
             = link_to t('page.destroy'), event_import_file, data: {confirm: t('page.are_you_sure')}, method: :delete
     = paginate(@event_import_files)
-#submenu.col-md-3
+  #submenu.col-md-3
   ul
     li
       = link_to t('page.new', model: t('activerecord.models.event_import_file')), new_event_import_file_path

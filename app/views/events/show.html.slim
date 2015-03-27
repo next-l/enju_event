@@ -1,7 +1,7 @@
 .row
-  h1.title
-    = t('page.showing', model: t('activerecord.models.event'))
-  #content_list
+  #content_list.col-md-9
+    h1.title
+      = t('page.showing', model: t('activerecord.models.event'))
     p#notice
       = notice
     h2.resource_title
@@ -41,9 +41,9 @@
         = t('activerecord.attributes.event.note')
         | :
       = raw auto_link(simple_format(h(@event.note)))
-#submenu.col-md-3
-  ul
-    li
-      = link_to t('page.edit'), edit_event_path(@event)
-    li
-      = back_to_index(flash[:page_info])
+  #submenu.col-md-3
+    ul
+      li
+        = link_to t('page.edit'), edit_event_path(@event)
+      li
+        = back_to_index(flash[:page_info])
