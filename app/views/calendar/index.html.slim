@@ -1,4 +1,4 @@
-#content_detail.ui-corner-all.ui-widget-content
+.row
   - if @library
     h1.title
       = t('calendar.library_calendar', :library_name => @library.display_name.localize)
@@ -24,7 +24,7 @@
             = link_to 'iCalendar', events_path(:format => :ics)
             | ) 
         = raw event_calendar
-#submenu.ui-corner-all.ui-widget-content
+#submenu.col-md-3
   ul
     li
       = link_to t('page.listing', :model => t('activerecord.models.event')), events_path

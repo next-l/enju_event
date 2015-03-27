@@ -1,4 +1,4 @@
-#content_detail.ui-corner-all.ui-widget-content
+.row
   h1.title
     = t('page.showing', model: t('activerecord.models.event_import_file'))
   #content_list
@@ -73,7 +73,7 @@
         = t('activerecord.models.user')
         | :
       = link_to @event_import_file.user.username, @event_import_file.user.profile if @event_import_file.user.try(:profile)
-#submenu.ui-corner-all.ui-widget-content
+#submenu.col-md-3
   = form_for(@event_import_file) do |f|
     ul
       li

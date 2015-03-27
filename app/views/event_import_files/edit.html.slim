@@ -1,4 +1,4 @@
-#content_detail.ui-corner-all.ui-widget-content
+.row
   h1.title
     = t('page.editing', model: t('activerecord.models.event_import_file'))
   #content_list
@@ -10,7 +10,7 @@
         = f.text_field :event_import_file_name
       .actions
         = f.submit
-#submenu.ui-corner-all.ui-widget-content
+#submenu.col-md-3
   ul
     li
       = link_to t('page.show'), @event_import_file

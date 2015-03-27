@@ -1,4 +1,4 @@
-#content_detail.ui-corner-all.ui-widget-content
+.row
   h1.title
     = t('page.new', model: t('activerecord.models.event_import_file'))
   #content_list
@@ -41,7 +41,7 @@
       .actions
         = f.hidden_field :mode, value: 'import'
         = f.submit t('page.start_import')
-#submenu.ui-corner-all.ui-widget-content
+#submenu.col-md-3
   ul
     li
       = back_to_index(flash[:page_info])

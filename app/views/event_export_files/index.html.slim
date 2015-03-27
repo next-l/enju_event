@@ -1,4 +1,4 @@
-#content_detail.ui-corner-all.ui-widget-content
+.row
   h1.title
     = t('page.listing', model: t('activerecord.models.event_export_file'))
   #content_list
@@ -32,7 +32,7 @@
           td
             = link_to t('page.destroy'), event_export_file, data: {confirm: t('page.are_you_sure')}, method: :delete
     = paginate(@event_export_files)
-#submenu.ui-corner-all.ui-widget-content
+#submenu.col-md-3
   ul
     li
       = link_to t('page.new', model: t('activerecord.models.event_export_file')), new_event_export_file_path

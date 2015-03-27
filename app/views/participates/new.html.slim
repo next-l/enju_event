@@ -1,4 +1,4 @@
-#content_detail.ui-corner-all.ui-widget-content
+.row
   h1.title
     = t('page.new', model: t('activerecord.models.participate'))
   #content_list
@@ -14,7 +14,7 @@
         = f.text_field :event_id
       .actions
         = f.submit
-#submenu.ui-corner-all.ui-widget-content
+#submenu.col-md-3
   ul
     li
       = link_to t('page.back'), participates_path

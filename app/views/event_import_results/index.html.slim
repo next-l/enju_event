@@ -1,4 +1,4 @@
-#content_detail.ui-corner-all.ui-widget-content
+.row
   h1.title
     = t('page.listing', model: t('activerecord.models.event_import_result'))
   #content_list
@@ -26,7 +26,7 @@
           = link_to t('page.show'), event_import_result
           = link_to t('page.destroy'), event_import_result, data: {confirm: t('page.are_you_sure')}, method: :delete
     = paginate(@event_import_results)
-#submenu.ui-corner-all.ui-widget-content
+#submenu.col-md-3
   ul
     li
       - if @event_import_file

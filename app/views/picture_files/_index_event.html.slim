@@ -1,4 +1,4 @@
-#content_detail.ui-corner-all.ui-widget-content
+.row
   h1.title
     = t('page.listing', model: t('activerecord.models.picture_file'))
   #content_list
@@ -40,7 +40,7 @@
           - if policy(picture_file).destroy?
             = link_to t('page.destroy'), picture_file, data: {confirm: t('page.are_you_sure')}, method: :delete
     = paginate(@picture_files)
-#submenu.ui-corner-all.ui-widget-content
+#submenu.col-md-3
   - if policy(PictureFile).create?
     ul
       li

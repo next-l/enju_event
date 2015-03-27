@@ -1,4 +1,4 @@
-#content_detail.ui-corner-all.ui-widget-content
+.row
   h1.title
     = t('page.listing', model: t('activerecord.models.event'))
   #content_list
@@ -62,7 +62,7 @@
                   = link_to t('page.edit'), edit_event_path(event)
                   = link_to t('page.destroy'), event, data: {confirm: t('page.are_you_sure')}, method: :delete
           = paginate(@events)
-#submenu.ui-corner-all.ui-widget-content
+#submenu.col-md-3
   ul
     - if params[:mode] == 'calendar'
       li
