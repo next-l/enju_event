@@ -13,7 +13,7 @@ gem "enju_leaf", github: "next-l/enju_leaf", branch: "bootstrap"
 gem "enju_biblio", github: "next-l/enju_biblio", branch: "bootstrap"
 gem "enju_library", github: "next-l/enju_library", branch: "bootstrap"
 gem "enju_message", github: "next-l/enju_message", branch: "bootstrap"
-gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer", branch: "master"
+gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer", branch: "bootstrap"
 gem "jquery-rails"
 gem "coveralls", require: false, group: :test
 
