@@ -31,7 +31,7 @@
           - if policy(event_category).destroy?
             = link_to t('page.destroy'), event_category_path(event_category), data: {confirm: t('page.are_you_sure')}, method: :delete
   #submenu.col-md-3
-  ul
-    - if policy(EventCategory).create?
-      li
-        = link_to t('page.new', model: t('activerecord.models.event_category')), new_event_category_path
+    ul
+      - if policy(EventCategory).create?
+        li
+          = link_to t('page.new', model: t('activerecord.models.event_category')), new_event_category_path

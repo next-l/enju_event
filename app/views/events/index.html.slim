@@ -1,7 +1,7 @@
 .row
-  h1.title
-    = t('page.listing', model: t('activerecord.models.event'))
   #content_list.col-md-9
+    h1.title
+      = t('page.listing', model: t('activerecord.models.event'))
     p#notice
       = notice
     - if @library
@@ -63,57 +63,57 @@
                   = link_to t('page.destroy'), event, data: {confirm: t('page.are_you_sure')}, method: :delete
           = paginate(@events)
   #submenu.col-md-3
-  ul
-    - if params[:mode] == 'calendar'
+    ul
+      - if params[:mode] == 'calendar'
+        li
+          = link_to t('event.table'), url_for(params.merge(mode: nil))
+      - else
+        li
+          = link_to t('event.calendar'), url_for(params.merge(mode: 'calendar'))
+    ul
+      - if user_signed_in?
+        - if current_user.has_role?('Librarian')
+          - if @library
+            li
+              = link_to t('page.new', model: t('activerecord.models.event')), new_event_path(library_id: @library.name)
+          - else
+            li
+              = link_to t('page.new', model: t('activerecord.models.event')), new_event_path(date: params[:date])
+            li
+              = link_to t('event.import_event'), event_import_files_path
+    ul
       li
-        = link_to t('event.table'), url_for(params.merge(mode: nil))
-    - else
-      li
-        = link_to t('event.calendar'), url_for(params.merge(mode: 'calendar'))
-  ul
-    - if user_signed_in?
-      - if current_user.has_role?('Librarian')
-        - if @library
-          li
-            = link_to t('page.new', model: t('activerecord.models.event')), new_event_path(library_id: @library.name)
-        - else
-          li
-            = link_to t('page.new', model: t('activerecord.models.event')), new_event_path(date: params[:date])
-          li
-            = link_to t('event.import_event'), event_import_files_path
-  ul
-    li
-      = link_to t('event.all_libraries'), events_path(mode: params[:mode])
-    - @libraries.each do |library|
-      li
-        = link_to library.display_name.localize, events_path(library_id: library.name, mode: params[:mode])
-  p
-    - if @library
-      = link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(library_id: @library.name, format: :rss)
-      |  (
-      = link_to 'RSS', events_path(library_id: @library.name, format: :rss)
-      | ) 
-      = link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), events_path(library_id: @library.name, format: :txt, locale: @locale.to_s)
-      |  (
-      = link_to 'TSV', events_path(library_id: @library.name, format: :txt, locale: @locale.to_s)
-      | ) 
-      br
-      = link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(library_id: @library.name, format: :ics, locale: @locale.to_s)
-      |  (
-      = link_to 'iCalendar', events_path(library_id: @library.name, format: :ics, locale: @locale.to_s)
-      | ) 
-    - else
-      = link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(format: :rss)
-      |  (
-      = link_to 'RSS', events_path(format: :rss)
-      | ) 
-      = link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), events_path(format: :txt, locale: @locale.to_s)
-      |  (
-      = link_to 'TSV', events_path(format: :txt, locale: @locale.to_s)
-      | ) 
-      br
-      = link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(format: :ics, locale: @locale.to_s)
-      |  (
-      = link_to 'iCalendar', events_path(format: :ics, locale: @locale.to_s)
-      | ) 
-  = render 'page/login' unless current_user
+        = link_to t('event.all_libraries'), events_path(mode: params[:mode])
+      - @libraries.each do |library|
+        li
+          = link_to library.display_name.localize, events_path(library_id: library.name, mode: params[:mode])
+    p
+      - if @library
+        = link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(library_id: @library.name, format: :rss)
+        |  (
+        = link_to 'RSS', events_path(library_id: @library.name, format: :rss)
+        | ) 
+        = link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), events_path(library_id: @library.name, format: :txt, locale: @locale.to_s)
+        |  (
+        = link_to 'TSV', events_path(library_id: @library.name, format: :txt, locale: @locale.to_s)
+        | ) 
+        br
+        = link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(library_id: @library.name, format: :ics, locale: @locale.to_s)
+        |  (
+        = link_to 'iCalendar', events_path(library_id: @library.name, format: :ics, locale: @locale.to_s)
+        | ) 
+      - else
+        = link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(format: :rss)
+        |  (
+        = link_to 'RSS', events_path(format: :rss)
+        | ) 
+        = link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), events_path(format: :txt, locale: @locale.to_s)
+        |  (
+        = link_to 'TSV', events_path(format: :txt, locale: @locale.to_s)
+        | ) 
+        br
+        = link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(format: :ics, locale: @locale.to_s)
+        |  (
+        = link_to 'iCalendar', events_path(format: :ics, locale: @locale.to_s)
+        | ) 
+    = render 'page/login' unless current_user
