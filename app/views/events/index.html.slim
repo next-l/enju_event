@@ -13,12 +13,12 @@
       - if params[:mode] == 'calendar'
         = render 'calendar'
       - else
-        = form_for :events, url: events_path, html: {method: 'get'} do
-          p
+        = form_for :events, url: events_path, html: {method: 'get', class: 'form-inline'} do
+          .form-group
             = label_tag :search_form_top, t('page.search_term')
             | : 
-            = search_field_tag 'query', h(@query), {id: 'search_form_top', class: 'search_form', placeholder: t('page.search_term')}
-            = submit_tag t('page.search')
+            = search_field_tag 'query', h(@query), {id: 'search_form_top', class: 'form-control', placeholder: t('page.search_term')}
+            = submit_tag t('page.search'), class: 'btn btn-default'
           p
             - case params[:mode]
             - when 'upcoming'
