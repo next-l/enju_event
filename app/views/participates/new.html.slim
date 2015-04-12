@@ -4,15 +4,15 @@
   #content_list.col-md-9
     = form_for(@participate) do |f|
       = f.error_messages
-      .field
+      .form-group
         = f.label t('activerecord.models.agent')
         br
         = f.text_field :agent_id
-      .field
+      .form-group
         = f.label t('activerecord.models.event')
         br
         = f.text_field :event_id
-      .actions
+      .form-control
         = f.submit class: 'btn btn-default'
   #submenu.col-md-3
   ul
