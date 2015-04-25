@@ -4,11 +4,11 @@
   #content_list.col-md-9
     = form_for(@event_import_file) do |f|
       = f.error_messages
-      .field
+      .form-group
         = f.label :event_import_file_name
         br
         = f.text_field :event_import_file_name
-      .actions
+      .form-control
         = f.submit class: 'btn btn-default'
   #submenu.col-md-3
   ul
