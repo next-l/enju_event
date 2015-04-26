@@ -22,7 +22,7 @@ class EventImportFilesController < ApplicationController
       format.json { render json: @event_import_file }
       format.download {
         send_file @event_import_file.event_import.download,
-          filename: @event_import_file.event_import_file_name,
+          filename: @event_import_file.event_import_filename,
           type: 'application/octet-stream'
       }
     end

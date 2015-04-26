@@ -128,7 +128,7 @@ end
 #  user_id                   :integer
 #  note                      :text
 #  executed_at               :datetime
-#  event_import_file_name    :string
+#  event_import_filename     :string
 #  event_import_content_type :string
 #  event_import_size         :integer
 #  event_import_updated_at   :datetime

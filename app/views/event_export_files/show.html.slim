@@ -10,8 +10,8 @@
       = @event_export_file.user.try(:username)
     p
       strong
-        = t('activerecord.attributes.event_export_file.event_export_file_name')
-      = link_to @event_export_file.event_export_file_name, event_export_file_path(@event_export_file, format: :download) if @event_export_file.event_export_file_name
+        = t('activerecord.attributes.event_export_file.event_export_filename')
+      = link_to @event_export_file.event_export_filename, event_export_file_path(@event_export_file, format: :download) if @event_export_file.event_export_filename
     p
       strong
         = t('activerecord.attributes.event_export_file.state')

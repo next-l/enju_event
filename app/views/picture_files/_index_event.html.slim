@@ -16,7 +16,7 @@
         th
           = t('activerecord.attributes.picture_file.picture_content_type')
         th
-          = t('activerecord.attributes.picture_file.picture_file_name')
+          = t('activerecord.attributes.picture_file.picture_filename')
         th
       - @picture_files.each do |picture_file|
         |  <tr class="line
@@ -32,7 +32,7 @@
         td
           = picture_file.picture_content_type
         td
-          = link_to picture_file.picture_file_name, picture_file_path(picture_file, format: :download, size: 'original')
+          = link_to picture_file.picture_filename, picture_file_path(picture_file, format: :download, size: 'original')
         td
           = link_to t('page.show'), picture_file
           - if policy(picture_file).update?

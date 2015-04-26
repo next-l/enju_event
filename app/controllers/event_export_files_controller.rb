@@ -21,7 +21,7 @@ class EventExportFilesController < ApplicationController
       format.json { render json: @event_export_file }
       format.download {
         send_file @event_export_file.event_export.download,
-          filename: @event_export_file.event_export_file_name,
+          filename: @event_export_file.event_export_filename,
           type: 'application/octet-stream'
       }
     end

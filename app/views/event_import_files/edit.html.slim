@@ -5,9 +5,9 @@
     = form_for(@event_import_file) do |f|
       = f.error_messages
       .form-group
-        = f.label :event_import_file_name
+        = f.label :event_import_filename
         br
-        = f.text_field :event_import_file_name
+        = f.text_field :event_import_filename
       .form-control
         = f.submit class: 'btn btn-default'
   #submenu.col-md-3
