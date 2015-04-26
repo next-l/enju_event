@@ -1,0 +1,26 @@
+.row
+  h1.title
+    = t('page.showing', model: t('activerecord.models.event_export_file'))
+  #content_list.col-md-9
+    p#notice
+      = notice
+    p
+      strong
+        = t('activerecord.models.user')
+      = @event_export_file.user.try(:username)
+    p
+      strong
+        = t('activerecord.attributes.event_export_file.event_export_filename')
+      = link_to @event_export_file.event_export_filename, event_export_file_path(@event_export_file, format: :download) if @event_export_file.event_export_filename
+    p
+      strong
+        = t('activerecord.attributes.event_export_file.state')
+        | :
+      = localized_state(@event_export_file.current_state)
+  #submenu.col-md-3
+  ul
+    li
+      = back_to_index(flash[:page_info])
+    - if current_user.has_role?('Administrator')
+      li
+        = link_to 'Resque', resque_path

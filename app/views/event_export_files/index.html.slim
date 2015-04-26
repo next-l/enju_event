@@ -1,0 +1,38 @@
+.row
+  h1.title
+    = t('page.listing', model: t('activerecord.models.event_export_file'))
+  #content_list.col-md-9
+    table.table.table-striped.index
+      thead
+        tr
+          th
+            | Id
+          th
+            = t('activerecord.models.user')
+          th
+            = t('activerecord.attributes.event_export_file.event_export_filename')
+          th
+            = t('activerecord.attributes.event_export_file.state')
+          th
+      tbody
+        - @event_export_files.each do |event_export_file|
+          |  <tr class="line
+          = cycle("0", "1")
+          | "> 
+          td
+            = link_to event_export_file.id, event_export_file
+          td
+            = event_export_file.user.try(:username)
+          td
+            = link_to event_export_file.event_export_filename, event_export_file_path(event_export_file, format: :download) if event_export_file.event_export_filename
+            br
+            = event_export_file.created_at
+          td
+            = localized_state(event_export_file.current_state)
+          td
+            = link_to t('page.destroy'), event_export_file, data: {confirm: t('page.are_you_sure')}, method: :delete
+    = paginate(@event_export_files)
+  #submenu.col-md-3
+  ul
+    li
+      = link_to t('page.new', model: t('activerecord.models.event_export_file')), new_event_export_file_path

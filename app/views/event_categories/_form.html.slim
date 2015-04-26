@@ -1,0 +1,16 @@
+= form_for(@event_category) do |f|
+  = f.error_messages
+  .form-group
+    = f.label :name
+    br
+    = f.text_field :name
+  .form-group
+    = f.label :display_name
+    br
+    = f.text_area :display_name
+  .form-group
+    = f.label :note
+    br
+    = f.text_area :note
+  .form-control
+    = f.submit class: 'btn btn-default'

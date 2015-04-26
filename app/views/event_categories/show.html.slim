@@ -1,0 +1,27 @@
+.row
+  #content_list.col-md-9
+    h1.title
+      = t('page.showing', model: t('activerecord.models.event_category'))
+    p#notice
+      = notice
+    p
+      strong
+        = t('activerecord.attributes.event_category.name')
+        | :
+      = @event_category.name
+    p
+      strong
+        = t('activerecord.attributes.event_category.display_name')
+        | :
+      = @event_category.display_name.localize
+    p
+      strong
+        = t('activerecord.attributes.event_category.note')
+        | :
+      = @event_category.note
+  #submenu.col-md-3
+    ul
+      li
+        = link_to t('page.edit'), edit_event_category_path(@event_category)
+      li
+        = back_to_index(flash[:page_info])

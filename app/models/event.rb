@@ -93,7 +93,7 @@ end
 #  note              :text
 #  start_at          :datetime
 #  end_at            :datetime
-#  all_day           :boolean          default("f"), not null
+#  all_day           :boolean          default(FALSE), not null
 #  deleted_at        :datetime
 #  display_name      :text
 #  created_at        :datetime

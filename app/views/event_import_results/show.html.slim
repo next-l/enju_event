@@ -1,0 +1,26 @@
+.row
+  h1.title
+    = t('page.showing', model: t('activerecord.models.event_import_result'))
+  #content_list.col-md-9
+    p#notice
+      = notice
+    p
+      b
+        = t('activerecord.models.event_import_file')
+      = @event_import_result.event_import_file.event_import_filename
+    p
+      b
+        = t('activerecord.models.event')
+      = @event_import_result.event_id
+    p
+      b
+        = t('activerecord.attributes.event_import_result.body')
+      = @event_import_result.body
+    p
+      b
+        = t('page.created_at')
+      =l @event_import_result.created_at
+  #submenu.col-md-3
+  ul
+    li
+      = back_to_index(flash[:page_info])

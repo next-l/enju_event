@@ -12,7 +12,7 @@ end
 #
 #  id                   :integer          not null, primary key
 #  to_state             :string
-#  metadata             :text             default("{}")
+#  metadata             :text             default({})
 #  sort_key             :integer
 #  event_import_file_id :integer
 #  created_at           :datetime
