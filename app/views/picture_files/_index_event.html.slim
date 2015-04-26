@@ -1,7 +1,14 @@
 .row
-  h1.title
-    = t('page.listing', model: t('activerecord.models.picture_file'))
+  #submenu.col-md-3
+    - if policy(PictureFile).create?
+      ul
+        li
+          = link_to t('page.new', model: t('activerecord.models.picture_file')), new_picture_file_path(event_id: event.id)
+        li
+          = link_to t('picture_file.all_picture'), picture_files_path
   #content_list.col-md-9
+    h1.title
+      = t('page.listing', model: t('activerecord.models.picture_file'))
     p#notice
       = notice
     h2.resource_title
@@ -40,10 +47,3 @@
           - if policy(picture_file).destroy?
             = link_to t('page.destroy'), picture_file, data: {confirm: t('page.are_you_sure')}, method: :delete
     = paginate(@picture_files)
-  #submenu.col-md-3
-  - if policy(PictureFile).create?
-    ul
-      li
-        = link_to t('page.new', model: t('activerecord.models.picture_file')), new_picture_file_path(event_id: event.id)
-      li
-        = link_to t('picture_file.all_picture'), picture_files_path

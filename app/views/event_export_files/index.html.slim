@@ -1,7 +1,11 @@
 .row
-  h1.title
-    = t('page.listing', model: t('activerecord.models.event_export_file'))
+  #submenu.col-md-3
+    ul
+      li
+        = link_to t('page.new', model: t('activerecord.models.event_export_file')), new_event_export_file_path
   #content_list.col-md-9
+    h1.title
+      = t('page.listing', model: t('activerecord.models.event_export_file'))
     table.table.table-striped.index
       thead
         tr
@@ -32,7 +36,3 @@
           td
             = link_to t('page.destroy'), event_export_file, data: {confirm: t('page.are_you_sure')}, method: :delete
     = paginate(@event_export_files)
-  #submenu.col-md-3
-  ul
-    li
-      = link_to t('page.new', model: t('activerecord.models.event_export_file')), new_event_export_file_path

@@ -1,7 +1,17 @@
 .row
-  h1.title
-    = t('page.showing', model: t('activerecord.models.event_import_file'))
+  #submenu.col-md-3
+    = form_for(@event_import_file) do |f|
+      ul
+        li
+          = link_to t('activerecord.models.event_import_result'), event_import_results_path(event_import_file_id: @event_import_file.id)
+        li
+          = back_to_index(flash[:page_info])
+        - if current_user.has_role?('Administrator')
+          li
+            = link_to 'Resque', resque_path
   #content_list.col-md-9
+    h1.title
+      = t('page.showing', model: t('activerecord.models.event_import_file'))
     p#notice
       = notice
     p
@@ -73,13 +83,3 @@
         = t('activerecord.models.user')
         | :
       = link_to @event_import_file.user.username, @event_import_file.user.profile if @event_import_file.user.try(:profile)
-  #submenu.col-md-3
-  = form_for(@event_import_file) do |f|
-    ul
-      li
-        = link_to t('activerecord.models.event_import_result'), event_import_results_path(event_import_file_id: @event_import_file.id)
-      li
-        = back_to_index(flash[:page_info])
-      - if current_user.has_role?('Administrator')
-        li
-          = link_to 'Resque', resque_path
