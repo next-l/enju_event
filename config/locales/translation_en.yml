@@ -23,7 +23,7 @@ en:
         all_day: All day
         display_name: Display name
       event_import_file:
-        event_import_file_name: Filename
+        event_import_filename: Filename
         event_import_content_type: Content type
         event_import_file_size: Size
         event_import_fingerprint: File hash
@@ -39,7 +39,7 @@ en:
       event_import_result:
         body: Body
       event_export_file:
-        event_export_file_name: Filename
+        event_export_filename: Filename
         event_export_file_size: Size
         state: State
 
