@@ -5,8 +5,8 @@
     = render 'form'
     = render 'all_day'
   #submenu.col-md-3
-    ul
-      li
+    ul.list-group
+      li.list-group-item
         = link_to t('page.show'), @event
-      li
+      li.list-group-item
         = link_to t('page.back'), events_path(page: flash[:page] ||= nil)

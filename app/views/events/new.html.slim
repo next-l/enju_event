@@ -5,10 +5,10 @@
     = render 'form'
     = render 'all_day'
   #submenu.col-md-3
-    ul
+    ul.list-group
       - if @library
-        li
+        li.list-group-item
           = link_to t('page.back'), events_path(library_id: @library.name)
       - else
-        li
+        li.list-group-item
           = link_to t('page.back'), events_path

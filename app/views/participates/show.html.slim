@@ -15,8 +15,8 @@
         | :
       = link_to @participate.event.display_name.localize, @participate.event
   #submenu.col-md-3
-  ul
-    li
+  ul.list-group
+    li.list-group-item
       = link_to t('page.edit'), edit_participate_path(@participate)
-    li
+    li.list-group-item
       = back_to_index(flash[:page_info])
