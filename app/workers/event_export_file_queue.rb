@@ -1,5 +1,5 @@
 class EventExportFileQueue
-  @queue = :event_export_file
+  @queue = :enju_leaf
 
   def self.perform(event_export_id)
     EventExportFile.find(event_export_id).export!

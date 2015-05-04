@@ -1,5 +1,5 @@
 class EventImportFileQueue
-  @queue = :event_import_file
+  @queue = :enju_leaf
 
   def self.perform(event_import_file_id)
     EventImportFile.find(event_import_file_id).import_start
