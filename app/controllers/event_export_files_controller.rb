@@ -26,7 +26,8 @@ class EventExportFilesController < ApplicationController
       format.json { render json: @event_export_file }
       format.download {
         if ENV['ENJU_STORAGE'] == 's3'
-          redirect_to @event_export_file.event_export.expiring_url(10)
+          send_data Faraday.get(@event_export_file.event_export.expiring_url).body.force_encoding('UTF-8'),
+            filename: File.basename(@event_export_file.event_export_file_name), type: 'application/octet-stream'
         else
           send_file file, filename: @event_export_file.event_export_file_name, type: 'application/octet-stream'
         end
