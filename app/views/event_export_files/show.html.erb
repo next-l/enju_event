@@ -18,6 +18,11 @@
   <%= localized_state(@event_export_file.current_state) -%>
 </p>
 
+<p>
+  <strong><%= t('page.created_at') -%>:</strong>
+  <%= l(@event_export_file.created_at) if @event_export_file.created_at -%>
+</p>
+
 </div>
 </div>
 
