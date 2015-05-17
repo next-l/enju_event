@@ -10,7 +10,7 @@
             li.list-group-item
               = link_to t('event.calendar'), url_for(params.merge(mode: 'calendar'))
         ul.list-group
-          - if user_signed_in?
+          - if current_user
             - if current_user.has_role?('Librarian')
               - if @library
                 li.list-group-item
