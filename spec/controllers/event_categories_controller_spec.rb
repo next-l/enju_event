@@ -124,7 +124,7 @@ describe EventCategoriesController do
       it "should not assign the requested event_category as @event_category" do
         get :new
         assigns(:event_category).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -164,7 +164,7 @@ describe EventCategoriesController do
       it "should not assign the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
         get :edit, :id => event_category.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -268,7 +268,7 @@ describe EventCategoriesController do
 
         it "should be forbidden" do
           post :create, :event_category => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
@@ -280,7 +280,7 @@ describe EventCategoriesController do
 
         it "should be forbidden" do
           post :create, :event_category => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -374,14 +374,14 @@ describe EventCategoriesController do
 
         it "should be forbidden" do
           put :update, :id => @event_category.id, :event_category => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested event_category as @event_category" do
           put :update, :id => @event_category.id, :event_category => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -438,7 +438,7 @@ describe EventCategoriesController do
 
       it "should be forbidden" do
         delete :destroy, :id => @event_category.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end

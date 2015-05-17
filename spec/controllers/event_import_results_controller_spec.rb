@@ -37,7 +37,7 @@ describe EventImportResultsController do
       it "assigns empty as @event_import_results" do
         get :index
         assigns(:event_import_results).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -74,7 +74,7 @@ describe EventImportResultsController do
       it "assigns the requested event_import_result as @event_import_result" do
         get :show, :id => 1
         assigns(:event_import_result).should eq(EventImportResult.find(1))
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end

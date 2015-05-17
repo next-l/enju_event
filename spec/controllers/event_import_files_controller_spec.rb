@@ -37,7 +37,7 @@ describe EventImportFilesController do
       it "assigns empty as @event_import_files" do
         get :index
         assigns(:event_import_files).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -74,7 +74,7 @@ describe EventImportFilesController do
       it "assigns the requested event_import_file as @event_import_file" do
         get :show, :id => 1
         assigns(:event_import_file).should eq(EventImportFile.find(1))
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -114,7 +114,7 @@ describe EventImportFilesController do
       it "should not assign the requested event_import_file as @event_import_file" do
         get :new
         assigns(:event_import_file).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -151,7 +151,7 @@ describe EventImportFilesController do
     describe "When not logged in" do
       it "should be redirect to new session url" do
         post :create, :event_import_file => {:event_import => fixture_file_upload("/../../examples/event_import_file_sample1.tsv", 'text/csv') }
-        response.should redirect_to new_user_session_url
+        response.should redirect_to new_session_url
       end
     end
   end
@@ -191,7 +191,7 @@ describe EventImportFilesController do
       it "should not assign the requested event_import_file as @event_import_file" do
         event_import_file = event_import_files(:event_import_file_00001)
         get :edit, :id => event_import_file.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -218,7 +218,7 @@ describe EventImportFilesController do
     describe "When not logged in" do
       it "should not update event_import_file" do
         put :update, :id => event_import_files(:event_import_file_00003).id, :event_import_file => { }
-        response.should redirect_to new_user_session_url
+        response.should redirect_to new_session_url
       end
     end
   end
@@ -274,7 +274,7 @@ describe EventImportFilesController do
 
       it "should be forbidden" do
         delete :destroy, :id => @event_import_file.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end

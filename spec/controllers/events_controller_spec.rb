@@ -154,7 +154,7 @@ describe EventsController do
       it "should not assign the requested event as @event" do
         get :new
         assigns(:event).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -193,7 +193,7 @@ describe EventsController do
       it "should not assign the requested event as @event" do
         event = FactoryGirl.create(:event)
         get :edit, :id => event.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -297,7 +297,7 @@ describe EventsController do
 
         it "should be forbidden" do
           post :create, :event => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
@@ -309,7 +309,7 @@ describe EventsController do
 
         it "should be forbidden" do
           post :create, :event => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -397,14 +397,14 @@ describe EventsController do
 
         it "should be forbidden" do
           put :update, :id => @event.id, :event => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested event as @event" do
           put :update, :id => @event.id, :event => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -461,7 +461,7 @@ describe EventsController do
 
       it "should be forbidden" do
         delete :destroy, :id => @event.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end

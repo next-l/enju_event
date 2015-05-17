@@ -118,7 +118,7 @@ describe ParticipatesController do
       it "should not assign the requested participate as @participate" do
         get :new
         assigns(:participate).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -158,7 +158,7 @@ describe ParticipatesController do
       it "should not assign the requested participate as @participate" do
         participate = FactoryGirl.create(:participate)
         get :edit, :id => participate.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -262,7 +262,7 @@ describe ParticipatesController do
 
         it "should be forbidden" do
           post :create, :participate => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
@@ -274,7 +274,7 @@ describe ParticipatesController do
 
         it "should be forbidden" do
           post :create, :participate => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -373,14 +373,14 @@ describe ParticipatesController do
 
         it "should be forbidden" do
           put :update, :id => @participate.id, :participate => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested participate as @participate" do
           put :update, :id => @participate.id, :participate => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -437,7 +437,7 @@ describe ParticipatesController do
 
       it "should be forbidden" do
         delete :destroy, :id => @participate.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
