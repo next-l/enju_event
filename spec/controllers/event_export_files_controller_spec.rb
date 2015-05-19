@@ -36,7 +36,7 @@ describe EventExportFilesController do
       it "assigns empty as @event_export_files" do
         get :index
         assigns(:event_export_files).should be_nil
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -76,7 +76,7 @@ describe EventExportFilesController do
       it "assigns the requested event_export_file as @event_export_file" do
         get :show, :id => event_export_files(:event_export_file_00003).id
         assigns(:event_export_file).should eq(event_export_files(:event_export_file_00003))
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -116,7 +116,7 @@ describe EventExportFilesController do
       it "should not assign the requested event_export_file as @event_export_file" do
         get :new
         assigns(:event_export_file).should be_nil
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -147,7 +147,7 @@ describe EventExportFilesController do
       it "should be redirected to new session url" do
         post :create, :event_export_file => { event_export_file_name: 'test.txt' }
         assigns(:event_export_file).should be_nil
-        response.should redirect_to new_session_url
+        response.should redirect_to new_user_session_url
       end
     end
   end
@@ -187,7 +187,7 @@ describe EventExportFilesController do
       it "should not assign the requested event_export_file as @event_export_file" do
         event_export_file = event_export_files(:event_export_file_00001)
         get :edit, :id => event_export_file.id
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -223,7 +223,7 @@ describe EventExportFilesController do
     describe "When not logged in" do
       it "should not update event_export_file" do
         put :update, :id => event_export_files(:event_export_file_00003).id, :event_export_file => { }
-        response.should redirect_to new_session_url
+        response.should redirect_to new_user_session_url
       end
     end
   end
@@ -279,7 +279,7 @@ describe EventExportFilesController do
 
       it "should be forbidden" do
         delete :destroy, :id => @event_export_file.id
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
