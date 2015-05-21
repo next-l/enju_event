@@ -1,7 +1,17 @@
 .row
-  h1.title
-    = t('page.editing', model: t('activerecord.models.event_import_file'))
+  #submenu.col-md-3
+    .panel.panel-default
+      .panel-heading
+        h2.panel-title
+          = t('activerecord.models.event_import_file')
+      ul.list-group
+        li.list-group-item
+          = link_to t('page.show'), @event_import_file
+        li.list-group-item
+          = link_to t('page.back'), event_import_files_path
   #content_list.col-md-9
+    h1.title
+      = t('page.editing', model: t('activerecord.models.event_import_file'))
     = form_for(@event_import_file) do |f|
       = f.error_messages
       .form-group
@@ -10,9 +20,3 @@
         = f.text_field :event_import_filename
       .form-control
         = f.submit class: 'btn btn-default'
-  #submenu.col-md-3
-  ul.list-group
-    li.list-group-item
-      = link_to t('page.show'), @event_import_file
-    li.list-group-item
-      = link_to t('page.back'), event_import_files_path

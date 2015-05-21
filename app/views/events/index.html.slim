@@ -1,61 +1,61 @@
 .row
   #submenu.col-md-3
     .panel.panel-default
-      .panel-body
-        ul.list-group
-          - if params[:mode] == 'calendar'
-            li.list-group-item
-              = link_to t('event.table'), url_for(params.merge(mode: nil))
-          - else
-            li.list-group-item
-              = link_to t('event.calendar'), url_for(params.merge(mode: 'calendar'))
-        ul.list-group
-          - if current_user
-            - if current_user.has_role?('Librarian')
-              - if @library
-                li.list-group-item
-                  = link_to t('page.new', model: t('activerecord.models.event')), new_event_path(library_id: @library.name)
-              - else
-                li.list-group-item
-                  = link_to t('page.new', model: t('activerecord.models.event')), new_event_path(date: params[:date])
-                li.list-group-item
-                  = link_to t('event.import_event'), event_import_files_path
-        ul.list-group
+      .panel-heading
+        h2.panel-title
+          = t('activerecord.models.event')
+      ul.list-group
+        - if params[:mode] == 'calendar'
           li.list-group-item
-            = link_to t('event.all_libraries'), events_path(mode: params[:mode])
-          - @libraries.each do |library|
-            li.list-group-item
-              = link_to library.display_name.localize, events_path(library_id: library.name, mode: params[:mode])
-        p
-          - if @library
-            => link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(library_id: @library.name, format: :rss)
-            |  (
-            = link_to 'RSS', events_path(library_id: @library.name, format: :rss)
-            | ) 
-            => link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), events_path(library_id: @library.name, format: :txt, locale: @locale.to_s)
-            |  (
-            = link_to 'TSV', events_path(library_id: @library.name, format: :txt, locale: @locale.to_s)
-            | ) 
-            br
-            => link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(library_id: @library.name, format: :ics, locale: @locale.to_s)
-            |  (
-            = link_to 'iCalendar', events_path(library_id: @library.name, format: :ics, locale: @locale.to_s)
-            | ) 
-          - else
-            => link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(format: :rss)
-            |  (
-            = link_to 'RSS', events_path(format: :rss)
-            | ) 
-            => link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), events_path(format: :txt, locale: @locale.to_s)
-            |  (
-            = link_to 'TSV', events_path(format: :txt, locale: @locale.to_s)
-            | ) 
-            br
-            => link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(format: :ics, locale: @locale.to_s)
-            |  (
-            = link_to 'iCalendar', events_path(format: :ics, locale: @locale.to_s)
-            | ) 
-        = render 'page/login' unless current_user
+            = link_to t('event.table'), url_for(params.merge(mode: nil))
+        - else
+          li.list-group-item
+            = link_to t('event.calendar'), url_for(params.merge(mode: 'calendar'))
+        - if current_user
+          - if current_user.has_role?('Librarian')
+            - if @library
+              li.list-group-item
+                = link_to t('page.new', model: t('activerecord.models.event')), new_event_path(library_id: @library.name)
+            - else
+              li.list-group-item
+                = link_to t('page.new', model: t('activerecord.models.event')), new_event_path(date: params[:date])
+              li.list-group-item
+                = link_to t('event.import_event'), event_import_files_path
+        li.list-group-item
+          = link_to t('event.all_libraries'), events_path(mode: params[:mode])
+        - @libraries.each do |library|
+          li.list-group-item
+            = link_to library.display_name.localize, events_path(library_id: library.name, mode: params[:mode])
+      .panel-body
+        - if @library
+          => link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(library_id: @library.name, format: :rss)
+          |  (
+          = link_to 'RSS', events_path(library_id: @library.name, format: :rss)
+          | ) 
+          => link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), events_path(library_id: @library.name, format: :txt, locale: @locale.to_s)
+          |  (
+          = link_to 'TSV', events_path(library_id: @library.name, format: :txt, locale: @locale.to_s)
+          | ) 
+          br
+          => link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(library_id: @library.name, format: :ics, locale: @locale.to_s)
+          |  (
+          = link_to 'iCalendar', events_path(library_id: @library.name, format: :ics, locale: @locale.to_s)
+          | ) 
+        - else
+          => link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(format: :rss)
+          |  (
+          = link_to 'RSS', events_path(format: :rss)
+          | ) 
+          => link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), events_path(format: :txt, locale: @locale.to_s)
+          |  (
+          = link_to 'TSV', events_path(format: :txt, locale: @locale.to_s)
+          | ) 
+          br
+          => link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(format: :ics, locale: @locale.to_s)
+          |  (
+          = link_to 'iCalendar', events_path(format: :ics, locale: @locale.to_s)
+          | ) 
+    =   render 'page/login' unless current_user
   #content_list.col-md-9
     h1.title
       = t('page.listing', model: t('activerecord.models.event'))
@@ -74,25 +74,25 @@
           .form-group
             = label_tag :search_form_top, t('page.search_term')
             | : 
-            = search_field_tag 'query', h(@query), {id: 'search_form_top', class: 'form-control', placeholder: t('page.search_term')}
+            => search_field_tag 'query', h(@query), {id: 'search_form_top', class: 'form-control', placeholder: t('page.search_term')}
             = submit_tag t('page.search'), class: 'btn btn-default'
           p
             - case params[:mode]
             - when 'upcoming'
-              = link_to t('event.all'), url_for(params.merge(mode: nil, only_path: true))
+              => link_to t('event.all'), url_for(params.merge(mode: nil, only_path: true))
               strong
-                = t('event.upcoming')
-              = link_to t('event.past'), url_for(params.merge(mode: 'past', only_path: true))
+                => t('event.upcoming')
+              => link_to t('event.past'), url_for(params.merge(mode: 'past', only_path: true))
             - when 'past'
-              = link_to t('event.all'), url_for(params.merge(mode: nil, only_path: true))
-              = link_to t('event.upcoming'), url_for(params.merge(mode: 'upcoming', only_path: true))
+              => link_to t('event.all'), url_for(params.merge(mode: nil, only_path: true))
+              => link_to t('event.upcoming'), url_for(params.merge(mode: 'upcoming', only_path: true))
               strong
-                = t('event.past')
+                => t('event.past')
             - else
               strong
-                = t('event.all')
-              = link_to t('event.upcoming'), url_for(params.merge(mode: 'upcoming', only_path: true))
-              = link_to t('event.past'), url_for(params.merge(mode: 'past', only_path: true))
+                => t('event.all')
+              => link_to t('event.upcoming'), url_for(params.merge(mode: 'upcoming', only_path: true))
+              => link_to t('event.past'), url_for(params.merge(mode: 'past', only_path: true))
           table.table.table-striped.index
             tr
               th
@@ -116,6 +116,6 @@
                 = l(event.end_at, format: :short)
               td
                 - if policy(event).destroy?
-                  = link_to t('page.edit'), edit_event_path(event)
-                  = link_to t('page.destroy'), event, data: {confirm: t('page.are_you_sure')}, method: :delete
+                  => link_to t('page.edit'), edit_event_path(event)
+                  => link_to t('page.destroy'), event, data: {confirm: t('page.are_you_sure')}, method: :delete
           = paginate(@events)
