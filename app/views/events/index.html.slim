@@ -21,12 +21,13 @@
                 = link_to t('page.new', model: t('activerecord.models.event')), new_event_path(date: params[:date])
               li.list-group-item
                 = link_to t('event.import_event'), event_import_files_path
-        li.list-group-item
-          = link_to t('event.all_libraries'), events_path(mode: params[:mode])
-        - @libraries.each do |library|
-          li.list-group-item
-            = link_to library.display_name.localize, events_path(library_id: library.name, mode: params[:mode])
       .panel-body
+        ul
+          li
+            = link_to t('event.all_libraries'), events_path(mode: params[:mode])
+          - @libraries.each do |library|
+            li
+              = link_to library.display_name.localize, events_path(library_id: library.name, mode: params[:mode])
         - if @library
           => link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(library_id: @library.name, format: :rss)
           |  (
