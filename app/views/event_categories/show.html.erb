@@ -23,7 +23,9 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.edit'), edit_event_category_path(@event_category) -%></li>
+    <%- if can? :update, @event_category -%>
+      <li><%= link_to t('page.edit'), edit_event_category_path(@event_category) -%></li>
+    <%- end -%>
     <li><%= back_to_index(flash[:page_info]) -%></li>
   </ul>
 </div>
