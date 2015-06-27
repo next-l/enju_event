@@ -1,17 +1,7 @@
 <%= form_for(@event_export_file) do |f| %>
   <%= f.error_messages %>
 
-  <%= f.hidden_field :mode, value: 'export' if @event_export_file.new_record? %><br>
-  <!--
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= @event_export_file.user.username %>
-  </div>
-  <div class="field">
-    <%= f.label :event_export %><br>
-    <%= f.file_field :event_export %>
-  </div>
-  -->
+  <%= f.hidden_field :mode, value: 'export' if @event_export_file.new_record? %>
   <div class="actions">
     <% if @event_export_file.new_record? %>
       <%= f.submit t('page.export') %>
