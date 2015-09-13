@@ -3,7 +3,6 @@ require "statesman"
 require "ri_cal"
 require "csv"
 require "nkf"
-require "mini_magick"
 require "refile/rails"
 require "refile/mini_magick"
 begin
