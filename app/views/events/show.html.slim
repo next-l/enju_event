@@ -35,12 +35,18 @@
       strong
         = t('activerecord.attributes.event.start_at')
         | :
-      = l(@event.start_at, format: :only_date)
+      - if @event.all_day
+        = l(@event.start_at, format: :only_date)
+      - else
+        = l(@event.start_at)
     p
       strong
         = t('activerecord.attributes.event.end_at')
         | :
-      = l(@event.end_at, format: :only_date)
+      - if @event.all_day
+        = l(@event.end_at, format: :only_date)
+      - else
+        = l(@event.end_at, format)
     p
       strong
         = t('activerecord.attributes.event.all_day')
