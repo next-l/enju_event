@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "pg"
   s.add_development_dependency "rspec-rails", "~> 3.3"
   s.add_development_dependency "factory_girl_rails"
-  s.add_development_dependency "enju_leaf", "~> 1.1.0.rc20"
+  s.add_development_dependency "enju_leaf", "~> 1.1.0.rc21"
   s.add_development_dependency "sunspot_solr", "~> 2.2"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "sunspot-rails-tester"
