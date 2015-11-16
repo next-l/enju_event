@@ -1,5 +1,7 @@
 class EventImportResultsController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_event_import_result, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+
   # GET /event_import_results
   # GET /event_import_results.json
   def index
@@ -38,6 +40,15 @@ class EventImportResultsController < ApplicationController
   end
 
   private
+  def set_event_import_result
+    @event_import_result = EventImportResult.find(params[:id])
+    authorize @event_import_result
+  end
+
+  def check_policy
+    authorize EventImportResult
+  end
+
   def event_import_result_params
     params.require(:event_import_result).permit(
       :event_id, :event_import_file_id, :body #, as: :admin

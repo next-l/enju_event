@@ -1,5 +1,6 @@
 class EventExportFilesController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_event_export_file, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
 
   # GET /event_export_files
   # GET /event_export_files.json
@@ -100,6 +101,15 @@ class EventExportFilesController < ApplicationController
   end
 
   private
+  def set_event_export_file
+    @event_export_file = EventExportFile.find(params[:id])
+    authorize @event_export_file
+  end
+
+  def check_policy
+    authorize EventExportFile
+  end
+
   def event_export_file_params
     params.require(:event_export_file).permit(:mode)
   end

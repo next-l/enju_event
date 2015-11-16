@@ -1,9 +1,11 @@
 class EventCategoriesController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_event_category, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+
   # GET /event_categories
   # GET /event_categories.json
   def index
-    @event_categories = EventCategory.all
+    @event_categories = EventCategory.order(:position)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,6 +84,15 @@ class EventCategoriesController < ApplicationController
   end
 
   private
+  def set_event_category
+    @event_category = EventCategory.find(params[:id])
+    authorize @event_category
+  end
+
+  def check_policy
+    authorize EventCategory
+  end
+
   def event_category_params
     params.require(:event_category).permit(:name, :display_name, :note)
   end

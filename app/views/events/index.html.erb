@@ -58,8 +58,10 @@
         <%= l(event.end_at, format: :short) -%>
       </td>
       <td>
-        <%- if can? :delete, event -%>
+        <%- if policy(event).update? -%>
           <%= link_to t('page.edit'), edit_event_path(event) -%>
+        <% end %>
+        <%- if policy(event).destroy? -%>
           <%= link_to t('page.destroy'), event, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
         <%- end -%>
       </td>

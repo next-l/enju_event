@@ -1,5 +1,6 @@
 class ParticipatesController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_participate, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
 
   # GET /participates
   # GET /participates.json
@@ -80,6 +81,15 @@ class ParticipatesController < ApplicationController
   end
 
   private
+  def set_participate
+    @participate = Participate.find(params[:id])
+    authorize @participate
+  end
+
+  def check_policy
+    authorize Participate
+  end
+
   def participate_params
     params.require(:participate).permit(:agent_id, :event_id)
   end

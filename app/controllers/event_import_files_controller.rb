@@ -1,6 +1,7 @@
 class EventImportFilesController < ApplicationController
-  load_and_authorize_resource
-  before_filter :prepare_options, only: [:new, :edit]
+  before_action :set_event_import_file, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+  before_action :prepare_options, only: [:new, :edit]
 
   # GET /event_import_files
   # GET /event_import_files.json
@@ -103,6 +104,15 @@ class EventImportFilesController < ApplicationController
   end
 
   private
+  def set_event_import_file
+    @event_import_file = EventImportFile.find(params[:id])
+    authorize @event_import_file
+  end
+
+  def check_policy
+    authorize EventImportFile
+  end
+
   def event_import_file_params
     params.require(:event_import_file).permit(
       :event_import, :edit_mode, :user_encoding, :mode,

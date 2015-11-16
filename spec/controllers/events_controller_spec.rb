@@ -145,7 +145,7 @@ describe EventsController do
 
       it "should not assign the requested event as @event" do
         get :new
-        assigns(:event).should_not be_valid
+        assigns(:event).should be_nil
         response.should be_forbidden
       end
     end
@@ -153,7 +153,7 @@ describe EventsController do
     describe "When not logged in" do
       it "should not assign the requested event as @event" do
         get :new
-        assigns(:event).should_not be_valid
+        assigns(:event).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -266,7 +266,7 @@ describe EventsController do
       describe "with valid params" do
         it "assigns a newly created event as @event" do
           post :create, :event => @attrs
-          assigns(:event).should be_valid
+          assigns(:event).should be_nil
         end
 
         it "should be forbidden" do
@@ -278,7 +278,7 @@ describe EventsController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved event as @event" do
           post :create, :event => @invalid_attrs
-          assigns(:event).should_not be_valid
+          assigns(:event).should be_nil
         end
 
         it "should be forbidden" do
@@ -292,7 +292,7 @@ describe EventsController do
       describe "with valid params" do
         it "assigns a newly created event as @event" do
           post :create, :event => @attrs
-          assigns(:event).should be_valid
+          assigns(:event).should be_nil
         end
 
         it "should be forbidden" do
@@ -304,7 +304,7 @@ describe EventsController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved event as @event" do
           post :create, :event => @invalid_attrs
-          assigns(:event).should_not be_valid
+          assigns(:event).should be_nil
         end
 
         it "should be forbidden" do
