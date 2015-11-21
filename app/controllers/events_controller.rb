@@ -1,10 +1,10 @@
 class EventsController < ApplicationController
+  before_action :store_page, only: :index
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
   before_action :get_library, :get_agent
   before_action :get_libraries, except: :destroy
   before_action :prepare_options
-  before_action :store_page, only: :index
   after_action :solr_commit, only: [:create, :update, :destroy]
   after_action :convert_charset, only: :index
 
