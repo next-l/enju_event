@@ -52,7 +52,7 @@ class EventExportFilesController < ApplicationController
     respond_to do |format|
       if @event_export_file.save
         if @event_export_file.mode == 'export'
-          Resque.enqueue(EventExportFileQueue, @event_export_file.id)
+          EventExportFileJob.perform_later(@event_export_file)
         end
         format.html { redirect_to @event_export_file, notice: t('export.successfully_created', model: t('activerecord.models.event_export_file')) }
         format.json { render json: @event_export_file, status: :created, location: @event_export_file }
@@ -69,7 +69,7 @@ class EventExportFilesController < ApplicationController
     respond_to do |format|
       if @event_export_file.update_attributes(event_export_file_params)
         if @event_export_file.mode == 'export'
-          EventExportFileQueue.perform(@event_export_file.id)
+          EventExportFileJob.perform_later(@event_export_file)
         end
         format.html { redirect_to @event_export_file, notice: t('controller.successfully_updated', model: t('activerecord.models.event_export_file')) }
         format.json { head :no_content }

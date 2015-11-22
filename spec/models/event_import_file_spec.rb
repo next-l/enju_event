@@ -113,7 +113,7 @@ describe EventImportFile do
     file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv")
     file.user = users(:admin)
     file.save
-    EventImportFileQueue.perform(file.id).should be_truthy
+    EventImportFileJob.perform_later(file).should be_truthy
   end
 end
 
