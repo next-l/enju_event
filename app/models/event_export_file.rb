@@ -1,7 +1,6 @@
 class EventExportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ExportFile
-  enju_export_file_model
 
   if ENV['ENJU_STORAGE'] == 's3'
     has_attached_file :event_export, storage: :s3,

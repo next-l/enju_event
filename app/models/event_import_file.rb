@@ -33,7 +33,6 @@ class EventImportFile < ActiveRecord::Base
 
   has_many :event_import_file_transitions
 
-  enju_import_file_model
   attr_accessor :mode
 
   def state_machine
