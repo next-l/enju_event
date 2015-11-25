@@ -14,7 +14,7 @@ module EnjuEvent
   module InstanceMethods
     def get_event
       @event = Event.find(params[:event_id]) if params[:event_id]
-      authorize @event, :show
+      authorize @event, :show if @event
     end
   end
 end
