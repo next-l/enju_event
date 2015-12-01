@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "enju_message", "~> 0.1.14"
   s.add_dependency "simple_form"
-  s.add_dependency "paperclip"
+  s.add_dependency "paperclip", "~> 4.3"
   s.add_dependency "statesman", "~> 1.3"
   s.add_dependency "ri_cal"
   s.add_dependency "rails_autolink"
