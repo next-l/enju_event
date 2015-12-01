@@ -926,7 +926,7 @@ ActiveRecord::Schema.define(version: 20151201163718) do
   add_index "picture_files", ["picture_attachable_id", "picture_attachable_type"], name: "index_picture_files_on_picture_attachable_id_and_type"
 
   create_table "places", force: :cascade do |t|
-    t.text     "term"
+    t.string   "term"
     t.text     "city"
     t.integer  "country_id"
     t.float    "latitude"
