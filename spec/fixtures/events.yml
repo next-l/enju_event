@@ -95,7 +95,6 @@ event_00008:
   note: test
   library_id: 2
   created_at: 2008-02-05 21:00:53.926050 +09:00
-
 # == Schema Information
 #
 # Table name: events
@@ -112,4 +111,6 @@ event_00008:
 #  display_name      :text
 #  created_at        :datetime
 #  updated_at        :datetime
+#  place_id          :integer
 #
+

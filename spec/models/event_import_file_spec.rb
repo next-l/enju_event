@@ -116,7 +116,6 @@ describe EventImportFile do
     EventImportFileJob.perform_later(file).should be_truthy
   end
 end
-
 # == Schema Information
 #
 # Table name: event_import_files
@@ -142,3 +141,4 @@ end
 #  default_event_category_id :integer
 #  event_import_id           :string
 #
+

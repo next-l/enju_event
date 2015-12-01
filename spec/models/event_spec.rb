@@ -18,7 +18,6 @@ describe Event do
     event.start_at.should eq event.end_at.beginning_of_day
   end
 end
-
 # == Schema Information
 #
 # Table name: events
@@ -35,4 +34,6 @@ end
 #  display_name      :text
 #  created_at        :datetime
 #  updated_at        :datetime
+#  place_id          :integer
 #
+

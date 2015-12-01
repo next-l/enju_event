@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305001006) do
+ActiveRecord::Schema.define(version: 20151201163718) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "basket_id"
@@ -455,10 +455,12 @@ ActiveRecord::Schema.define(version: 20150305001006) do
     t.text     "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "place_id"
   end
 
   add_index "events", ["event_category_id"], name: "index_events_on_event_category_id"
   add_index "events", ["library_id"], name: "index_events_on_library_id"
+  add_index "events", ["place_id"], name: "index_events_on_place_id"
 
   create_table "exemplifies", force: :cascade do |t|
     t.integer  "manifestation_id", null: false
@@ -922,6 +924,19 @@ ActiveRecord::Schema.define(version: 20150305001006) do
   end
 
   add_index "picture_files", ["picture_attachable_id", "picture_attachable_type"], name: "index_picture_files_on_picture_attachable_id_and_type"
+
+  create_table "places", force: :cascade do |t|
+    t.text     "term"
+    t.text     "city"
+    t.integer  "country_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "places", ["country_id"], name: "index_places_on_country_id"
+  add_index "places", ["term"], name: "index_places_on_term"
 
   create_table "produce_types", force: :cascade do |t|
     t.string   "name"

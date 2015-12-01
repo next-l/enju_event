@@ -14,7 +14,6 @@ describe EventExportFile do
     Message.order(:id).last.subject.should eq 'エクスポートが完了しました'
   end
 end
-
 # == Schema Information
 #
 # Table name: event_export_files
@@ -28,3 +27,4 @@ end
 #  event_export_size     :integer
 #  event_export_filename :string
 #
+
