@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 class Event < ActiveRecord::Base
   scope :closing_days, -> { includes(:event_category).where('event_categories.name' => 'closed') }
   scope :on, lambda {|datetime| where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1)}
@@ -8,6 +7,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :event_category, validate: true
   belongs_to :library, validate: true
+  belongs_to :place
   has_many :picture_files, as: :picture_attachable
   has_many :participates, dependent: :destroy
   has_many :agents, through: :participates
@@ -89,13 +89,14 @@ end
 #  id                :integer          not null, primary key
 #  library_id        :integer          not null
 #  event_category_id :integer          not null
-#  name              :string(255)
+#  name              :string
 #  note              :text
 #  start_at          :datetime
 #  end_at            :datetime
 #  all_day           :boolean          default(FALSE), not null
 #  deleted_at        :datetime
 #  display_name      :text
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  created_at        :datetime
+#  updated_at        :datetime
+#  place_id          :integer
 #

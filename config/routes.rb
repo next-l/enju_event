@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :places
   resources :event_export_files
 
   resources :event_import_files
