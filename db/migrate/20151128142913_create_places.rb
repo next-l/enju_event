@@ -1,7 +1,7 @@
 class CreatePlaces < ActiveRecord::Migration
   def change
     create_table :places do |t|
-      t.text :term
+      t.string :term
       t.text :city
       t.integer :country_id
       t.float :latitude
