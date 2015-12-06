@@ -1,3 +1,3 @@
 module EnjuEvent
-  VERSION = "0.1.17"
+  VERSION = "0.2.0.beta.1"
 end
