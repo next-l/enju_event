@@ -55,7 +55,12 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.edit'), edit_event_path(@event) -%></li>
+    <%- if policy(@event).update? -%>
+      <li><%= link_to t('page.edit'), edit_event_path(@event) -%></li>
+    <% end %>
+    <% if policy(@event).destroy? %>
+      <li><%= link_to t('page.destroy'), @event, data: {confirm: t('page.are_you_sure')}, method: :delete -%></li>
+    <% end %>
     <li><%= back_to_index(flash[:page_info]) -%></li>
   </ul>
 </div>
