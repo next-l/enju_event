@@ -12,6 +12,8 @@ module EnjuEvent
   end
 
   module InstanceMethods
+    private
+
     def get_event
       @event = Event.find(params[:event_id]) if params[:event_id]
     end
