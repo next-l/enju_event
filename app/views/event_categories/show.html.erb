@@ -26,6 +26,6 @@
     <%- if policy(@event_category).update? -%>
       <li><%= link_to t('page.edit'), edit_event_category_path(@event_category) -%></li>
     <%- end -%>
-    <li><%= back_to_index(flash[:page_info]) -%></li>
+    <li><%= link_to t('page.back'), :back -%></li>
   </ul>
 </div>
