@@ -1,7 +1,6 @@
 class EventExportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ExportFile
-  enju_export_file_model
 
   #validates_attachment_content_type :event_export, :content_type => /\Atext\/plain\Z/
   attachment :event_export
