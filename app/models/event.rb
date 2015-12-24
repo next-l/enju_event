@@ -64,7 +64,7 @@ class Event < ActiveRecord::Base
       start_at
       end_at
       all_day
-    ).join("\t")
+    ).to_csv(col_sep: "\t")
     events = Event.all.map{|e|
       lines = []
       lines << e.name
