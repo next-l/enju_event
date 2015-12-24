@@ -75,7 +75,7 @@ class Event < ActiveRecord::Base
       lines << e.all_day
     }
     if options[:format] == :txt
-      events.map{|e| e.join("\t")}.unshift(header).join("\r\n")
+      events.map{|e| e.to_csv(col_sep: "\t")}.unshift(header).join
     else
       event
     end
