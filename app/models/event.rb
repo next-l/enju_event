@@ -66,7 +66,7 @@ class Event < ActiveRecord::Base
       all_day
     )
     lines = []
-    Event.all.find_each.map{|e|
+    Event.all.map{|e|
       line = []
       line << e.name
       line << e.event_category.name
