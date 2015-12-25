@@ -66,6 +66,7 @@ class Event < ActiveRecord::Base
       all_day
     )
     lines = []
+    lines << header.to_csv(col_sep: "\t")
     events = Event.find_each.map{|e|
       lines << e.name
       lines << e.event_category.name
@@ -75,7 +76,7 @@ class Event < ActiveRecord::Base
       lines << e.all_day
     }
     if options[:format] == :txt
-      [lines.to_csv(col_sep: "\t")].unshift(header.to_csv(col_sep: "\t")).join
+      lines.to_csv(col_sep: "\t")
     else
       event
     end
