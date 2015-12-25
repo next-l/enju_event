@@ -17,6 +17,13 @@ describe Event do
     event.set_all_day
     event.start_at.should eq event.end_at.beginning_of_day
   end
+
+  it "should export events" do
+    lines = Event.export
+    CSV.parse(lines, col_sep: "\t")
+    expect(lines).not_to be_empty
+    expect(lines.split(/\n/).size).to eq Event.all.count + 1
+  end
 end
 # == Schema Information
 #
