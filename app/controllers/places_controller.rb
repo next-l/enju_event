@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: places
+#
+#  id         :integer          not null, primary key
+#  term       :string
+#  city       :text
+#  country_id :integer
+#  latitude   :float
+#  longitude  :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]

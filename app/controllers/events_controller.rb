@@ -1,4 +1,23 @@
 # -*- encoding: utf-8 -*-
+# == Schema Information
+#
+# Table name: events
+#
+#  id                :integer          not null, primary key
+#  library_id        :integer          not null
+#  event_category_id :integer          not null
+#  name              :string
+#  note              :text
+#  start_at          :datetime
+#  end_at            :datetime
+#  all_day           :boolean          default(FALSE), not null
+#  deleted_at        :datetime
+#  display_name      :text
+#  created_at        :datetime
+#  updated_at        :datetime
+#  place_id          :integer
+#
+
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]

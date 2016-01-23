@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: event_categories
+#
+#  id           :integer          not null, primary key
+#  name         :string           not null
+#  display_name :text
+#  note         :text
+#  position     :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 require 'rails_helper'
 require 'sunspot/rails/spec_helper'
 

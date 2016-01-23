@@ -2,7 +2,6 @@ class EventExportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ExportFile
 
-  #validates_attachment_content_type :event_export, :content_type => /\Atext\/plain\Z/
   attachment :event_export
   has_many :event_export_file_transitions
 

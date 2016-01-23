@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: event_import_results
+#
+#  id                   :integer          not null, primary key
+#  event_import_file_id :integer
+#  event_id             :integer
+#  body                 :text
+#  created_at           :datetime
+#  updated_at           :datetime
+#
+
 class EventImportResultsController < ApplicationController
   before_action :set_event_import_result, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]

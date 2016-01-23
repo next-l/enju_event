@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: participates
+#
+#  id         :integer          not null, primary key
+#  agent_id   :integer          not null
+#  event_id   :integer          not null
+#  position   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class ParticipatesController < ApplicationController
   before_action :set_participate, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
