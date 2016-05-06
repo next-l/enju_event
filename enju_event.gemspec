@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "simple_form", "~> 3.2"
   s.add_dependency "refile", "~> 0.6"
   s.add_dependency "refile-mini_magick"
-  s.add_dependency "statesman", "~> 1.3"
+  s.add_dependency "statesman", "~> 2.0"
   s.add_dependency "ri_cal"
   s.add_dependency "rails_autolink"
   s.add_dependency "geocoder"
