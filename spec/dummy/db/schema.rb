@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213072705) do
+ActiveRecord::Schema.define(version: 20160703184311) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "basket_id"
@@ -391,6 +391,7 @@ ActiveRecord::Schema.define(version: 20151213072705) do
     t.integer  "event_export_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "most_recent"
   end
 
   add_index "event_export_file_transitions", ["event_export_file_id"], name: "index_event_export_file_transitions_on_file_id"
@@ -414,6 +415,7 @@ ActiveRecord::Schema.define(version: 20151213072705) do
     t.integer  "event_import_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "most_recent"
   end
 
   add_index "event_import_file_transitions", ["event_import_file_id"], name: "index_event_import_file_transitions_on_event_import_file_id"
