@@ -5,6 +5,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 require 'enju_event'
 require 'enju_message'
+require 'enju_leaf'
 require 'resque/server'
 
 module Dummy
