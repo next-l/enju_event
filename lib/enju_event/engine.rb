@@ -1,6 +1,4 @@
 require "enju_message"
-require "paperclip"
-require "statesman"
 require "ri_cal"
 require "csv"
 require "nkf"
