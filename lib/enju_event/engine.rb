@@ -1,4 +1,4 @@
-require "enju_message"
+require "enju_library"
 require "paperclip"
 require "statesman"
 require "ri_cal"
