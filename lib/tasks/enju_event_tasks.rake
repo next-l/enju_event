@@ -11,4 +11,10 @@ namespace :enju_event do
   task :event_import => :environment do
     EventImportFile.import
   end
+
+  desc "upgrade enju_circulation"
+  task :upgrade => :environment do
+    Rake::Task['statesman:backfill_most_recent'].invoke('EventExportFile')
+    Rake::Task['statesman:backfill_most_recent'].invoke('EventImportFile')
+  end
 end
