@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703184311) do
+ActiveRecord::Schema.define(version: 20160813130535) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "basket_id"
@@ -678,6 +678,8 @@ ActiveRecord::Schema.define(version: 20160703184311) do
     t.text     "admin_networks"
     t.string   "url",            default: "http://localhost:3000/"
     t.text     "settings"
+    t.text     "html_snippet"
+    t.string   "email"
   end
 
   add_index "library_groups", ["short_name"], name: "index_library_groups_on_short_name"
@@ -1319,6 +1321,7 @@ ActiveRecord::Schema.define(version: 20160703184311) do
     t.integer  "user_export_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "most_recent"
   end
 
   add_index "user_export_file_transitions", ["sort_key", "user_export_file_id"], name: "index_user_export_file_transitions_on_sort_key_and_file_id", unique: true
@@ -1387,6 +1390,7 @@ ActiveRecord::Schema.define(version: 20160703184311) do
     t.integer  "user_import_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "most_recent"
   end
 
   add_index "user_import_file_transitions", ["sort_key", "user_import_file_id"], name: "index_user_import_file_transitions_on_sort_key_and_file_id", unique: true
@@ -1398,7 +1402,7 @@ ActiveRecord::Schema.define(version: 20160703184311) do
     t.datetime "executed_at"
     t.string   "user_import_file_name"
     t.string   "user_import_content_type"
-    t.string   "user_import_file_size"
+    t.integer  "user_import_file_size"
     t.datetime "user_import_updated_at"
     t.string   "user_import_fingerprint"
     t.string   "edit_mode"
@@ -1416,6 +1420,7 @@ ActiveRecord::Schema.define(version: 20160703184311) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "error_message"
   end
 
   create_table "user_reserve_stat_transitions", force: :cascade do |t|

@@ -6,6 +6,8 @@ Bundler.require(*Rails.groups)
 require 'enju_event'
 require 'enju_message'
 require 'enju_leaf'
+require 'globalize'
+require 'globalize-accessors'
 require 'resque/server'
 
 module Dummy
