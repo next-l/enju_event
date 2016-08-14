@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe EventImportResult do
   #pending "add some examples to (or delete) #{__FILE__}"
