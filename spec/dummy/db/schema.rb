@@ -408,6 +408,8 @@ ActiveRecord::Schema.define(version: 20160814165332) do
     t.datetime "updated_at"
   end
 
+  add_index "event_export_files", ["user_id"], name: "index_event_export_files_on_user_id"
+
   create_table "event_import_file_transitions", force: :cascade do |t|
     t.string   "to_state"
     t.text     "metadata",             default: "{}"
