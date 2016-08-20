@@ -102,20 +102,20 @@
   </ul>
   <p>
     <%- if @library -%>
-      <%= link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(library_id: @library.name, format: :rss) -%>
+      <%= link_to (image_tag 'icons/feed.png', size: '16x16', class: 'enju_icon', alt: t('page.feed')), events_path(library_id: @library.name, format: :rss) -%>
       (<%= link_to 'RSS', events_path(library_id: @library.name, format: :rss) -%>)
-      <%= link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), events_path(library_id: @library.name, format: :txt, locale: @locale.to_s) -%>
+      <%= link_to (image_tag 'icons/page_white_excel.png', size: '16x16', class: 'enju_icon', alt: 'TSV'), events_path(library_id: @library.name, format: :txt, locale: @locale.to_s) -%>
       (<%= link_to 'TSV', events_path(library_id: @library.name, format: :txt, locale: @locale.to_s) -%>)
       <br />
-      <%= link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(library_id: @library.name, format: :ics, locale: @locale.to_s) -%>
+      <%= link_to (image_tag 'icons/calendar.png', size: '16x16', class: 'enju_icon', alt: 'iCalendar'), events_path(library_id: @library.name, format: :ics, locale: @locale.to_s) -%>
       (<%= link_to 'iCalendar', events_path(library_id: @library.name, format: :ics, locale: @locale.to_s) -%>)
     <%- else -%>
-      <%= link_to (image_tag 'icons/feed.png', size: '16x16', alt: t('page.feed'), class: 'icon'), events_path(format: :rss) -%>
+      <%= link_to (image_tag 'icons/feed.png', size: '16x16', class: 'enju_icon', alt: t('page.feed')), events_path(format: :rss) -%>
       (<%= link_to 'RSS', events_path(format: :rss) -%>)
-      <%= link_to (image_tag 'icons/page_white_excel.png', size: '16x16', alt: 'TSV', class: 'icon'), events_path(format: :txt, locale: @locale.to_s) -%>
+      <%= link_to (image_tag 'icons/page_white_excel.png', size: '16x16', class: 'enju_icon', alt: 'TSV'), events_path(format: :txt, locale: @locale.to_s) -%>
       (<%= link_to 'TSV', events_path(format: :txt, locale: @locale.to_s) -%>)
       <br />
-      <%= link_to (image_tag 'icons/calendar.png', size: '16x16', alt: 'iCalendar', class: 'icon'), events_path(format: :ics, locale: @locale.to_s) -%>
+      <%= link_to (image_tag 'icons/calendar.png', size: '16x16', class: 'enju_icon', alt: 'iCalendar'), events_path(format: :ics, locale: @locale.to_s) -%>
       (<%= link_to 'iCalendar', events_path(format: :ics, locale: @locale.to_s) -%>)
     <%- end -%>
   </p>
