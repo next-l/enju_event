@@ -1,18 +1,14 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.1.9
   - 2.2.5
   - 2.3.1
 before_script:
-  - mysql -e 'create database enju_test'
   - psql -c 'create database enju_test;' -U postgres
   - bundle exec rake db:migrate
 services:
   - redis-server
 env:
-  - DB=sqlite
-  - DB=mysql
   - DB=postgresql
 notifications:
   slack:
