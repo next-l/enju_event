@@ -3,8 +3,6 @@ require "statesman"
 require "ri_cal"
 require "csv"
 require "nkf"
-require "refile/rails"
-require "refile/mini_magick"
 begin
   require 'charlock_holmes/string'
 rescue LoadError

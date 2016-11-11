@@ -14,9 +14,6 @@ gem "enju_biblio", github: "next-l/enju_biblio"
 gem "enju_library", github: "next-l/enju_library"
 gem "enju_message", github: "next-l/enju_message"
 gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer"
-gem "refile", github: "refile/refile"
-gem "refile-mini_magick", github: "refile/refile-mini_magick"
-gem "globalize", github: "globalize/globalize"
 gem "codeclimate-test-reporter", group: :test, require: false
 gem "jquery-rails"
 
