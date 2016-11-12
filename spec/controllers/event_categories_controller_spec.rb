@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: event_categories
-#
-#  id           :integer          not null, primary key
-#  name         :string           not null
-#  display_name :text
-#  note         :text
-#  position     :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
 require 'rails_helper'
 require 'sunspot/rails/spec_helper'
 
@@ -68,7 +55,7 @@ describe EventCategoriesController do
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
-        get :show, :id => event_category.id
+        get :show, id: event_category.id
         assigns(:event_category).should eq(event_category)
       end
     end
@@ -78,7 +65,7 @@ describe EventCategoriesController do
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
-        get :show, :id => event_category.id
+        get :show, id: event_category.id
         assigns(:event_category).should eq(event_category)
       end
     end
@@ -88,7 +75,7 @@ describe EventCategoriesController do
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
-        get :show, :id => event_category.id
+        get :show, id: event_category.id
         assigns(:event_category).should eq(event_category)
       end
     end
@@ -96,7 +83,7 @@ describe EventCategoriesController do
     describe "When not logged in" do
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
-        get :show, :id => event_category.id
+        get :show, id: event_category.id
         assigns(:event_category).should eq(event_category)
       end
     end
@@ -148,7 +135,7 @@ describe EventCategoriesController do
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
-        get :edit, :id => event_category.id
+        get :edit, id: event_category.id
         assigns(:event_category).should eq(event_category)
       end
     end
@@ -158,7 +145,7 @@ describe EventCategoriesController do
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
-        get :edit, :id => event_category.id
+        get :edit, id: event_category.id
         response.should be_forbidden
       end
     end
@@ -168,7 +155,7 @@ describe EventCategoriesController do
 
       it "assigns the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
-        get :edit, :id => event_category.id
+        get :edit, id: event_category.id
         response.should be_forbidden
       end
     end
@@ -176,7 +163,7 @@ describe EventCategoriesController do
     describe "When not logged in" do
       it "should not assign the requested event_category as @event_category" do
         event_category = FactoryGirl.create(:event_category)
-        get :edit, :id => event_category.id
+        get :edit, id: event_category.id
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -193,24 +180,24 @@ describe EventCategoriesController do
 
       describe "with valid params" do
         it "assigns a newly created event_category as @event_category" do
-          post :create, :event_category => @attrs
+          post :create, event_category: @attrs
           assigns(:event_category).should be_valid
         end
 
         it "redirects to the created patron" do
-          post :create, :event_category => @attrs
+          post :create, event_category: @attrs
           response.should redirect_to(assigns(:event_category))
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved event_category as @event_category" do
-          post :create, :event_category => @invalid_attrs
+          post :create, event_category: @invalid_attrs
           assigns(:event_category).should_not be_valid
         end
 
         it "should be successful" do
-          post :create, :event_category => @invalid_attrs
+          post :create, event_category: @invalid_attrs
           response.should be_success
         end
       end
@@ -221,24 +208,24 @@ describe EventCategoriesController do
 
       describe "with valid params" do
         it "assigns a newly created event_category as @event_category" do
-          post :create, :event_category => @attrs
+          post :create, event_category: @attrs
           assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :event_category => @attrs
+          post :create, event_category: @attrs
           response.should be_forbidden
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved event_category as @event_category" do
-          post :create, :event_category => @invalid_attrs
+          post :create, event_category: @invalid_attrs
           assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :event_category => @invalid_attrs
+          post :create, event_category: @invalid_attrs
           response.should be_forbidden
         end
       end
@@ -249,24 +236,24 @@ describe EventCategoriesController do
 
       describe "with valid params" do
         it "assigns a newly created event_category as @event_category" do
-          post :create, :event_category => @attrs
+          post :create, event_category: @attrs
           assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :event_category => @attrs
+          post :create, event_category: @attrs
           response.should be_forbidden
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved event_category as @event_category" do
-          post :create, :event_category => @invalid_attrs
+          post :create, event_category: @invalid_attrs
           assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :event_category => @invalid_attrs
+          post :create, event_category: @invalid_attrs
           response.should be_forbidden
         end
       end
@@ -275,24 +262,24 @@ describe EventCategoriesController do
     describe "When not logged in" do
       describe "with valid params" do
         it "assigns a newly created event_category as @event_category" do
-          post :create, :event_category => @attrs
+          post :create, event_category: @attrs
           assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :event_category => @attrs
+          post :create, event_category: @attrs
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved event_category as @event_category" do
-          post :create, :event_category => @invalid_attrs
+          post :create, event_category: @invalid_attrs
           assigns(:event_category).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :event_category => @invalid_attrs
+          post :create, event_category: @invalid_attrs
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -311,23 +298,23 @@ describe EventCategoriesController do
 
       describe "with valid params" do
         it "updates the requested event_category" do
-          put :update, :id => @event_category.id, :event_category => @attrs
+          put :update, id: @event_category.id, event_category: @attrs
         end
 
         it "assigns the requested event_category as @event_category" do
-          put :update, :id => @event_category.id, :event_category => @attrs
+          put :update, id: @event_category.id, event_category: @attrs
           assigns(:event_category).should eq(@event_category)
         end
 
         it "moves its position when specified" do
-          put :update, :id => @event_category.id, :event_category => @attrs, :move => 'lower'
+          put :update, id: @event_category.id, event_category: @attrs, :move => 'lower'
           response.should redirect_to(event_categories_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested event_category as @event_category" do
-          put :update, :id => @event_category.id, :event_category => @invalid_attrs
+          put :update, id: @event_category.id, event_category: @invalid_attrs
           response.should render_template("edit")
         end
       end
@@ -338,11 +325,11 @@ describe EventCategoriesController do
 
       describe "with valid params" do
         it "updates the requested event_category" do
-          put :update, :id => @event_category.id, :event_category => @attrs
+          put :update, id: @event_category.id, event_category: @attrs
         end
 
         it "assigns the requested event_category as @event_category" do
-          put :update, :id => @event_category.id, :event_category => @attrs
+          put :update, id: @event_category.id, event_category: @attrs
           assigns(:event_category).should eq(@event_category)
           response.should be_forbidden
         end
@@ -350,7 +337,7 @@ describe EventCategoriesController do
 
       describe "with invalid params" do
         it "assigns the requested event_category as @event_category" do
-          put :update, :id => @event_category.id, :event_category => @invalid_attrs
+          put :update, id: @event_category.id, event_category: @invalid_attrs
           response.should be_forbidden
         end
       end
@@ -361,11 +348,11 @@ describe EventCategoriesController do
 
       describe "with valid params" do
         it "updates the requested event_category" do
-          put :update, :id => @event_category.id, :event_category => @attrs
+          put :update, id: @event_category.id, event_category: @attrs
         end
 
         it "assigns the requested event_category as @event_category" do
-          put :update, :id => @event_category.id, :event_category => @attrs
+          put :update, id: @event_category.id, event_category: @attrs
           assigns(:event_category).should eq(@event_category)
           response.should be_forbidden
         end
@@ -373,7 +360,7 @@ describe EventCategoriesController do
 
       describe "with invalid params" do
         it "assigns the requested event_category as @event_category" do
-          put :update, :id => @event_category.id, :event_category => @invalid_attrs
+          put :update, id: @event_category.id, event_category: @invalid_attrs
           response.should be_forbidden
         end
       end
@@ -382,18 +369,18 @@ describe EventCategoriesController do
     describe "When not logged in" do
       describe "with valid params" do
         it "updates the requested event_category" do
-          put :update, :id => @event_category.id, :event_category => @attrs
+          put :update, id: @event_category.id, event_category: @attrs
         end
 
         it "should be forbidden" do
-          put :update, :id => @event_category.id, :event_category => @attrs
+          put :update, id: @event_category.id, event_category: @attrs
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested event_category as @event_category" do
-          put :update, :id => @event_category.id, :event_category => @invalid_attrs
+          put :update, id: @event_category.id, event_category: @invalid_attrs
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -409,11 +396,11 @@ describe EventCategoriesController do
       login_fixture_admin
 
       it "destroys the requested event_category" do
-        delete :destroy, :id => @event_category.id
+        delete :destroy, id: @event_category.id
       end
 
       it "redirects to the event_categories list" do
-        delete :destroy, :id => @event_category.id
+        delete :destroy, id: @event_category.id
         response.should redirect_to(event_categories_url)
       end
     end
@@ -422,11 +409,11 @@ describe EventCategoriesController do
       login_fixture_librarian
 
       it "destroys the requested event_category" do
-        delete :destroy, :id => @event_category.id
+        delete :destroy, id: @event_category.id
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @event_category.id
+        delete :destroy, id: @event_category.id
         response.should be_forbidden
       end
     end
@@ -435,22 +422,22 @@ describe EventCategoriesController do
       login_fixture_user
 
       it "destroys the requested event_category" do
-        delete :destroy, :id => @event_category.id
+        delete :destroy, id: @event_category.id
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @event_category.id
+        delete :destroy, id: @event_category.id
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
       it "destroys the requested event_category" do
-        delete :destroy, :id => @event_category.id
+        delete :destroy, id: @event_category.id
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @event_category.id
+        delete :destroy, id: @event_category.id
         response.should redirect_to(new_user_session_url)
       end
     end

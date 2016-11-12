@@ -1,17 +1,5 @@
 # -*- encoding: utf-8 -*-
-# == Schema Information
-#
-# Table name: event_import_results
-#
-#  id                   :integer          not null, primary key
-#  event_import_file_id :integer
-#  event_id             :integer
-#  body                 :text
-#  created_at           :datetime
-#  updated_at           :datetime
-#
-
-require 'spec_helper'
+require 'rails_helper'
 
 describe EventImportResultsController do
   fixtures :all

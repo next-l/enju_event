@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe EventImportFile do
   fixtures :all
@@ -116,6 +116,7 @@ describe EventImportFile do
     EventImportFileJob.perform_later(file).should be_truthy
   end
 end
+
 # == Schema Information
 #
 # Table name: event_import_files
@@ -127,9 +128,9 @@ end
 #  user_id                   :integer
 #  note                      :text
 #  executed_at               :datetime
-#  event_import_filename     :string
+#  event_import_file_name    :string
 #  event_import_content_type :string
-#  event_import_size         :integer
+#  event_import_file_size    :integer
 #  event_import_updated_at   :datetime
 #  edit_mode                 :string
 #  created_at                :datetime
@@ -139,6 +140,4 @@ end
 #  user_encoding             :string
 #  default_library_id        :integer
 #  default_event_category_id :integer
-#  event_import_id           :string
 #
-

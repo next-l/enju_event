@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe Event do
   fixtures :events
@@ -25,6 +25,7 @@ describe Event do
     expect(lines.split(/\n/).size).to eq Event.all.count + 1
   end
 end
+
 # == Schema Information
 #
 # Table name: events
@@ -43,4 +44,3 @@ end
 #  updated_at        :datetime
 #  place_id          :integer
 #
-

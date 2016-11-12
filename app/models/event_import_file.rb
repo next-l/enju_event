@@ -1,11 +1,10 @@
 class EventImportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ImportFile
-  default_scope {order('event_import_files.id DESC')}
+  include AttachmentUploader[:attachment]
   scope :not_imported, -> {in_state(:pending)}
   scope :stucked, -> {in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago)}
 
-  attachment :event_import
   validates :event_import, presence: true, on: :create
   belongs_to :user, validate: true
   belongs_to :default_library, class_name: 'Library'

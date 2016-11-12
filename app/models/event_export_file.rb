@@ -1,8 +1,8 @@
 class EventExportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ExportFile
+  include AttachmentUploader[:attachment]
 
-  attachment :event_export
   has_many :event_export_file_transitions
 
   def state_machine
