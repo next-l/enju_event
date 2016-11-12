@@ -57,10 +57,10 @@ class EventCategoriesController < ApplicationController
 
     respond_to do |format|
       if @event_category.save
-        format.html { redirect_to @event_category, notice:  t('controller.successfully_created', model:  t('activerecord.models.event_category')) }
+        format.html { redirect_to @event_category, notice:  t('controller.successfully_created', model: t('activerecord.models.event_category')) }
         format.json { render json: @event_category, status: :created, location: @event_category }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @event_category.errors, status: :unprocessable_entity }
       end
     end
@@ -76,10 +76,10 @@ class EventCategoriesController < ApplicationController
 
     respond_to do |format|
       if @event_category.update_attributes(event_category_params)
-        format.html { redirect_to @event_category, notice:  t('controller.successfully_updated', model:  t('activerecord.models.event_category')) }
+        format.html { redirect_to @event_category, notice:  t('controller.successfully_updated', model: t('activerecord.models.event_category')) }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @event_category.errors, status: :unprocessable_entity }
       end
     end
@@ -97,6 +97,7 @@ class EventCategoriesController < ApplicationController
   end
 
   private
+
   def set_event_category
     @event_category = EventCategory.find(params[:id])
     authorize @event_category

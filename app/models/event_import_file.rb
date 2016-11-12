@@ -2,8 +2,8 @@ class EventImportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ImportFile
   include AttachmentUploader[:attachment]
-  scope :not_imported, -> {in_state(:pending)}
-  scope :stucked, -> {in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago)}
+  scope :not_imported, -> { in_state(:pending) }
+  scope :stucked, -> { in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago) }
 
   validates :attachment, presence: true, on: :create
   belongs_to :user, validate: true
@@ -21,7 +21,7 @@ class EventImportFile < ActiveRecord::Base
   end
 
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
-    to: :state_machine
+           to: :state_machine
 
   def import
     transition_to!(:started)
@@ -34,7 +34,7 @@ class EventImportFile < ActiveRecord::Base
       row_num += 1
       next if row['dummy'].to_s.strip.present?
       event_import_result = EventImportResult.new
-      event_import_result.assign_attributes({ event_import_file_id: id, body: row.fields.join("\t") })
+      event_import_result.assign_attributes(event_import_file_id: id, body: row.fields.join("\t"))
       event_import_result.save!
 
       event = Event.new
@@ -43,22 +43,22 @@ class EventImportFile < ActiveRecord::Base
       event.note = row['note']
       event.start_at = Time.zone.parse(row['start_at']) if row['start_at'].present?
       event.end_at = Time.zone.parse(row['end_at']) if row['end_at'].present?
-      if %w(t true TRUE).include?(row['all_day'].to_s.strip)
-        event.all_day = true
-      else
-        event.all_day = false
-      end
-      library = Library.where(name: row['library']).first
+      event.all_day = if %w(t true TRUE).include?(row['all_day'].to_s.strip)
+                        true
+                      else
+                        false
+                      end
+      library = Library.find_by(name: row['library'])
       library = default_library || Library.web if library.blank?
       event.library = library
-      event_category = EventCategory.where(name: row['event_category']).first
+      event_category = EventCategory.find_by(name: row['event_category'])
       event_category = default_event_category if event_category.blank?
       event.event_category = event_category
 
-      if event.save 
+      if event.save
         event_import_result.event = event
         num[:imported] += 1
-        if row_num % 50 == 0
+        if (row_num % 50).zero?
           Sunspot.commit
           GC.start
         end
@@ -89,19 +89,19 @@ class EventImportFile < ActiveRecord::Base
       row_num += 1
       next if row['dummy'].to_s.strip.present?
       event = Event.find(row['id'].to_s.strip)
-      event_category = EventCategory.where(name: row['event_category'].to_s.strip).first
+      event_category = EventCategory.find_by(name: row['event_category'].to_s.strip)
       event.event_category = event_category if event_category
-      library = Library.where(name: row['library'].to_s.strip).first
+      library = Library.find_by(name: row['library'].to_s.strip)
       event.library = library if library
       event.name = row['name'] if row['name'].to_s.strip.present?
       event.start_at = Time.zone.parse(row['start_at']) if row['start_at'].present?
       event.end_at = Time.zone.parse(row['end_at']) if row['end_at'].present?
       event.note = row['note'] if row['note'].to_s.strip.present?
-      if %w(t true TRUE).include?(row['all_day'].to_s.strip)
-        event.all_day = true
-      else
-        event.all_day = false
-      end
+      event.all_day = if %w(t true TRUE).include?(row['all_day'].to_s.strip)
+                        true
+                      else
+                        false
+                      end
       event.save!
     end
     transition_to!(:completed)
@@ -135,14 +135,13 @@ class EventImportFile < ActiveRecord::Base
   end
 
   def self.import
-    EventImportFile.not_imported.each do |file|
-      file.import_start
-    end
+    EventImportFile.not_imported.each(&:import_start)
   rescue
     Rails.logger.info "#{Time.zone.now} importing events failed!"
   end
 
   private
+
   def self.transition_class
     EventImportFileTransition
   end
@@ -164,7 +163,7 @@ class EventImportFile < ActiveRecord::Base
     end
     rows = CSV.open(tempfile, headers: header, col_sep: "\t")
     event_import_result = EventImportResult.new
-    event_import_result.assign_attributes({ event_import_file_id: id, body: header.join("\t") })
+    event_import_result.assign_attributes(event_import_file_id: id, body: header.join("\t"))
     event_import_result.save!
     tempfile.close(true)
     file.close
@@ -172,11 +171,11 @@ class EventImportFile < ActiveRecord::Base
   end
 
   def check_field(field)
-    if [field['name']].reject{|f| f.to_s.strip == ""}.empty?
-      raise "You should specify a name in the first line"
+    if [field['name']].reject { |f| f.to_s.strip == '' }.empty?
+      raise 'You should specify a name in the first line'
     end
-    if [field['start_at'], field['end_at']].reject{|f| f.to_s.strip == ""}.empty?
-      raise "You should specify dates in the first line"
+    if [field['start_at'], field['end_at']].reject { |f| f.to_s.strip == '' }.empty?
+      raise 'You should specify dates in the first line'
     end
   end
 
@@ -209,4 +208,5 @@ end
 #  default_library_id        :integer
 #  default_event_category_id :integer
 #  event_import_id           :string
+#  attachment_data           :jsonb
 #

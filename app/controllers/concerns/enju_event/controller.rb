@@ -1,9 +1,8 @@
 module EnjuEvent
   module Controller
-    
     private
 
-    def get_event
+    def set_event
       if params[:event_id]
         @event = Event.find(params[:event_id])
         authorize @event, :show?

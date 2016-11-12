@@ -2,21 +2,21 @@ require 'rails_helper'
 
 describe EventImportFile do
   fixtures :all
-  #pending "add some examples to (or delete) #{__FILE__}"
+  # pending "add some examples to (or delete) #{__FILE__}"
 
-  describe "When it is written in utf-8" do
+  describe 'When it is written in utf-8' do
     before(:each) do
-      @file = EventImportFile.create attachment: File.open("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), :default_library_id => 3
+      @file = EventImportFile.create attachment: File.open("#{Rails.root}/../../examples/event_import_file_sample1.tsv"), default_library_id: 3
       @file.default_library = Library.find(3)
       @file.default_event_category = EventCategory.find(3)
       @file.user = users(:admin)
     end
 
-    it "should be imported" do
+    it 'should be imported' do
       closing_days_size = Event.closing_days.size
       old_events_count = Event.count
       old_import_results_count = EventImportResult.count
-      @file.import_start.should eq({:imported => 2, :failed => 2})
+      @file.import_start.should eq(imported: 2, failed: 2)
       Event.count.should eq old_events_count + 2
       Event.closing_days.size.should eq closing_days_size + 1
       EventImportResult.count.should eq old_import_results_count + 5
@@ -33,10 +33,10 @@ describe EventImportFile do
       @file.executed_at.should be_truthy
 
       @file.reload
-      @file.error_message.should eq "The following column(s) were ignored: invalid"
+      @file.error_message.should eq 'The following column(s) were ignored: invalid'
     end
 
-    it "should send message when import is completed" do
+    it 'should send message when import is completed' do
       old_message_count = Message.count
       @file.user = User.where(username: 'librarian1').first
       @file.import_start
@@ -45,15 +45,15 @@ describe EventImportFile do
     end
   end
 
-  describe "When it is written in shift_jis" do
+  describe 'When it is written in shift_jis' do
     before(:each) do
-      @file = EventImportFile.create attachment: File.open("#{Rails.root.to_s}/../../examples/event_import_file_sample2.tsv")
+      @file = EventImportFile.create attachment: File.open("#{Rails.root}/../../examples/event_import_file_sample2.tsv")
       @file.default_library = Library.find(3)
       @file.default_event_category = EventCategory.find(3)
       @file.user = users(:admin)
     end
 
-    it "should be imported" do
+    it 'should be imported' do
       old_event_count = Event.count
       old_import_results_count = EventImportResult.count
       @file.import_start
@@ -65,23 +65,23 @@ describe EventImportFile do
     end
   end
 
-  describe "When it is an invalid file" do
+  describe 'When it is an invalid file' do
     before(:each) do
-      @file = EventImportFile.create attachment: File.open("#{Rails.root.to_s}/../../examples/invalid_file.tsv")
+      @file = EventImportFile.create attachment: File.open("#{Rails.root}/../../examples/invalid_file.tsv")
     end
 
-    it "should not be imported" do
+    it 'should not be imported' do
       old_event_count = Event.count
       old_import_results_count = EventImportResult.count
-      lambda{@file.import_start}.should raise_error(RuntimeError)
+      -> { @file.import_start }.should raise_error(RuntimeError)
       Event.count.should eq old_event_count
       EventImportResult.count.should eq old_import_results_count + 1
     end
   end
 
   describe "when its mode is 'update'" do
-    it "should update events" do
-      @file = EventImportFile.create attachment: File.open("#{Rails.root.to_s}/../../examples/event_update_file.tsv")
+    it 'should update events' do
+      @file = EventImportFile.create attachment: File.open("#{Rails.root}/../../examples/event_update_file.tsv")
       @file.modify
       event1 = Event.find(1)
       event1.name.should eq '変更後のイベント名'
@@ -97,19 +97,18 @@ describe EventImportFile do
       event3.name.should eq 'ミーティング'
     end
   end
-    
 
   describe "when its mode is 'destroy'" do
-    it "should destroy events" do
+    it 'should destroy events' do
       old_event_count = Event.count
-      @file = EventImportFile.create attachment: File.new("#{Rails.root.to_s}/../../examples/event_destroy_file.tsv")
+      @file = EventImportFile.create attachment: File.new("#{Rails.root}/../../examples/event_destroy_file.tsv")
       @file.remove
       Event.count.should eq old_event_count - 2
     end
   end
 
-  it "should import in background" do
-    file = EventImportFile.create attachment: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv")
+  it 'should import in background' do
+    file = EventImportFile.create attachment: File.new("#{Rails.root}/../../examples/event_import_file_sample1.tsv")
     file.user = users(:admin)
     file.save
     EventImportFileJob.perform_later(file).should be_truthy
@@ -127,9 +126,9 @@ end
 #  user_id                   :integer
 #  note                      :text
 #  executed_at               :datetime
-#  event_import_file_name    :string
+#  event_import_filename     :string
 #  event_import_content_type :string
-#  event_import_file_size    :integer
+#  event_import_size         :integer
 #  event_import_updated_at   :datetime
 #  edit_mode                 :string
 #  created_at                :datetime
@@ -139,4 +138,6 @@ end
 #  user_encoding             :string
 #  default_library_id        :integer
 #  default_event_category_id :integer
+#  event_import_id           :string
+#  attachment_data           :jsonb
 #

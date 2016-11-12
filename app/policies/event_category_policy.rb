@@ -16,8 +16,7 @@ class EventCategoryPolicy < ApplicationPolicy
   end
 
   def destroy?
-    if user.try(:has_role?, 'Administrator')
-      true if !['unknown', 'closed'].include?(record.name)
-    end
+    return false unless user.try(:has_role?, 'Administrator')
+    true unless %w(unknown closed).include?(record.name)
   end
 end

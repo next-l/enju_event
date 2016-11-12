@@ -5,9 +5,7 @@ module ImportFile
 
   module ClassMethods
     def expire
-      self.stucked.find_each do |file|
-        file.destroy
-      end
+      stucked.find_each(&:destroy)
     end
   end
 end

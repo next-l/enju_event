@@ -1,8 +1,8 @@
-require "enju_message"
-require "statesman"
-require "ri_cal"
-require "csv"
-require "nkf"
+require 'enju_message'
+require 'statesman'
+require 'ri_cal'
+require 'csv'
+require 'nkf'
 begin
   require 'charlock_holmes/string'
 rescue LoadError

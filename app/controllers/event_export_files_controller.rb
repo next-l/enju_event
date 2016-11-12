@@ -33,11 +33,11 @@ class EventExportFilesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event_export_file }
-      format.download {
+      format.download do
         send_file @event_export_file.event_export.download,
-          filename: File.basename(@event_export_file.event_export_filename),
-          type: 'application/octet-stream'
-      }
+                  filename: File.basename(@event_export_file.event_export_filename),
+                  type: 'application/octet-stream'
+      end
     end
   end
 
@@ -71,7 +71,7 @@ class EventExportFilesController < ApplicationController
         format.html { redirect_to @event_export_file, notice: t('export.successfully_created', model: t('activerecord.models.event_export_file')) }
         format.json { render json: @event_export_file, status: :created, location: @event_export_file }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @event_export_file.errors, status: :unprocessable_entity }
       end
     end
@@ -88,7 +88,7 @@ class EventExportFilesController < ApplicationController
         format.html { redirect_to @event_export_file, notice: t('controller.successfully_updated', model: t('activerecord.models.event_export_file')) }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @event_export_file.errors, status: :unprocessable_entity }
       end
     end
@@ -106,6 +106,7 @@ class EventExportFilesController < ApplicationController
   end
 
   private
+
   def set_event_export_file
     @event_export_file = EventExportFile.find(params[:id])
     authorize @event_export_file

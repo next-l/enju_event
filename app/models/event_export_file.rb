@@ -10,7 +10,7 @@ class EventExportFile < ActiveRecord::Base
   end
 
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
-    to: :state_machine
+           to: :state_machine
 
   def export!
     transition_to!(:started)
@@ -18,12 +18,10 @@ class EventExportFile < ActiveRecord::Base
     file = Event.export(format: :txt)
     tempfile.puts(file)
     tempfile.close
-    File.open(tempfile.path, "r") do |f|
+    File.open(tempfile.path, 'r') do |f|
       begin
         self.attachment = f
-        if save
-          send_message
-        end
+        send_message if save
         transition_to!(:completed)
       rescue => e
         transition_to!(:failed)
@@ -33,6 +31,7 @@ class EventExportFile < ActiveRecord::Base
   end
 
   private
+
   def self.transition_class
     EventExportFileTransition
   end
@@ -54,4 +53,5 @@ end
 #  event_export_id       :string
 #  event_export_size     :integer
 #  event_export_filename :string
+#  attachment_data       :jsonb
 #

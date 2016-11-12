@@ -3,7 +3,7 @@ require 'rails_helper'
 describe EventsController do
   fixtures :all
 
-  describe "GET index", :solr => true do
+  describe 'GET index', solr: true do
     before do
       Event.reindex
     end
@@ -12,146 +12,146 @@ describe EventsController do
       FactoryGirl.create(:event)
     end
 
-    describe "When logged in as Administrator" do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
 
-      it "assigns all events as @events" do
+      it 'assigns all events as @events' do
         get :index
         assigns(:events).should_not be_nil
       end
     end
 
-    describe "When logged in as Librarian" do
+    describe 'When logged in as Librarian' do
       login_fixture_librarian
 
-      it "assigns all events as @events" do
+      it 'assigns all events as @events' do
         get :index
         assigns(:events).should_not be_nil
       end
     end
 
-    describe "When logged in as User" do
+    describe 'When logged in as User' do
       login_fixture_user
 
-      it "assigns all events as @events" do
+      it 'assigns all events as @events' do
         get :index
         assigns(:events).should_not be_nil
       end
     end
 
-    describe "When not logged in" do
-      it "assigns all events as @events" do
+    describe 'When not logged in' do
+      it 'assigns all events as @events' do
         get :index
         assigns(:events).should_not be_nil
       end
 
-      it "assigns all events as @events in rss format" do
-        get :index, :format => 'rss'
+      it 'assigns all events as @events in rss format' do
+        get :index, params: { format: 'rss' }
         assigns(:events).should_not be_nil
       end
 
-      it "assigns all events as @events in ics format" do
-        get :index, :format => 'ics'
+      it 'assigns all events as @events in ics format' do
+        get :index, params: { format: 'ics' }
         assigns(:events).should_not be_nil
       end
 
-      it "assigns all events as @events in txt format" do
-        get :index, :format => 'txt'
+      it 'assigns all events as @events in txt format' do
+        get :index, params: { format: 'txt' }
         assigns(:events).should_not be_nil
       end
 
-      it "should get index with library_id" do
-        get :index, :library_id => 'kamata'
+      it 'should get index with library_id' do
+        get :index, params: { library_id: 'kamata' }
         response.should be_success
         assigns(:library).should eq libraries(:library_00002)
         assigns(:events).should_not be_nil
       end
 
-      it "should get upcoming event index" do
-        get :index, :mode => 'upcoming'
+      it 'should get upcoming event index' do
+        get :index, params: { mode: 'upcoming' }
         response.should be_success
         assigns(:events).should_not be_nil
       end
 
-      it "should get past event index" do
-        get :index, :mode => 'past'
+      it 'should get past event index' do
+        get :index, params: { mode: 'past' }
         response.should be_success
         assigns(:events).should_not be_nil
       end
     end
   end
 
-  describe "GET show" do
-    describe "When logged in as Administrator" do
+  describe 'GET show' do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
 
-      it "assigns the requested event as @event" do
+      it 'assigns the requested event as @event' do
         event = FactoryGirl.create(:event)
-        get :show, :id => event.id
+        get :show, params: { id: event.id }
         assigns(:event).should eq(event)
       end
     end
 
-    describe "When logged in as Librarian" do
+    describe 'When logged in as Librarian' do
       login_fixture_librarian
 
-      it "assigns the requested event as @event" do
+      it 'assigns the requested event as @event' do
         event = FactoryGirl.create(:event)
-        get :show, :id => event.id
+        get :show, params: { id: event.id }
         assigns(:event).should eq(event)
       end
     end
 
-    describe "When logged in as User" do
+    describe 'When logged in as User' do
       login_fixture_user
 
-      it "assigns the requested event as @event" do
+      it 'assigns the requested event as @event' do
         event = FactoryGirl.create(:event)
-        get :show, :id => event.id
+        get :show, params: { id: event.id }
         assigns(:event).should eq(event)
       end
     end
 
-    describe "When not logged in" do
-      it "assigns the requested event as @event" do
+    describe 'When not logged in' do
+      it 'assigns the requested event as @event' do
         event = FactoryGirl.create(:event)
-        get :show, :id => event.id
+        get :show, params: { id: event.id }
         assigns(:event).should eq(event)
       end
     end
   end
 
-  describe "GET new" do
-    describe "When logged in as Administrator" do
+  describe 'GET new' do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
 
-      it "assigns the requested event as @event" do
+      it 'assigns the requested event as @event' do
         get :new
         assigns(:event).should_not be_valid
       end
     end
 
-    describe "When logged in as Librarian" do
+    describe 'When logged in as Librarian' do
       login_fixture_librarian
 
-      it "should not assign the requested event as @event" do
+      it 'should not assign the requested event as @event' do
         get :new
         assigns(:event).should_not be_valid
       end
     end
 
-    describe "When logged in as User" do
+    describe 'When logged in as User' do
       login_fixture_user
 
-      it "should not assign the requested event as @event" do
+      it 'should not assign the requested event as @event' do
         get :new
         assigns(:event).should be_nil
         response.should be_forbidden
       end
     end
 
-    describe "When not logged in" do
-      it "should not assign the requested event as @event" do
+    describe 'When not logged in' do
+      it 'should not assign the requested event as @event' do
         get :new
         assigns(:event).should be_nil
         response.should redirect_to(new_user_session_url)
@@ -159,308 +159,308 @@ describe EventsController do
     end
   end
 
-  describe "GET edit" do
-    describe "When logged in as Administrator" do
+  describe 'GET edit' do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
 
-      it "assigns the requested event as @event" do
+      it 'assigns the requested event as @event' do
         event = FactoryGirl.create(:event)
-        get :edit, :id => event.id
+        get :edit, params: { id: event.id }
         assigns(:event).should eq(event)
       end
     end
 
-    describe "When logged in as Librarian" do
+    describe 'When logged in as Librarian' do
       login_fixture_librarian
 
-      it "assigns the requested event as @event" do
+      it 'assigns the requested event as @event' do
         event = FactoryGirl.create(:event)
-        get :edit, :id => event.id
+        get :edit, params: { id: event.id }
       end
     end
 
-    describe "When logged in as User" do
+    describe 'When logged in as User' do
       login_fixture_user
 
-      it "assigns the requested event as @event" do
+      it 'assigns the requested event as @event' do
         event = FactoryGirl.create(:event)
-        get :edit, :id => event.id
+        get :edit, params: { id: event.id }
         response.should be_forbidden
       end
     end
 
-    describe "When not logged in" do
-      it "should not assign the requested event as @event" do
+    describe 'When not logged in' do
+      it 'should not assign the requested event as @event' do
         event = FactoryGirl.create(:event)
-        get :edit, :id => event.id
+        get :edit, params: { id: event.id }
         response.should redirect_to(new_user_session_url)
       end
     end
   end
 
-  describe "POST create" do
+  describe 'POST create' do
     before(:each) do
       @attrs = FactoryGirl.attributes_for(:event)
-      @invalid_attrs = {:name => ''}
+      @invalid_attrs = { name: '' }
     end
 
-    describe "When logged in as Administrator" do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
 
-      describe "with valid params" do
-        it "assigns a newly created event as @event" do
-          post :create, :event => @attrs
+      describe 'with valid params' do
+        it 'assigns a newly created event as @event' do
+          post :create, params: { event: @attrs }
           assigns(:event).should be_valid
         end
 
-        it "redirects to the created event" do
-          post :create, :event => @attrs
+        it 'redirects to the created event' do
+          post :create, params: { event: @attrs }
           response.should redirect_to(assigns(:event))
         end
       end
 
-      describe "with invalid params" do
-        it "assigns a newly created but unsaved event as @event" do
-          post :create, :event => @invalid_attrs
+      describe 'with invalid params' do
+        it 'assigns a newly created but unsaved event as @event' do
+          post :create, params: { event: @invalid_attrs }
           assigns(:event).should_not be_valid
         end
 
-        it "should be forbidden" do
-          post :create, :event => @invalid_attrs
-          response.should render_template("new")
+        it 'should be forbidden' do
+          post :create, params: { event: @invalid_attrs }
+          response.should render_template('new')
         end
       end
     end
 
-    describe "When logged in as Librarian" do
+    describe 'When logged in as Librarian' do
       login_fixture_librarian
 
-      describe "with valid params" do
-        it "assigns a newly created event as @event" do
-          post :create, :event => @attrs
+      describe 'with valid params' do
+        it 'assigns a newly created event as @event' do
+          post :create, params: { event: @attrs }
           assigns(:event).should be_valid
         end
 
-        it "redirects to the created event" do
-          post :create, :event => @attrs
+        it 'redirects to the created event' do
+          post :create, params: { event: @attrs }
           response.should redirect_to(assigns(:event))
         end
       end
 
-      describe "with invalid params" do
-        it "assigns a newly created but unsaved event as @event" do
-          post :create, :event => @invalid_attrs
+      describe 'with invalid params' do
+        it 'assigns a newly created but unsaved event as @event' do
+          post :create, params: { event: @invalid_attrs }
           assigns(:event).should_not be_valid
         end
 
-        it "should be forbidden" do
-          post :create, :event => @invalid_attrs
-          response.should render_template("new")
+        it 'should be forbidden' do
+          post :create, params: { event: @invalid_attrs }
+          response.should render_template('new')
         end
       end
     end
 
-    describe "When logged in as User" do
+    describe 'When logged in as User' do
       login_fixture_user
 
-      describe "with valid params" do
-        it "assigns a newly created event as @event" do
-          post :create, :event => @attrs
+      describe 'with valid params' do
+        it 'assigns a newly created event as @event' do
+          post :create, params: { event: @attrs }
           assigns(:event).should be_nil
         end
 
-        it "should be forbidden" do
-          post :create, :event => @attrs
+        it 'should be forbidden' do
+          post :create, params: { event: @attrs }
           response.should be_forbidden
         end
       end
 
-      describe "with invalid params" do
-        it "assigns a newly created but unsaved event as @event" do
-          post :create, :event => @invalid_attrs
+      describe 'with invalid params' do
+        it 'assigns a newly created but unsaved event as @event' do
+          post :create, params: { event: @invalid_attrs }
           assigns(:event).should be_nil
         end
 
-        it "should be forbidden" do
-          post :create, :event => @invalid_attrs
+        it 'should be forbidden' do
+          post :create, params: { event: @invalid_attrs }
           response.should be_forbidden
         end
       end
     end
 
-    describe "When not logged in" do
-      describe "with valid params" do
-        it "assigns a newly created event as @event" do
-          post :create, :event => @attrs
+    describe 'When not logged in' do
+      describe 'with valid params' do
+        it 'assigns a newly created event as @event' do
+          post :create, params: { event: @attrs }
           assigns(:event).should be_nil
         end
 
-        it "should be forbidden" do
-          post :create, :event => @attrs
+        it 'should be forbidden' do
+          post :create, params: { event: @attrs }
           response.should redirect_to(new_user_session_url)
         end
       end
 
-      describe "with invalid params" do
-        it "assigns a newly created but unsaved event as @event" do
-          post :create, :event => @invalid_attrs
+      describe 'with invalid params' do
+        it 'assigns a newly created but unsaved event as @event' do
+          post :create, params: { event: @invalid_attrs }
           assigns(:event).should be_nil
         end
 
-        it "should be forbidden" do
-          post :create, :event => @invalid_attrs
+        it 'should be forbidden' do
+          post :create, params: { event: @invalid_attrs }
           response.should redirect_to(new_user_session_url)
         end
       end
     end
   end
 
-  describe "PUT update" do
+  describe 'PUT update' do
     before(:each) do
       @event = FactoryGirl.create(:event)
       @attrs = FactoryGirl.attributes_for(:event)
-      @invalid_attrs = {:name => ''}
+      @invalid_attrs = { name: '' }
     end
 
-    describe "When logged in as Administrator" do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
 
-      describe "with valid params" do
-        it "updates the requested event" do
-          put :update, :id => @event.id, :event => @attrs
+      describe 'with valid params' do
+        it 'updates the requested event' do
+          put :update, params: { id: @event.id, event: @attrs }
         end
 
-        it "assigns the requested event as @event" do
-          put :update, :id => @event.id, :event => @attrs
+        it 'assigns the requested event as @event' do
+          put :update, params: { id: @event.id, event: @attrs }
           assigns(:event).should eq(@event)
         end
       end
 
-      describe "with invalid params" do
-        it "assigns the requested event as @event" do
-          put :update, :id => @event.id, :event => @invalid_attrs
-          response.should render_template("edit")
+      describe 'with invalid params' do
+        it 'assigns the requested event as @event' do
+          put :update, params: { id: @event.id, event: @invalid_attrs }
+          response.should render_template('edit')
         end
       end
     end
 
-    describe "When logged in as Librarian" do
+    describe 'When logged in as Librarian' do
       login_fixture_librarian
 
-      describe "with valid params" do
-        it "updates the requested event" do
-          put :update, :id => @event.id, :event => @attrs
+      describe 'with valid params' do
+        it 'updates the requested event' do
+          put :update, params: { id: @event.id, event: @attrs }
         end
 
-        it "assigns the requested event as @event" do
-          put :update, :id => @event.id, :event => @attrs
+        it 'assigns the requested event as @event' do
+          put :update, params: { id: @event.id, event: @attrs }
           assigns(:event).should eq(@event)
         end
       end
 
-      describe "with invalid params" do
-        it "assigns the requested event as @event" do
-          put :update, :id => @event.id, :event => @invalid_attrs
-          response.should render_template("edit")
+      describe 'with invalid params' do
+        it 'assigns the requested event as @event' do
+          put :update, params: { id: @event.id, event: @invalid_attrs }
+          response.should render_template('edit')
         end
       end
     end
 
-    describe "When logged in as User" do
+    describe 'When logged in as User' do
       login_fixture_user
 
-      describe "with valid params" do
-        it "updates the requested event" do
-          put :update, :id => @event.id, :event => @attrs
+      describe 'with valid params' do
+        it 'updates the requested event' do
+          put :update, params: { id: @event.id, event: @attrs }
         end
 
-        it "assigns the requested event as @event" do
-          put :update, :id => @event.id, :event => @attrs
+        it 'assigns the requested event as @event' do
+          put :update, params: { id: @event.id, event: @attrs }
           assigns(:event).should eq(@event)
           response.should be_forbidden
         end
       end
 
-      describe "with invalid params" do
-        it "assigns the requested event as @event" do
-          put :update, :id => @event.id, :event => @invalid_attrs
+      describe 'with invalid params' do
+        it 'assigns the requested event as @event' do
+          put :update, params: { id: @event.id, event: @invalid_attrs }
           response.should be_forbidden
         end
       end
     end
 
-    describe "When not logged in" do
-      describe "with valid params" do
-        it "updates the requested event" do
-          put :update, :id => @event.id, :event => @attrs
+    describe 'When not logged in' do
+      describe 'with valid params' do
+        it 'updates the requested event' do
+          put :update, params: { id: @event.id, event: @attrs }
         end
 
-        it "should be forbidden" do
-          put :update, :id => @event.id, :event => @attrs
+        it 'should be forbidden' do
+          put :update, params: { id: @event.id, event: @attrs }
           response.should redirect_to(new_user_session_url)
         end
       end
 
-      describe "with invalid params" do
-        it "assigns the requested event as @event" do
-          put :update, :id => @event.id, :event => @invalid_attrs
+      describe 'with invalid params' do
+        it 'assigns the requested event as @event' do
+          put :update, params: { id: @event.id, event: @invalid_attrs }
           response.should redirect_to(new_user_session_url)
         end
       end
     end
   end
 
-  describe "DELETE destroy" do
+  describe 'DELETE destroy' do
     before(:each) do
       @event = FactoryGirl.create(:event)
     end
 
-    describe "When logged in as Administrator" do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
 
-      it "destroys the requested event" do
-        delete :destroy, :id => @event.id
+      it 'destroys the requested event' do
+        delete :destroy, params: { id: @event.id }
       end
 
-      it "redirects to the events list" do
-        delete :destroy, :id => @event.id
+      it 'redirects to the events list' do
+        delete :destroy, params: { id: @event.id }
         response.should redirect_to(events_url)
       end
     end
 
-    describe "When logged in as Librarian" do
+    describe 'When logged in as Librarian' do
       login_fixture_librarian
 
-      it "destroys the requested event" do
-        delete :destroy, :id => @event.id
+      it 'destroys the requested event' do
+        delete :destroy, params: { id: @event.id }
       end
 
-      it "redirects to the events list" do
-        delete :destroy, :id => @event.id
+      it 'redirects to the events list' do
+        delete :destroy, params: { id: @event.id }
         response.should redirect_to(events_url)
       end
     end
 
-    describe "When logged in as User" do
+    describe 'When logged in as User' do
       login_fixture_user
 
-      it "destroys the requested event" do
-        delete :destroy, :id => @event.id
+      it 'destroys the requested event' do
+        delete :destroy, params: { id: @event.id }
       end
 
-      it "should be forbidden" do
-        delete :destroy, :id => @event.id
+      it 'should be forbidden' do
+        delete :destroy, params: { id: @event.id }
         response.should be_forbidden
       end
     end
 
-    describe "When not logged in" do
-      it "destroys the requested event" do
-        delete :destroy, :id => @event.id
+    describe 'When not logged in' do
+      it 'destroys the requested event' do
+        delete :destroy, params: { id: @event.id }
       end
 
-      it "should be forbidden" do
-        delete :destroy, :id => @event.id
+      it 'should be forbidden' do
+        delete :destroy, params: { id: @event.id }
         response.should redirect_to(new_user_session_url)
       end
     end

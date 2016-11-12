@@ -1,9 +1,9 @@
 class Event < ActiveRecord::Base
   scope :closing_days, -> { includes(:event_category).where('event_categories.name' => 'closed') }
-  scope :on, lambda {|datetime| where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1)}
-  scope :past, lambda {|datetime| where('end_at <= ?', Time.zone.parse(datetime).beginning_of_day)}
-  scope :upcoming, lambda {|datetime| where('start_at >= ?', Time.zone.parse(datetime).beginning_of_day)}
-  scope :at, lambda {|library| where(:library_id => library.id)}
+  scope :on, ->(datetime) { where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1) }
+  scope :past, ->(datetime) { where('end_at <= ?', Time.zone.parse(datetime).beginning_of_day) }
+  scope :upcoming, ->(datetime) { where('start_at >= ?', Time.zone.parse(datetime).beginning_of_day) }
+  scope :at, ->(library) { where(library_id: library.id) }
 
   belongs_to :event_category, validate: true
   belongs_to :library, validate: true
@@ -22,7 +22,7 @@ class Event < ActiveRecord::Base
     time :end_at
   end
 
-  validates_presence_of :name, :library, :event_category, :start_at, :end_at
+  validates :name, :library, :event_category, :start_at, :end_at, presence: true
   validates_associated :library, :event_category
   validate :check_date
   before_validation :set_date
@@ -31,32 +31,27 @@ class Event < ActiveRecord::Base
   paginates_per 10
 
   def set_date
-    if all_day
-      set_all_day
-    end
+    set_all_day if all_day
   end
 
   def set_all_day
-    if start_at and end_at
-      self.start_at = start_at.beginning_of_day
-      self.end_at = end_at.end_of_day
-    end
+    return unless start_at && end_at
+    self.start_at = start_at.beginning_of_day
+    self.end_at = end_at.end_of_day
   end
 
   def check_date
-    if start_at and end_at
-      if start_at >= end_at
-        errors.add(:start_at)
-        errors.add(:end_at)
-      end
-    end
+    return unless start_at && end_at
+    return if start_at <= end_at
+    errors.add(:start_at)
+    errors.add(:end_at)
   end
 
   def set_display_name
     self.display_name = name if display_name.blank?
   end
 
-  def self.export(options = {format: :txt})
+  def self.export(options = { format: :txt })
     header = %w(
       name
       event_category
@@ -66,7 +61,7 @@ class Event < ActiveRecord::Base
       all_day
     )
     lines = []
-    Event.find_each.map{|e|
+    Event.find_each.map do |e|
       line = []
       line << e.name
       line << e.event_category.name
@@ -75,9 +70,9 @@ class Event < ActiveRecord::Base
       line << e.end_at
       line << e.all_day
       lines << line
-    }
+    end
     if options[:format] == :txt
-      lines.map{|line| line.to_csv(col_sep: "\t")}.unshift(header.to_csv(col_sep: "\t")).join
+      lines.map { |line| line.to_csv(col_sep: "\t") }.unshift(header.to_csv(col_sep: "\t")).join
     else
       event
     end

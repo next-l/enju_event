@@ -46,11 +46,11 @@ class EventImportFilesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event_import_file }
-      format.download {
+      format.download do
         send_file @event_import_file.event_import.download,
-          filename: File.basename(@event_import_file.event_import_filename),
-          type: 'application/octet-stream'
-      }
+                  filename: File.basename(@event_import_file.event_import_filename),
+                  type: 'application/octet-stream'
+      end
     end
   end
 
@@ -86,7 +86,7 @@ class EventImportFilesController < ApplicationController
         format.json { render json: @event_import_file, status: :created, location: @event_import_file }
       else
         prepare_options
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @event_import_file.errors, status: :unprocessable_entity }
       end
     end
@@ -104,7 +104,7 @@ class EventImportFilesController < ApplicationController
         format.json { head :no_content }
       else
         prepare_options
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @event_import_file.errors, status: :unprocessable_entity }
       end
     end
@@ -122,6 +122,7 @@ class EventImportFilesController < ApplicationController
   end
 
   private
+
   def set_event_import_file
     @event_import_file = EventImportFile.find(params[:id])
     authorize @event_import_file

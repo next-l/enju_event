@@ -1,12 +1,12 @@
 class EventImportResult < ActiveRecord::Base
   default_scope { order('event_import_results.id') }
-  scope :file_id, proc{|file_id| where(event_import_file_id: file_id)}
+  scope :file_id, proc { |file_id| where(event_import_file_id: file_id) }
   scope :failed, -> { where(event_id: nil) }
 
   belongs_to :event_import_file
   belongs_to :event
 
-  validates_presence_of :event_import_file_id
+  validates :event_import_file_id, presence: true
 end
 
 # == Schema Information

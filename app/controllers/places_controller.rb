@@ -61,18 +61,19 @@ class PlacesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_place
-      @place = Place.find(params[:id])
-      autorize @place
-    end
 
-    def check_policy
-      authorize Place
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_place
+    @place = Place.find(params[:id])
+    autorize @place
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def place_params
-      params.require(:place).permit(:term, :city, :country_id, :latitude, :longitude)
-    end
+  def check_policy
+    authorize Place
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def place_params
+    params.require(:place).permit(:term, :city, :country_id, :latitude, :longitude)
+  end
 end

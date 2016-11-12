@@ -32,7 +32,7 @@ class EventsController < ApplicationController
     @count = {}
     query = params[:query].to_s.strip
     @query = query.dup
-    query = query.gsub('　', ' ')
+    query = query.tr('　', ' ')
     tag = params[:tag].to_s if params[:tag].present?
     date = params[:date].to_s if params[:date].present?
     mode = params[:mode]
@@ -42,7 +42,7 @@ class EventsController < ApplicationController
     search.build do
       fulltext query if query.present?
       with(:library_id).equal_to library.id if library
-      #with(:tag).equal_to tag
+      # with(:tag).equal_to tag
       if date
         with(:start_at).less_than_or_equal_to Time.zone.parse(date)
         with(:end_at).greater_than Time.zone.parse(date)
@@ -64,7 +64,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json
-      format.rss  { render layout: false }
+      format.rss { render layout: false }
       format.txt
       format.atom
       format.ics
@@ -85,7 +85,7 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
-     prepare_options
+    prepare_options
     if params[:date]
       begin
         date = Time.zone.parse(params[:date])
@@ -96,7 +96,7 @@ class EventsController < ApplicationController
     else
       date = Time.zone.now.beginning_of_day
     end
-    @event = Event.new(:start_at => date, :end_at => date)
+    @event = Event.new(start_at: date, end_at: date)
     @event.library = @library
 
     respond_to do |format|
@@ -124,7 +124,7 @@ class EventsController < ApplicationController
         format.json { render json: @event, status: :created, location: @event }
       else
         prepare_options
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -144,7 +144,7 @@ class EventsController < ApplicationController
         format.json { head :no_content }
       else
         prepare_options
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -162,6 +162,7 @@ class EventsController < ApplicationController
   end
 
   private
+
   def set_event
     @event = Event.find(params[:id])
     authorize @event

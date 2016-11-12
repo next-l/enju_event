@@ -9,6 +9,7 @@ event_export_file_00002:
 event_export_file_00003:
   id: 3
   user_id: 1
+
 # == Schema Information
 #
 # Table name: event_export_files
@@ -21,5 +22,5 @@ event_export_file_00003:
 #  event_export_id       :string
 #  event_export_size     :integer
 #  event_export_filename :string
+#  attachment_data       :jsonb
 #
-

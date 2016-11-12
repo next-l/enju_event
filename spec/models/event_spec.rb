@@ -4,21 +4,21 @@ require 'rails_helper'
 describe Event do
   fixtures :events
 
-  it "should set_all_day" do
+  it 'should set_all_day' do
     event = events(:event_00001)
     event.all_day = true
     event.set_all_day
     event.all_day.should be_truthy
   end
 
-  it "should set all_day and beginning_of_day" do
+  it 'should set all_day and beginning_of_day' do
     event = events(:event_00008)
     event.all_day = true
     event.set_all_day
     event.start_at.should eq event.end_at.beginning_of_day
   end
 
-  it "should export events" do
+  it 'should export events' do
     lines = Event.export
     CSV.parse(lines, col_sep: "\t")
     expect(lines).not_to be_empty

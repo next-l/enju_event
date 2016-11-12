@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  authenticate :user, lambda {|u| u.role.try(:name) == 'Administrator' } do
-    mount Resque::Server.new, at: "/resque", as: :resque
+  authenticate :user, ->(u) { u.role.try(:name) == 'Administrator' } do
+    mount Resque::Server.new, at: '/resque', as: :resque
   end
   devise_for :users
 

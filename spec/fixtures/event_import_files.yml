@@ -18,6 +18,7 @@ event_import_file_00003:
   event_import_size: 1
   user_id: 1
   event_import_content_type: text/csv
+
 # == Schema Information
 #
 # Table name: event_import_files
@@ -42,5 +43,5 @@ event_import_file_00003:
 #  default_library_id        :integer
 #  default_event_category_id :integer
 #  event_import_id           :string
+#  attachment_data           :jsonb
 #
-

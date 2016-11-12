@@ -1,4 +1,4 @@
-require "enju_event/engine"
+require 'enju_event/engine'
 
 module EnjuEvent
 end
