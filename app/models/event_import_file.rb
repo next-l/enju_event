@@ -5,7 +5,7 @@ class EventImportFile < ActiveRecord::Base
   scope :not_imported, -> {in_state(:pending)}
   scope :stucked, -> {in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago)}
 
-  validates :event_import, presence: true, on: :create
+  validates :attachment, presence: true, on: :create
   belongs_to :user, validate: true
   belongs_to :default_library, class_name: 'Library'
   belongs_to :default_event_category, class_name: 'EventCategory'
@@ -26,7 +26,7 @@ class EventImportFile < ActiveRecord::Base
   def import
     transition_to!(:started)
     num = { imported: 0, failed: 0 }
-    rows = open_import_file(create_import_temp_file(event_import.download))
+    rows = open_import_file(create_import_temp_file(attachment.download))
     check_field(rows.first)
     row_num = 1
 
@@ -43,7 +43,6 @@ class EventImportFile < ActiveRecord::Base
       event.note = row['note']
       event.start_at = Time.zone.parse(row['start_at']) if row['start_at'].present?
       event.end_at = Time.zone.parse(row['end_at']) if row['end_at'].present?
-      category = row['event_category'].to_s.strip
       if %w(t true TRUE).include?(row['all_day'].to_s.strip)
         event.all_day = true
       else
@@ -82,7 +81,7 @@ class EventImportFile < ActiveRecord::Base
 
   def modify
     transition_to!(:started)
-    rows = open_import_file(create_import_temp_file(event_import.download))
+    rows = open_import_file(create_import_temp_file(attachment.download))
     check_field(rows.first)
     row_num = 1
 
@@ -115,7 +114,7 @@ class EventImportFile < ActiveRecord::Base
 
   def remove
     transition_to!(:started)
-    rows = open_import_file(create_import_temp_file(event_import.download))
+    rows = open_import_file(create_import_temp_file(attachment.download))
     rows.shift
     row_num = 1
 
@@ -176,13 +175,13 @@ class EventImportFile < ActiveRecord::Base
     if [field['name']].reject{|f| f.to_s.strip == ""}.empty?
       raise "You should specify a name in the first line"
     end
-    if [field['start_at'], field['end_at']].reject{|field| field.to_s.strip == ""}.empty?
+    if [field['start_at'], field['end_at']].reject{|f| f.to_s.strip == ""}.empty?
       raise "You should specify dates in the first line"
     end
   end
 
   def set_fingerprint
-    self.event_import_fingerprint = Digest::SHA1.file(event_import.download.path).hexdigest
+    self.event_import_fingerprint = Digest::SHA1.file(attachment.download.path).hexdigest
   end
 end
 

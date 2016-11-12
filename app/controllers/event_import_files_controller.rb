@@ -134,7 +134,7 @@ class EventImportFilesController < ApplicationController
 
   def event_import_file_params
     params.require(:event_import_file).permit(
-      :event_import, :edit_mode, :user_encoding, :mode,
+      :attachment, :edit_mode, :user_encoding, :mode,
       :default_library_id, :default_event_category_id
     )
   end

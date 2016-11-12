@@ -18,14 +18,18 @@ class EventExportFile < ActiveRecord::Base
     file = Event.export(format: :txt)
     tempfile.puts(file)
     tempfile.close
-    self.event_export = File.new(tempfile.path, "r")
-    if save
-      send_message
+    File.open(tempfile.path, "r") do |f|
+      begin
+        self.attachment = f
+        if save
+          send_message
+        end
+        transition_to!(:completed)
+      rescue => e
+        transition_to!(:failed)
+        raise e
+      end
     end
-    transition_to!(:completed)
-  rescue => e
-    transition_to!(:failed)
-    raise e
   end
 
   private

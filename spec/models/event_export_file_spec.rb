@@ -1,15 +1,14 @@
-# -*- encoding: utf-8 -*-
 require 'rails_helper'
   
 describe EventExportFile do
   fixtures :all
   
-  it "should export in background" do
+  it "should export" do
     message_count = Message.count
     file = EventExportFile.new
     file.user = users(:admin)
     file.save
-    EventExportFileJob.perform_later(file).should be_truthy
+    file.export!
     Message.count.should eq message_count + 1
     Message.order(:id).last.subject.should eq 'エクスポートが完了しました'
   end
