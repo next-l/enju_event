@@ -21,7 +21,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
-  before_action :set_library, :set_agent
+  before_action :set_library, :set_parent_agent
   before_action :set_libraries, except: :destroy
   before_action :prepare_options
   after_action :convert_charset, only: :index
