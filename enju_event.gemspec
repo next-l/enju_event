@@ -18,8 +18,6 @@ Gem::Specification.new do |s|
 
   # s.add_dependency "enju_message", "~> 0.2.0.beta.1"
   s.add_dependency 'simple_form', '~> 3.4'
-  # s.add_dependency "refile", "~> 0.6"
-  # s.add_dependency "refile-mini_magick"
   s.add_dependency 'statesman'
   s.add_dependency 'ri_cal'
   s.add_dependency 'rails_autolink'

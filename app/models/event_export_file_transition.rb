@@ -1,5 +1,5 @@
 class EventExportFileTransition < ActiveRecord::Base
-  include Statesman::Adapters::ActiveRecordTransition
+  #include Statesman::Adapters::ActiveRecordTransition
 
   belongs_to :event_export_file, inverse_of: :event_export_file_transitions
   # attr_accessible :to_state, :sort_key, :metadata
