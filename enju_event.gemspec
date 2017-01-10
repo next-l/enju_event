@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['spec/**/*'] - Dir['spec/dummy/log/*'] - Dir['spec/dummy/solr/{data,pids,default,development,test}/*'] - Dir['spec/dummy/tmp/*']
 
   # s.add_dependency "enju_message", "~> 0.2.0.beta.1"
-  s.add_dependency 'simple_form', '~> 3.3'
+  s.add_dependency 'simple_form', '~> 3.4'
   # s.add_dependency "refile", "~> 0.6"
   # s.add_dependency "refile-mini_magick"
   s.add_dependency 'statesman'
