@@ -428,7 +428,7 @@ ActiveRecord::Schema.define(version: 20161112085723) do
 
   create_table "event_export_file_transitions", force: :cascade do |t|
     t.string   "to_state"
-    t.text     "metadata",             default: "{}"
+    t.jsonb    "metadata",             default: {}
     t.integer  "sort_key"
     t.integer  "event_export_file_id"
     t.datetime "created_at"
@@ -448,11 +448,12 @@ ActiveRecord::Schema.define(version: 20161112085723) do
     t.string   "event_export_filename"
     t.jsonb    "attachment_data"
     t.index ["event_export_id"], name: "index_event_export_files_on_event_export_id", using: :btree
+    t.index ["user_id"], name: "index_event_export_files_on_user_id", using: :btree
   end
 
   create_table "event_import_file_transitions", force: :cascade do |t|
     t.string   "to_state"
-    t.text     "metadata",             default: "{}"
+    t.jsonb    "metadata",             default: {}
     t.integer  "sort_key"
     t.integer  "event_import_file_id"
     t.datetime "created_at"
