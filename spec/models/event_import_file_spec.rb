@@ -7,7 +7,7 @@ describe EventImportFile do
   describe 'When it is written in utf-8' do
     before(:each) do
       @file = EventImportFile.create attachment: File.open("#{Rails.root}/../../examples/event_import_file_sample1.tsv"), default_library_id: 3
-      @file.default_library = Library.find(3)
+      @file.default_library = Library.find('8fe7dd9b-7387-4f80-a656-109127a925eb')
       @file.default_event_category = EventCategory.find(3)
       @file.user = users(:admin)
     end
@@ -48,7 +48,7 @@ describe EventImportFile do
   describe 'When it is written in shift_jis' do
     before(:each) do
       @file = EventImportFile.create attachment: File.open("#{Rails.root}/../../examples/event_import_file_sample2.tsv")
-      @file.default_library = Library.find(3)
+      @file.default_library = Library.find('8fe7dd9b-7387-4f80-a656-109127a925eb')
       @file.default_event_category = EventCategory.find(3)
       @file.user = users(:admin)
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115184756) do
+ActiveRecord::Schema.define(version: 20170114174536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,8 +192,8 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.integer  "user_id"
     t.text     "note"
     t.integer  "lock_version", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["user_id"], name: "index_baskets_on_user_id", using: :btree
   end
 
@@ -232,12 +232,12 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "carrier_types", force: :cascade do |t|
-    t.string   "name",                    null: false
-    t.text     "display_name"
+    t.string   "name",                      null: false
+    t.jsonb    "display_name_translations"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "attachment_id"
     t.string   "attachment_filename"
     t.integer  "attachment_size"
@@ -341,12 +341,12 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "content_types", force: :cascade do |t|
-    t.string   "name",                    null: false
-    t.text     "display_name"
+    t.string   "name",                      null: false
+    t.jsonb    "display_name_translations"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "attachment_id"
     t.string   "attachment_filename"
     t.integer  "attachment_size"
@@ -379,10 +379,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
 
   create_table "creates", force: :cascade do |t|
     t.integer  "agent_id",       null: false
-    t.integer  "work_id",        null: false
+    t.uuid     "work_id",        null: false
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "create_type_id"
     t.index ["agent_id"], name: "index_creates_on_agent_id", using: :btree
     t.index ["work_id"], name: "index_creates_on_work_id", using: :btree
@@ -402,11 +402,11 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   create_table "doi_records", force: :cascade do |t|
     t.string   "body",                null: false
     t.string   "registration_agency"
-    t.integer  "manifestation_id",    null: false
+    t.uuid     "manifestation_id"
     t.string   "source"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.index ["body"], name: "index_doi_records_on_body", using: :btree
+    t.index ["body"], name: "index_doi_records_on_body", unique: true, using: :btree
     t.index ["manifestation_id"], name: "index_doi_records_on_manifestation_id", using: :btree
   end
 
@@ -500,17 +500,16 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer  "library_id",                        null: false
-    t.integer  "event_category_id",                 null: false
+    t.uuid     "library_id",                                null: false
+    t.integer  "event_category_id",                         null: false
     t.string   "name"
     t.text     "note"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.boolean  "all_day",           default: false, null: false
-    t.datetime "deleted_at"
-    t.text     "display_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean  "all_day",                   default: false, null: false
+    t.jsonb    "display_name_translations"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.integer  "place_id"
     t.index ["event_category_id"], name: "index_events_on_event_category_id", using: :btree
     t.index ["library_id"], name: "index_events_on_library_id", using: :btree
@@ -518,31 +517,30 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "exemplifies", force: :cascade do |t|
-    t.integer  "manifestation_id", null: false
-    t.integer  "item_id",          null: false
+    t.uuid     "manifestation_id", null: false
+    t.uuid     "item_id",          null: false
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["item_id"], name: "index_exemplifies_on_item_id", unique: true, using: :btree
-    t.index ["manifestation_id"], name: "index_exemplifies_on_manifestation_id", using: :btree
   end
 
   create_table "form_of_works", force: :cascade do |t|
-    t.string   "name",         null: false
-    t.text     "display_name"
+    t.string   "name",                      null: false
+    t.jsonb    "display_name_translations"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "frequencies", force: :cascade do |t|
-    t.string   "name",         null: false
-    t.text     "display_name"
+    t.string   "name",                      null: false
+    t.jsonb    "display_name_translations"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "identifier_types", force: :cascade do |t|
@@ -557,13 +555,26 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   create_table "identifiers", force: :cascade do |t|
     t.string   "body",               null: false
     t.integer  "identifier_type_id", null: false
-    t.integer  "manifestation_id"
+    t.uuid     "manifestation_id"
     t.boolean  "primary"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.index ["body", "identifier_type_id"], name: "index_identifiers_on_body_and_identifier_type_id", using: :btree
     t.index ["manifestation_id"], name: "index_identifiers_on_manifestation_id", using: :btree
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.integer  "profile_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "provider",        null: false
+    t.index ["email"], name: "index_identities_on_email", using: :btree
+    t.index ["name"], name: "index_identities_on_name", using: :btree
+    t.index ["profile_id"], name: "index_identities_on_profile_id", using: :btree
   end
 
   create_table "import_request_transitions", force: :cascade do |t|
@@ -580,10 +591,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
 
   create_table "import_requests", force: :cascade do |t|
     t.string   "isbn"
-    t.integer  "manifestation_id"
+    t.uuid     "manifestation_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["isbn"], name: "index_import_requests_on_isbn", using: :btree
     t.index ["manifestation_id"], name: "index_import_requests_on_manifestation_id", using: :btree
     t.index ["user_id"], name: "index_import_requests_on_user_id", using: :btree
@@ -596,7 +607,7 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.uuid     "manifestation_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["body"], name: "index_isbn_records_on_body", using: :btree
+    t.index ["body"], name: "index_isbn_records_on_body", unique: true, using: :btree
     t.index ["manifestation_id"], name: "index_isbn_records_on_manifestation_id", using: :btree
   end
 
@@ -604,10 +615,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.string   "body",             null: false
     t.string   "issn_type"
     t.string   "source"
-    t.integer  "manifestation_id"
+    t.uuid     "manifestation_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["body"], name: "index_issn_records_on_body", using: :btree
+    t.index ["body"], name: "index_issn_records_on_body", unique: true, using: :btree
     t.index ["manifestation_id"], name: "index_issn_records_on_manifestation_id", using: :btree
   end
 
@@ -622,9 +633,9 @@ ActiveRecord::Schema.define(version: 20161115184756) do
 
   create_table "item_transitions", force: :cascade do |t|
     t.string   "to_state",                   null: false
-    t.text     "jsonb",       default: "{}"
+    t.jsonb    "metadata",    default: "{}"
     t.integer  "sort_key",                   null: false
-    t.integer  "item_id",                    null: false
+    t.uuid     "item_id",                    null: false
     t.boolean  "most_recent",                null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
@@ -697,9 +708,9 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "libraries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string   "name",                                    null: false
+    t.string   "name",                                          null: false
     t.jsonb    "display_name_translations"
-    t.jsonb    "short_display_name"
+    t.jsonb    "short_display_name_translations"
     t.string   "zip_code"
     t.text     "street"
     t.text     "locality"
@@ -708,14 +719,14 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.string   "telephone_number_2"
     t.string   "fax_number"
     t.text     "note"
-    t.integer  "call_number_rows",          default: 1,   null: false
-    t.string   "call_number_delimiter",     default: "|", null: false
-    t.integer  "library_group_id",          default: 1,   null: false
-    t.integer  "users_count",               default: 0,   null: false
+    t.integer  "call_number_rows",                default: 1,   null: false
+    t.string   "call_number_delimiter",           default: "|", null: false
+    t.integer  "library_group_id",                default: 1,   null: false
+    t.integer  "users_count",                     default: 0,   null: false
     t.integer  "position"
     t.integer  "country_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.datetime "deleted_at"
     t.text     "opening_hour"
     t.string   "isil"
@@ -792,13 +803,14 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "manifestation_relationships", force: :cascade do |t|
-    t.integer  "parent_id"
-    t.integer  "child_id"
+    t.uuid     "parent_id"
+    t.uuid     "child_id"
     t.integer  "manifestation_relationship_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "position"
     t.index ["child_id"], name: "index_manifestation_relationships_on_child_id", using: :btree
+    t.index ["manifestation_relationship_type_id"], name: "index_manifestation_relationships_on_relationship_type_id", using: :btree
     t.index ["parent_id"], name: "index_manifestation_relationships_on_parent_id", using: :btree
   end
 
@@ -839,7 +851,7 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.datetime "deleted_at"
     t.string   "access_address"
     t.integer  "language_id",                     default: 1,     null: false
-    t.integer  "carrier_type_id",                 default: 1,     null: false
+    t.integer  "carrier_type_id",                                 null: false
     t.integer  "start_page"
     t.integer  "end_page"
     t.integer  "height"
@@ -891,19 +903,20 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.jsonb    "attachment_data"
     t.index ["access_address"], name: "index_manifestations_on_access_address", using: :btree
     t.index ["attachment_id"], name: "index_manifestations_on_attachment_id", using: :btree
+    t.index ["carrier_type_id"], name: "index_manifestations_on_carrier_type_id", using: :btree
     t.index ["date_of_publication"], name: "index_manifestations_on_date_of_publication", using: :btree
     t.index ["doi"], name: "index_manifestations_on_doi", using: :btree
-    t.index ["manifestation_identifier"], name: "index_manifestations_on_manifestation_identifier", using: :btree
+    t.index ["manifestation_identifier"], name: "index_manifestations_on_manifestation_identifier", unique: true, using: :btree
     t.index ["updated_at"], name: "index_manifestations_on_updated_at", using: :btree
   end
 
   create_table "medium_of_performances", force: :cascade do |t|
-    t.string   "name",         null: false
-    t.text     "display_name"
+    t.string   "name",                      null: false
+    t.jsonb    "display_name_translations"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "message_request_transitions", force: :cascade do |t|
@@ -973,10 +986,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
 
   create_table "owns", force: :cascade do |t|
     t.integer  "agent_id",   null: false
-    t.integer  "item_id",    null: false
+    t.uuid     "item_id",    null: false
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_owns_on_agent_id", using: :btree
     t.index ["item_id"], name: "index_owns_on_item_id", using: :btree
   end
@@ -1044,34 +1057,34 @@ ActiveRecord::Schema.define(version: 20161115184756) do
 
   create_table "produces", force: :cascade do |t|
     t.integer  "agent_id",         null: false
-    t.integer  "manifestation_id", null: false
+    t.uuid     "manifestation_id", null: false
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "produce_type_id"
     t.index ["agent_id"], name: "index_produces_on_agent_id", using: :btree
     t.index ["manifestation_id"], name: "index_produces_on_manifestation_id", using: :btree
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "user_group_id"
-    t.integer  "library_id"
+  create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid     "user_group_id"
+    t.uuid     "library_id"
     t.string   "locale"
     t.string   "user_number"
     t.text     "full_name"
     t.text     "note"
     t.text     "keyword_list"
     t.integer  "required_role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "checkout_icalendar_token"
     t.boolean  "save_checkout_history",    default: false, null: false
     t.datetime "expired_at"
     t.text     "full_name_transcription"
     t.datetime "date_of_birth"
     t.index ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true, using: :btree
-    t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
+    t.index ["library_id"], name: "index_profiles_on_library_id", using: :btree
+    t.index ["user_group_id"], name: "index_profiles_on_user_group_id", using: :btree
     t.index ["user_number"], name: "index_profiles_on_user_number", unique: true, using: :btree
   end
 
@@ -1086,10 +1099,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
 
   create_table "realizes", force: :cascade do |t|
     t.integer  "agent_id",        null: false
-    t.integer  "expression_id",   null: false
+    t.uuid     "expression_id",   null: false
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "realize_type_id"
     t.index ["agent_id"], name: "index_realizes_on_agent_id", using: :btree
     t.index ["expression_id"], name: "index_realizes_on_expression_id", using: :btree
@@ -1100,8 +1113,8 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "request_types", force: :cascade do |t|
@@ -1109,8 +1122,8 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "reserve_stat_has_manifestations", force: :cascade do |t|
@@ -1240,12 +1253,12 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",                     null: false
-    t.string   "display_name"
+    t.string   "name",                                  null: false
+    t.jsonb    "display_name_translations"
     t.text     "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "score",        default: 0, null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "score",                     default: 0, null: false
     t.integer  "position"
   end
 
@@ -1317,12 +1330,12 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "subscribes", force: :cascade do |t|
-    t.integer  "subscription_id", null: false
-    t.integer  "work_id",         null: false
+    t.integer  "subscription_id"
+    t.uuid     "work_id",         null: false
     t.datetime "start_at",        null: false
     t.datetime "end_at",          null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["subscription_id"], name: "index_subscribes_on_subscription_id", using: :btree
     t.index ["work_id"], name: "index_subscribes_on_work_id", using: :btree
   end
@@ -1334,8 +1347,8 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.integer  "order_list_id"
     t.datetime "deleted_at"
     t.integer  "subscribes_count", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.index ["order_list_id"], name: "index_subscriptions_on_order_list_id", using: :btree
     t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
   end
@@ -1427,10 +1440,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "user_has_roles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "user_id",    null: false
+    t.integer  "role_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["role_id"], name: "index_user_has_roles_on_role_id", using: :btree
     t.index ["user_id"], name: "index_user_has_roles_on_user_id", using: :btree
   end
@@ -1450,7 +1463,7 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.integer  "user_id"
     t.text     "note"
     t.datetime "executed_at"
-    t.string   "user_import_filename"
+    t.string   "user_import_file_name"
     t.string   "user_import_content_type"
     t.string   "user_import_file_size"
     t.datetime "user_import_updated_at"
@@ -1519,8 +1532,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "confirmed_at"
+    t.uuid     "profile_id"
     t.index ["checkout_icalendar_token"], name: "index_users_on_checkout_icalendar_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["profile_id"], name: "index_users_on_profile_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
@@ -1538,7 +1553,7 @@ ActiveRecord::Schema.define(version: 20161115184756) do
 
   create_table "withdraws", force: :cascade do |t|
     t.integer  "basket_id"
-    t.integer  "item_id"
+    t.uuid     "item_id"
     t.integer  "librarian_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -1546,20 +1561,41 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.index ["item_id"], name: "index_withdraws_on_item_id", using: :btree
   end
 
-  add_foreign_key "accepts", "baskets"
+  add_foreign_key "accepts", "baskets", on_delete: :nullify
   add_foreign_key "accepts", "items"
+  add_foreign_key "baskets", "users"
   add_foreign_key "checked_items", "baskets"
   add_foreign_key "checked_items", "items"
+  add_foreign_key "creates", "agents"
+  add_foreign_key "doi_records", "manifestations"
+  add_foreign_key "events", "libraries"
+  add_foreign_key "exemplifies", "items"
+  add_foreign_key "exemplifies", "manifestations"
+  add_foreign_key "identifiers", "manifestations"
+  add_foreign_key "import_requests", "manifestations"
+  add_foreign_key "import_requests", "users"
   add_foreign_key "isbn_records", "manifestations"
+  add_foreign_key "issn_records", "manifestations"
   add_foreign_key "item_has_use_restrictions", "items"
   add_foreign_key "item_has_use_restrictions", "use_restrictions"
   add_foreign_key "items", "manifestations"
   add_foreign_key "lending_policies", "items"
   add_foreign_key "lending_policies", "user_groups"
   add_foreign_key "library_groups", "users"
+  add_foreign_key "owns", "agents"
+  add_foreign_key "owns", "items"
   add_foreign_key "periodicals", "manifestations"
+  add_foreign_key "produces", "agents"
+  add_foreign_key "produces", "manifestations"
   add_foreign_key "reserves", "items"
   add_foreign_key "reserves", "manifestations"
   add_foreign_key "reserves", "users"
   add_foreign_key "shelves", "libraries"
+  add_foreign_key "subscribes", "subscriptions"
+  add_foreign_key "subscriptions", "users"
+  add_foreign_key "user_has_roles", "roles"
+  add_foreign_key "user_has_roles", "users"
+  add_foreign_key "users", "profiles"
+  add_foreign_key "withdraws", "baskets", on_delete: :nullify
+  add_foreign_key "withdraws", "items"
 end
