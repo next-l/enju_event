@@ -3,7 +3,7 @@ FactoryGirl.define do
     f.user_group_id { UserGroup.first.id }
     f.required_role_id { Role.find_by(name: 'User').id }
     f.sequence(:user_number) { |n| "user_number_#{n}" }
-    f.library_id { Library.find_by(name: 'kamata').id }
+    f.library { Library.find_by(name: 'kamata') }
     f.locale 'ja'
     factory :librarian_profile, class: Profile do |profile|
       profile.required_role_id { Role.find_by(name: 'Librarian').id }

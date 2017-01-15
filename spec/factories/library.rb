@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :library do |f|
     f.sequence(:name) { |n| "library#{n}" }
     f.sequence(:short_display_name) { |n| "library_#{n}" }
+    f.sequence(:display_name) { |n| "library_#{n}" }
     f.library_group_id { LibraryGroup.first.id }
   end
 end

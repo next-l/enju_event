@@ -5,7 +5,6 @@ event_00001:
   end_at: 2008-01-14 02:54:00 +09:00
   name: 仕事始め
   display_name_translations: {"ja": "仕事始め"}
-  deleted_at: 
   start_at: 2008-01-13 02:54:00 +09:00
   id: 71044385-fcdf-4893-a14c-c90996c21930
   note: なんとかかんとか
@@ -17,7 +16,6 @@ event_00002:
   end_at: 2008-01-14 02:54:00 +09:00
   name: テスト
   display_name_translations: {"ja": "テスト"}
-  deleted_at: 
   start_at: 2008-01-13 02:54:00 +09:00
   id: 3f1a4643-30a3-427e-a2f0-b67a955074cb
   note: テスト用のイベントです。
@@ -29,7 +27,6 @@ event_00003:
   end_at: 2008-02-05 00:00:00 +09:00
   name: ミーティング
   display_name_translations: {"ja": "ミーティング"}
-  deleted_at: 
   start_at: 2008-01-13 00:00:00 +09:00
   id: 54a4b5eb-2b57-42c2-9dfa-ef0b9ee14aa3
   note: ""
@@ -41,7 +38,6 @@ event_00004:
   end_at: 2008-02-06 00:00:00 +09:00
   name: テスト
   display_name_translations: {"ja": "テスト"}
-  deleted_at: 
   start_at: 2008-02-05 00:00:00 +09:00
   id: aae23704-d377-4040-9deb-613bde0555dd
   note: なんとかかんとか
@@ -53,7 +49,6 @@ event_00005:
   end_at: 2008-02-08 00:00:00 +09:00
   name: test
   display_name_translations: {"en": "test"}
-  deleted_at: 
   start_at: 2008-02-05 00:00:00 +09:00
   id: 1c390a37-8c53-47da-a362-ee474ac14396
   note: ""
@@ -65,7 +60,6 @@ event_00006:
   end_at: 2008-02-08 00:00:00 +09:00
   name: なんとかかんとか
   display_name_translations: {"ja": "なんとかかんとか"}
-  deleted_at: 
   start_at: 2008-02-05 00:00:00 +09:00
   id: 81e8ce6c-382e-4581-8fe7-c9fa228c26a9
   note: ""
@@ -77,7 +71,6 @@ event_00007:
   end_at: 2008-02-08 00:00:00 +09:00
   name: test2
   display_name_translations: {"en": "test"}
-  deleted_at: 
   start_at: 2008-02-05 00:00:00 +09:00
   id: b3ed2f49-58aa-487b-b2d5-22b1dc52d3a9
   note: test
@@ -89,7 +82,6 @@ event_00008:
   end_at: 2008-02-05 15:00:00 +09:00
   name: test3
   display_name_translations: {"en": "test"}
-  deleted_at: 
   start_at: 2008-02-05 15:00:00 +09:00
   id: 60930c0d-f6ee-469f-9a77-992d262c7428
   note: test

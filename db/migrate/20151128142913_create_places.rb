@@ -1,15 +1,13 @@
-class CreatePlaces < ActiveRecord::Migration
+class CreatePlaces < ActiveRecord::Migration[5.0]
   def change
     create_table :places do |t|
-      t.string :term
+      t.string :term, index: true
       t.text :city
-      t.integer :country_id
+      t.integer :country_id, index: true
       t.float :latitude
       t.float :longitude
 
-      t.timestamps null: false
+      t.timestamps
     end
-    add_index :places, :term
-    add_index :places, :country_id
   end
 end
