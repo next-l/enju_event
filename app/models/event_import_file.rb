@@ -6,7 +6,7 @@ class EventImportFile < ActiveRecord::Base
   scope :stucked, -> { in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago) }
 
   validates :attachment, presence: true, on: :create
-  belongs_to :user, validate: true
+  belongs_to :user
   belongs_to :default_library, class_name: 'Library'
   belongs_to :default_event_category, class_name: 'EventCategory'
   has_many :event_import_results
