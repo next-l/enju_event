@@ -6,8 +6,8 @@ describe EventImportFile do
 
   describe 'When it is written in utf-8' do
     before(:each) do
-      @file = EventImportFile.create attachment: File.open("#{Rails.root}/../../examples/event_import_file_sample1.tsv"), default_library_id: 3
-      @file.default_library = Library.find(3)
+      @file = EventImportFile.create attachment: File.open("#{Rails.root}/../../examples/event_import_file_sample1.tsv"), default_library_id: libraries(:library_00003).id
+      @file.default_library = libraries(:library_00003)
       @file.default_event_category = EventCategory.find(3)
       @file.user = users(:admin)
     end
@@ -48,7 +48,7 @@ describe EventImportFile do
   describe 'When it is written in shift_jis' do
     before(:each) do
       @file = EventImportFile.create attachment: File.open("#{Rails.root}/../../examples/event_import_file_sample2.tsv")
-      @file.default_library = Library.find(3)
+      @file.default_library = libraries(:library_00003)
       @file.default_event_category = EventCategory.find(3)
       @file.user = users(:admin)
     end
@@ -57,11 +57,11 @@ describe EventImportFile do
       old_event_count = Event.count
       old_import_results_count = EventImportResult.count
       @file.import_start
-      Event.order('id DESC').first.name.should eq 'event3'
+      Event.order(created_at: :desc).first.name.should eq 'event3'
       Event.count.should eq old_event_count + 2
       EventImportResult.count.should eq old_import_results_count + 5
-      Event.order('id DESC').first.start_at.should eq Time.zone.parse('2014-07-01').beginning_of_day
-      Event.order('id DESC').first.end_at.should eq Time.zone.parse('2014-07-31 14:00')
+      Event.order(created_at: :desc).first.start_at.should eq Time.zone.parse('2014-07-01').beginning_of_day
+      Event.order(created_at: :desc).first.end_at.should eq Time.zone.parse('2014-07-31 14:00')
     end
   end
 
@@ -83,17 +83,17 @@ describe EventImportFile do
     it 'should update events' do
       @file = EventImportFile.create attachment: File.open("#{Rails.root}/../../examples/event_update_file.tsv")
       @file.modify
-      event1 = Event.find(1)
+      event1 = events(:event_00001)
       event1.name.should eq '変更後のイベント名'
       event1.start_at.should eq Time.zone.parse('2012-04-01').beginning_of_day
       event1.end_at.should eq Time.zone.parse('2012-04-02')
 
-      event2 = Event.find(2)
+      event2 = events(:event_00002)
       event2.end_at.should eq Time.zone.parse('2012-04-03')
       event2.all_day.should be_falsy
       event2.library.name.should eq 'mita'
 
-      event3 = Event.find(3)
+      event3 = events(:event_00003)
       event3.name.should eq 'ミーティング'
     end
   end

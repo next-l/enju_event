@@ -5,8 +5,8 @@ class Event < ActiveRecord::Base
   scope :upcoming, ->(datetime) { where('start_at >= ?', Time.zone.parse(datetime).beginning_of_day) }
   scope :at, ->(library) { where(library_id: library.id) }
 
-  belongs_to :event_category, validate: true
-  belongs_to :library, validate: true
+  belongs_to :event_category
+  belongs_to :library
   belongs_to :place
   has_many :picture_files, as: :picture_attachable
   has_many :participates, dependent: :destroy
@@ -28,6 +28,7 @@ class Event < ActiveRecord::Base
   before_validation :set_date
   before_validation :set_display_name, on: :create
 
+  translates :display_name
   paginates_per 10
 
   def set_date
@@ -83,17 +84,17 @@ end
 #
 # Table name: events
 #
-#  id                :integer          not null, primary key
-#  library_id        :integer          not null
-#  event_category_id :integer          not null
-#  name              :string
-#  note              :text
-#  start_at          :datetime
-#  end_at            :datetime
-#  all_day           :boolean          default(FALSE), not null
-#  deleted_at        :datetime
-#  display_name      :text
-#  created_at        :datetime
-#  updated_at        :datetime
-#  place_id          :integer
+#  id                        :uuid             not null, primary key
+#  library_id                :uuid             not null
+#  event_category_id         :integer          not null
+#  name                      :string
+#  note                      :text
+#  start_at                  :datetime
+#  end_at                    :datetime
+#  all_day                   :boolean          default(FALSE), not null
+#  deleted_at                :datetime
+#  display_name_translations :jsonb
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  place_id                  :integer
 #

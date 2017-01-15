@@ -30,17 +30,17 @@ end
 #
 # Table name: events
 #
-#  id                :integer          not null, primary key
-#  library_id        :integer          not null
-#  event_category_id :integer          not null
-#  name              :string
-#  note              :text
-#  start_at          :datetime
-#  end_at            :datetime
-#  all_day           :boolean          default(FALSE), not null
-#  deleted_at        :datetime
-#  display_name      :text
-#  created_at        :datetime
-#  updated_at        :datetime
-#  place_id          :integer
+#  id                        :uuid             not null, primary key
+#  library_id                :uuid             not null
+#  event_category_id         :integer          not null
+#  name                      :string
+#  note                      :text
+#  start_at                  :datetime
+#  end_at                    :datetime
+#  all_day                   :boolean          default(FALSE), not null
+#  deleted_at                :datetime
+#  display_name_translations :jsonb
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  place_id                  :integer
 #
