@@ -197,7 +197,7 @@ end
 #  executed_at               :datetime
 #  event_import_filename     :string
 #  event_import_content_type :string
-#  event_import_size         :integer
+#  event_import_file_size    :integer
 #  event_import_updated_at   :datetime
 #  edit_mode                 :string
 #  created_at                :datetime
@@ -207,6 +207,5 @@ end
 #  user_encoding             :string
 #  default_library_id        :integer
 #  default_event_category_id :integer
-#  event_import_id           :string
 #  attachment_data           :jsonb
 #

@@ -45,13 +45,10 @@ end
 #
 # Table name: event_export_files
 #
-#  id                    :integer          not null, primary key
-#  user_id               :integer
-#  executed_at           :datetime
-#  created_at            :datetime
-#  updated_at            :datetime
-#  event_export_id       :string
-#  event_export_size     :integer
-#  event_export_filename :string
-#  attachment_data       :jsonb
+#  id              :integer          not null, primary key
+#  user_id         :integer
+#  executed_at     :datetime
+#  created_at      :datetime
+#  updated_at      :datetime
+#  attachment_data :jsonb
 #
