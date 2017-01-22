@@ -34,7 +34,7 @@
           td
             = link_to (event_import_file.id), event_import_file
           td
-            = link_to event_import_file.event_import_filename, event_import_file_path(event_import_file, format: :download) if event_import_file.event_import_filename
+            = link_to event_import_file.attachment.metadata['filename'], event_import_file_path(event_import_file, format: :download) if event_import_file.attachment
             br
             = t('activerecord.models.user')
             | : 
@@ -44,7 +44,7 @@
           td
             = l(event_import_file.executed_at) if event_import_file.executed_at
           td
-            = localized_state(event_import_file.current_state)
+            = localized_state(event_import_file.state_machine.current_state)
           td
             = link_to t('page.show'), event_import_file
             = link_to t('page.destroy'), event_import_file, data: {confirm: t('page.are_you_sure')}, method: :delete

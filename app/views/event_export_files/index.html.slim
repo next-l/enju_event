@@ -28,7 +28,7 @@
           td
             = event_export_file.user.try(:username)
           td
-            = link_to event_export_file.event_export_filename, event_export_file_path(event_export_file, format: :download) if event_export_file.event_export_filename
+            = link_to event_export_file.attachment.metadata['filename'], event_export_file_path(event_export_file, format: :download) if event_export_file.attachment
             br
             = event_export_file.created_at
           td

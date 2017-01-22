@@ -1,4 +1,4 @@
 id	name	event_category	library	start_at	end_at	all_day	note	dummy
-1	変更後のイベント名		kamata	2012-04-01	2012-04-02			
-2			mita		2012-04-03	FALSE		
-3	変更後のイベント名							この行は無視される
+71044385-fcdf-4893-a14c-c90996c21930	変更後のイベント名		kamata	2012-04-01	2012-04-02			
+3f1a4643-30a3-427e-a2f0-b67a955074cb			mita		2012-04-03	FALSE		
+54a4b5eb-2b57-42c2-9dfa-ef0b9ee14aa3	変更後のイベント名							この行は無視される

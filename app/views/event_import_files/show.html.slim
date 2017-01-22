@@ -25,17 +25,17 @@
       strong
         = t('activerecord.attributes.event_import_file.event_import_filename')
         | :
-      = link_to @event_import_file.event_import_filename, event_import_file_path(@event_import_file, format: :download) if @event_import_file.event_import_filename
+      = link_to @event_import_file.attachment.metadata['filename'], event_import_file_path(@event_import_file, format: :download) if @event_import_file.attachment
     p
       strong
         = t('activerecord.attributes.event_import_file.event_import_content_type')
         | :
-      = @event_import_file.event_import_content_type
+      = @event_import_file.attachment.mime_type
     p
       strong
         = t('activerecord.attributes.event_import_file.event_import_file_size')
         | :
-      = @event_import_file.event_import_file_size
+      = @event_import_file.attachment.size
     p
       strong
         = t('activerecord.attributes.event_import_file.event_import_fingerprint')
@@ -75,7 +75,7 @@
       strong
         = t('activerecord.attributes.event_import_file.state')
         | :
-      = localized_state(@event_import_file.current_state)
+      = localized_state(@event_import_file.state_machine.current_state)
     p
       strong
         = t('activerecord.attributes.event_import_file.error_message')

@@ -18,12 +18,12 @@
     p
       strong
         = t('activerecord.attributes.event_export_file.event_export_filename')
-      = link_to @event_export_file.event_export_filename, event_export_file_path(@event_export_file, format: :download) if @event_export_file.event_export_filename
+      = link_to @event_export_file.attachment.metadata['filename'], event_export_file_path(@event_export_file, format: :download) if @event_export_file.attachment
     p
       strong
         = t('activerecord.attributes.event_export_file.state')
         | :
-      = localized_state(@event_export_file.current_state)
+      = localized_state(@event_export_file.state_machine.current_state)
     p
       strong
         = t('page.created_at')
