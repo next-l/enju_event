@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "enju_message", "~> 0.2.0"
   s.add_dependency "ri_cal"
 
-  s.add_development_dependency "enju_leaf", "~> 1.2.0"
+  s.add_development_dependency "enju_leaf", "~> 1.2.1"
   s.add_development_dependency "globalize", "~> 5.1.0.beta1"
   s.add_development_dependency "globalize-accessors"
   s.add_development_dependency "sqlite3"
