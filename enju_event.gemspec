@@ -35,4 +35,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "coveralls"
   s.add_development_dependency "appraisal"
   s.add_development_dependency "resque", "~> 1.27"
+  s.add_development_dependency "sinatra", ">= 1.4.6"
 end
