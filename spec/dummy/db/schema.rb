@@ -948,8 +948,8 @@ ActiveRecord::Schema.define(version: 20170121173222) do
     t.datetime "sent_at"
     t.datetime "deleted_at"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "message_templates", force: :cascade do |t|
@@ -958,8 +958,8 @@ ActiveRecord::Schema.define(version: 20170121173222) do
     t.jsonb    "body_translations",                null: false
     t.integer  "position"
     t.string   "locale",            default: "en"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.index ["status"], name: "index_message_templates_on_status", unique: true, using: :btree
   end
 
