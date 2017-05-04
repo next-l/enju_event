@@ -1,9 +1,9 @@
-class CreateMessageTemplates < ActiveRecord::Migration[5.0]
+class CreateMessageTemplates < ActiveRecord::Migration
   def self.up
     create_table :message_templates do |t|
       t.string :status, :null => false
       t.text :title, :null => false
-      t.text :body, :null => false
+      t.jsonb :body_translations, :null => false
       t.integer :position
       t.string :locale, :default => I18n.default_locale.to_s
 

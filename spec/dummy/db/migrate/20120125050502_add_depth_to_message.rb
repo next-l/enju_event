@@ -1,4 +1,4 @@
-class AddDepthToMessage < ActiveRecord::Migration[5.0]
+class AddDepthToMessage < ActiveRecord::Migration
   def change
     add_column :messages, :depth, :integer
 
