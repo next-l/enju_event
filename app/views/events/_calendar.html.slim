@@ -1,5 +1,0 @@
-p
-
-#calendar
-script
-  |  $(document).ready(function() { $('#calendar').fullCalendar({ events: '<ruby code="= url_for(params.permit.merge(format: :json, only_path: true))"></ruby>', lang: '<ruby code="= @locale.to_s"></ruby>' }); }); 
