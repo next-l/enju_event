@@ -953,13 +953,13 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "message_templates", force: :cascade do |t|
-    t.string   "status",                           null: false
-    t.text     "title",                            null: false
-    t.jsonb    "body_translations",                null: false
+    t.string   "status",                    null: false
+    t.text     "title",                     null: false
+    t.text     "body",                      null: false
     t.integer  "position"
-    t.string   "locale",            default: "en"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.string   "locale",     default: "en"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["status"], name: "index_message_templates_on_status", unique: true, using: :btree
   end
 
