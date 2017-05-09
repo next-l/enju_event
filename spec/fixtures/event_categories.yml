@@ -1,7 +1,7 @@
 --- 
 event_category_00001: 
   name: unknown  
-  display_name_translations: {"en": "(not specified)"}
+  display_name_translations: {"en": "(not specified)", "ja": "不明"}
   updated_at: 2008-01-01 16:24:17.869192 +09:00
   id: 1
   note: ""
@@ -9,7 +9,7 @@ event_category_00001:
   position: 1
 event_category_00002: 
   name: closed
-  display_name_translations: {"ja": "休館日"}
+  display_name_translations: {"en": "Closed", "ja": "休館日"}
   updated_at: 2008-01-01 16:24:32.561469 +09:00
   id: 2
   note: ""
