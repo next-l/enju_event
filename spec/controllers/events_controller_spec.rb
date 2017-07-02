@@ -78,6 +78,21 @@ describe EventsController do
         response.should be_success
         assigns(:events).should_not be_nil
       end
+
+      describe "with json data (calendar feed)" do
+        it "should get all events data" do
+          20.times do |c|
+            FactoryGirl.create(:event)
+          end
+          Event.reindex
+          today = Date.today
+          get :index, { format: "json", start: today.beginning_of_month.to_s, end: today.end_of_month.to_s }
+          expect(response).to be_success
+          events = assigns(:events)
+          expect(events).not_to be_nil
+          expect(events.size).to be >= 20
+        end
+      end
     end
   end
 

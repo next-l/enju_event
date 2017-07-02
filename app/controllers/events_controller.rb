@@ -16,6 +16,7 @@ class EventsController < ApplicationController
     query = query.gsub('　', ' ')
     tag = params[:tag].to_s if params[:tag].present?
     date = params[:date].to_s if params[:date].present?
+    per_page = ( params[:format] == "json" ) ? 500 : Event.default_per_page
     mode = params[:mode]
 
     search = Sunspot.new_search(Event)
@@ -28,6 +29,10 @@ class EventsController < ApplicationController
         with(:start_at).less_than_or_equal_to Time.zone.parse(date)
         with(:end_at).greater_than Time.zone.parse(date)
       end
+      if params[:start].present? and params[:end].present?
+        with(:start_at).greater_than_or_equal_to Time.zone.parse(params[:start])
+        with(:end_at).less_than_or_equal_to Time.zone.parse(params[:end]).end_of_day
+      end
       case mode
       when 'upcoming'
         with(:start_at).greater_than Time.zone.now.beginning_of_day
@@ -38,14 +43,14 @@ class EventsController < ApplicationController
     end
 
     page = params[:page] || 1
-    search.query.paginate(page.to_i, Event.default_per_page)
+    search.query.paginate(page.to_i, per_page)
     @events = search.execute!.results
     @count[:query_result] = @events.total_entries
 
     respond_to do |format|
       format.html # index.html.erb
       format.html.phone
-      format.json
+      format.json { render json: @events.to_json }
       format.rss  { render layout: false }
       format.txt
       format.atom
