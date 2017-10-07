@@ -8,5 +8,4 @@ appraise "rails-5.0" do
   gem 'statesman', '~> 2.0'
   gem 'activemodel-serializers-xml'
   gem 'rails-controller-testing'
-  gem 'sinatra', '~> 2.0.0.rc2'
 end
