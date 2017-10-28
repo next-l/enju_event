@@ -60,7 +60,6 @@ class EventImportFile < ActiveRecord::Base
         num[:imported] += 1
         if (row_num % 50).zero?
           Sunspot.commit
-          GC.start
         end
       else
         num[:failed] += 1

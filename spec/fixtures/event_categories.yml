@@ -17,7 +17,7 @@ event_category_00002:
   position: 2
 event_category_00003: 
   name: book_talk
-  display_name_translations: {"ja": "おはなし会"}
+  display_name_translations: {"en": "book_talk", "ja": "おはなし会"}
   updated_at: 2008-01-01 16:24:45.267241 +09:00
   id: 3
   note: ""
@@ -25,7 +25,7 @@ event_category_00003:
   position: 3
 event_category_00004: 
   name: movie_theater
-  display_name_translations: {"ja": "上映会"}
+  display_name_translations: {"en": "movie", "ja": "上映会"}
   updated_at: 2008-01-01 16:24:55.261682 +09:00
   id: 4
   note: ""
@@ -33,7 +33,7 @@ event_category_00004:
   position: 4
 event_category_00005: 
   name: talk_event
-  display_name_translations: {"ja": "講演会"}
+  display_name_translations: {"en": "talk", "ja": "講演会"}
   updated_at: 2008-01-01 16:25:04.251141 +09:00
   id: 5
   note: ""

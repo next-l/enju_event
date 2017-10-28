@@ -20,8 +20,8 @@ describe EventImportFile do
       Event.count.should eq old_events_count + 2
       Event.closing_days.size.should eq closing_days_size + 1
       EventImportResult.count.should eq old_import_results_count + 5
-      Event.order(:id).last.library.name.should eq 'hachioji'
-      Event.order(:id).last.name.should eq 'event3'
+      Event.order(created_at: :desc).first.library.name.should eq 'hachioji'
+      Event.order(created_at: :desc).first.name.should eq 'event3'
       Event.where(name: 'event2').first.should be_nil
       event3 = Event.where(name: 'event3').first
       event3.display_name.should eq 'イベント3'
@@ -41,7 +41,7 @@ describe EventImportFile do
       @file.user = User.where(username: 'librarian1').first
       @file.import_start
       Message.count.should eq old_message_count + 1
-      Message.order(:id).last.subject.should eq 'インポートが完了しました'
+      Message.order(created_at: :desc).first.subject.should eq 'インポートが完了しました'
     end
   end
 
@@ -107,12 +107,12 @@ describe EventImportFile do
     end
   end
 
-  it 'should import in background' do
-    file = EventImportFile.create attachment: File.new("#{Rails.root}/../../examples/event_import_file_sample1.tsv")
-    file.user = users(:admin)
-    file.save
-    EventImportFileJob.perform_later(file).should be_truthy
-  end
+  #it 'should import in background' do
+  #  file = EventImportFile.create attachment: File.new("#{Rails.root}/../../examples/event_import_file_sample1.tsv")
+  #  file.user = users(:admin)
+  #  file.save
+  #  EventImportFileJob.perform_later(file).should be_truthy
+  #end
 end
 
 # == Schema Information

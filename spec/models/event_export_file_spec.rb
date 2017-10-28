@@ -10,7 +10,7 @@ describe EventExportFile do
     file.save
     file.export!
     Message.count.should eq message_count + 1
-    Message.order(:id).last.subject.should eq 'エクスポートが完了しました'
+    Message.order(created_at: :desc).first.subject.should eq 'エクスポートが完了しました'
   end
 end
 
