@@ -10,17 +10,17 @@
 
 <p>
   <strong><%= t('activerecord.attributes.event_import_file.event_import_file_name') -%>:</strong>
-  <%= link_to @event_import_file.event_import_file_name, event_import_file_path(@event_import_file, format: :download) if @event_import_file.event_import_file_name %>
+  <%= link_to @event_import_file.attachment.metadata['filename'], @event_import_file_path(event_import_file, format: :download) %>
 </p>
 
 <p>
   <strong><%= t('activerecord.attributes.event_import_file.event_import_content_type') -%>:</strong>
-  <%= @event_import_file.event_import_content_type -%>
+  <%= @event_import_file.attachment.metadata['mime_type'] -%>
 </p>
 
 <p>
   <strong><%= t('activerecord.attributes.event_import_file.event_import_file_size') -%>:</strong>
-  <%= @event_import_file.event_import_file_size -%>
+  <%= @event_import_file.attachment.metadata['size'] -%>
 </p>
 
 <p>
