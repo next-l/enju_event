@@ -3,12 +3,15 @@
 event_export_file_00001:
   id: 1
   user_id: 1
+  attachment_data: {"id": "00001", "storage": "cache", "metadata": {"filename": "test"}}
 event_export_file_00002:
   id: 2
   user_id: 1
+  attachment_data: {"id": "00002", "storage": "cache", "metadata": {"filename": "test"}}
 event_export_file_00003:
   id: 3
   user_id: 1
+  attachment_data: {"id": "00003", "storage": "cache", "metadata": {"filename": "test"}}
 
 # == Schema Information
 #
