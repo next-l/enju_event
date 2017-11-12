@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
+  s.add_dependency "enju_seed", "~> 0.2.2"
   s.add_dependency "enju_message", "~> 0.2.1"
   s.add_dependency "ri_cal"
 
@@ -33,7 +34,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-activemodel-mocks"
   s.add_development_dependency "redis-rails"
   s.add_development_dependency "coveralls"
-  s.add_development_dependency "appraisal"
   s.add_development_dependency "resque", "~> 1.27"
-  s.add_development_dependency "sinatra", ">= 1.4.6"
 end
