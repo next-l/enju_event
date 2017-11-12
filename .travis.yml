@@ -1,7 +1,7 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.2.7
+  - 2.2.6
   - 2.3.3
 before_script:
   - psql -c 'CREATE DATABASE enju_event_dummy_test'
@@ -16,6 +16,7 @@ env:
 notifications:
   slack:
     secure: hNnknSF8o2Gv0BKtligsFO07rurlizyDrjKEnzE1qV9U0GALZlyUigurJUxAhgUXNfI73SRR6zmfQl6+m/B6jGp2UF8S+c9gsuv7lWZPz+BpvZ2Eit3YW1hA7+o1f3Toc7UHDTvfowo8uyo5pKFLtVfsZVu5gXnT22+NBmPg9vw=
+dist: precise
 sudo: false
 addons:
-  postgresql: "9.4"
+  postgresql: "9.5"
