@@ -1,10 +1,10 @@
-class CreateEventImportFiles < ActiveRecord::Migration[5.0]
+class CreateEventImportFiles < ActiveRecord::Migration[5.1]
   def self.up
     create_table :event_import_files do |t|
       t.integer :parent_id
       t.string :content_type
       t.integer :size
-      t.references :user, index: true
+      t.references :user, foreign_key: true
       t.text :note
       t.datetime :imported_at
       t.string :event_import_filename

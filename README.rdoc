@@ -1,11 +1,11 @@
 = EnjuEvent
-{<img src="https://travis-ci.org/next-l/enju_event.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/next-l/enju_event]
-{<img src="https://codeclimate.com/github/next-l/enju_event/badges/gpa.svg" />}[https://codeclimate.com/github/next-l/enju_event]
-{<img src="https://codeclimate.com/github/next-l/enju_event/badges/coverage.svg" />}[https://codeclimate.com/github/next-l/enju_event/coverage]
-{<img src="https://hakiri.io/github/next-l/enju_event/master.svg" alt="security" />}[https://hakiri.io/github/next-l/enju_event/master]
+{<img src="https://travis-ci.org/next-l/enju_grid.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/next-l/enju_grid]
+{<img src="https://codeclimate.com/github/next-l/enju_grid/badges/gpa.svg" />}[https://codeclimate.com/github/next-l/enju_grid]
+{<img src="https://codeclimate.com/github/next-l/enju_grid/badges/coverage.svg" />}[https://codeclimate.com/github/next-l/enju_grid/coverage]
+{<img src="https://hakiri.io/github/next-l/enju_grid/master.svg" alt="security" />}[https://hakiri.io/github/next-l/enju_grid/master]
 
 This project rocks and uses MIT-LICENSE.
 
 == 製作者・貢献者 (Authors and contributors)
-* {TANABE, Kosuke}[https://github.com/nabeta] ({@nabeta}[https://twitter.com/nabeta])
+* {Masao Takaku}[https://github.com/masao]
 * {Project Next-L}[http://www.next-l.jp] ({@ProjectNextL}[https://twitter.com/ProjectNextL])
