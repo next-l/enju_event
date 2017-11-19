@@ -189,15 +189,9 @@ end
 #
 #  id                        :integer          not null, primary key
 #  parent_id                 :integer
-#  content_type              :string
-#  size                      :integer
 #  user_id                   :integer
 #  note                      :text
 #  executed_at               :datetime
-#  event_import_filename     :string
-#  event_import_content_type :string
-#  event_import_file_size    :integer
-#  event_import_updated_at   :datetime
 #  edit_mode                 :string
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null

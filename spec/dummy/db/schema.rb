@@ -449,15 +449,9 @@ ActiveRecord::Schema.define(version: 20170121173222) do
 
   create_table "event_import_files", force: :cascade do |t|
     t.integer "parent_id"
-    t.string "content_type"
-    t.integer "size"
     t.bigint "user_id"
     t.text "note"
     t.datetime "executed_at"
-    t.string "event_import_filename"
-    t.string "event_import_content_type"
-    t.integer "event_import_file_size"
-    t.datetime "event_import_updated_at"
     t.string "edit_mode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -990,7 +984,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
 
   create_table "participates", force: :cascade do |t|
     t.bigint "agent_id", null: false
-    t.bigint "event_id", null: false
+    t.uuid "event_id", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1608,6 +1602,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   add_foreign_key "library_groups", "users"
   add_foreign_key "owns", "agents"
   add_foreign_key "owns", "items"
+  add_foreign_key "participates", "events"
   add_foreign_key "periodicals", "manifestations"
   add_foreign_key "produces", "agents"
   add_foreign_key "produces", "manifestations"
