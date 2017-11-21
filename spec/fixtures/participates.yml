@@ -2,12 +2,12 @@
 
 one:
   agent_id: 1
-  event_id: 1
+  event_id: 71044385-fcdf-4893-a14c-c90996c21930
   position: 1
 
 two:
   agent_id: 2
-  event_id: 1
+  event_id: 71044385-fcdf-4893-a14c-c90996c21930
   position: 2
 
 # == Schema Information
