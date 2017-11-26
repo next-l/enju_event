@@ -6,7 +6,7 @@ describe ParticipatesController do
   disconnect_sunspot
 
   def valid_attributes
-    FactoryGirl.attributes_for(:participate)
+    FactoryBot.attributes_for(:participate)
   end
 
   describe 'GET index' do
@@ -50,7 +50,7 @@ describe ParticipatesController do
       login_fixture_admin
 
       it 'assigns the requested participate as @participate' do
-        participate = FactoryGirl.create(:participate)
+        participate = FactoryBot.create(:participate)
         get :show, params: { id: participate.id }
         assigns(:participate).should eq(participate)
       end
@@ -60,7 +60,7 @@ describe ParticipatesController do
       login_fixture_librarian
 
       it 'assigns the requested participate as @participate' do
-        participate = FactoryGirl.create(:participate)
+        participate = FactoryBot.create(:participate)
         get :show, params: { id: participate.id }
         assigns(:participate).should eq(participate)
       end
@@ -70,7 +70,7 @@ describe ParticipatesController do
       login_fixture_user
 
       it 'assigns the requested participate as @participate' do
-        participate = FactoryGirl.create(:participate)
+        participate = FactoryBot.create(:participate)
         get :show, params: { id: participate.id }
         assigns(:participate).should eq(participate)
       end
@@ -78,7 +78,7 @@ describe ParticipatesController do
 
     describe 'When not logged in' do
       it 'assigns the requested participate as @participate' do
-        participate = FactoryGirl.create(:participate)
+        participate = FactoryBot.create(:participate)
         get :show, params: { id: participate.id }
         assigns(:participate).should eq(participate)
       end
@@ -128,7 +128,7 @@ describe ParticipatesController do
       login_fixture_admin
 
       it 'assigns the requested participate as @participate' do
-        participate = FactoryGirl.create(:participate)
+        participate = FactoryBot.create(:participate)
         get :edit, params: { id: participate.id }
         assigns(:participate).should eq(participate)
       end
@@ -138,7 +138,7 @@ describe ParticipatesController do
       login_fixture_librarian
 
       it 'assigns the requested participate as @participate' do
-        participate = FactoryGirl.create(:participate)
+        participate = FactoryBot.create(:participate)
         get :edit, params: { id: participate.id }
         assigns(:participate).should eq(participate)
       end
@@ -148,7 +148,7 @@ describe ParticipatesController do
       login_fixture_user
 
       it 'assigns the requested participate as @participate' do
-        participate = FactoryGirl.create(:participate)
+        participate = FactoryBot.create(:participate)
         get :edit, params: { id: participate.id }
         response.should be_forbidden
       end
@@ -156,7 +156,7 @@ describe ParticipatesController do
 
     describe 'When not logged in' do
       it 'should not assign the requested participate as @participate' do
-        participate = FactoryGirl.create(:participate)
+        participate = FactoryBot.create(:participate)
         get :edit, params: { id: participate.id }
         response.should redirect_to(new_user_session_url)
       end
@@ -282,7 +282,7 @@ describe ParticipatesController do
 
   describe 'PUT update' do
     before(:each) do
-      @participate = FactoryGirl.create(:participate)
+      @participate = FactoryBot.create(:participate)
       @attrs = valid_attributes
       @invalid_attrs = { event_id: '' }
     end
@@ -388,7 +388,7 @@ describe ParticipatesController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @participate = FactoryGirl.create(:participate)
+      @participate = FactoryBot.create(:participate)
     end
 
     describe 'When logged in as Administrator' do

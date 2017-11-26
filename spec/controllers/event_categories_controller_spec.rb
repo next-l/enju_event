@@ -6,12 +6,12 @@ describe EventCategoriesController do
   disconnect_sunspot
 
   def valid_attributes
-    FactoryGirl.attributes_for(:event_category)
+    FactoryBot.attributes_for(:event_category)
   end
 
   describe 'GET index' do
     before(:each) do
-      FactoryGirl.create(:event_category)
+      FactoryBot.create(:event_category)
     end
 
     describe 'When logged in as Administrator' do
@@ -54,7 +54,7 @@ describe EventCategoriesController do
       login_fixture_admin
 
       it 'assigns the requested event_category as @event_category' do
-        event_category = FactoryGirl.create(:event_category)
+        event_category = FactoryBot.create(:event_category)
         get :show, params: { id: event_category.id }
         assigns(:event_category).should eq(event_category)
       end
@@ -64,7 +64,7 @@ describe EventCategoriesController do
       login_fixture_librarian
 
       it 'assigns the requested event_category as @event_category' do
-        event_category = FactoryGirl.create(:event_category)
+        event_category = FactoryBot.create(:event_category)
         get :show, params: { id: event_category.id }
         assigns(:event_category).should eq(event_category)
       end
@@ -74,7 +74,7 @@ describe EventCategoriesController do
       login_fixture_user
 
       it 'assigns the requested event_category as @event_category' do
-        event_category = FactoryGirl.create(:event_category)
+        event_category = FactoryBot.create(:event_category)
         get :show, params: { id: event_category.id }
         assigns(:event_category).should eq(event_category)
       end
@@ -82,7 +82,7 @@ describe EventCategoriesController do
 
     describe 'When not logged in' do
       it 'assigns the requested event_category as @event_category' do
-        event_category = FactoryGirl.create(:event_category)
+        event_category = FactoryBot.create(:event_category)
         get :show, params: { id: event_category.id }
         assigns(:event_category).should eq(event_category)
       end
@@ -134,7 +134,7 @@ describe EventCategoriesController do
       login_fixture_admin
 
       it 'assigns the requested event_category as @event_category' do
-        event_category = FactoryGirl.create(:event_category)
+        event_category = FactoryBot.create(:event_category)
         get :edit, params: { id: event_category.id }
         assigns(:event_category).should eq(event_category)
       end
@@ -144,7 +144,7 @@ describe EventCategoriesController do
       login_fixture_librarian
 
       it 'assigns the requested event_category as @event_category' do
-        event_category = FactoryGirl.create(:event_category)
+        event_category = FactoryBot.create(:event_category)
         get :edit, params: { id: event_category.id }
         response.should be_forbidden
       end
@@ -154,7 +154,7 @@ describe EventCategoriesController do
       login_fixture_user
 
       it 'assigns the requested event_category as @event_category' do
-        event_category = FactoryGirl.create(:event_category)
+        event_category = FactoryBot.create(:event_category)
         get :edit, params: { id: event_category.id }
         response.should be_forbidden
       end
@@ -162,7 +162,7 @@ describe EventCategoriesController do
 
     describe 'When not logged in' do
       it 'should not assign the requested event_category as @event_category' do
-        event_category = FactoryGirl.create(:event_category)
+        event_category = FactoryBot.create(:event_category)
         get :edit, params: { id: event_category.id }
         response.should redirect_to(new_user_session_url)
       end
@@ -288,7 +288,7 @@ describe EventCategoriesController do
 
   describe 'PUT update' do
     before(:each) do
-      @event_category = FactoryGirl.create(:event_category)
+      @event_category = FactoryBot.create(:event_category)
       @attrs = valid_attributes
       @invalid_attrs = { name: '' }
     end
@@ -389,7 +389,7 @@ describe EventCategoriesController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @event_category = FactoryGirl.create(:event_category)
+      @event_category = FactoryBot.create(:event_category)
     end
 
     describe 'When logged in as Administrator' do

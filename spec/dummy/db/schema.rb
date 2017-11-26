@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "agent_merges", force: :cascade do |t|
-    t.integer "agent_id", null: false
-    t.integer "agent_merge_list_id", null: false
+    t.uuid "agent_id"
+    t.bigint "agent_merge_list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_agent_merges_on_agent_id"
@@ -105,12 +105,13 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "agent_relationships", force: :cascade do |t|
-    t.integer "parent_id"
-    t.integer "child_id"
-    t.integer "agent_relationship_type_id"
+    t.uuid "parent_id", null: false
+    t.uuid "child_id", null: false
+    t.bigint "agent_relationship_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "position"
+    t.index ["agent_relationship_type_id"], name: "index_agent_relationships_on_agent_relationship_type_id"
     t.index ["child_id"], name: "index_agent_relationships_on_child_id"
     t.index ["parent_id"], name: "index_agent_relationships_on_parent_id"
   end
@@ -125,7 +126,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
     t.index ["name"], name: "index_agent_types_on_name", unique: true
   end
 
-  create_table "agents", force: :cascade do |t|
+  create_table "agents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "last_name"
     t.string "middle_name"
     t.string "first_name"
@@ -363,7 +364,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "creates", force: :cascade do |t|
-    t.bigint "agent_id", null: false
+    t.uuid "agent_id", null: false
     t.uuid "work_id", null: false
     t.integer "position"
     t.datetime "created_at", null: false
@@ -386,6 +387,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
 
   create_table "doi_records", force: :cascade do |t|
     t.string "body", null: false
+    t.string "display_body", null: false
     t.string "registration_agency"
     t.uuid "manifestation_id"
     t.string "source"
@@ -396,7 +398,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "donates", force: :cascade do |t|
-    t.bigint "agent_id", null: false
+    t.uuid "agent_id", null: false
     t.uuid "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -591,11 +593,9 @@ ActiveRecord::Schema.define(version: 20170121173222) do
     t.string "body", null: false
     t.string "isbn_type"
     t.string "source"
-    t.uuid "manifestation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["body"], name: "index_isbn_records_on_body", unique: true
-    t.index ["manifestation_id"], name: "index_isbn_records_on_manifestation_id"
   end
 
   create_table "issn_record_and_manifestations", force: :cascade do |t|
@@ -651,6 +651,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "manifestation_id", null: false
     t.string "call_number"
     t.string "item_identifier"
     t.datetime "created_at", null: false
@@ -662,17 +663,17 @@ ActiveRecord::Schema.define(version: 20170121173222) do
     t.integer "lock_version", default: 0, null: false
     t.integer "required_role_id", default: 1, null: false
     t.datetime "acquired_at"
-    t.integer "bookstore_id"
-    t.integer "budget_type_id"
+    t.uuid "bookstore_id"
+    t.bigint "budget_type_id"
     t.bigint "circulation_status_id", default: 1, null: false
     t.bigint "checkout_type_id", default: 1, null: false
     t.string "binding_item_identifier"
     t.string "binding_call_number"
     t.datetime "binded_at"
-    t.uuid "manifestation_id"
     t.uuid "shelf_id", null: false
     t.index ["binding_item_identifier"], name: "index_items_on_binding_item_identifier"
     t.index ["bookstore_id"], name: "index_items_on_bookstore_id"
+    t.index ["budget_type_id"], name: "index_items_on_budget_type_id"
     t.index ["checkout_type_id"], name: "index_items_on_checkout_type_id"
     t.index ["circulation_status_id"], name: "index_items_on_circulation_status_id"
     t.index ["item_identifier"], name: "index_items_on_item_identifier", unique: true
@@ -879,9 +880,9 @@ ActiveRecord::Schema.define(version: 20170121173222) do
     t.integer "year_of_publication"
     t.text "attachment_meta"
     t.integer "month_of_publication"
-    t.boolean "fulltext_content"
+    t.boolean "fulltext_content", default: false, null: false
     t.string "doi"
-    t.boolean "serial"
+    t.boolean "serial", default: false, null: false
     t.text "statement_of_responsibility"
     t.text "publication_place"
     t.text "extent"
@@ -973,7 +974,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "owns", force: :cascade do |t|
-    t.bigint "agent_id", null: false
+    t.uuid "agent_id", null: false
     t.uuid "item_id", null: false
     t.integer "position"
     t.datetime "created_at", null: false
@@ -1002,11 +1003,9 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "picture_files", force: :cascade do |t|
-    t.integer "picture_attachable_id"
-    t.string "picture_attachable_type"
-    t.string "content_type"
+    t.uuid "picture_attachable_id", null: false
+    t.string "picture_attachable_type", null: false
     t.text "title"
-    t.string "thumbnail"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1023,9 +1022,9 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "places", force: :cascade do |t|
-    t.string "term"
+    t.string "term", null: false
     t.text "city"
-    t.integer "country_id"
+    t.bigint "country_id"
     t.float "latitude"
     t.float "longitude"
     t.datetime "created_at", null: false
@@ -1044,7 +1043,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "produces", force: :cascade do |t|
-    t.bigint "agent_id", null: false
+    t.uuid "agent_id", null: false
     t.uuid "manifestation_id", null: false
     t.integer "position"
     t.datetime "created_at", null: false
@@ -1086,7 +1085,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "realizes", force: :cascade do |t|
-    t.bigint "agent_id", null: false
+    t.uuid "agent_id", null: false
     t.uuid "expression_id", null: false
     t.integer "position"
     t.datetime "created_at", null: false
@@ -1218,15 +1217,15 @@ ActiveRecord::Schema.define(version: 20170121173222) do
     t.string "resource_import_fingerprint"
     t.text "error_message"
     t.string "user_encoding"
-    t.integer "default_shelf_id"
+    t.uuid "default_shelf_id"
     t.jsonb "attachment_data"
     t.index ["user_id"], name: "index_resource_import_files_on_user_id"
   end
 
   create_table "resource_import_results", force: :cascade do |t|
     t.integer "resource_import_file_id"
-    t.integer "manifestation_id"
-    t.integer "item_id"
+    t.uuid "manifestation_id"
+    t.uuid "item_id"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1277,12 +1276,12 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   end
 
   create_table "series_statement_merges", force: :cascade do |t|
-    t.integer "series_statement_id", null: false
-    t.integer "series_statement_merge_list_id", null: false
+    t.bigint "series_statement_id"
+    t.bigint "series_statement_merge_list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["series_statement_id"], name: "index_series_statement_merges_on_series_statement_id"
-    t.index ["series_statement_merge_list_id"], name: "index_series_statement_merges_on_list_id"
+    t.index ["series_statement_merge_list_id"], name: "index_series_statement_merges_on_series_statement_merge_list_id"
   end
 
   create_table "series_statements", force: :cascade do |t|
@@ -1296,14 +1295,14 @@ ActiveRecord::Schema.define(version: 20170121173222) do
     t.text "title_transcription"
     t.text "title_alternative"
     t.string "series_statement_identifier"
-    t.integer "manifestation_id"
+    t.uuid "manifestation_id"
     t.text "note"
     t.text "title_subseries_transcription"
     t.text "creator_string"
     t.text "volume_number_string"
     t.text "volume_number_transcription_string"
-    t.boolean "series_master"
-    t.integer "root_manifestation_id"
+    t.boolean "series_master", default: false, null: false
+    t.uuid "root_manifestation_id"
     t.index ["manifestation_id"], name: "index_series_statements_on_manifestation_id"
     t.index ["root_manifestation_id"], name: "index_series_statements_on_root_manifestation_id"
     t.index ["series_statement_identifier"], name: "index_series_statements_on_series_statement_identifier"
@@ -1558,6 +1557,11 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   add_foreign_key "accepts", "items"
   add_foreign_key "accepts", "users", column: "librarian_id"
   add_foreign_key "agent_import_files", "users"
+  add_foreign_key "agent_merges", "agent_merge_lists"
+  add_foreign_key "agent_merges", "agents"
+  add_foreign_key "agent_relationships", "agent_relationship_types"
+  add_foreign_key "agent_relationships", "agents", column: "child_id"
+  add_foreign_key "agent_relationships", "agents", column: "parent_id"
   add_foreign_key "baskets", "users"
   add_foreign_key "carrier_type_has_checkout_types", "carrier_types"
   add_foreign_key "carrier_type_has_checkout_types", "checkout_types"
@@ -1573,6 +1577,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   add_foreign_key "checkouts", "users"
   add_foreign_key "checkouts", "users", column: "librarian_id"
   add_foreign_key "creates", "agents"
+  add_foreign_key "creates", "manifestations", column: "work_id"
   add_foreign_key "doi_records", "manifestations"
   add_foreign_key "donates", "agents"
   add_foreign_key "donates", "items"
@@ -1587,7 +1592,6 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   add_foreign_key "import_requests", "users"
   add_foreign_key "isbn_record_and_manifestations", "isbn_records"
   add_foreign_key "isbn_record_and_manifestations", "manifestations"
-  add_foreign_key "isbn_records", "manifestations"
   add_foreign_key "issn_record_and_manifestations", "issn_records"
   add_foreign_key "issn_record_and_manifestations", "manifestations"
   add_foreign_key "issn_record_and_periodicals", "issn_records"
@@ -1595,6 +1599,8 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   add_foreign_key "issn_records", "manifestations"
   add_foreign_key "item_has_use_restrictions", "items"
   add_foreign_key "item_has_use_restrictions", "use_restrictions"
+  add_foreign_key "items", "bookstores"
+  add_foreign_key "items", "budget_types"
   add_foreign_key "items", "checkout_types"
   add_foreign_key "items", "circulation_statuses"
   add_foreign_key "items", "manifestations"
@@ -1604,8 +1610,11 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   add_foreign_key "owns", "items"
   add_foreign_key "participates", "events"
   add_foreign_key "periodicals", "manifestations"
+  add_foreign_key "places", "countries"
   add_foreign_key "produces", "agents"
   add_foreign_key "produces", "manifestations"
+  add_foreign_key "realizes", "agents"
+  add_foreign_key "realizes", "manifestations", column: "expression_id"
   add_foreign_key "reserve_and_expiring_dates", "reserves", column: "reserve_id"
   add_foreign_key "reserve_stat_has_manifestations", "manifestations"
   add_foreign_key "reserves", "items"
@@ -1615,6 +1624,9 @@ ActiveRecord::Schema.define(version: 20170121173222) do
   add_foreign_key "resource_import_files", "users"
   add_foreign_key "retains", "items", on_delete: :cascade
   add_foreign_key "retains", "reserves", column: "reserve_id", on_delete: :cascade
+  add_foreign_key "series_statement_merges", "series_statement_merge_lists"
+  add_foreign_key "series_statement_merges", "series_statements"
+  add_foreign_key "series_statements", "manifestations"
   add_foreign_key "shelves", "libraries"
   add_foreign_key "subscribes", "subscriptions"
   add_foreign_key "subscriptions", "users"

@@ -1,12 +1,12 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  agent_id: 1
+  agent_id: 727eae50-90a8-419b-ab0c-bd8f9a3a2873
   event_id: 71044385-fcdf-4893-a14c-c90996c21930
   position: 1
 
 two:
-  agent_id: 2
+  agent_id: 29ef327d-172b-451f-9e9c-36f8831ccefe
   event_id: 71044385-fcdf-4893-a14c-c90996c21930
   position: 2
 

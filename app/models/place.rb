@@ -8,7 +8,7 @@ end
 # Table name: places
 #
 #  id         :integer          not null, primary key
-#  term       :string
+#  term       :string           not null
 #  city       :text
 #  country_id :integer
 #  latitude   :float

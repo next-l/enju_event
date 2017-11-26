@@ -93,9 +93,9 @@ library_00004:
 #  country_id                      :integer
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
+#  deleted_at                      :datetime
 #  opening_hour                    :text
 #  isil                            :string
 #  latitude                        :float
 #  longitude                       :float
-#  in_use                          :boolean          default(FALSE), not null
 #

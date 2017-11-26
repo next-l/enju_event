@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :agent do |f|
     f.sequence(:full_name) { |n| "full_name_#{n}" }
     f.agent_type_id { AgentType.where(name: 'person').first.id }
@@ -7,7 +7,7 @@ FactoryGirl.define do
   end
 end
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :invalid_agent, class: Agent do |f|
   end
 end
