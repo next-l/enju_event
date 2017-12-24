@@ -9,7 +9,7 @@ describe EventsController do
     end
 
     before(:each) do
-      FactoryGirl.create(:event)
+      FactoryBot.create(:event)
     end
 
     describe "When logged in as Administrator" do
@@ -82,7 +82,7 @@ describe EventsController do
       describe "with json data (calendar feed)" do
         it "should get all events data" do
           20.times do |c|
-            FactoryGirl.create(:event)
+            FactoryBot.create(:event)
           end
           Event.reindex
           today = Date.today
@@ -101,7 +101,7 @@ describe EventsController do
       login_fixture_admin
 
       it "assigns the requested event as @event" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         get :show, :id => event.id
         assigns(:event).should eq(event)
       end
@@ -111,7 +111,7 @@ describe EventsController do
       login_fixture_librarian
 
       it "assigns the requested event as @event" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         get :show, :id => event.id
         assigns(:event).should eq(event)
       end
@@ -121,7 +121,7 @@ describe EventsController do
       login_fixture_user
 
       it "assigns the requested event as @event" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         get :show, :id => event.id
         assigns(:event).should eq(event)
       end
@@ -129,7 +129,7 @@ describe EventsController do
 
     describe "When not logged in" do
       it "assigns the requested event as @event" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         get :show, :id => event.id
         assigns(:event).should eq(event)
       end
@@ -179,7 +179,7 @@ describe EventsController do
       login_fixture_admin
 
       it "assigns the requested event as @event" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         get :edit, :id => event.id
         assigns(:event).should eq(event)
       end
@@ -189,7 +189,7 @@ describe EventsController do
       login_fixture_librarian
 
       it "assigns the requested event as @event" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         get :edit, :id => event.id
       end
     end
@@ -198,7 +198,7 @@ describe EventsController do
       login_fixture_user
 
       it "assigns the requested event as @event" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         get :edit, :id => event.id
         response.should be_forbidden
       end
@@ -206,7 +206,7 @@ describe EventsController do
 
     describe "When not logged in" do
       it "should not assign the requested event as @event" do
-        event = FactoryGirl.create(:event)
+        event = FactoryBot.create(:event)
         get :edit, :id => event.id
         response.should redirect_to(new_user_session_url)
       end
@@ -215,7 +215,7 @@ describe EventsController do
 
   describe "POST create" do
     before(:each) do
-      @attrs = FactoryGirl.attributes_for(:event)
+      @attrs = FactoryBot.attributes_for(:event)
       @invalid_attrs = {:name => ''}
     end
 
@@ -332,8 +332,8 @@ describe EventsController do
 
   describe "PUT update" do
     before(:each) do
-      @event = FactoryGirl.create(:event)
-      @attrs = FactoryGirl.attributes_for(:event)
+      @event = FactoryBot.create(:event)
+      @attrs = FactoryBot.attributes_for(:event)
       @invalid_attrs = {:name => ''}
     end
 
@@ -427,7 +427,7 @@ describe EventsController do
 
   describe "DELETE destroy" do
     before(:each) do
-      @event = FactoryGirl.create(:event)
+      @event = FactoryBot.create(:event)
     end
 
     describe "When logged in as Administrator" do
