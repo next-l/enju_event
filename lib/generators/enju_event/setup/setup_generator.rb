@@ -10,5 +10,6 @@ class EnjuEvent::SetupGenerator < Rails::Generators::Base
       " *= require enju_event/application\n", :after => " *= require enju_leaf\n"
     inject_into_file 'app/assets/javascripts/application.js',
       "//= require enju_event/application\n", :after => "//= require enju_leaf\n"
+    generate("enju_event:update")
   end
 end
