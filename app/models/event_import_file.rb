@@ -31,7 +31,7 @@ class EventImportFile < ActiveRecord::Base
   belongs_to :default_event_category, class_name: 'EventCategory'
   has_many :event_import_results
 
-  has_many :event_import_file_transitions
+  has_many :event_import_file_transitions, autosave: false
 
   attr_accessor :mode
 

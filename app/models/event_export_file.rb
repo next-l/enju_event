@@ -16,7 +16,7 @@ class EventExportFile < ActiveRecord::Base
       path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
   end
   validates_attachment_content_type :event_export, :content_type => /\Atext\/plain\Z/
-  has_many :event_export_file_transitions
+  has_many :event_export_file_transitions, autosave: false
 
   def state_machine
     EventExportFileStateMachine.new(self, transition_class: EventExportFileTransition)
