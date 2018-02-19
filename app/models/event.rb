@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  scope :closing_days, -> { includes(:event_category).where('event_categories.name' => 'closed') }
+  scope :closing_days, -> { joins(:event_category).where('event_categories.name' => 'closed') }
   scope :on, ->(datetime) { where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1) }
   scope :past, ->(datetime) { where('end_at <= ?', Time.zone.parse(datetime).beginning_of_day) }
   scope :upcoming, ->(datetime) { where('start_at >= ?', Time.zone.parse(datetime).beginning_of_day) }
