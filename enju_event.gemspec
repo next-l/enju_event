@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "enju_message", "~> 0.2.3"
   s.add_dependency "ri_cal"
+  s.add_dependency "jbuilder"
 
   s.add_development_dependency "enju_leaf", "~> 1.2.2"
   s.add_development_dependency "sqlite3"

@@ -50,7 +50,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.html.phone
-      format.json { render json: @events.to_json }
+      format.json
       format.rss  { render layout: false }
       format.txt
       format.atom
