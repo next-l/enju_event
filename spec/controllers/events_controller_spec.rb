@@ -80,6 +80,7 @@ describe EventsController do
       end
 
       describe "with json data (calendar feed)" do
+        render_views
         it "should get all events data" do
           20.times do |c|
             FactoryBot.create(:event)
@@ -91,6 +92,12 @@ describe EventsController do
           events = assigns(:events)
           expect(events).not_to be_nil
           expect(events.size).to be >= 20
+          expect(response.body).to match /\A\[/
+          data = JSON.parse(response.body)
+          p data.first
+          expect(data.first).not_to be_nil
+          expect(data.first).to have_key("start")
+          expect(data.first).to have_key("url")
         end
       end
     end
