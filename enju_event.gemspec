@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['spec/**/*'] - Dir['spec/dummy/log/*'] - Dir['spec/dummy/solr/{data,pids,default,development,test}/*'] - Dir['spec/dummy/tmp/*']
 
   # s.add_dependency "enju_message", "~> 0.2.0"
-  s.add_dependency 'simple_form', '~> 3.5'
+  s.add_dependency 'simple_form'
   s.add_dependency 'statesman'
   s.add_dependency 'ri_cal'
   s.add_dependency 'rails_autolink'

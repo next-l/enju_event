@@ -4,11 +4,16 @@ rvm:
   - 2.3.4
   - 2.4.1
 before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
   - psql -c 'CREATE DATABASE enju_event_dummy_test'
   - psql enju_event_dummy_test -c 'CREATE EXTENSION pgcrypto'
   - bundle exec rake db:migrate
+script:
+  - bundle exec rspec
 after_script:
-  - bundle exec codeclimate-test-reporter
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 services:
   - redis-server
 env:
@@ -18,4 +23,4 @@ notifications:
     secure: hNnknSF8o2Gv0BKtligsFO07rurlizyDrjKEnzE1qV9U0GALZlyUigurJUxAhgUXNfI73SRR6zmfQl6+m/B6jGp2UF8S+c9gsuv7lWZPz+BpvZ2Eit3YW1hA7+o1f3Toc7UHDTvfowo8uyo5pKFLtVfsZVu5gXnT22+NBmPg9vw=
 sudo: false
 addons:
-  postgresql: "9.5"
+  postgresql: "9.6"
