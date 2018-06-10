@@ -51,7 +51,7 @@ class EventImportResultsController < ApplicationController
 
   def event_import_result_params
     params.require(:event_import_result).permit(
-      :event_id, :event_import_file_id, :body #, as: :admin
+      :event_id, :event_import_file_id, :body # , as: :admin
     )
   end
 end

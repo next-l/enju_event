@@ -24,7 +24,7 @@ class EventsController < ApplicationController
     search.build do
       fulltext query if query.present?
       with(:library_id).equal_to library.id if library
-      #with(:tag).equal_to tag
+      # with(:tag).equal_to tag
       if date
         with(:start_at).less_than_or_equal_to Time.zone.parse(date)
         with(:end_at).greater_than Time.zone.parse(date)
@@ -74,23 +74,23 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
      prepare_options
-    if params[:date]
-      begin
-        date = Time.zone.parse(params[:date])
-      rescue ArgumentError
-        date = Time.zone.now.beginning_of_day
-        flash[:notice] = t('page.invalid_date')
-      end
-    else
-      date = Time.zone.now.beginning_of_day
-    end
-    @event = Event.new(start_at: date, end_at: date)
-    @event.library = @library
+     if params[:date]
+       begin
+         date = Time.zone.parse(params[:date])
+       rescue ArgumentError
+         date = Time.zone.now.beginning_of_day
+         flash[:notice] = t('page.invalid_date')
+       end
+     else
+       date = Time.zone.now.beginning_of_day
+     end
+     @event = Event.new(start_at: date, end_at: date)
+     @event.library = @library
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @event }
-    end
+     respond_to do |format|
+       format.html # new.html.erb
+       format.json { render json: @event }
+     end
   end
 
   # GET /events/1/edit

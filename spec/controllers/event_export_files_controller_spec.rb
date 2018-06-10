@@ -46,7 +46,7 @@ describe EventExportFilesController do
       login_fixture_admin
 
       it "assigns the requested event_export_file as @event_export_file" do
-        get :show, id: event_export_files(:event_export_file_00003).id
+        get :show, params: { id: event_export_files(:event_export_file_00003).id }
         assigns(:event_export_file).should eq(event_export_files(:event_export_file_00003))
         response.should be_success
       end
@@ -56,7 +56,7 @@ describe EventExportFilesController do
       login_fixture_librarian
 
       it "assigns the requested event_export_file as @event_export_file" do
-        get :show, id: event_export_files(:event_export_file_00003).id
+        get :show, params: { id: event_export_files(:event_export_file_00003).id }
         assigns(:event_export_file).should eq(event_export_files(:event_export_file_00003))
         response.should be_success
       end
@@ -66,7 +66,7 @@ describe EventExportFilesController do
       login_fixture_user
 
       it "assigns the requested event_export_file as @event_export_file" do
-        get :show, id: event_export_files(:event_export_file_00003).id
+        get :show, params: { id: event_export_files(:event_export_file_00003).id }
         assigns(:event_export_file).should eq(event_export_files(:event_export_file_00003))
         response.should be_forbidden
       end
@@ -74,7 +74,7 @@ describe EventExportFilesController do
 
     describe "When not logged in" do
       it "assigns the requested event_export_file as @event_export_file" do
-        get :show, id: event_export_files(:event_export_file_00003).id
+        get :show, params: { id: event_export_files(:event_export_file_00003).id }
         assigns(:event_export_file).should eq(event_export_files(:event_export_file_00003))
         response.should redirect_to(new_user_session_url)
       end
@@ -126,7 +126,7 @@ describe EventExportFilesController do
       login_fixture_librarian
 
       it "should create agent_export_file" do
-        post :create, event_export_file: { event_export_file_name: 'test.txt' }
+        post :create, params: { event_export_file: { event_export_file_name: 'test.txt' } }
         assigns(:event_export_file).should be_valid
         assigns(:event_export_file).user.username.should eq @user.username
         response.should redirect_to event_export_file_url(assigns(:event_export_file))
@@ -137,7 +137,7 @@ describe EventExportFilesController do
       login_fixture_user
 
       it "should be forbidden" do
-        post :create, event_export_file: { event_export_file_name: 'test.txt' }
+        post :create, params: { event_export_file: { event_export_file_name: 'test.txt' } }
         assigns(:event_export_file).should be_nil
         response.should be_forbidden
       end
@@ -145,7 +145,7 @@ describe EventExportFilesController do
 
     describe "When not logged in" do
       it "should be redirected to new session url" do
-        post :create, event_export_file: { event_export_file_name: 'test.txt' }
+        post :create, params: { event_export_file: { event_export_file_name: 'test.txt' } }
         assigns(:event_export_file).should be_nil
         response.should redirect_to new_user_session_url
       end
@@ -158,7 +158,7 @@ describe EventExportFilesController do
 
       it "assigns the requested event_export_file as @event_export_file" do
         event_export_file = event_export_files(:event_export_file_00001)
-        get :edit, id: event_export_file.id
+        get :edit, params: { id: event_export_file.id }
         assigns(:event_export_file).should eq(event_export_file)
       end
     end
@@ -168,7 +168,7 @@ describe EventExportFilesController do
 
       it "assigns the requested event_export_file as @event_export_file" do
         event_export_file = event_export_files(:event_export_file_00001)
-        get :edit, id: event_export_file.id
+        get :edit, params: { id: event_export_file.id }
         assigns(:event_export_file).should eq(event_export_file)
       end
     end
@@ -178,7 +178,7 @@ describe EventExportFilesController do
 
       it "assigns the requested event_export_file as @event_export_file" do
         event_export_file = event_export_files(:event_export_file_00001)
-        get :edit, id: event_export_file.id
+        get :edit, params: { id: event_export_file.id }
         response.should be_forbidden
       end
     end
@@ -186,7 +186,7 @@ describe EventExportFilesController do
     describe "When not logged in" do
       it "should not assign the requested event_export_file as @event_export_file" do
         event_export_file = event_export_files(:event_export_file_00001)
-        get :edit, id: event_export_file.id
+        get :edit, params: { id: event_export_file.id }
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -197,7 +197,7 @@ describe EventExportFilesController do
       login_fixture_admin
 
       it "should update event_export_file" do
-        put :update, id: event_export_files(:event_export_file_00003).id, event_export_file: { event_export_file_name: 'test.txt' }
+        put :update, params: { id: event_export_files(:event_export_file_00003).id, event_export_file: { event_export_file_name: 'test.txt' } }
         response.should redirect_to event_export_file_url(assigns(:event_export_file))
       end
     end
@@ -206,7 +206,7 @@ describe EventExportFilesController do
       login_fixture_librarian
 
       it "should update event_export_file" do
-        put :update, id: event_export_files(:event_export_file_00003).id, event_export_file: { event_export_file_name: 'test.txt' }
+        put :update, params: { id: event_export_files(:event_export_file_00003).id, event_export_file: { event_export_file_name: 'test.txt' } }
         response.should redirect_to event_export_file_url(assigns(:event_export_file))
       end
     end
@@ -215,14 +215,14 @@ describe EventExportFilesController do
       login_fixture_user
 
       it "should not update event_export_file" do
-        put :update, id: event_export_files(:event_export_file_00003).id, event_export_file: { }
+        put :update, params: { id: event_export_files(:event_export_file_00003).id, event_export_file: { } }
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
       it "should not update event_export_file" do
-        put :update, id: event_export_files(:event_export_file_00003).id, event_export_file: { }
+        put :update, params: { id: event_export_files(:event_export_file_00003).id, event_export_file: { } }
         response.should redirect_to new_user_session_url
       end
     end
@@ -237,11 +237,11 @@ describe EventExportFilesController do
       login_fixture_admin
 
       it "destroys the requested event_export_file" do
-        delete :destroy, id: @event_export_file.id
+        delete :destroy, params: { id: @event_export_file.id }
       end
 
       it "redirects to the event_export_files list" do
-        delete :destroy, id: @event_export_file.id
+        delete :destroy, params: { id: @event_export_file.id }
         response.should redirect_to(event_export_files_url)
       end
     end
@@ -250,11 +250,11 @@ describe EventExportFilesController do
       login_fixture_librarian
 
       it "destroys the requested event_export_file" do
-        delete :destroy, id: @event_export_file.id
+        delete :destroy, params: { id: @event_export_file.id }
       end
 
       it "redirects to the event_export_files list" do
-        delete :destroy, id: @event_export_file.id
+        delete :destroy, params: { id: @event_export_file.id }
         response.should redirect_to(event_export_files_url)
       end
     end
@@ -263,22 +263,22 @@ describe EventExportFilesController do
       login_fixture_user
 
       it "destroys the requested event_export_file" do
-        delete :destroy, id: @event_export_file.id
+        delete :destroy, params: { id: @event_export_file.id }
       end
 
       it "should be forbidden" do
-        delete :destroy, id: @event_export_file.id
+        delete :destroy, params: { id: @event_export_file.id }
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
       it "destroys the requested event_export_file" do
-        delete :destroy, id: @event_export_file.id
+        delete :destroy, params: { id: @event_export_file.id }
       end
 
       it "should be forbidden" do
-        delete :destroy, id: @event_export_file.id
+        delete :destroy, params: { id: @event_export_file.id }
         response.should redirect_to(new_user_session_url)
       end
     end

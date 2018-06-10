@@ -22,7 +22,7 @@ class Event < ActiveRecord::Base
     time :end_at
   end
 
-  validates_presence_of :name, :library, :event_category, :start_at, :end_at
+  validates :name, :library, :event_category, :start_at, :end_at, presence: true
   validates_associated :library, :event_category
   validate :check_date
   before_validation :set_date

@@ -3,7 +3,7 @@ class EventImportFileTransition < ActiveRecord::Base
 
   
   belongs_to :event_import_file, inverse_of: :event_import_file_transitions
-  #attr_accessible :to_state, :sort_key, :metadata
+  # attr_accessible :to_state, :sort_key, :metadata
 end
 
 # == Schema Information
