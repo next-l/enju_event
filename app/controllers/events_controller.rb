@@ -84,7 +84,7 @@ class EventsController < ApplicationController
     else
       date = Time.zone.now.beginning_of_day
     end
-    @event = Event.new(:start_at => date, :end_at => date)
+    @event = Event.new(start_at: date, end_at: date)
     @event.library = @library
 
     respond_to do |format|

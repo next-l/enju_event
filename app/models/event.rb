@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   scope :on, lambda {|datetime| where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1)}
   scope :past, lambda {|datetime| where('end_at <= ?', Time.zone.parse(datetime).beginning_of_day)}
   scope :upcoming, lambda {|datetime| where('start_at >= ?', Time.zone.parse(datetime).beginning_of_day)}
-  scope :at, lambda {|library| where(:library_id => library.id)}
+  scope :at, lambda {|library| where(library_id: library.id)}
 
   belongs_to :event_category, validate: true
   belongs_to :library, validate: true
