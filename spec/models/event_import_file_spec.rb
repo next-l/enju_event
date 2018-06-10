@@ -7,7 +7,7 @@ describe EventImportFile do
 
   describe "When it is written in utf-8" do
     before(:each) do
-      @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), :default_library_id => 3
+      @file = EventImportFile.create event_import: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), default_library_id: 3
       @file.default_library = Library.find(3)
       @file.default_event_category = EventCategory.find(3)
       @file.user = users(:admin)
@@ -17,7 +17,7 @@ describe EventImportFile do
       closing_days_size = Event.closing_days.size
       old_events_count = Event.count
       old_import_results_count = EventImportResult.count
-      @file.import_start.should eq({:imported => 2, :failed => 2})
+      @file.import_start.should eq({imported: 2, failed: 2})
       Event.count.should eq old_events_count + 2
       Event.closing_days.size.should eq closing_days_size + 1
       EventImportResult.count.should eq old_import_results_count + 5
@@ -48,7 +48,7 @@ describe EventImportFile do
 
   describe "When it is written in shift_jis" do
     before(:each) do
-      @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample2.tsv")
+      @file = EventImportFile.create event_import: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample2.tsv")
       @file.default_library = Library.find(3)
       @file.default_event_category = EventCategory.find(3)
       @file.user = users(:admin)
@@ -68,7 +68,7 @@ describe EventImportFile do
 
   describe "When it is an invalid file" do
     before(:each) do
-      @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/invalid_file.tsv")
+      @file = EventImportFile.create event_import: File.new("#{Rails.root.to_s}/../../examples/invalid_file.tsv")
     end
 
     it "should not be imported" do
@@ -82,7 +82,7 @@ describe EventImportFile do
 
   describe "when its mode is 'update'" do
     it "should update events" do
-      @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_update_file.tsv")
+      @file = EventImportFile.create event_import: File.new("#{Rails.root.to_s}/../../examples/event_update_file.tsv")
       @file.modify
       event1 = Event.find(1)
       event1.name.should eq '変更後のイベント名'
@@ -103,14 +103,14 @@ describe EventImportFile do
   describe "when its mode is 'destroy'" do
     it "should destroy events" do
       old_event_count = Event.count
-      @file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_destroy_file.tsv")
+      @file = EventImportFile.create event_import: File.new("#{Rails.root.to_s}/../../examples/event_destroy_file.tsv")
       @file.remove
       Event.count.should eq old_event_count - 2
     end
   end
 
   it "should import in background" do
-    file = EventImportFile.create :event_import => File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv")
+    file = EventImportFile.create event_import: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv")
     file.user = users(:admin)
     file.save
     EventImportFileJob.perform_later(file).should be_truthy

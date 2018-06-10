@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 
   resources :events
   resources :event_categories
-  resources :event_import_results, :only => [:index, :show, :destroy]
+  resources :event_import_results, only: [:index, :show, :destroy]
   resources :participates
 end

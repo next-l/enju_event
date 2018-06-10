@@ -172,7 +172,7 @@ describe EventCategoriesController do
   describe "POST create" do
     before(:each) do
       @attrs = valid_attributes
-      @invalid_attrs = {:name => ''}
+      @invalid_attrs = {name: ''}
     end
 
     describe "When logged in as Administrator" do
@@ -290,7 +290,7 @@ describe EventCategoriesController do
     before(:each) do
       @event_category = FactoryBot.create(:event_category)
       @attrs = valid_attributes
-      @invalid_attrs = {:name => ''}
+      @invalid_attrs = {name: ''}
     end
 
     describe "When logged in as Administrator" do
@@ -307,7 +307,7 @@ describe EventCategoriesController do
         end
 
         it "moves its position when specified" do
-          put :update, id: @event_category.id, event_category: @attrs, :move => 'lower'
+          put :update, id: @event_category.id, event_category: @attrs, move: 'lower'
           response.should redirect_to(event_categories_url)
         end
       end
