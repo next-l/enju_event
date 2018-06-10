@@ -1,4 +1,4 @@
-xml.instruct! :xml, :version=>"1.0"
+xml.instruct! :xml, version: "1.0"
 xml.rss('version' => "2.0",
   'xmlns:opensearch' => "http://a9.com/-/spec/opensearch/1.1/",
   'xmlns:atom' => "http://www.w3.org/2005/Atom"){
@@ -24,7 +24,7 @@ xml.rss('version' => "2.0",
         # rfc822
         xml.pubDate event.created_at.rfc2822
         xml.link event_url(event)
-        xml.guid event_url(event), :isPermaLink => "true"
+        xml.guid event_url(event), isPermaLink: "true"
         #event.tags.each do |tag|
         #  xml.category tag.name
         #end
