@@ -1,6 +1,6 @@
 module EnjuEvent
   module Controller
-    
+
     private
 
     def get_event

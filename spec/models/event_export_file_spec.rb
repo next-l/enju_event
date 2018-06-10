@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 require 'rails_helper'
-  
+
 describe EventExportFile do
   fixtures :all
-  
+
   it "should export in background" do
     message_count = Message.count
     file = EventExportFile.new

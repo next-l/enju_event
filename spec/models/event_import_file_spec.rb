@@ -98,7 +98,7 @@ describe EventImportFile do
       event3.name.should eq 'ミーティング'
     end
   end
-    
+
 
   describe "when its mode is 'destroy'" do
     it "should destroy events" do

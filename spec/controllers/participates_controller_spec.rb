@@ -51,7 +51,7 @@ describe ParticipatesController do
 
       it "assigns the requested participate as @participate" do
         participate = FactoryBot.create(:participate)
-        get :show, params: { id: participate.id }
+        get :show, id: participate.id
         assigns(:participate).should eq(participate)
       end
     end
@@ -61,7 +61,7 @@ describe ParticipatesController do
 
       it "assigns the requested participate as @participate" do
         participate = FactoryBot.create(:participate)
-        get :show, params: { id: participate.id }
+        get :show, id: participate.id
         assigns(:participate).should eq(participate)
       end
     end
@@ -71,7 +71,7 @@ describe ParticipatesController do
 
       it "assigns the requested participate as @participate" do
         participate = FactoryBot.create(:participate)
-        get :show, params: { id: participate.id }
+        get :show, id: participate.id
         assigns(:participate).should eq(participate)
       end
     end
@@ -79,7 +79,7 @@ describe ParticipatesController do
     describe "When not logged in" do
       it "assigns the requested participate as @participate" do
         participate = FactoryBot.create(:participate)
-        get :show, params: { id: participate.id }
+        get :show, id: participate.id
         assigns(:participate).should eq(participate)
       end
     end
@@ -129,7 +129,7 @@ describe ParticipatesController do
 
       it "assigns the requested participate as @participate" do
         participate = FactoryBot.create(:participate)
-        get :edit, params: { id: participate.id }
+        get :edit, id: participate.id
         assigns(:participate).should eq(participate)
       end
     end
@@ -139,7 +139,7 @@ describe ParticipatesController do
 
       it "assigns the requested participate as @participate" do
         participate = FactoryBot.create(:participate)
-        get :edit, params: { id: participate.id }
+        get :edit, id: participate.id
         assigns(:participate).should eq(participate)
       end
     end
@@ -149,7 +149,7 @@ describe ParticipatesController do
 
       it "assigns the requested participate as @participate" do
         participate = FactoryBot.create(:participate)
-        get :edit, params: { id: participate.id }
+        get :edit, id: participate.id
         response.should be_forbidden
       end
     end
@@ -157,7 +157,7 @@ describe ParticipatesController do
     describe "When not logged in" do
       it "should not assign the requested participate as @participate" do
         participate = FactoryBot.create(:participate)
-        get :edit, params: { id: participate.id }
+        get :edit, id: participate.id
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -174,24 +174,24 @@ describe ParticipatesController do
 
       describe "with valid params" do
         it "assigns a newly created participate as @participate" do
-          post :create, params: { participate: @attrs }
+          post :create, participate: @attrs
           assigns(:participate).should be_valid
         end
 
         it "redirects to the created participate" do
-          post :create, params: { participate: @attrs }
+          post :create, participate: @attrs
           response.should redirect_to(participate_url(assigns(:participate)))
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved participate as @participate" do
-          post :create, params: { participate: @invalid_attrs }
+          post :create, participate: @invalid_attrs
           assigns(:participate).should_not be_valid
         end
 
         it "re-renders the 'new' template" do
-          post :create, params: { participate: @invalid_attrs }
+          post :create, participate: @invalid_attrs
           response.should render_template("new")
         end
       end
@@ -202,24 +202,24 @@ describe ParticipatesController do
 
       describe "with valid params" do
         it "assigns a newly created participate as @participate" do
-          post :create, params: { participate: @attrs }
+          post :create, participate: @attrs
           assigns(:participate).should be_valid
         end
 
         it "redirects to the created participate" do
-          post :create, params: { participate: @attrs }
+          post :create, participate: @attrs
           response.should redirect_to(participate_url(assigns(:participate)))
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved participate as @participate" do
-          post :create, params: { participate: @invalid_attrs }
+          post :create, participate: @invalid_attrs
           assigns(:participate).should_not be_valid
         end
 
         it "re-renders the 'new' template" do
-          post :create, params: { participate: @invalid_attrs }
+          post :create, participate: @invalid_attrs
           response.should render_template("new")
         end
       end
@@ -230,24 +230,24 @@ describe ParticipatesController do
 
       describe "with valid params" do
         it "assigns a newly created participate as @participate" do
-          post :create, params: { participate: @attrs }
+          post :create, participate: @attrs
           assigns(:participate).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, params: { participate: @attrs }
+          post :create, participate: @attrs
           response.should be_forbidden
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved participate as @participate" do
-          post :create, params: { participate: @invalid_attrs }
+          post :create, participate: @invalid_attrs
           assigns(:participate).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, params: { participate: @invalid_attrs }
+          post :create, participate: @invalid_attrs
           response.should be_forbidden
         end
       end
@@ -256,24 +256,24 @@ describe ParticipatesController do
     describe "When not logged in" do
       describe "with valid params" do
         it "assigns a newly created participate as @participate" do
-          post :create, params: { participate: @attrs }
+          post :create, participate: @attrs
           assigns(:participate).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, params: { participate: @attrs }
+          post :create, participate: @attrs
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved participate as @participate" do
-          post :create, params: { participate: @invalid_attrs }
+          post :create, participate: @invalid_attrs
           assigns(:participate).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, params: { participate: @invalid_attrs }
+          post :create, participate: @invalid_attrs
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -292,11 +292,11 @@ describe ParticipatesController do
 
       describe "with valid params" do
         it "updates the requested participate" do
-          put :update, params: { id: @participate.id, participate: @attrs }
+          put :update, id: @participate.id, participate: @attrs
         end
 
         it "assigns the requested participate as @participate" do
-          put :update, params: { id: @participate.id, participate: @attrs }
+          put :update, id: @participate.id, participate: @attrs
           assigns(:participate).should eq(@participate)
           response.should redirect_to(@participate)
         end
@@ -304,11 +304,11 @@ describe ParticipatesController do
 
       describe "with invalid params" do
         it "assigns the requested participate as @participate" do
-          put :update, params: { id: @participate.id, participate: @invalid_attrs }
+          put :update, id: @participate.id, participate: @invalid_attrs
         end
 
         it "re-renders the 'edit' template" do
-          put :update, params: { id: @participate.id, participate: @invalid_attrs }
+          put :update, id: @participate.id, participate: @invalid_attrs
           response.should render_template("edit")
         end
       end
@@ -319,11 +319,11 @@ describe ParticipatesController do
 
       describe "with valid params" do
         it "updates the requested participate" do
-          put :update, params: { id: @participate.id, participate: @attrs }
+          put :update, id: @participate.id, participate: @attrs
         end
 
         it "assigns the requested participate as @participate" do
-          put :update, params: { id: @participate.id, participate: @attrs }
+          put :update, id: @participate.id, participate: @attrs
           assigns(:participate).should eq(@participate)
           response.should redirect_to(@participate)
         end
@@ -331,12 +331,12 @@ describe ParticipatesController do
 
       describe "with invalid params" do
         it "assigns the participate as @participate" do
-          put :update, params: { id: @participate.id, participate: @invalid_attrs }
+          put :update, id: @participate.id, participate: @invalid_attrs
           assigns(:participate).should_not be_valid
         end
 
         it "re-renders the 'edit' template" do
-          put :update, params: { id: @participate.id, participate: @invalid_attrs }
+          put :update, id: @participate.id, participate: @invalid_attrs
           response.should render_template("edit")
         end
       end
@@ -347,11 +347,11 @@ describe ParticipatesController do
 
       describe "with valid params" do
         it "updates the requested participate" do
-          put :update, params: { id: @participate.id, participate: @attrs }
+          put :update, id: @participate.id, participate: @attrs
         end
 
         it "assigns the requested participate as @participate" do
-          put :update, params: { id: @participate.id, participate: @attrs }
+          put :update, id: @participate.id, participate: @attrs
           assigns(:participate).should eq(@participate)
           response.should be_forbidden
         end
@@ -359,7 +359,7 @@ describe ParticipatesController do
 
       describe "with invalid params" do
         it "assigns the requested participate as @participate" do
-          put :update, params: { id: @participate.id, participate: @invalid_attrs }
+          put :update, id: @participate.id, participate: @invalid_attrs
           response.should be_forbidden
         end
       end
@@ -368,18 +368,18 @@ describe ParticipatesController do
     describe "When not logged in" do
       describe "with valid params" do
         it "updates the requested participate" do
-          put :update, params: { id: @participate.id, participate: @attrs }
+          put :update, id: @participate.id, participate: @attrs
         end
 
         it "should be forbidden" do
-          put :update, params: { id: @participate.id, participate: @attrs }
+          put :update, id: @participate.id, participate: @attrs
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested participate as @participate" do
-          put :update, params: { id: @participate.id, participate: @invalid_attrs }
+          put :update, id: @participate.id, participate: @invalid_attrs
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -395,11 +395,11 @@ describe ParticipatesController do
       login_fixture_admin
 
       it "destroys the requested participate" do
-        delete :destroy, params: { id: @participate.id }
+        delete :destroy, id: @participate.id
       end
 
       it "redirects to the participates list" do
-        delete :destroy, params: { id: @participate.id }
+        delete :destroy, id: @participate.id
         response.should redirect_to(participates_url)
       end
     end
@@ -408,11 +408,11 @@ describe ParticipatesController do
       login_fixture_librarian
 
       it "destroys the requested participate" do
-        delete :destroy, params: { id: @participate.id }
+        delete :destroy, id: @participate.id
       end
 
       it "redirects to the participates list" do
-        delete :destroy, params: { id: @participate.id }
+        delete :destroy, id: @participate.id
         response.should redirect_to(participates_url)
       end
     end
@@ -421,22 +421,22 @@ describe ParticipatesController do
       login_fixture_user
 
       it "destroys the requested participate" do
-        delete :destroy, params: { id: @participate.id }
+        delete :destroy, id: @participate.id
       end
 
       it "should be forbidden" do
-        delete :destroy, params: { id: @participate.id }
+        delete :destroy, id: @participate.id
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
       it "destroys the requested participate" do
-        delete :destroy, params: { id: @participate.id }
+        delete :destroy, id: @participate.id
       end
 
       it "should be forbidden" do
-        delete :destroy, params: { id: @participate.id }
+        delete :destroy, id: @participate.id
         response.should redirect_to(new_user_session_url)
       end
     end
