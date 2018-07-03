@@ -11,7 +11,7 @@ xml.rss('version' => "2.0",
     xml.tag! "atom:link", rel: 'self', href: "#{request.protocol}#{request.host_with_port}#{url_for(params.permit.merge(format: :rss, only_path: true))}"
     xml.tag! "atom:link", rel: 'alternate', href: events_url
     # xml.tag! "atom:link", rel: 'search', :type => 'application/opensearchdescription+xml', href: "http://#{request.host_with_port}/page/opensearch"
-    unless params[:query].blank?
+    if params[:query].present?
       xml.tag! "opensearch:totalResults", @count[:query_result]
       xml.tag! "opensearch:startIndex", @events.offset + 1
       xml.tag! "opensearch:itemsPerPage", @events.per_page

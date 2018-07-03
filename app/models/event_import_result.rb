@@ -4,7 +4,7 @@ class EventImportResult < ActiveRecord::Base
   scope :failed, -> { where(event_id: nil) }
 
   belongs_to :event_import_file
-  belongs_to :event
+  belongs_to :event, optional: true
 
   validates :event_import_file_id, presence: true
 end
