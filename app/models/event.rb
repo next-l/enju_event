@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :event_category, validate: true
   belongs_to :library, validate: true
-  belongs_to :place
+  belongs_to :place, optional: true
   has_many :picture_files, as: :picture_attachable
   has_many :participates, dependent: :destroy
   has_many :agents, through: :participates
