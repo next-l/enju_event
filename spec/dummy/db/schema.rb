@@ -121,8 +121,8 @@ ActiveRecord::Schema.define(version: 20180107164617) do
     t.string "full_name"
     t.text "full_name_transcription"
     t.text "full_name_alternative"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.datetime "deleted_at"
     t.string "zip_code_1"
     t.string "zip_code_2"
@@ -546,8 +546,8 @@ ActiveRecord::Schema.define(version: 20180107164617) do
   create_table "items", force: :cascade do |t|
     t.string "call_number"
     t.string "item_identifier"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.datetime "deleted_at"
     t.integer "shelf_id", default: 1, null: false
     t.boolean "include_supplements", default: false, null: false
@@ -757,8 +757,8 @@ ActiveRecord::Schema.define(version: 20180107164617) do
     t.string "manifestation_identifier"
     t.datetime "date_of_publication"
     t.datetime "date_copyrighted"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.datetime "deleted_at"
     t.string "access_address"
     t.integer "language_id", default: 1, null: false
@@ -1426,8 +1426,8 @@ ActiveRecord::Schema.define(version: 20180107164617) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean "save_checkout_history", default: false, null: false
     t.string "checkout_icalendar_token"
     t.string "username"
