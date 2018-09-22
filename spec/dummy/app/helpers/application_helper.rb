@@ -1,3 +1,3 @@
 module ApplicationHelper
-  include EnjuLeaf::EnjuLeafHelper
+  include EnjuLeaf::ApplicationHelper
 end
