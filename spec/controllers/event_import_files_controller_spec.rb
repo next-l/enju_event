@@ -85,7 +85,7 @@ describe EventImportFilesController do
       it "assigns the requested event_import_file as @event_import_file" do
         get :new
         assigns(:event_import_file).should_not be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 
@@ -95,7 +95,7 @@ describe EventImportFilesController do
       it "should not assign the requested event_import_file as @event_import_file" do
         get :new
         assigns(:event_import_file).should_not be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 

@@ -62,20 +62,20 @@ describe EventsController do
 
       it "should get index with library_id" do
         get :index, params: { library_id: 'kamata' }
-        response.should be_success
+        response.should be_successful
         assigns(:library).should eq libraries(:library_00002)
         assigns(:events).should_not be_nil
       end
 
       it "should get upcoming event index" do
         get :index, params: { mode: 'upcoming' }
-        response.should be_success
+        response.should be_successful
         assigns(:events).should_not be_nil
       end
 
       it "should get past event index" do
         get :index, params: { mode: 'past' }
-        response.should be_success
+        response.should be_successful
         assigns(:events).should_not be_nil
       end
 
@@ -88,7 +88,7 @@ describe EventsController do
           Event.reindex
           today = Date.today
           get :index, params: { format: "json", start: today.beginning_of_month.to_s, end: today.end_of_month.to_s }
-          expect(response).to be_success
+          expect(response).to be_successful
           events = assigns(:events)
           expect(events).not_to be_nil
           expect(events.size).to be >= 20

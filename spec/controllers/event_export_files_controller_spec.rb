@@ -48,7 +48,7 @@ describe EventExportFilesController do
       it "assigns the requested event_export_file as @event_export_file" do
         get :show, params: { id: event_export_files(:event_export_file_00003).id }
         assigns(:event_export_file).should eq(event_export_files(:event_export_file_00003))
-        response.should be_success
+        response.should be_successful
       end
     end
 
@@ -58,7 +58,7 @@ describe EventExportFilesController do
       it "assigns the requested event_export_file as @event_export_file" do
         get :show, params: { id: event_export_files(:event_export_file_00003).id }
         assigns(:event_export_file).should eq(event_export_files(:event_export_file_00003))
-        response.should be_success
+        response.should be_successful
       end
     end
 
@@ -88,7 +88,7 @@ describe EventExportFilesController do
       it "assigns the requested event_export_file as @event_export_file" do
         get :new
         assigns(:event_export_file).should be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 
@@ -98,7 +98,7 @@ describe EventExportFilesController do
       it "should not assign the requested event_export_file as @event_export_file" do
         get :new
         assigns(:event_export_file).should be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 

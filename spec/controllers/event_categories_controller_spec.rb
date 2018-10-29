@@ -96,7 +96,7 @@ describe EventCategoriesController do
       it "assigns the requested event_category as @event_category" do
         get :new
         assigns(:event_category).should_not be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 
@@ -198,7 +198,7 @@ describe EventCategoriesController do
 
         it "should be successful" do
           post :create, params: { event_category: @invalid_attrs }
-          response.should be_success
+          response.should be_successful
         end
       end
     end
