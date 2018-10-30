@@ -4,17 +4,10 @@ rvm:
   - 2.3.7
   - 2.4.4
 before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-  - psql -c 'CREATE DATABASE enju_library_dummy_test'
-  - psql enju_library_dummy_test -c 'CREATE EXTENSION pgcrypto'
+  - psql -c 'CREATE DATABASE enju_event_dummy_test'
+  - psql enju_event_dummy_test -c 'CREATE EXTENSION pgcrypto'
   - bundle exec rake db:migrate
   - bundle exec rake app:sunspot:solr:start
-script:
-  - bundle exec rspec
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 services:
   - redis-server
 env:
