@@ -29,5 +29,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-activemodel-mocks"
   s.add_development_dependency "redis-rails"
   s.add_development_dependency "coveralls"
-  s.add_development_dependency "resque", "~> 1.27"
+  s.add_development_dependency "resque"
 end
