@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "ri_cal"
   s.add_dependency "jbuilder"
 
-  s.add_development_dependency "enju_leaf", "~> 1.3.0.rc.1"
+  s.add_development_dependency "enju_leaf", "~> 1.3.0"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "mysql2"
   s.add_development_dependency "pg"
@@ -31,5 +31,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-activemodel-mocks"
   s.add_development_dependency "redis-rails"
   s.add_development_dependency "coveralls"
-  s.add_development_dependency "resque", "~> 1.27"
+  s.add_development_dependency "resque"
 end
