@@ -4,17 +4,17 @@
 
 <div data-role="content">
 <h2 class="resource_title">
-  <%= @event.display_name -%>
+  <%= @event.display_name.localize -%>
 </h2>
 
 <p>
   <strong><%= t('activerecord.models.event_category') -%>:</strong>
-  <%= @event.event_category.display_name -%>
+  <%= @event.event_category.display_name.localize -%>
 </p>
 
 <p>
   <strong><%= t('activerecord.models.library') -%>:</strong>
-  <%= link_to @event.library.display_name, @event.library -%>
+  <%= link_to @event.library.display_name.localize, @event.library -%>
 </p>
 
 <%- if @event.all_day -%>

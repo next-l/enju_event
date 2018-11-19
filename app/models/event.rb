@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
 
   searchable do
     text :name, :note
-    string :library_id
+    integer :library_id
     time :created_at
     time :updated_at
     time :start_at
@@ -28,7 +28,6 @@ class Event < ActiveRecord::Base
   before_validation :set_date
   before_validation :set_display_name, on: :create
 
-  translates :display_name
   paginates_per 10
 
   def set_date
@@ -89,16 +88,17 @@ end
 #
 # Table name: events
 #
-#  id                        :bigint           not null, primary key
-#  library_id                :bigint           not null
-#  event_category_id         :bigint           not null
-#  name                      :string           not null
-#  note                      :text
-#  start_at                  :datetime
-#  end_at                    :datetime
-#  all_day                   :boolean          default(FALSE), not null
-#  display_name_translations :jsonb            not null
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
-#  place_id                  :bigint
+#  id                :integer          not null, primary key
+#  library_id        :integer          not null
+#  event_category_id :integer          not null
+#  name              :string           not null
+#  note              :text
+#  start_at          :datetime
+#  end_at            :datetime
+#  all_day           :boolean          default(FALSE), not null
+#  deleted_at        :datetime
+#  display_name      :text
+#  created_at        :datetime
+#  updated_at        :datetime
+#  place_id          :integer
 #

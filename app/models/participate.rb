@@ -13,10 +13,10 @@ end
 #
 # Table name: participates
 #
-#  id         :bigint           not null, primary key
-#  agent_id   :bigint           not null
-#  event_id   :bigint           not null
+#  id         :integer          not null, primary key
+#  agent_id   :integer          not null
+#  event_id   :integer          not null
 #  position   :integer          default(1), not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  created_at :datetime
+#  updated_at :datetime
 #

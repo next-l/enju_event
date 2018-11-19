@@ -7,7 +7,7 @@ end
 #
 # Table name: places
 #
-#  id         :bigint           not null, primary key
+#  id         :integer          not null, primary key
 #  term       :string
 #  city       :text
 #  country_id :bigint
