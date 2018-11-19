@@ -403,6 +403,12 @@ describe EventCategoriesController do
         delete :destroy, params: { id: @event_category.id }
         response.should redirect_to(event_categories_url)
       end
+
+      it "should not destroy event_category that has events" do
+        event_category = EventCategory.first
+        delete :destroy, params: { id: event_category.id }
+        response.should be_forbidden
+      end
     end
 
     describe "When logged in as Librarian" do
