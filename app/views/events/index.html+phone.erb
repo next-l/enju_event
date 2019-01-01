@@ -4,7 +4,7 @@
 
 <div data-role="content">
 <%- if @library -%>
-  <h2><%= link_to @library.display_name, @library -%></h2>
+  <h2><%= link_to @library.display_name.localize, @library -%></h2>
 <%- else -%>
   <h2><%= t('event.all_libraries') -%></h2>
 <%- end -%>
@@ -39,7 +39,7 @@
 <ul data-role="listview">
   <%- @events.each_with_index do |event, i| -%>
     <li>
-      <%= link_to event.display_name, event -%>
+      <%= link_to event.display_name.localize, event -%>
       <br />
       <%= l(event.start_at, format: :short) -%>
       -

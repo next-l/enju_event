@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: event_import_results
-#
-#  id                   :integer          not null, primary key
-#  event_import_file_id :integer
-#  event_id             :integer
-#  body                 :text
-#  created_at           :datetime
-#  updated_at           :datetime
-#
-
 class EventImportResultsController < ApplicationController
   before_action :set_event_import_result, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
@@ -18,11 +6,11 @@ class EventImportResultsController < ApplicationController
   # GET /event_import_results.json
   def index
     @event_import_file = EventImportFile.where(id: params[:event_import_file_id]).first
-    @event_import_results = if @event_import_file
-                              @event_import_file.event_import_results.page(params[:page])
-                            else
-                              EventImportResult.page(params[:page])
-                            end
+    if @event_import_file
+      @event_import_results = @event_import_file.event_import_results.page(params[:page])
+    else
+      @event_import_results = EventImportResult.page(params[:page])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -52,7 +40,6 @@ class EventImportResultsController < ApplicationController
   end
 
   private
-
   def set_event_import_result
     @event_import_result = EventImportResult.find(params[:id])
     authorize @event_import_result

@@ -1,28 +1,9 @@
-# -*- encoding: utf-8 -*-
-# == Schema Information
-#
-# Table name: events
-#
-#  id                :integer          not null, primary key
-#  library_id        :integer          not null
-#  event_category_id :integer          not null
-#  name              :string
-#  note              :text
-#  start_at          :datetime
-#  end_at            :datetime
-#  all_day           :boolean          default(FALSE), not null
-#  deleted_at        :datetime
-#  display_name      :text
-#  created_at        :datetime
-#  updated_at        :datetime
-#  place_id          :integer
-#
-
 class EventsController < ApplicationController
+  before_action :store_page, only: :index
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
-  before_action :set_library, :set_parent_agent
-  before_action :set_libraries, except: :destroy
+  before_action :get_library, :get_agent
+  before_action :get_libraries, except: :destroy
   before_action :prepare_options
   after_action :convert_charset, only: :index
 
@@ -32,9 +13,10 @@ class EventsController < ApplicationController
     @count = {}
     query = params[:query].to_s.strip
     @query = query.dup
-    query = query.tr('　', ' ')
+    query = query.gsub('　', ' ')
     tag = params[:tag].to_s if params[:tag].present?
     date = params[:date].to_s if params[:date].present?
+    per_page = ( params[:format] == "json" ) ? 500 : Event.default_per_page
     mode = params[:mode]
 
     search = Sunspot.new_search(Event)
@@ -47,6 +29,10 @@ class EventsController < ApplicationController
         with(:start_at).less_than_or_equal_to Time.zone.parse(date)
         with(:end_at).greater_than Time.zone.parse(date)
       end
+      if params[:start].present? and params[:end].present?
+        with(:start_at).greater_than_or_equal_to Time.zone.parse(params[:start])
+        with(:end_at).less_than_or_equal_to Time.zone.parse(params[:end]).end_of_day
+      end
       case mode
       when 'upcoming'
         with(:start_at).greater_than Time.zone.now.beginning_of_day
@@ -57,14 +43,15 @@ class EventsController < ApplicationController
     end
 
     page = params[:page] || 1
-    search.query.paginate(page.to_i, Event.default_per_page)
+    search.query.paginate(page.to_i, per_page)
     @events = search.execute!.results
     @count[:query_result] = @events.total_entries
 
     respond_to do |format|
       format.html # index.html.erb
+      format.html.phone
       format.json
-      format.rss { render layout: false }
+      format.rss  { render layout: false }
       format.txt
       format.atom
       format.ics
@@ -78,6 +65,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.html.phone
       format.json { render json: @event }
     end
   end
@@ -85,24 +73,24 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
-    prepare_options
-    if params[:date]
-      begin
-        date = Time.zone.parse(params[:date])
-      rescue ArgumentError
-        date = Time.zone.now.beginning_of_day
-        flash[:notice] = t('page.invalid_date')
-      end
-    else
-      date = Time.zone.now.beginning_of_day
-    end
-    @event = Event.new(start_at: date, end_at: date)
-    @event.library = @library
+     prepare_options
+     if params[:date]
+       begin
+         date = Time.zone.parse(params[:date])
+       rescue ArgumentError
+         date = Time.zone.now.beginning_of_day
+         flash[:notice] = t('page.invalid_date')
+       end
+     else
+       date = Time.zone.now.beginning_of_day
+     end
+     @event = Event.new(start_at: date, end_at: date)
+     @event.library = @library
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @event }
-    end
+     respond_to do |format|
+       format.html # new.html.erb
+       format.json { render json: @event }
+     end
   end
 
   # GET /events/1/edit
@@ -124,7 +112,7 @@ class EventsController < ApplicationController
         format.json { render json: @event, status: :created, location: @event }
       else
         prepare_options
-        format.html { render action: 'new' }
+        format.html { render action: "new" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -144,7 +132,7 @@ class EventsController < ApplicationController
         format.json { head :no_content }
       else
         prepare_options
-        format.html { render action: 'edit' }
+        format.html { render action: "edit" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -162,7 +150,6 @@ class EventsController < ApplicationController
   end
 
   private
-
   def set_event
     @event = Event.find(params[:id])
     authorize @event
