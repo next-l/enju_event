@@ -88,9 +88,9 @@ end
 #
 # Table name: events
 #
-#  id                :integer          not null, primary key
-#  library_id        :integer          not null
-#  event_category_id :integer          not null
+#  id                :bigint(8)        not null, primary key
+#  library_id        :bigint(8)        not null
+#  event_category_id :bigint(8)        not null
 #  name              :string
 #  note              :text
 #  start_at          :datetime
@@ -98,7 +98,7 @@ end
 #  all_day           :boolean          default(FALSE), not null
 #  deleted_at        :datetime
 #  display_name      :text
-#  created_at        :datetime
-#  updated_at        :datetime
-#  place_id          :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  place_id          :bigint(8)
 #

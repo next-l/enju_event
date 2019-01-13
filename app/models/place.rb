@@ -7,10 +7,10 @@ end
 #
 # Table name: places
 #
-#  id         :integer          not null, primary key
+#  id         :bigint(8)        not null, primary key
 #  term       :string
 #  city       :text
-#  country_id :integer
+#  country_id :bigint(8)
 #  latitude   :float
 #  longitude  :float
 #  created_at :datetime         not null
