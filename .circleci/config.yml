@@ -3,13 +3,13 @@ jobs:
   build:
     working_directory: ~/enju_event
     docker:
-      - image: circleci/ruby:2.4
+      - image: circleci/ruby:2.5.3-node-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: postgres
-      - image: circleci/postgres:9.6-alpine
+      - image: circleci/postgres:10
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: enju_event_dummy_test
