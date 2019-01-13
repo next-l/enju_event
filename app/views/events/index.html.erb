@@ -4,7 +4,7 @@
 <p id="notice"><%= notice %></p>
 
 <%- if @library -%>
-  <h2><%= link_to @library.display_name, @library -%></h2>
+  <h2><%= link_to @library.display_name.localize, @library -%></h2>
 <%- else -%>
   <h2><%= t('event.all_libraries') -%></h2>
 <%- end -%>
@@ -46,12 +46,12 @@
   <%- @events.each_with_index do |event, i| -%>
     <tr class="line<%= cycle("0", "1") -%>">
       <td>
-        <%= link_to event.library.display_name, event.library -%>
+        <%= link_to event.library.display_name.localize, event.library -%>
         <br />
-        <%= event.event_category.display_name -%>
+        <%= event.event_category.display_name.localize -%>
       </td>
       <td>
-        <%= link_to event.display_name, event -%>
+        <%= link_to event.display_name.localize, event -%>
         <br />
         <%= l(event.start_at, format: :short) -%>
         -
@@ -97,7 +97,7 @@
   <ul>
     <li><%= link_to t('event.all_libraries'), events_path(mode: params[:mode]) -%></li>
     <%- @libraries.each do |library| -%>
-      <li><%= link_to library.display_name, events_path(library_id: library.name, mode: params[:mode]) -%></li>
+      <li><%= link_to library.display_name.localize, events_path(library_id: library.name, mode: params[:mode]) -%></li>
     <%- end -%>
   </ul>
   <p>

@@ -10,12 +10,12 @@
 
 <p>
   <strong><%= t('activerecord.attributes.event_export_file.event_export_file_name') -%></strong>
-  <%= link_to @event_export_file.attachment.metadata['file_name'], event_export_file_path(@event_export_file, format: :download) %>
+  <%= link_to @event_export_file.event_export_file_name, event_export_file_path(@event_export_file, format: :download) if @event_export_file.event_export_file_name %>
 </p>
 
 <p>
   <strong><%= t('activerecord.attributes.event_export_file.state') -%>:</strong>
-  <%= localized_state(@event_export_file.state_machine.current_state) -%>
+  <%= localized_state(@event_export_file.current_state) -%>
 </p>
 
 <p>

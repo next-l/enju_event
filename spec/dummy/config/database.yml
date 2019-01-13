@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: dummy_production
+  database: enju_event_dummy_production
   username: dummy
   password: <%= ENV['DUMMY_DATABASE_PASSWORD'] %>

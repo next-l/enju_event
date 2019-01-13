@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: participates
-#
-#  id         :integer          not null, primary key
-#  agent_id   :integer          not null
-#  event_id   :integer          not null
-#  position   :integer
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 class ParticipatesController < ApplicationController
   before_action :set_participate, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
@@ -60,7 +48,7 @@ class ParticipatesController < ApplicationController
         format.html { redirect_to(@participate) }
         format.json { render json: @participate, status: :created, location: @participate }
       else
-        format.html { render action: 'new' }
+        format.html { render action: "new" }
         format.json { render json: @participate.errors, status: :unprocessable_entity }
       end
     end
@@ -75,7 +63,7 @@ class ParticipatesController < ApplicationController
         format.html { redirect_to(@participate) }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: "edit" }
         format.json { render json: @participate.errors, status: :unprocessable_entity }
       end
     end
@@ -93,7 +81,6 @@ class ParticipatesController < ApplicationController
   end
 
   private
-
   def set_participate
     @participate = Participate.find(params[:id])
     authorize @participate

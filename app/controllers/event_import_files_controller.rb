@@ -1,29 +1,3 @@
-# == Schema Information
-#
-# Table name: event_import_files
-#
-#  id                        :integer          not null, primary key
-#  parent_id                 :integer
-#  content_type              :string
-#  size                      :integer
-#  user_id                   :integer
-#  note                      :text
-#  executed_at               :datetime
-#  event_import_filename     :string
-#  event_import_content_type :string
-#  event_import_size         :integer
-#  event_import_updated_at   :datetime
-#  edit_mode                 :string
-#  created_at                :datetime
-#  updated_at                :datetime
-#  event_import_fingerprint  :string
-#  error_message             :text
-#  user_encoding             :string
-#  default_library_id        :integer
-#  default_event_category_id :integer
-#  event_import_id           :string
-#
-
 class EventImportFilesController < ApplicationController
   before_action :set_event_import_file, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
@@ -43,14 +17,22 @@ class EventImportFilesController < ApplicationController
   # GET /event_import_files/1
   # GET /event_import_files/1.json
   def show
+    if @event_import_file.event_import.path
+      unless ENV['ENJU_STORAGE'] == 's3'
+        file = @event_import_file.event_import.path
+      end
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event_import_file }
-      format.download do
-        send_file @event_import_file.event_import.download,
-                  filename: File.basename(@event_import_file.event_import_filename),
-                  type: 'application/octet-stream'
-      end
+      format.download {
+        if ENV['ENJU_STORAGE'] == 's3'
+          redirect_to @event_import_file.event_import.expiring_url(10)
+        else
+          send_file file, filename: @event_import_file.event_import_file_name, type: 'application/octet-stream'
+        end
+      }
     end
   end
 
@@ -86,7 +68,7 @@ class EventImportFilesController < ApplicationController
         format.json { render json: @event_import_file, status: :created, location: @event_import_file }
       else
         prepare_options
-        format.html { render action: 'new' }
+        format.html { render action: "new" }
         format.json { render json: @event_import_file.errors, status: :unprocessable_entity }
       end
     end
@@ -104,7 +86,7 @@ class EventImportFilesController < ApplicationController
         format.json { head :no_content }
       else
         prepare_options
-        format.html { render action: 'edit' }
+        format.html { render action: "edit" }
         format.json { render json: @event_import_file.errors, status: :unprocessable_entity }
       end
     end
@@ -122,11 +104,9 @@ class EventImportFilesController < ApplicationController
   end
 
   private
-
   def set_event_import_file
     @event_import_file = EventImportFile.find(params[:id])
     authorize @event_import_file
-    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
   end
 
   def check_policy
@@ -135,7 +115,7 @@ class EventImportFilesController < ApplicationController
 
   def event_import_file_params
     params.require(:event_import_file).permit(
-      :attachment, :edit_mode, :user_encoding, :mode,
+      :event_import, :edit_mode, :user_encoding, :mode,
       :default_library_id, :default_event_category_id
     )
   end

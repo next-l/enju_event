@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe EventImportResult do
-  # pending "add some examples to (or delete) #{__FILE__}"
+  #pending "add some examples to (or delete) #{__FILE__}"
+
 end
 
 # == Schema Information
@@ -12,6 +13,6 @@ end
 #  event_import_file_id :integer
 #  event_id             :integer
 #  body                 :text
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
+#  created_at           :datetime
+#  updated_at           :datetime
 #

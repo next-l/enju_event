@@ -1,17 +1,3 @@
-# == Schema Information
-#
-# Table name: places
-#
-#  id         :integer          not null, primary key
-#  term       :string
-#  city       :text
-#  country_id :integer
-#  latitude   :float
-#  longitude  :float
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
@@ -61,8 +47,7 @@ class PlacesController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share common setup or constraints between actions.
   def set_place
     @place = Place.find(params[:id])
     autorize @place
@@ -72,7 +57,7 @@ class PlacesController < ApplicationController
     authorize Place
   end
 
-  # Only allow a trusted parameter "white list" through.
+    # Only allow a trusted parameter "white list" through.
   def place_params
     params.require(:place).permit(:term, :city, :country_id, :latitude, :longitude)
   end
