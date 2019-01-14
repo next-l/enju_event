@@ -136,8 +136,6 @@ end
 # Table name: event_import_files
 #
 #  id                        :bigint(8)        not null, primary key
-#  content_type              :string
-#  size                      :integer
 #  user_id                   :bigint(8)
 #  note                      :text
 #  executed_at               :datetime

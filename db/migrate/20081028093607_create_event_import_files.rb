@@ -1,9 +1,7 @@
 class CreateEventImportFiles < ActiveRecord::Migration[5.2]
   def change
     create_table :event_import_files do |t|
-      t.string :content_type
-      t.integer :size
-      t.references :user, index: true
+      t.references :user, foreign_key: true
       t.text :note
       t.datetime :imported_at
       t.string :event_import_file_name

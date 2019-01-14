@@ -416,8 +416,6 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
   end
 
   create_table "event_import_files", force: :cascade do |t|
-    t.string "content_type"
-    t.integer "size"
     t.bigint "user_id"
     t.text "note"
     t.datetime "executed_at"
@@ -1460,6 +1458,8 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
     t.index ["librarian_id"], name: "index_withdraws_on_librarian_id"
   end
 
+  add_foreign_key "event_export_files", "users"
+  add_foreign_key "event_import_files", "users"
   add_foreign_key "events", "event_categories"
   add_foreign_key "items", "manifestations"
   add_foreign_key "libraries", "library_groups"
