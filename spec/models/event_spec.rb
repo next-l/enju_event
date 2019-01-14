@@ -37,7 +37,7 @@ end
 #  start_at          :datetime
 #  end_at            :datetime
 #  all_day           :boolean          default(FALSE), not null
-#  display_name      :jsonb
+#  display_name      :jsonb            not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  place_id          :bigint(8)

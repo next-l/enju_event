@@ -136,7 +136,6 @@ end
 # Table name: event_import_files
 #
 #  id                        :bigint(8)        not null, primary key
-#  parent_id                 :bigint(8)
 #  content_type              :string
 #  size                      :integer
 #  user_id                   :bigint(8)
