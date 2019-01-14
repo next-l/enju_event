@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  include Mobility
   scope :closing_days, -> { includes(:event_category).where('event_categories.name' => 'closed') }
   scope :on, lambda {|datetime| where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1)}
   scope :past, lambda {|datetime| where('end_at <= ?', Time.zone.parse(datetime).beginning_of_day)}
@@ -28,6 +29,7 @@ class Event < ActiveRecord::Base
   before_validation :set_date
   before_validation :set_display_name, on: :create
 
+  translates :display_name
   paginates_per 10
 
   def set_date
@@ -91,13 +93,12 @@ end
 #  id                :bigint(8)        not null, primary key
 #  library_id        :bigint(8)        not null
 #  event_category_id :bigint(8)        not null
-#  name              :string
+#  name              :string           not null
 #  note              :text
 #  start_at          :datetime
 #  end_at            :datetime
 #  all_day           :boolean          default(FALSE), not null
-#  deleted_at        :datetime
-#  display_name      :text
+#  display_name      :jsonb
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  place_id          :bigint(8)

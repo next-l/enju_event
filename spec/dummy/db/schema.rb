@@ -371,7 +371,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
 
   create_table "event_categories", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.jsonb "display_name", default: {}
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -454,13 +454,12 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
   create_table "events", force: :cascade do |t|
     t.bigint "library_id", null: false
     t.bigint "event_category_id", null: false
-    t.string "name"
+    t.string "name", null: false
     t.text "note"
     t.datetime "start_at"
     t.datetime "end_at"
     t.boolean "all_day", default: false, null: false
-    t.datetime "deleted_at"
-    t.text "display_name"
+    t.jsonb "display_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "place_id"

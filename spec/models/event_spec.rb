@@ -32,13 +32,12 @@ end
 #  id                :bigint(8)        not null, primary key
 #  library_id        :bigint(8)        not null
 #  event_category_id :bigint(8)        not null
-#  name              :string
+#  name              :string           not null
 #  note              :text
 #  start_at          :datetime
 #  end_at            :datetime
 #  all_day           :boolean          default(FALSE), not null
-#  deleted_at        :datetime
-#  display_name      :text
+#  display_name      :jsonb
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  place_id          :bigint(8)

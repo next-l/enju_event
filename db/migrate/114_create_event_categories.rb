@@ -1,16 +1,12 @@
 class CreateEventCategories < ActiveRecord::Migration[5.2]
-  def self.up
+  def change
     create_table :event_categories do |t|
       t.string :name, null: false
-      t.text :display_name
+      t.jsonb :display_name, default: {}
       t.text :note
       t.integer :position
 
       t.timestamps
     end
-  end
-
-  def self.down
-    drop_table :event_categories
   end
 end
