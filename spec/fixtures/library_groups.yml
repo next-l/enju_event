@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
-  name: unknown
-  display_name: {"en": "unknown", "ja": "不明"}
-  short_name: unknown
+  name: enju_library
+  display_name: {"en": "Enju Library", "ja": "えんじゅ図書館"}
+  short_name: enju_library
   note: 
   my_networks: "0.0.0.0/0\r\n\
     ::/0"
