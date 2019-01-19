@@ -1265,7 +1265,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "subscribes", force: :cascade do |t|
     t.bigint "subscription_id", null: false
-    t.integer "work_id", null: false
+    t.bigint "work_id", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
     t.datetime "created_at", null: false
@@ -1519,4 +1519,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "libraries", "library_groups"
   add_foreign_key "library_groups", "users"
   add_foreign_key "resource_import_files", "users"
+  add_foreign_key "subscribes", "manifestations", column: "work_id"
+  add_foreign_key "subscribes", "subscriptions"
 end
