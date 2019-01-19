@@ -1,5 +1,4 @@
 class EventExportFileTransition < ActiveRecord::Base
-  include Statesman::Adapters::ActiveRecordTransition
 
 
   belongs_to :event_export_file, inverse_of: :event_export_file_transitions
@@ -12,9 +11,9 @@ end
 #
 #  id                   :bigint(8)        not null, primary key
 #  to_state             :string
-#  metadata             :text             default({})
+#  metadata             :jsonb
 #  sort_key             :integer
-#  event_export_file_id :integer
+#  event_export_file_id :bigint(8)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  most_recent          :boolean          not null
