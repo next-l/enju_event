@@ -94,7 +94,6 @@ describe EventsController do
           expect(events.size).to be >= 20
           expect(response.body).to match /\A\[/
           data = JSON.parse(response.body)
-          p data.first
           expect(data.first).not_to be_nil
           expect(data.first).to have_key("start")
           expect(data.first).to have_key("url")
