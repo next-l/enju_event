@@ -211,29 +211,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.datetime "attachment_updated_at"
   end
 
-  create_table "checked_items", id: :serial, force: :cascade do |t|
-    t.integer "item_id", null: false
-    t.integer "basket_id", null: false
-    t.datetime "due_date", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "librarian_id"
-    t.index ["basket_id"], name: "index_checked_items_on_basket_id"
-    t.index ["item_id"], name: "index_checked_items_on_item_id"
-  end
-
-  create_table "checkins", id: :serial, force: :cascade do |t|
-    t.integer "item_id", null: false
-    t.integer "librarian_id"
-    t.integer "basket_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "lock_version", default: 0, null: false
-    t.index ["basket_id"], name: "index_checkins_on_basket_id"
-    t.index ["item_id"], name: "index_checkins_on_item_id"
-    t.index ["librarian_id"], name: "index_checkins_on_librarian_id"
-  end
-
   create_table "colors", force: :cascade do |t|
     t.bigint "library_group_id"
     t.string "property"
@@ -431,15 +408,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "identifier_types", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.text "display_name"
-    t.text "note"
-    t.integer "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "identifiers", force: :cascade do |t|
     t.string "body", null: false
     t.integer "identifier_type_id", null: false
@@ -570,17 +538,17 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["name"], name: "index_languages_on_name", unique: true
   end
 
-  create_table "lending_policies", id: :serial, force: :cascade do |t|
-    t.integer "item_id", null: false
-    t.integer "user_group_id", null: false
+  create_table "lending_policies", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "user_group_id", null: false
     t.integer "loan_period", default: 0, null: false
     t.datetime "fixed_due_date"
     t.integer "renewal", default: 0, null: false
     t.integer "fine", default: 0, null: false
     t.text "note"
     t.integer "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["item_id", "user_group_id"], name: "index_lending_policies_on_item_id_and_user_group_id", unique: true
   end
 
@@ -726,7 +694,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.text "attachment_meta"
     t.integer "month_of_publication"
     t.boolean "fulltext_content"
-    t.string "doi"
     t.boolean "serial"
     t.text "statement_of_responsibility"
     t.text "publication_place"
@@ -734,7 +701,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.text "dimensions"
     t.index ["access_address"], name: "index_manifestations_on_access_address"
     t.index ["date_of_publication"], name: "index_manifestations_on_date_of_publication"
-    t.index ["doi"], name: "index_manifestations_on_doi"
     t.index ["manifestation_identifier"], name: "index_manifestations_on_manifestation_identifier", unique: true
     t.index ["updated_at"], name: "index_manifestations_on_updated_at"
   end
@@ -1279,6 +1245,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "issn_records", "manifestations"
   add_foreign_key "items", "bookstores"
   add_foreign_key "items", "manifestations"
+  add_foreign_key "lending_policies", "items"
+  add_foreign_key "lending_policies", "user_groups"
   add_foreign_key "libraries", "library_groups"
   add_foreign_key "library_groups", "users"
   add_foreign_key "manifestation_relationships", "manifestations", column: "child_id"
