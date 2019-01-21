@@ -155,9 +155,7 @@ class EventImportFile < ActiveRecord::Base
   end
 
   def self.import
-    EventImportFile.not_imported.each do |file|
-      file.import_start
-    end
+    EventImportFile.not_imported.each(&:import_start)
   rescue
     Rails.logger.info "#{Time.zone.now} importing events failed!"
   end
