@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "birth_date"
     t.string "death_date"
     t.string "agent_identifier"
-    t.bigint "profile_id"
+    t.uuid "profile_id"
     t.index ["agent_identifier"], name: "index_agents_on_agent_identifier"
     t.index ["country_id"], name: "index_agents_on_country_id"
     t.index ["full_name"], name: "index_agents_on_full_name"
@@ -424,7 +424,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.bigint "profile_id"
+    t.uuid "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
@@ -856,8 +856,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["manifestation_id"], name: "index_produces_on_manifestation_id"
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.bigint "user_group_id"
+  create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_group_id", null: false
     t.bigint "library_id"
     t.string "locale"
     t.string "user_number"
@@ -1195,7 +1195,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.datetime "confirmed_at"
-    t.bigint "profile_id"
+    t.uuid "profile_id"
     t.index ["email"], name: "index_users_on_email"
     t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
