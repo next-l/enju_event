@@ -2,12 +2,12 @@
 
 one:
   agent_id: 1
-  event_id: 1
+  event_id: 1665290c-5913-4e7c-808f-516856ace5ac
   position: 1
 
 two:
   agent_id: 2
-  event_id: 1
+  event_id: 1665290c-5913-4e7c-808f-516856ace5ac
   position: 2
 
 # == Schema Information
@@ -16,7 +16,7 @@ two:
 #
 #  id         :bigint(8)        not null, primary key
 #  agent_id   :bigint(8)        not null
-#  event_id   :bigint(8)        not null
+#  event_id   :uuid             not null
 #  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

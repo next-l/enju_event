@@ -29,7 +29,7 @@ end
 #
 # Table name: events
 #
-#  id                :bigint(8)        not null, primary key
+#  id                :uuid             not null, primary key
 #  library_id        :bigint(8)        not null
 #  event_category_id :bigint(8)        not null
 #  name              :string           not null

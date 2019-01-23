@@ -363,7 +363,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["event_import_file_id"], name: "index_event_import_results_on_event_import_file_id"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "library_id", null: false
     t.bigint "event_category_id", null: false
     t.string "name", null: false
@@ -540,7 +540,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "lending_policies", force: :cascade do |t|
     t.bigint "item_id", null: false
-    t.bigint "user_group_id", null: false
+    t.uuid "user_group_id", null: false
     t.integer "loan_period", default: 0, null: false
     t.datetime "fixed_due_date"
     t.integer "renewal", default: 0, null: false
@@ -795,7 +795,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "participates", force: :cascade do |t|
     t.bigint "agent_id", null: false
-    t.bigint "event_id", null: false
+    t.uuid "event_id", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1108,8 +1108,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["user_id"], name: "index_user_export_files_on_user_id"
   end
 
-  create_table "user_groups", force: :cascade do |t|
-    t.string "name"
+  create_table "user_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
     t.jsonb "display_name", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
@@ -1159,7 +1159,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.datetime "updated_at", null: false
     t.string "user_encoding"
     t.bigint "default_library_id"
-    t.bigint "default_user_group_id"
+    t.uuid "default_user_group_id"
     t.index ["default_library_id"], name: "index_user_import_files_on_default_library_id"
     t.index ["default_user_group_id"], name: "index_user_import_files_on_default_user_group_id"
     t.index ["user_id"], name: "index_user_import_files_on_user_id"
@@ -1236,6 +1236,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "event_export_files", "users"
   add_foreign_key "event_import_files", "users"
   add_foreign_key "events", "event_categories"
+  add_foreign_key "events", "libraries"
   add_foreign_key "identifiers", "manifestations"
   add_foreign_key "import_requests", "users"
   add_foreign_key "isbn_record_and_manifestations", "isbn_records"
@@ -1251,13 +1252,13 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "library_groups", "users"
   add_foreign_key "manifestation_relationships", "manifestations", column: "child_id"
   add_foreign_key "manifestation_relationships", "manifestations", column: "parent_id"
+  add_foreign_key "participates", "events"
   add_foreign_key "resource_export_files", "users"
   add_foreign_key "resource_import_files", "users"
   add_foreign_key "resource_import_results", "resource_import_files"
   add_foreign_key "series_statement_merges", "series_statement_merge_lists"
   add_foreign_key "series_statement_merges", "series_statements"
   add_foreign_key "series_statements", "manifestations"
-  add_foreign_key "subscribes", "manifestations", column: "work_id"
   add_foreign_key "subscribes", "subscriptions"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
