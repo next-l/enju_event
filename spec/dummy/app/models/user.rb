@@ -9,3 +9,5 @@ class User < ActiveRecord::Base
   include EnjuSeed::EnjuUser
   include EnjuMessage::EnjuUser
 end
+
+Library.include(EnjuEvent::EnjuLibrary)
