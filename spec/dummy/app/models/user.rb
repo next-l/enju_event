@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
   include EnjuMessage::EnjuUser
 end
 
+LibrariesController.include EnjuEvent::EnjuLibrariesController
 Library.include(EnjuEvent::EnjuLibrary)

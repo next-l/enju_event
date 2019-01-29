@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
 
   searchable do
     text :name, :note
-    integer :library_id
+    string :library_id
     time :created_at
     time :updated_at
     time :start_at
