@@ -91,7 +91,7 @@ end
 # Table name: events
 #
 #  id                :uuid             not null, primary key
-#  library_id        :bigint(8)        not null
+#  library_id        :uuid             not null
 #  event_category_id :bigint(8)        not null
 #  name              :string           not null
 #  note              :text

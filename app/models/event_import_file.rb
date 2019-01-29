@@ -217,6 +217,6 @@ end
 #  event_import_fingerprint  :string
 #  error_message             :text
 #  user_encoding             :string
-#  default_library_id        :bigint(8)
+#  default_library_id        :uuid
 #  default_event_category_id :bigint(8)
 #

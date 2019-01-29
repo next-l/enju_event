@@ -6,9 +6,9 @@ describe EventImportFile do
 
   describe "When it is written in utf-8" do
     before(:each) do
-      @file = EventImportFile.create(
+      @file = EventImportFile.create!(
         event_import: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"),
-        default_library_id: 3,
+        default_library: libraries(:library_00003),
         default_event_category: EventCategory.find(3),
         user: users(:admin)
       )
@@ -51,7 +51,7 @@ describe EventImportFile do
     before(:each) do
       @file = EventImportFile.create!(
         event_import: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample2.tsv"),
-        default_library: Library.find(3),
+        default_library: libraries(:library_00003),
         default_event_category: EventCategory.find(3),
         user: users(:admin)
       )
@@ -149,6 +149,6 @@ end
 #  event_import_fingerprint  :string
 #  error_message             :text
 #  user_encoding             :string
-#  default_library_id        :bigint(8)
+#  default_library_id        :uuid
 #  default_event_category_id :bigint(8)
 #

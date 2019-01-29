@@ -8,7 +8,7 @@ event_00001:
   start_at: 2008-01-13 02:54:00 +09:00
   id: 1665290c-5913-4e7c-808f-516856ace5ac
   note: なんとかかんとか
-  library_id: 2
+  library_id: f6ba26aa-9481-4804-b30f-04692c0189ac
   created_at: 2008-01-01 16:20:54.372729 +09:00
 event_00002: 
   updated_at: 2008-01-13 02:54:21.134175 +09:00
@@ -19,7 +19,7 @@ event_00002:
   start_at: 2008-01-13 02:54:00 +09:00
   id: cd58c195-f58b-4767-bf01-8d7ca624936c
   note: テスト用のイベントです。
-  library_id: 2
+  library_id: f6ba26aa-9481-4804-b30f-04692c0189ac
   created_at: 2008-01-01 20:54:25.803201 +09:00
 event_00003: 
   updated_at: 2008-02-05 20:00:35.319131 +09:00
@@ -30,7 +30,7 @@ event_00003:
   start_at: 2008-01-13 00:00:00 +09:00
   id: 43c27240-415b-41fe-ac12-793bbc9e2874
   note: ""
-  library_id: 2
+  library_id: f6ba26aa-9481-4804-b30f-04692c0189ac
   created_at: 2008-01-13 02:51:10.642395 +09:00
 event_00004: 
   updated_at: 2008-02-05 15:43:42.617670 +09:00
@@ -41,7 +41,7 @@ event_00004:
   start_at: 2008-02-05 00:00:00 +09:00
   id: 47febf0c-cc68-449f-a061-4fc7317ce752
   note: なんとかかんとか
-  library_id: 3
+  library_id: 2ee21d56-b6ca-4518-85e0-50300957f31f
   created_at: 2008-02-05 15:43:42.617670 +09:00
 event_00005: 
   updated_at: 2008-02-05 20:41:50.533164 +09:00
@@ -52,7 +52,7 @@ event_00005:
   start_at: 2008-02-05 00:00:00 +09:00
   id: f61c4259-77ad-4283-9d72-db32b12bdb19
   note: ""
-  library_id: 2
+  library_id: f6ba26aa-9481-4804-b30f-04692c0189ac
   created_at: 2008-02-05 20:41:50.533164 +09:00
 event_00006: 
   updated_at: 2008-02-05 23:52:06.315285 +09:00
@@ -63,7 +63,7 @@ event_00006:
   start_at: 2008-02-05 00:00:00 +09:00
   id: 8409a451-af5b-411a-b766-6772d4d62246
   note: ""
-  library_id: 2
+  library_id: f6ba26aa-9481-4804-b30f-04692c0189ac
   created_at: 2008-02-05 20:50:26.651371 +09:00
 event_00007: 
   updated_at: 2008-02-05 21:00:53.926050 +09:00
@@ -74,7 +74,7 @@ event_00007:
   start_at: 2008-02-05 00:00:00 +09:00
   id: 168416e5-ffca-4be0-a0eb-401d994b7985
   note: test
-  library_id: 2
+  library_id: f6ba26aa-9481-4804-b30f-04692c0189ac
   created_at: 2008-02-05 21:00:53.926050 +09:00
 event_00008: 
   updated_at: 2008-02-05 21:00:53.926050 +09:00
@@ -85,7 +85,7 @@ event_00008:
   start_at: 2008-02-05 15:00:00 +09:00
   id: 942bf9b5-ca1c-4597-9e6c-e01e617bf782
   note: test
-  library_id: 2
+  library_id: f6ba26aa-9481-4804-b30f-04692c0189ac
   created_at: 2008-02-05 21:00:53.926050 +09:00
 
 # == Schema Information
@@ -93,7 +93,7 @@ event_00008:
 # Table name: events
 #
 #  id                :uuid             not null, primary key
-#  library_id        :bigint(8)        not null
+#  library_id        :uuid             not null
 #  event_category_id :bigint(8)        not null
 #  name              :string           not null
 #  note              :text
