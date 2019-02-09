@@ -74,7 +74,7 @@ describe EventImportFile do
       @file = EventImportFile.create!(
         user: users(:admin)
       )
-      @file.event_import.attach(io: File.new("#{Rails.root.to_s}/../../examples/invalid_File.tsv"), filename: 'attachment.txt')
+      @file.event_import.attach(io: File.new("#{Rails.root.to_s}/../../examples/invalid_file.tsv"), filename: 'attachment.txt')
     end
 
     it "should not be imported" do
