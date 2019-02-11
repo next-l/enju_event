@@ -20,7 +20,6 @@ class EventImportFilesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event_import_file }
-      format.download
     end
   end
 

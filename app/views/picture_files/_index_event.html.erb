@@ -26,7 +26,7 @@
       </td>
       <td><%= picture_file.picture.byte_size -%></td>
       <td><%= picture_file.picture.content_type -%></td>
-      <td><%= link_to picture_file.picture.filename, picture_file_path(picture_file, format: :download, size: 'original') -%></td>
+      <td><%= link_to picture_file.picture.filename, picture_file.picture -%></td>
       <td>
         <%= link_to t('page.show'), picture_file -%>
         <%- if policy(picture_file).update? -%>

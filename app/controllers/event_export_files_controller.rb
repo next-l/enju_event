@@ -19,7 +19,6 @@ class EventExportFilesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event_export_file }
-      format.download
     end
   end
 
