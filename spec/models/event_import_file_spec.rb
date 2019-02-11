@@ -138,14 +138,9 @@ end
 #  user_id                   :bigint(8)
 #  note                      :text
 #  executed_at               :datetime
-#  event_import_file_name    :string
-#  event_import_content_type :string
-#  event_import_file_size    :integer
-#  event_import_updated_at   :datetime
 #  edit_mode                 :string
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
-#  event_import_fingerprint  :string
 #  error_message             :text
 #  user_encoding             :string
 #  default_library_id        :uuid
