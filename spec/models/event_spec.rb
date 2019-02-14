@@ -29,16 +29,16 @@ end
 #
 # Table name: events
 #
-#  id                :uuid             not null, primary key
-#  library_id        :uuid             not null
-#  event_category_id :bigint(8)        not null
-#  name              :string           not null
-#  note              :text
-#  start_at          :datetime
-#  end_at            :datetime
-#  all_day           :boolean          default(FALSE), not null
-#  display_name      :jsonb            not null
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  place_id          :bigint(8)
+#  id                        :uuid             not null, primary key
+#  library_id                :uuid             not null
+#  event_category_id         :bigint(8)        not null
+#  name                      :string           not null
+#  note                      :text
+#  start_at                  :datetime
+#  end_at                    :datetime
+#  all_day                   :boolean          default(FALSE), not null
+#  display_name_translations :jsonb            not null
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  place_id                  :bigint(8)
 #

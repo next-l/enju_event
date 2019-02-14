@@ -1,5 +1,4 @@
 class Event < ActiveRecord::Base
-  include Mobility
   scope :closing_days, -> { includes(:event_category).where('event_categories.name' => 'closed') }
   scope :on, lambda {|datetime| where('start_at >= ? AND start_at < ?', datetime.beginning_of_day, datetime.tomorrow.beginning_of_day + 1)}
   scope :past, lambda {|datetime| where('end_at <= ?', Time.zone.parse(datetime).beginning_of_day)}
@@ -90,16 +89,16 @@ end
 #
 # Table name: events
 #
-#  id                :uuid             not null, primary key
-#  library_id        :uuid             not null
-#  event_category_id :bigint(8)        not null
-#  name              :string           not null
-#  note              :text
-#  start_at          :datetime
-#  end_at            :datetime
-#  all_day           :boolean          default(FALSE), not null
-#  display_name      :jsonb            not null
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  place_id          :bigint(8)
+#  id                        :uuid             not null, primary key
+#  library_id                :uuid             not null
+#  event_category_id         :bigint(8)        not null
+#  name                      :string           not null
+#  note                      :text
+#  start_at                  :datetime
+#  end_at                    :datetime
+#  all_day                   :boolean          default(FALSE), not null
+#  display_name_translations :jsonb            not null
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  place_id                  :bigint(8)
 #
