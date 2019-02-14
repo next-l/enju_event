@@ -1,14 +1,14 @@
 --- 
 event_category_00001: 
   name: unknown  
-  display_name: {"en": "unknown",
+  display_name_translations: {"en": "unknown",
     "ja": "不明"}
   id: 1
   note: ""
   position: 1
 event_category_00002: 
   name: closed  
-  display_name: {"en": "closed",
+  display_name_translations: {"en": "closed",
     "ja": "休館日"}
   id: 2
   note: ""
