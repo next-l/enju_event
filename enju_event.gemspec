@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "enju_message", "~> 0.4.0.beta.1"
   s.add_dependency "ri_cal"
-  s.add_dependency "jbuilder"
 
   s.add_development_dependency "enju_leaf", "~> 1.4.0.beta.1"
   s.add_development_dependency "pg"
@@ -27,7 +26,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "sunspot_solr", "~> 2.3"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "rspec-activemodel-mocks"
-  s.add_development_dependency "redis-rails"
   s.add_development_dependency "coveralls"
   s.add_development_dependency "resque"
 end

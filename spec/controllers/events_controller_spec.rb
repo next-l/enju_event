@@ -79,25 +79,10 @@ describe EventsController do
         assigns(:events).should_not be_nil
       end
 
-      describe "with json data (calendar feed)" do
-        render_views
-        it "should get all events data" do
-          20.times do |c|
-            FactoryBot.create(:event)
-          end
-          Event.reindex
-          today = Date.today
-          get :index, params: { format: "json", start: today.beginning_of_month.to_s, end: today.end_of_month.to_s }
-          expect(response).to be_successful
-          events = assigns(:events)
-          expect(events).not_to be_nil
-          expect(events.size).to be >= 20
-          expect(response.body).to match /\A\[/
-          data = JSON.parse(response.body)
-          expect(data.first).not_to be_nil
-          expect(data.first).to have_key("start")
-          expect(data.first).to have_key("url")
-        end
+      it "should get all events data" do
+        get :index, format: 'json'
+        expect(response).to be_successful
+        expect(assigns(:events).size).to be >= 8
       end
     end
   end
