@@ -4,10 +4,10 @@ describe "event_export_files/index" do
   fixtures :all
 
   before(:each) do
-    assign(:event_export_files, Kaminari::paginate_array([
-      stub_model(EventExportFile, user_id: 1),
-      stub_model(EventExportFile, user_id: 1)
-    ]).page(1))
+    2.times do
+      FactoryBot.create(:event_export_file)
+    end
+    assign(:event_export_files, EventExportFile.page(1))
   end
 
   it "renders a list of event_export_files" do

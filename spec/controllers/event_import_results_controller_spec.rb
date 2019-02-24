@@ -4,6 +4,12 @@ describe EventImportResultsController do
   fixtures :all
 
   describe "GET index" do
+    before do
+      3.times do
+        FactoryBot.create(:event_import_result)
+      end
+    end
+
     describe "When logged in as Administrator" do
       login_fixture_admin
 
@@ -42,12 +48,16 @@ describe EventImportResultsController do
   end
 
   describe "GET show" do
+    before do
+      @event_import_result = FactoryBot.create(:event_import_result)
+    end
+
     describe "When logged in as Administrator" do
       login_fixture_admin
 
       it "assigns the requested event_import_result as @event_import_result" do
-        get :show, params: { id: 1 }
-        assigns(:event_import_result).should eq(EventImportResult.find(1))
+        get :show, params: { id: @event_import_result.id }
+        assigns(:event_import_result).should eq(@event_import_result)
       end
     end
 
@@ -55,8 +65,8 @@ describe EventImportResultsController do
       login_fixture_librarian
 
       it "assigns the requested event_import_result as @event_import_result" do
-        get :show, params: { id: 1 }
-        assigns(:event_import_result).should eq(EventImportResult.find(1))
+        get :show, params: { id: @event_import_result.id }
+        assigns(:event_import_result).should eq(@event_import_result)
       end
     end
 
@@ -64,15 +74,15 @@ describe EventImportResultsController do
       login_fixture_user
 
       it "assigns the requested event_import_result as @event_import_result" do
-        get :show, params: { id: 1 }
-        assigns(:event_import_result).should eq(EventImportResult.find(1))
+        get :show, params: { id: @event_import_result.id }
+        assigns(:event_import_result).should eq(@event_import_result)
       end
     end
 
     describe "When not logged in" do
       it "assigns the requested event_import_result as @event_import_result" do
-        get :show, params: { id: 1 }
-        assigns(:event_import_result).should eq(EventImportResult.find(1))
+        get :show, params: { id: @event_import_result.id }
+        assigns(:event_import_result).should eq(@event_import_result)
         response.should redirect_to(new_user_session_url)
       end
     end

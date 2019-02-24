@@ -184,7 +184,7 @@ end
 #
 # Table name: event_import_files
 #
-#  id                        :bigint(8)        not null, primary key
+#  id                        :uuid             not null, primary key
 #  user_id                   :bigint(8)
 #  note                      :text
 #  executed_at               :datetime

@@ -5,7 +5,7 @@ class EventExportFilesController < ApplicationController
   # GET /event_export_files
   # GET /event_export_files.json
   def index
-    @event_export_files = EventExportFile.order('id DESC').page(params[:page])
+    @event_export_files = EventExportFile.order('created_at DESC').page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
