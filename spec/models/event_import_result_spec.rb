@@ -9,7 +9,7 @@ end
 #
 # Table name: event_import_results
 #
-#  id                   :bigint(8)        not null, primary key
+#  id                   :uuid             not null, primary key
 #  event_import_file_id :uuid
 #  event_id             :uuid
 #  body                 :text
