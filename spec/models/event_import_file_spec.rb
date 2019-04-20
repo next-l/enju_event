@@ -134,7 +134,7 @@ end
 #
 # Table name: event_import_files
 #
-#  id                        :uuid             not null, primary key
+#  id                        :bigint(8)        not null, primary key
 #  user_id                   :bigint(8)
 #  note                      :text
 #  executed_at               :datetime
@@ -143,6 +143,6 @@ end
 #  updated_at                :datetime         not null
 #  error_message             :text
 #  user_encoding             :string
-#  default_library_id        :uuid
+#  default_library_id        :bigint(8)
 #  default_event_category_id :bigint(8)
 #

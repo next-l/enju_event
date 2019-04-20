@@ -14,8 +14,8 @@ end
 # Table name: participates
 #
 #  id         :bigint(8)        not null, primary key
-#  agent_id   :uuid             not null
-#  event_id   :uuid             not null
+#  agent_id   :bigint(8)        not null
+#  event_id   :bigint(8)        not null
 #  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

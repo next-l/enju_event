@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  agent_id: 90b48b67-7e0c-48ce-80a2-e40acdb5005f
-  event_id: 1665290c-5913-4e7c-808f-516856ace5ac
+  agent_id: 1
+  event_id: 1
   position: 1
 
 two:
-  agent_id: 89a69872-dc33-40df-9541-fb38d453e767
-  event_id: 1665290c-5913-4e7c-808f-516856ace5ac
+  agent_id: 2
+  event_id: 1
   position: 2
 
 # == Schema Information
@@ -15,8 +15,8 @@ two:
 # Table name: participates
 #
 #  id         :bigint(8)        not null, primary key
-#  agent_id   :uuid             not null
-#  event_id   :uuid             not null
+#  agent_id   :bigint(8)        not null
+#  event_id   :bigint(8)        not null
 #  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
