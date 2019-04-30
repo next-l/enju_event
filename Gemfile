@@ -10,6 +10,7 @@ gemspec
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
+gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
@@ -20,5 +21,9 @@ gem 'enju_biblio', github: 'next-l/enju_biblio'
 gem 'enju_library', github: 'next-l/enju_library'
 gem 'enju_message', github: 'next-l/enju_message'
 gem 'jbuilder'
-gem 'rails-controller-testing', group: :test
-gem 'rspec_junit_formatter', group: :test
+gem 'sassc-rails'
+group :test do
+  gem 'rails-controller-testing'
+  gem 'rspec_junit_formatter'
+  gem 'webdrivers'
+end

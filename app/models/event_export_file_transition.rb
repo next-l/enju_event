@@ -9,11 +9,11 @@ end
 #
 # Table name: event_export_file_transitions
 #
-#  id                   :bigint(8)        not null, primary key
+#  id                   :bigint           not null, primary key
 #  to_state             :string
 #  metadata             :jsonb
 #  sort_key             :integer
-#  event_export_file_id :bigint(8)
+#  event_export_file_id :bigint
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  most_recent          :boolean          not null

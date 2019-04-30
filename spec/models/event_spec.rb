@@ -29,9 +29,9 @@ end
 #
 # Table name: events
 #
-#  id                        :bigint(8)        not null, primary key
-#  library_id                :bigint(8)        not null
-#  event_category_id         :bigint(8)        not null
+#  id                        :bigint           not null, primary key
+#  library_id                :bigint           not null
+#  event_category_id         :bigint           not null
 #  name                      :string           not null
 #  note                      :text
 #  start_at                  :datetime
@@ -40,5 +40,5 @@ end
 #  display_name_translations :jsonb            not null
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
-#  place_id                  :bigint(8)
+#  place_id                  :bigint
 #
