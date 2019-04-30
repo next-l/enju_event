@@ -20,3 +20,8 @@ notifications:
 sudo: false
 addons:
   postgresql: "9.6"
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable

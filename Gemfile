@@ -10,10 +10,13 @@ gemspec
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
+gem 'jquery-rails'
+gem 'sassc-rails'
 
 # To use debugger
 # gem 'debugger'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
+  gem 'webdrivers'
 end
