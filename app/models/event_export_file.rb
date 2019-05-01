@@ -19,12 +19,14 @@ class EventExportFile < ActiveRecord::Base
     tempfile.puts(file)
     tempfile.close
     self.event_export = File.new(tempfile.path, "r")
-    if save
-      send_message
-    end
+    save!
     transition_to!(:completed)
+    mailer = EventExportMailer.completed(self)
+    send_message(mailer)
   rescue => e
     transition_to!(:failed)
+    mailer = EventExportMailer.failed(self)
+    send_message(mailer)
     raise e
   end
 

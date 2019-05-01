@@ -10,7 +10,7 @@ describe EventExportFile do
     file.save
     EventExportFileJob.perform_later(file).should be_truthy
     Message.count.should eq message_count + 1
-    Message.order(:created_at).last.subject.should eq 'エクスポートが完了しました'
+    Message.order(:created_at).last.subject.should eq "Export completed: #{file.id}"
   end
 end
 
