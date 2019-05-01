@@ -6,7 +6,7 @@ class EventImportFilesController < ApplicationController
   # GET /event_import_files
   # GET /event_import_files.json
   def index
-    @event_import_files = EventImportFile.page(params[:page])
+    @event_import_files = EventImportFile.order(created_at: :desc).page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
