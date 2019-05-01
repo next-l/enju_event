@@ -90,12 +90,15 @@ class EventImportFile < ActiveRecord::Base
     Sunspot.commit
     rows.close
     transition_to!(:completed)
-    send_message
+    mailer = EventImportMailer.completed(self)
+    send_message(mailer)
     num
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     save
     transition_to!(:failed)
+    mailer = EventImportMailer.failed(self)
+    send_message(mailer)
     raise e
   end
 
@@ -125,10 +128,14 @@ class EventImportFile < ActiveRecord::Base
       event.save!
     end
     transition_to!(:completed)
+    mailer = EventImportMailer.completed(self)
+    send_message(mailer)
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     save
     transition_to!(:failed)
+    mailer = EventImportMailer.failed(self)
+    send_message(mailer)
     raise e
   end
 
@@ -147,10 +154,14 @@ class EventImportFile < ActiveRecord::Base
       event.destroy
     end
     transition_to!(:completed)
+    mailer = EventImportMailer.completed(self)
+    send_message(mailer)
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     save
     transition_to!(:failed)
+    mailer = EventImportMailer.failed(self)
+    send_message(mailer)
     raise e
   end
 

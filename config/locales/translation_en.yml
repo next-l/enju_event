@@ -56,3 +56,14 @@ en:
   event_import_file:
     default_library: If "library" column is not set in the TSV file, this library is set to the new event.
     default_event_category: If "event_category" column is not set in the TSV file, this event category is set to the new event.
+
+  event_import_mailer:
+    completed:
+      subject: 'Import completed'
+    failed:
+      subject: 'Import failed'
+  event_export_mailer:
+    completed:
+      subject: 'Export completed'
+    failed:
+      subject: 'Export failed'

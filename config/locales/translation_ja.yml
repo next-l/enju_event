@@ -58,3 +58,14 @@ ja:
   event_import_file:
     default_library: TSVファイルで"library"列が指定されていない場合、この図書館が登録されます。
     default_event_category: TSVファイルで"event_category"列が指定されていない場合、この種別が登録されます。
+
+  event_import_mailer:
+    completed:
+      subject: 'インポートが完了しました'
+    failed:
+      subject: 'インポートに失敗しました'
+  event_export_mailer:
+    completed:
+      subject: 'エクスポートが完了しました'
+    failed:
+      subject: 'エクスポートに失敗しました'

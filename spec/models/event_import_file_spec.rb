@@ -43,7 +43,7 @@ describe EventImportFile do
       @file.user = User.where(username: 'librarian1').first
       @file.import_start
       Message.count.should eq old_message_count + 1
-      Message.order(:id).last.subject.should eq 'インポートが完了しました'
+      Message.order(:created_at).last.subject.should eq "Import completed: #{@file.id}"
     end
   end
 
