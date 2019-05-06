@@ -6,7 +6,7 @@ class CreateShelves < ActiveRecord::Migration[5.2]
       t.text :note
       t.references :library, foreign_key: true, null: false
       t.integer :items_count, default: 0, null: false
-      t.integer :position
+      t.integer :position, default: 1, null: false
       t.timestamps
     end
   end

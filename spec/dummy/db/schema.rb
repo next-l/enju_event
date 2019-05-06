@@ -226,8 +226,8 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
 
   create_table "colors", force: :cascade do |t|
     t.bigint "library_group_id"
-    t.string "property"
-    t.string "code"
+    t.string "property", null: false
+    t.string "code", null: false
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
   end
 
   create_table "create_types", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
     t.integer "position"
@@ -303,7 +303,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "name", null: false
     t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -775,7 +775,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
   create_table "participates", force: :cascade do |t|
     t.bigint "agent_id", null: false
     t.bigint "event_id", null: false
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_participates_on_agent_id"
@@ -833,10 +833,10 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
   end
 
   create_table "produce_types", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -875,7 +875,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "name", null: false
     t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

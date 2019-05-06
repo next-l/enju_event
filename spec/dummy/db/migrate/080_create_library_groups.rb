@@ -8,7 +8,7 @@ class CreateLibraryGroups < ActiveRecord::Migration[5.2]
       t.text :login_banner
       t.text :note
       t.integer :country_id
-      t.integer :position
+      t.integer :position, null: false, default: 1
 
       t.timestamps
     end
