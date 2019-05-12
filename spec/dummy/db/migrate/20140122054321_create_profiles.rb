@@ -1,10 +1,8 @@
 class CreateProfiles < ActiveRecord::Migration[5.2]
   def change
     create_table :profiles do |t|
-      t.references :user_group, null: false
-      t.references :library
       t.string :locale
-      t.string :user_number, unique: true
+      t.string :user_number, index: {unique: true}
       t.text :full_name
       t.text :note
       t.text :keyword_list

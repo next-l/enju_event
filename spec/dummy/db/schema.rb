@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_14_151124) do
+ActiveRecord::Schema.define(version: 2019_05_11_145706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -261,7 +261,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "name", null: false
     t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -417,7 +417,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "name", null: false
     t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_identifier_types_on_name", unique: true
@@ -431,8 +431,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["body"], name: "index_identifiers_on_body"
-    t.index ["identifier_type_id"], name: "index_identifiers_on_identifier_type_id"
+    t.index ["body", "identifier_type_id"], name: "index_identifiers_on_body_and_identifier_type_id"
     t.index ["manifestation_id"], name: "index_identifiers_on_manifestation_id"
   end
 
@@ -503,7 +502,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "item_identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "shelf_id"
+    t.bigint "shelf_id", null: false
     t.boolean "include_supplements", default: false, null: false
     t.text "note"
     t.string "url"
@@ -817,7 +816,6 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.integer "picture_width"
     t.integer "picture_height"
     t.index ["picture_attachable_id", "picture_attachable_type"], name: "index_picture_files_on_picture_attachable_id_and_type"
-    t.index ["picture_attachable_id"], name: "index_picture_files_on_picture_attachable_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -854,8 +852,6 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.bigint "user_group_id", null: false
-    t.bigint "library_id"
     t.string "locale"
     t.string "user_number"
     t.text "full_name"
@@ -867,8 +863,11 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.datetime "expired_at"
     t.text "full_name_transcription"
     t.datetime "date_of_birth"
+    t.bigint "user_group_id", null: false
+    t.bigint "library_id", null: false
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
+    t.index ["user_number"], name: "index_profiles_on_user_number", unique: true
   end
 
   create_table "realize_types", force: :cascade do |t|
@@ -976,7 +975,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "name", null: false
     t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_roles_on_name", unique: true
@@ -1112,8 +1111,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.bigint "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_user_has_roles_on_role_id"
-    t.index ["user_id"], name: "index_user_has_roles_on_user_id"
+    t.index ["user_id", "role_id"], name: "index_user_has_roles_on_user_id_and_role_id", unique: true
   end
 
   create_table "user_import_file_transitions", force: :cascade do |t|
@@ -1140,8 +1138,6 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "user_encoding"
     t.bigint "default_library_id"
     t.bigint "default_user_group_id"
-    t.index ["default_library_id"], name: "index_user_import_files_on_default_library_id"
-    t.index ["default_user_group_id"], name: "index_user_import_files_on_default_user_group_id"
     t.index ["user_id"], name: "index_user_import_files_on_user_id"
   end
 
@@ -1175,9 +1171,9 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.datetime "confirmed_at"
-    t.bigint "profile_id"
+    t.bigint "profile_id", null: false
     t.index ["email"], name: "index_users_on_email"
-    t.index ["profile_id"], name: "index_users_on_profile_id"
+    t.index ["profile_id"], name: "index_users_on_profile_id", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -1211,9 +1207,12 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
   add_foreign_key "donates", "agents"
   add_foreign_key "donates", "items"
   add_foreign_key "event_export_files", "users"
+  add_foreign_key "event_import_files", "event_categories", column: "default_event_category_id"
+  add_foreign_key "event_import_files", "libraries", column: "default_library_id"
   add_foreign_key "event_import_files", "users"
   add_foreign_key "events", "event_categories"
   add_foreign_key "events", "libraries"
+  add_foreign_key "events", "places"
   add_foreign_key "identifiers", "identifier_types"
   add_foreign_key "identifiers", "manifestations"
   add_foreign_key "import_requests", "manifestations"
@@ -1236,9 +1235,12 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
   add_foreign_key "periodicals", "frequencies"
   add_foreign_key "produces", "agents"
   add_foreign_key "produces", "manifestations"
+  add_foreign_key "profiles", "libraries"
+  add_foreign_key "profiles", "user_groups"
   add_foreign_key "realizes", "agents"
   add_foreign_key "realizes", "manifestations", column: "expression_id"
   add_foreign_key "resource_export_files", "users"
+  add_foreign_key "resource_import_files", "shelves", column: "default_shelf_id"
   add_foreign_key "resource_import_files", "users"
   add_foreign_key "resource_import_results", "resource_import_files"
   add_foreign_key "series_statement_merges", "series_statement_merge_lists"
