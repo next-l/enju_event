@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_170645) do
+ActiveRecord::Schema.define(version: 2019_05_12_133459) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer "basket_id"
@@ -369,16 +369,17 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
     t.string "name", null: false
     t.text "display_name"
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.json "display_name_translations", default: {}, null: false
   end
 
   create_table "event_export_file_transitions", force: :cascade do |t|
     t.string "to_state"
     t.text "metadata", default: "{}"
     t.integer "sort_key"
-    t.integer "event_export_file_id"
+    t.bigint "event_export_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "most_recent", null: false
@@ -388,7 +389,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
   end
 
   create_table "event_export_files", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "event_export_file_name"
     t.string "event_export_content_type"
     t.integer "event_export_file_size"
@@ -403,7 +404,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
     t.string "to_state"
     t.text "metadata", default: "{}"
     t.integer "sort_key"
-    t.integer "event_import_file_id"
+    t.bigint "event_import_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "most_recent", null: false
@@ -429,24 +430,28 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
     t.string "event_import_fingerprint"
     t.text "error_message"
     t.string "user_encoding"
-    t.integer "default_library_id"
+    t.bigint "default_library_id"
     t.integer "default_event_category_id"
+    t.index ["default_event_category_id"], name: "index_event_import_files_on_default_event_category_id"
+    t.index ["default_library_id"], name: "index_event_import_files_on_default_library_id"
     t.index ["parent_id"], name: "index_event_import_files_on_parent_id"
     t.index ["user_id"], name: "index_event_import_files_on_user_id"
   end
 
   create_table "event_import_results", force: :cascade do |t|
-    t.integer "event_import_file_id"
+    t.bigint "event_import_file_id"
     t.integer "event_id"
     t.text "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["event_id"], name: "index_event_import_results_on_event_id"
+    t.index ["event_import_file_id"], name: "index_event_import_results_on_event_import_file_id"
   end
 
   create_table "events", force: :cascade do |t|
     t.integer "library_id", null: false
     t.integer "event_category_id", null: false
-    t.string "name"
+    t.string "name", null: false
     t.text "note"
     t.datetime "start_at"
     t.datetime "end_at"
@@ -456,6 +461,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "place_id"
+    t.json "display_name_translations", default: {}, null: false
     t.index ["event_category_id"], name: "index_events_on_event_category_id"
     t.index ["library_id"], name: "index_events_on_library_id"
     t.index ["place_id"], name: "index_events_on_place_id"
@@ -903,7 +909,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
   create_table "participates", force: :cascade do |t|
     t.integer "agent_id", null: false
     t.integer "event_id", null: false
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["agent_id"], name: "index_participates_on_agent_id"
@@ -933,7 +939,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_170645) do
   create_table "places", force: :cascade do |t|
     t.string "term"
     t.text "city"
-    t.integer "country_id"
+    t.bigint "country_id"
     t.float "latitude"
     t.float "longitude"
     t.datetime "created_at", null: false

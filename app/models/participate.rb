@@ -16,7 +16,7 @@ end
 #  id         :integer          not null, primary key
 #  agent_id   :integer          not null
 #  event_id   :integer          not null
-#  position   :integer
+#  position   :integer          default(1), not null
 #  created_at :datetime
 #  updated_at :datetime
 #

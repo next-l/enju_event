@@ -14,7 +14,7 @@ end
 # Table name: event_import_results
 #
 #  id                   :integer          not null, primary key
-#  event_import_file_id :integer
+#  event_import_file_id :bigint
 #  event_id             :integer
 #  body                 :text
 #  created_at           :datetime

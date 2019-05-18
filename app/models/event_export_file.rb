@@ -58,7 +58,7 @@ end
 # Table name: event_export_files
 #
 #  id                        :integer          not null, primary key
-#  user_id                   :integer
+#  user_id                   :bigint
 #  event_export_file_name    :string
 #  event_export_content_type :string
 #  event_export_file_size    :integer

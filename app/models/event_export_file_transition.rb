@@ -14,7 +14,7 @@ end
 #  to_state             :string
 #  metadata             :text             default({})
 #  sort_key             :integer
-#  event_export_file_id :integer
+#  event_export_file_id :bigint
 #  created_at           :datetime
 #  updated_at           :datetime
 #  most_recent          :boolean          not null
