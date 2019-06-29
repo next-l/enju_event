@@ -1,9 +1,0 @@
-name	event_category	library	start_at	end_at	all_day
-仕事始め	unknown	kamata	2008-01-12 17:54:00 UTC	2008-01-13 17:54:00 UTC	false
-テスト	closed	kamata	2008-01-12 17:54:00 UTC	2008-01-13 17:54:00 UTC	false
-ミーティング	unknown	kamata	2008-01-12 15:00:00 UTC	2008-02-04 15:00:00 UTC	false
-テスト	movie_theater	hachioji	2008-02-04 15:00:00 UTC	2008-02-05 15:00:00 UTC	false
-test	unknown	kamata	2008-02-04 15:00:00 UTC	2008-02-07 15:00:00 UTC	false
-なんとかかんとか	closed	kamata	2008-02-04 15:00:00 UTC	2008-02-07 15:00:00 UTC	false
-test	unknown	kamata	2008-02-04 15:00:00 UTC	2008-02-07 15:00:00 UTC	false
-test	unknown	kamata	2008-02-05 06:00:00 UTC	2008-02-05 06:00:00 UTC	false
