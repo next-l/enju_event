@@ -1,5 +1,5 @@
 class EventImportFileTransition < ActiveRecord::Base
-
+  include Statesman::Adapters::ActiveRecordTransition
 
   belongs_to :event_import_file, inverse_of: :event_import_file_transitions
   # attr_accessible :to_state, :sort_key, :metadata
@@ -9,12 +9,12 @@ end
 #
 # Table name: event_import_file_transitions
 #
-#  id                   :bigint           not null, primary key
+#  id                   :integer          not null, primary key
 #  to_state             :string
-#  metadata             :jsonb
+#  metadata             :text             default({})
 #  sort_key             :integer
 #  event_import_file_id :bigint
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
+#  created_at           :datetime
+#  updated_at           :datetime
 #  most_recent          :boolean          not null
 #

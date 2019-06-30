@@ -134,13 +134,21 @@ end
 #
 # Table name: event_import_files
 #
-#  id                        :bigint           not null, primary key
+#  id                        :integer          not null, primary key
+#  parent_id                 :integer
+#  content_type              :string
+#  size                      :integer
 #  user_id                   :bigint
 #  note                      :text
 #  executed_at               :datetime
+#  event_import_file_name    :string
+#  event_import_content_type :string
+#  event_import_file_size    :integer
+#  event_import_updated_at   :datetime
 #  edit_mode                 :string
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
+#  created_at                :datetime
+#  updated_at                :datetime
+#  event_import_fingerprint  :string
 #  error_message             :text
 #  user_encoding             :string
 #  default_library_id        :bigint
