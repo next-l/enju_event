@@ -10,7 +10,7 @@
 
 <p>
   <strong><%= t('activerecord.attributes.event_export_file.event_export_file_name') -%></strong>
-  <%= link_to @event_export_file.event_export.filename, @event_export_file.event_export if @event_export_file.event_export.attached? %>
+  <%= link_to @event_export_file.event_export_file_name, event_export_file_path(@event_export_file, format: :download) if @event_export_file.event_export_file_name %>
 </p>
 
 <p>

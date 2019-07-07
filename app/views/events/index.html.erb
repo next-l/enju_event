@@ -97,7 +97,7 @@
   <ul>
     <li><%= link_to t('event.all_libraries'), url_for(filtered_params.merge(library_id: nil, page: nil)) -%></li>
     <%- @libraries.each do |library| -%>
-      <li><%= link_to library.display_name, url_for(filtered_params.merge(library_id: library.name)) -%></li>
+      <li><%= link_to library.display_name, url_for(filtered_params.merge(library_id: library.name, mode: params[:mode])) -%></li>
     <%- end -%>
   </ul>
   <p>
