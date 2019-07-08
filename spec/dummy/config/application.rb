@@ -17,3 +17,4 @@ module Dummy
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+

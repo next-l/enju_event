@@ -4,7 +4,27 @@ class EventImportFile < ActiveRecord::Base
   scope :not_imported, -> {in_state(:pending)}
   scope :stucked, -> {in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago)}
 
-  has_one_attached :event_import
+  if ENV['ENJU_STORAGE'] == 's3'
+    has_attached_file :event_import, storage: :s3,
+      s3_credentials: {
+        access_key: ENV['AWS_ACCESS_KEY_ID'],
+        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+        bucket: ENV['S3_BUCKET_NAME'],
+        s3_host_name: ENV['S3_HOST_NAME']
+      },
+      s3_permissions: :private
+  else
+    has_attached_file :event_import,
+      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
+  end
+  validates_attachment_content_type :event_import, content_type: [
+    'text/csv',
+    'text/plain',
+    'text/tab-separated-values',
+    'application/octet-stream',
+    'application/vnd.ms-excel'
+  ]
+  validates_attachment_presence :event_import
   belongs_to :user, validate: true
   belongs_to :default_library, class_name: 'Library', optional: true
   belongs_to :default_event_category, class_name: 'EventCategory', optional: true
@@ -24,8 +44,8 @@ class EventImportFile < ActiveRecord::Base
   def import
     transition_to!(:started)
     num = { imported: 0, failed: 0 }
-    rows = open_import_file
-    check_field(rows.headers.join('\t'))
+    rows = open_import_file(create_import_temp_file(event_import))
+    check_field(rows.first)
     row_num = 1
 
     rows.each do |row|
@@ -67,6 +87,7 @@ class EventImportFile < ActiveRecord::Base
       event_import_result.save!
     end
     Sunspot.commit
+    rows.close
     transition_to!(:completed)
     mailer = EventImportMailer.completed(self)
     send_message(mailer)
@@ -82,7 +103,7 @@ class EventImportFile < ActiveRecord::Base
 
   def modify
     transition_to!(:started)
-    rows = open_import_file
+    rows = open_import_file(create_import_temp_file(event_import))
     check_field(rows.first)
     row_num = 1
 
@@ -119,7 +140,8 @@ class EventImportFile < ActiveRecord::Base
 
   def remove
     transition_to!(:started)
-    rows = open_import_file
+    rows = open_import_file(create_import_temp_file(event_import))
+    rows.shift
     row_num = 1
 
     rows.each do |row|
@@ -143,7 +165,9 @@ class EventImportFile < ActiveRecord::Base
   end
 
   def self.import
-    EventImportFile.not_imported.each(&:import_start)
+    EventImportFile.not_imported.each do |file|
+      file.import_start
+    end
   rescue
     Rails.logger.info "#{Time.zone.now} importing events failed!"
   end
@@ -157,26 +181,23 @@ class EventImportFile < ActiveRecord::Base
     :pending
   end
 
-  def open_import_file
-    byte = ActiveStorage::Blob.service.download(event_import.key)
-    if defined?(CharlockHolmes)
-      string = CharlockHolmes::Converter.convert(byte, user_encoding || byte.detect_encoding[:encoding], 'utf-8')
-    else
-      string = NKF.nkf("--ic=#{user_encoding || NKF.guess(byte).to_s} --oc=utf-8", byte)
-    end
-
-    rows = CSV.parse(string, col_sep: "\t", encoding: 'utf-8', headers: true)
+  def open_import_file(tempfile)
+    file = CSV.open(tempfile, col_sep: "\t")
     header_columns = %w(
       id name display_name library event_category start_at end_at all_day note dummy
     )
-    ignored_columns = rows.headers - header_columns
+    header = file.first
+    ignored_columns = header - header_columns
     unless ignored_columns.empty?
       self.error_message = I18n.t('import.following_column_were_ignored', column: ignored_columns.join(', '))
       save!
     end
+    rows = CSV.open(tempfile, headers: header, col_sep: "\t")
     event_import_result = EventImportResult.new
-    event_import_result.assign_attributes({ event_import_file_id: id, body: rows.headers.join("\t") })
+    event_import_result.assign_attributes({ event_import_file_id: id, body: header.join("\t") })
     event_import_result.save!
+    tempfile.close(true)
+    file.close
     rows
   end
 
@@ -198,7 +219,7 @@ end
 #  parent_id                 :integer
 #  content_type              :string
 #  size                      :integer
-#  user_id                   :bigint
+#  user_id                   :integer
 #  note                      :text
 #  executed_at               :datetime
 #  event_import_file_name    :string
@@ -211,6 +232,6 @@ end
 #  event_import_fingerprint  :string
 #  error_message             :text
 #  user_encoding             :string
-#  default_library_id        :bigint
-#  default_event_category_id :bigint
+#  default_library_id        :integer
+#  default_event_category_id :integer
 #

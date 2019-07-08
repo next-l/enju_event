@@ -1,9 +1,16 @@
-require 'rails_helper'
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-describe EventImportResult do
-  #pending "add some examples to (or delete) #{__FILE__}"
+one:
+  id: 1
+  event_import_file_id: 1
+  event_id: 1
+  body: MyText
 
-end
+two:
+  id: 2
+  event_import_file_id: 1
+  event_id: 2
+  body: MyText
 
 # == Schema Information
 #

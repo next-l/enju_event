@@ -1,18 +1,14 @@
-require 'rails_helper'
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-describe EventExportFile do
-  fixtures :all
-
-  it "should export in background" do
-    message_count = Message.count
-    file = EventExportFile.new
-    file.user = users(:admin)
-    file.save
-    EventExportFileJob.perform_later(file).should be_truthy
-    Message.count.should eq message_count + 1
-    Message.order(:created_at).last.subject.should eq "Export completed: #{file.id}"
-  end
-end
+event_export_file_00001:
+  id: 1
+  user_id: 1
+event_export_file_00002:
+  id: 2
+  user_id: 1
+event_export_file_00003:
+  id: 3
+  user_id: 1
 
 # == Schema Information
 #
