@@ -125,7 +125,7 @@ class EventsController < ApplicationController
     @event.set_date
 
     respond_to do |format|
-      if @event.update_attributes(event_params)
+      if @event.update(event_params)
 
         flash[:notice] = t('controller.successfully_updated', model: t('activerecord.models.event'))
         format.html { redirect_to(@event) }
