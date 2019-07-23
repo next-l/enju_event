@@ -1,4 +1,4 @@
-class Place < ActiveRecord::Base
+class Place < ApplicationRecord
   has_many :events
   validates :term, presence: true
 end

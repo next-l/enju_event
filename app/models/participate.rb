@@ -1,4 +1,4 @@
-class Participate < ActiveRecord::Base
+class Participate < ApplicationRecord
   belongs_to :agent
   belongs_to :event
 

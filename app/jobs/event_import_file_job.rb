@@ -1,4 +1,4 @@
-class EventImportFileJob < ActiveJob::Base
+class EventImportFileJob < ApplicationJob
   queue_as :enju_leaf
 
   def perform(event_import_file)

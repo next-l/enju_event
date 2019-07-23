@@ -1,4 +1,4 @@
-class EventExportFile < ActiveRecord::Base
+class EventExportFile < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
   include ExportFile
 

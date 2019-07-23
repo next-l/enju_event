@@ -1,4 +1,4 @@
-class EventImportResult < ActiveRecord::Base
+class EventImportResult < ApplicationRecord
   default_scope { order('event_import_results.id') }
   scope :file_id, proc{|file_id| where(event_import_file_id: file_id)}
   scope :failed, -> { where(event_id: nil) }

@@ -1,4 +1,4 @@
-class EventImportFile < ActiveRecord::Base
+class EventImportFile < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
   include ImportFile
   scope :not_imported, -> {in_state(:pending)}

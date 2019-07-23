@@ -1,4 +1,4 @@
-class EventImportFileTransition < ActiveRecord::Base
+class EventImportFileTransition < ApplicationRecord
   include Statesman::Adapters::ActiveRecordTransition
 
 

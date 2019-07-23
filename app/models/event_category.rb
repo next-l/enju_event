@@ -1,4 +1,4 @@
-class EventCategory < ActiveRecord::Base
+class EventCategory < ApplicationRecord
   include MasterModel
   default_scope { order('position') }
   has_many :events
