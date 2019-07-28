@@ -1,4 +1,4 @@
-class EventExportFile < ActiveRecord::Base
+class EventExportFile < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
   include ExportFile
 
@@ -58,7 +58,7 @@ end
 # Table name: event_export_files
 #
 #  id                        :integer          not null, primary key
-#  user_id                   :bigint
+#  user_id                   :integer
 #  event_export_file_name    :string
 #  event_export_content_type :string
 #  event_export_file_size    :integer

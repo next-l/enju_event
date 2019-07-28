@@ -1,4 +1,4 @@
-class EventCategory < ActiveRecord::Base
+class EventCategory < ApplicationRecord
   include MasterModel
   default_scope { order('position') }
   has_many :events
@@ -14,7 +14,7 @@ end
 #  name         :string           not null
 #  display_name :text
 #  note         :text
-#  position     :integer          default(1), not null
+#  position     :integer
 #  created_at   :datetime
 #  updated_at   :datetime
 #

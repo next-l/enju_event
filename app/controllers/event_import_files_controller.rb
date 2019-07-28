@@ -78,7 +78,7 @@ class EventImportFilesController < ApplicationController
   # PUT /event_import_files/1.json
   def update
     respond_to do |format|
-      if @event_import_file.update_attributes(event_import_file_params)
+      if @event_import_file.update(event_import_file_params)
         if @event_import_file.mode == 'import'
           EventImportFileJob.perform_later(@event_import_file)
         end

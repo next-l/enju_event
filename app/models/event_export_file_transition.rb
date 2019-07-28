@@ -1,4 +1,4 @@
-class EventExportFileTransition < ActiveRecord::Base
+class EventExportFileTransition < ApplicationRecord
   include Statesman::Adapters::ActiveRecordTransition
 
 
@@ -14,7 +14,7 @@ end
 #  to_state             :string
 #  metadata             :text             default({})
 #  sort_key             :integer
-#  event_export_file_id :bigint
+#  event_export_file_id :integer
 #  created_at           :datetime
 #  updated_at           :datetime
 #  most_recent          :boolean          not null

@@ -1,4 +1,4 @@
-class EventExportFileJob < ActiveJob::Base
+class EventExportFileJob < ApplicationJob
   queue_as :enju_leaf
 
   def perform(event_export_file)

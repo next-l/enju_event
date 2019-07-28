@@ -76,7 +76,7 @@ class EventExportFilesController < ApplicationController
   # PUT /event_export_files/1.json
   def update
     respond_to do |format|
-      if @event_export_file.update_attributes(event_export_file_params)
+      if @event_export_file.update(event_export_file_params)
         if @event_export_file.mode == 'export'
           EventExportFileJob.perform_later(@event_export_file)
         end

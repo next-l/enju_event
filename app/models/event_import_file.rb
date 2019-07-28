@@ -1,4 +1,4 @@
-class EventImportFile < ActiveRecord::Base
+class EventImportFile < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
   include ImportFile
   scope :not_imported, -> {in_state(:pending)}
@@ -232,6 +232,6 @@ end
 #  event_import_fingerprint  :string
 #  error_message             :text
 #  user_encoding             :string
-#  default_library_id        :bigint
+#  default_library_id        :integer
 #  default_event_category_id :integer
 #

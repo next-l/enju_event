@@ -58,7 +58,7 @@ class ParticipatesController < ApplicationController
   # PUT /participates/1.json
   def update
     respond_to do |format|
-      if @participate.update_attributes(participate_params)
+      if @participate.update(participate_params)
         flash[:notice] = 'Participate was successfully updated.'
         format.html { redirect_to(@participate) }
         format.json { head :no_content }
