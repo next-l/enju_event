@@ -16,7 +16,6 @@ script:
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
   - psql enju_event_dummy_test -c 'CREATE EXTENSION pgcrypto'
-  - bundle exec rake db:migrate
 services:
   - redis-server
   - mysql
