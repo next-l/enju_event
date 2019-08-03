@@ -1434,7 +1434,8 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.integer "role_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["user_id", "role_id"], name: "index_user_has_roles_on_user_id_and_role_id", unique: true
+    t.index ["role_id"], name: "index_user_has_roles_on_role_id"
+    t.index ["user_id"], name: "index_user_has_roles_on_user_id"
   end
 
   create_table "user_import_file_transitions", force: :cascade do |t|
