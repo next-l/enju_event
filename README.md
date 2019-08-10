@@ -1,7 +1,7 @@
 # EnjuEvent
-[![CircleCI](https://circleci.com/gh/next-l/enju_event.svg?style=svg)](https://circleci.com/gh/next-l/enju_event)
-[![Coverage Status](https://coveralls.io/repos/github/next-l/enju_event/badge.svg?branch=master)](https://coveralls.io/github/next-l/enju_event?branch=master)
-[![security](https://hakiri.io/github/next-l/enju_event/master.svg)](https://hakiri.io/github/next-l/enju_event/master)
+[![Travis CI](https://travis-ci.com/next-l/enju_event.svg?branch=1.3)](https://travis-ci.com/next-l/enju_event)
+[![Coverage Status](https://coveralls.io/repos/github/next-l/enju_event/badge.svg?branch=1.3)](https://coveralls.io/github/next-l/enju_event?branch=1.3)
+[![security](https://hakiri.io/github/next-l/enju_event/1.3.svg)](https://hakiri.io/github/next-l/enju_event/1.3)
 
 This project rocks and uses MIT-LICENSE.
 
