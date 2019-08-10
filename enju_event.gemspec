@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "ri_cal"
   s.add_dependency "jbuilder"
 
-  s.add_development_dependency "enju_leaf", "~> 1.3.2"
+  s.add_development_dependency "enju_leaf", "~> 1.3.3"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "mysql2"
   s.add_development_dependency "pg"
@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "redis-rails"
   s.add_development_dependency "coveralls"
   s.add_development_dependency "resque"
-  s.add_development_dependency "capybara", "~> 3.11", "< 3.27"
+  s.add_development_dependency "capybara", "~> 3.11", "< 3.16"
   s.add_development_dependency "selenium-webdriver"
   s.add_development_dependency "puma"
   s.add_development_dependency "annotate"
