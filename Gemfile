@@ -21,8 +21,6 @@ gem 'enju_library', github: 'next-l/enju_library'
 gem 'enju_message', github: 'next-l/enju_message'
 gem 'jbuilder'
 gem 'sassc-rails'
-gem 'paper_trail'
-gem 'paperclip-meta'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'

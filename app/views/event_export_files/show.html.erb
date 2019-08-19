@@ -10,7 +10,7 @@
 
 <p>
   <strong><%= t('activerecord.attributes.event_export_file.event_export_file_name') -%></strong>
-  <%= link_to @event_export_file.event_export_file_name, event_export_file_path(@event_export_file, format: :download) if @event_export_file.event_export_file_name %>
+  <%= link_to @event_export_file.event_export.filename.to_s, event_export_file_path(@event_export_file, format: :download) if @event_export_file.event_export.attached? %>
 </p>
 
 <p>
@@ -20,7 +20,7 @@
 
 <p>
   <strong><%= t('page.created_at') -%>:</strong>
-  <%= l(@event_export_file.created_at) if @event_export_file.created_at -%>
+  <%=l @event_export_file.created_at -%>
 </p>
 
 </div>
