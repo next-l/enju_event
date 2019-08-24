@@ -44,9 +44,9 @@ end
 #
 # Table name: event_export_files
 #
-#  id          :integer          not null, primary key
-#  user_id     :integer
+#  id          :bigint           not null, primary key
+#  user_id     :bigint
 #  executed_at :datetime
-#  created_at  :datetime
-#  updated_at  :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #

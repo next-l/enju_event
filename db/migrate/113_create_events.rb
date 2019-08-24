@@ -1,4 +1,4 @@
-class CreateEvents < ActiveRecord::Migration[4.2]
+class CreateEvents < ActiveRecord::Migration[5.2]
   def change
     create_table :events do |t|
       t.references :library, index: true, null: false
