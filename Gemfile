@@ -21,6 +21,7 @@ gem 'enju_library', github: 'next-l/enju_library'
 gem 'enju_message', github: 'next-l/enju_message'
 gem 'jbuilder'
 gem 'sassc-rails'
+gem 'sprockets', '~> 3.7'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'

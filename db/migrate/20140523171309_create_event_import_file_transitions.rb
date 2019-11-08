@@ -1,6 +1,7 @@
 class CreateEventImportFileTransitions < ActiveRecord::Migration[5.2]
   def change
     create_table :event_import_file_transitions do |t|
+      t.string :to_state
       t.jsonb :metadata, default: {}
       t.integer :sort_key
       t.integer :event_import_file_id

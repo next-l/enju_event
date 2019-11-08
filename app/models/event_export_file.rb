@@ -1,5 +1,8 @@
 class EventExportFile < ApplicationRecord
-  include Statesman::Adapters::ActiveRecordQueries
+  include Statesman::Adapters::ActiveRecordQueries[
+    transition_class: EventExportFileTransition,
+    initial_state: :pending
+  ]
   include ExportFile
 
   has_one_attached :event_export

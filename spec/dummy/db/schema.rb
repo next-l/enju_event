@@ -331,6 +331,7 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
   end
 
   create_table "event_import_file_transitions", force: :cascade do |t|
+    t.string "to_state"
     t.jsonb "metadata", default: {}
     t.integer "sort_key"
     t.integer "event_import_file_id"

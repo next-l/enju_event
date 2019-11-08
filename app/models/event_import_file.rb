@@ -1,5 +1,8 @@
 class EventImportFile < ApplicationRecord
-  include Statesman::Adapters::ActiveRecordQueries
+  include Statesman::Adapters::ActiveRecordQueries[
+    transition_class: EventImportFileTransition,
+    initial_state: :pending
+  ]
   include ImportFile
   scope :not_imported, -> {in_state(:pending)}
   scope :stucked, -> {in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago)}
