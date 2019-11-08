@@ -1,19 +1,15 @@
 class CreateMessages < ActiveRecord::Migration[5.2]
-  def self.up
+  def change
     create_table :messages, force: true do |t|
       t.datetime :read_at
-      t.references :sender, index: true
-      t.references :receiver, index: true
+      t.references :sender, foreign_key: {to_table: :users}
+      t.references :receiver, foreign_key: {to_table: :users}
       t.string   :subject, null: false
       t.text     :body
-      t.references :message_request, index: true
-      t.references :parent, index: true
+      t.references :message_request
+      t.references :parent, foreign_key: {to_table: :messages}
 
       t.timestamps
     end
-  end
-
-  def self.down
-    drop_table :messages
   end
 end
