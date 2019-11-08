@@ -17,6 +17,7 @@ gem 'jquery-rails'
 gem 'jbuilder'
 gem 'sassc-rails'
 gem 'paper_trail'
+gem 'sprockets', '~> 3.7'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
