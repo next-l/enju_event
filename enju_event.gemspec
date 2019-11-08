@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"]
 
-  s.add_dependency "enju_message", "~> 0.4.0.beta.1"
+  s.add_dependency "enju_message", "~> 0.4.0.beta.2"
   s.add_dependency "ri_cal"
 
   s.add_development_dependency "enju_leaf", "~> 2.0.0.beta.1"
