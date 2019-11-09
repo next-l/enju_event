@@ -32,7 +32,7 @@ jobs:
         bundle exec rake db:create
         bundle exec rake db:schema:load
         yarn install
-        bundle exec rake app:sunspot:solr:start
+        bundle exec rake app:sunspot:solr:start RAILS_ENV=test
         bundle exec rake
       env:
         DATABASE_URL: postgres://postgres:postgres@localhost:5432/dummy_test
