@@ -1,7 +1,6 @@
 # EnjuEvent
-[![CircleCI](https://circleci.com/gh/next-l/enju_event.svg?style=svg)](https://circleci.com/gh/next-l/enju_event)
+![](https://github.com/next-l/enju_event/workflows/Ruby/badge.svg?branch=2.x)
 [![Coverage Status](https://coveralls.io/repos/github/next-l/enju_event/badge.svg?branch=master)](https://coveralls.io/github/next-l/enju_event?branch=master)
-[![security](https://hakiri.io/github/next-l/enju_event/master.svg)](https://hakiri.io/github/next-l/enju_event/master)
 
 This project rocks and uses MIT-LICENSE.
 
