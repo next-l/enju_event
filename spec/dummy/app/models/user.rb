@@ -9,3 +9,5 @@ class User < ApplicationRecord
   include EnjuLibrary::EnjuUser
   include EnjuMessage::EnjuUser
 end
+
+include EnjuLibrary::EnjuProfile
