@@ -176,13 +176,6 @@ class EventImportFile < ApplicationRecord
   end
 
   private
-  def self.transition_class
-    EventImportFileTransition
-  end
-
-  def self.initial_state
-    :pending
-  end
 
   def open_import_file(tempfile)
     file = CSV.open(tempfile, col_sep: "\t")
