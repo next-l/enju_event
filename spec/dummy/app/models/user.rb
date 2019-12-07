@@ -10,4 +10,4 @@ class User < ApplicationRecord
   include EnjuMessage::EnjuUser
 end
 
-include EnjuLibrary::EnjuProfile
+Profile.include(EnjuLibrary::EnjuProfile)
