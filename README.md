@@ -1,5 +1,5 @@
 # EnjuEvent
-![](https://github.com/next-l/enju_event/workflows/Ruby/badge.svg?branch=2.x)
+[![CircleCI](https://circleci.com/gh/next-l/enju_event/tree/2.x.svg?style=svg)](https://circleci.com/gh/next-l/enju_event/tree/2.x)
 [![Coverage Status](https://coveralls.io/repos/github/next-l/enju_event/badge.svg?branch=master)](https://coveralls.io/github/next-l/enju_event?branch=master)
 
 This project rocks and uses MIT-LICENSE.
