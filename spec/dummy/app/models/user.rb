@@ -6,6 +6,6 @@ class User < ApplicationRecord
 
   # Setup accessible (or protected) attributes for your model
 
-  include EnjuSeed::EnjuUser
+  include EnjuLibrary::EnjuUser
   include EnjuMessage::EnjuUser
 end
