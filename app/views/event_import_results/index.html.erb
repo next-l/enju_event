@@ -1,6 +1,6 @@
-<div id="content_detail" class="ui-corner-all ui-widget-content">
-  <h1 class="title"><%= t('page.listing', model: t('activerecord.models.event_import_result')) -%></h1>
-  <div id="content_list">
+<div class="row">
+  <div class="col-md-9">
+    <h1 class="title"><%= t('page.listing', model: t('activerecord.models.event_import_result')) -%></h1>
     <% if @event_import_file %>
       <h2 class="event_title">
         <%= link_to @event_import_file.event_import.blob.filename, @event_import_file %>
@@ -31,9 +31,28 @@
     </table>
 
     <%= paginate(@event_import_results) %>
+<<<<<<< HEAD
 
   </div>
-</div>
 
-<div id="submenu" class="ui-corner-all ui-widget-content">
+  <div class="col">
+=======
+  </div>
+
+  <div class="col">
+    <div class="card card-body">
+      <ul>
+        <li>
+          <% if @event_import_file %>
+            <%= link_to (image_tag 'icons/page_white_excel.png', size: '16x16', class: 'enju_icon', alt: 'TSV'), event_import_results_path(event_import_file_id: @event_import_file.id, format: :txt, locale: @locale.to_s) -%>
+            (<%= link_to 'TSV', event_import_results_path(event_import_file_id: @event_import_file.id, format: :txt, locale: @locale.to_s) -%>)
+          <% else %>
+            <%= link_to (image_tag 'icons/page_white_excel.png', size: '16x16', class: 'enju_icon', alt: 'TSV'), event_import_results_path(format: :txt, locale: @locale.to_s) -%>
+            (<%= link_to 'TSV', event_import_results_path(format: :txt, locale: @locale.to_s) -%>)
+          <% end %>
+        </li>
+      </ul>
+    </div>
+>>>>>>> update template files
+  </div>
 </div>
