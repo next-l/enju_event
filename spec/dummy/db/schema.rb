@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_105435) do
+ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "accepts", force: :cascade do |t|
@@ -183,7 +184,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
 
   create_table "baskets", force: :cascade do |t|
     t.bigint "user_id"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "lock_version", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -194,7 +195,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
     t.text "name", null: false
     t.string "zip_code"
     t.text "address"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.string "telephone_number"
     t.string "fax_number"
     t.string "url"
@@ -206,7 +207,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
   create_table "budget_types", force: :cascade do |t|
     t.string "name"
     t.text "display_name"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -547,7 +548,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
     t.string "telephone_number_1"
     t.string "telephone_number_2"
     t.string "fax_number"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "call_number_rows", default: 1, null: false
     t.string "call_number_delimiter", default: "|", null: false
     t.bigint "library_group_id", null: false
@@ -571,7 +572,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
     t.string "short_name", null: false
     t.text "my_networks"
     t.text "old_login_banner"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "country_id"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -583,14 +584,14 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
     t.integer "max_number_of_results", default: 500
     t.boolean "family_name_first", default: true
     t.integer "pub_year_facet_range_interval", default: 10
-    t.bigint "user_id"
     t.boolean "csv_charset_conversion", default: false, null: false
     t.text "header_logo_meta"
     t.jsonb "display_name_translations", default: {}, null: false
     t.jsonb "login_banner_translations", default: {}, null: false
     t.jsonb "footer_banner_translations", default: {}, null: false
+    t.string "email"
+    t.index ["email"], name: "index_library_groups_on_email"
     t.index ["short_name"], name: "index_library_groups_on_short_name"
-    t.index ["user_id"], name: "index_library_groups_on_user_id"
   end
 
   create_table "licenses", force: :cascade do |t|
@@ -901,7 +902,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
   create_table "request_status_types", force: :cascade do |t|
     t.string "name", null: false
     t.text "display_name"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -911,7 +912,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
   create_table "request_types", force: :cascade do |t|
     t.string "name", null: false
     t.text "display_name"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -997,7 +998,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
     t.text "http_method", null: false
     t.text "query_param", null: false
     t.text "additional_param"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1045,7 +1046,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
 
   create_table "shelves", force: :cascade do |t|
     t.string "name", null: false
-    t.text "note"
+    t.text "note", comment: "備考"
     t.bigint "library_id", null: false
     t.integer "items_count", default: 0, null: false
     t.integer "position"
@@ -1069,7 +1070,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.text "title", null: false
-    t.text "note"
+    t.text "note", comment: "備考"
     t.bigint "user_id"
     t.bigint "order_list_id"
     t.integer "subscribes_count", default: 0, null: false
@@ -1103,7 +1104,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
 
   create_table "user_groups", force: :cascade do |t|
     t.string "name"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1136,7 +1137,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
 
   create_table "user_import_files", force: :cascade do |t|
     t.bigint "user_id"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.datetime "executed_at"
     t.string "user_import_fingerprint"
     t.string "edit_mode"
@@ -1218,7 +1219,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_105435) do
   add_foreign_key "issn_record_and_manifestations", "manifestations"
   add_foreign_key "items", "manifestations"
   add_foreign_key "libraries", "library_groups"
-  add_foreign_key "library_groups", "users"
   add_foreign_key "messages", "messages", column: "parent_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
