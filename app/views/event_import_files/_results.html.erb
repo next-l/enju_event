@@ -8,14 +8,14 @@
   <tr>
     <th><%= t('activerecord.attributes.event_import_result.lineno') %></th>
     <th><%= t('activerecord.attributes.event_import_result.body') %></th>
-    <th><%= t('activerecord.models.user') %></th>
+    <th><%= t('activerecord.models.event') %></th>
     <th></th>
   </tr>
 <% @event_import_results.each_with_index do |event_import_result, idx| %>
   <tr class="line<%= cycle("0", "1") -%>">
     <td><%= @event_import_results.offset_value + idx + 1 %></td>
     <td><%= event_import_result.body.inspect %></td>
-    <td><%= link_to event_import_result.user.username, event_import_result.user.profile if event_import_result.user.try(:profile) %></td>
+    <td><%= link_to event_import_result.event.display_name, event_import_result.event if event_import_result.event %></td>
     <td>
       <%= link_to t('page.show'), event_import_result %>
       <%= link_to t('page.destroy'), event_import_result, data: {confirm: t('page.are_you_sure')}, method: :delete %>
