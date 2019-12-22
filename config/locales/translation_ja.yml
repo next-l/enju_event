@@ -38,6 +38,7 @@ ja:
         default_event_category_id: 既定の催し物の種別
       event_import_result:
         body: 本文
+        lineno: 行数
       event_export_file:
         event_export_file_name: ファイル名
         event_export_file_size: ファイルサイズ
