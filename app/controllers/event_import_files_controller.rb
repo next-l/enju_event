@@ -17,6 +17,8 @@ class EventImportFilesController < ApplicationController
   # GET /event_import_files/1
   # GET /event_import_files/1.json
   def show
+    @event_import_results = @event_import_file.user_import_results.page(params[:page])
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event_import_file }
