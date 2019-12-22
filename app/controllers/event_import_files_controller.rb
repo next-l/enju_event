@@ -22,7 +22,7 @@ class EventImportFilesController < ApplicationController
         file = @event_import_file.event_import.path
       end
     end
-    @event_import_results = @event_import_file.user_import_results.page(params[:page])
+    @event_import_results = @event_import_file.event_import_results.page(params[:page])
 
     respond_to do |format|
       format.html # show.html.erb
