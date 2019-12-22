@@ -13,13 +13,6 @@
         <strong><%= t('activerecord.attributes.event_import_file.event_import_file_name') -%>:</strong>
         <%= link_to @event_import_file.event_import_file_name, event_import_file_path(@event_import_file, format: :download) %>
         (<%= @event_import_file.event_import_content_type -%>)
-
-      <p>
-        <strong><%= t('activerecord.attributes.event_import_file.event_import_content_type') -%>:</strong>
-        <%= @event_import_file.event_import_content_type -%>
-      </p>
-
-      <p>
         <strong><%= t('activerecord.attributes.event_import_file.event_import_file_size') -%>:</strong>
         <%= @event_import_file.event_import_file_size -%>
       </p>
@@ -63,24 +56,24 @@
     <p>
       <strong><%= t('activerecord.attributes.event_import_file.error_message') -%>:</strong>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <%= simple_format(@event_import_file.error_message) -%>
 =======
       <%= @event_import_file.error_message -%>
 >>>>>>> update template files
+=======
+      <%= simple_format(@event_import_file.error_message) -%>
+>>>>>>> move event_import_result TSV link to event_import_file
     </p>
 
     <p>
       <strong><%= t('activerecord.models.user') -%>:</strong>
       <%= link_to @event_import_file.user.username, @event_import_file.user.profile if @event_import_file.user.try(:profile) -%>
     </p>
-<<<<<<< HEAD
 
     <% if @event_import_results %>
       <%= render 'results' %>
     <% end %>
-
-=======
->>>>>>> update template files
   </div>
 
   <div class="row">
