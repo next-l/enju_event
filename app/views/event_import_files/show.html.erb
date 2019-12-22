@@ -43,12 +43,12 @@
 
     <p>
       <strong><%= t('activerecord.attributes.event_import_file.default_event_category_id') -%>:</strong>
-      <%= link_to @event_import_file.default_event_category.display_name, @event_import_file.default_event_category if @event_import_file.default_event_category.try(:display_name) -%>
+      <%= link_to @event_import_file.default_event_category.display_name.localize, @event_import_file.default_event_category if @event_import_file.default_event_category.try(:display_name) -%>
     </p>
 
     <p>
       <strong><%= t('activerecord.attributes.event_import_file.default_library_id') -%>:</strong>
-      <%= link_to @event_import_file.default_library.display_name, @event_import_file.default_library if @event_import_file.default_library.try(:display_name) -%>
+      <%= link_to @event_import_file.default_library.display_name.localize, @event_import_file.default_library if @event_import_file.default_library.try(:display_name) -%>
     </p>
 
     <p>
