@@ -11,7 +11,7 @@ RSpec.describe 'EventImportResults', type: :system do
 
     it 'should get event_import_results index' do
       visit event_import_results_path
-      expect(page).to have_link 'TSV'
+      expect(page).not_to have_link 'TSV'
     end
   end
 end
