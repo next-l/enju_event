@@ -9,7 +9,7 @@ describe EventImportResultsController do
 
       it "assigns all event_import_results as @event_import_results" do
         get :index
-        assigns(:event_import_results).should eq(EventImportResult.page(1))
+        assigns(:event_import_results).should eq(EventImportResult.order(created_at: :desc).page(1))
       end
     end
 
@@ -18,7 +18,7 @@ describe EventImportResultsController do
 
       it "assigns all event_import_results as @event_import_results" do
         get :index
-        assigns(:event_import_results).should eq(EventImportResult.page(1))
+        assigns(:event_import_results).should eq(EventImportResult.order(created_at: :desc).page(1))
       end
     end
 
