@@ -30,11 +30,9 @@ class EventExportFile < ApplicationRecord
 
   def export!
     transition_to!(:started)
-    tempfile = Tempfile.new(['event_export_file_', '.txt'])
-    file = Event.export(format: :txt)
-    tempfile.puts(file)
-    tempfile.close
-    self.event_export = File.new(tempfile.path, "r")
+    role_name = user.try(:role).try(:name)
+    tsv = Event.export(role: role_name)
+    event_export.attach(io: StringIO.new(tsv), filename: "event_export.txt")
     save!
     transition_to!(:completed)
     mailer = EventExportMailer.completed(self)

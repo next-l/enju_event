@@ -29,6 +29,7 @@ class Event < ApplicationRecord
   before_validation :set_display_name, on: :create
 
   paginates_per 10
+  translates :display_name
 
   def set_date
     if all_day
@@ -56,30 +57,48 @@ class Event < ApplicationRecord
     self.display_name = name if display_name.blank?
   end
 
-  def self.export(options = {format: :txt})
-    header = %w(
-      name
-      event_category
-      library
-      start_at
-      end_at
-      all_day
-    )
-    lines = []
-    Event.find_each.map{|e|
-      line = []
-      line << e.name
-      line << e.event_category.name
-      line << e.library.name
-      line << e.start_at
-      line << e.end_at
-      line << e.all_day
-      lines << line
+  # CSVのヘッダ
+  # @param [String] role 権限
+  def self.csv_header(role: 'Guest')
+    Event.new.to_hash(role: role).keys
+  end
+
+  # CSV出力用のハッシュ
+  # @param [String] role 権限
+  def to_hash(role: 'Guest')
+    record = {
+      name: name,
+      event_category: event_category.try(:name),
+      library: library.try(:name),
+      start_at: start_at,
+      end_at: end_at,
+      all_day: all_day,
+      note: note,
+      created_at: created_at,
+      updated_at: updated_at
     }
-    if options[:format] == :txt
-      lines.map{|line| line.to_csv(col_sep: "\t")}.unshift(header.to_csv(col_sep: "\t")).join
-    else
-      event
+
+    I18n.available_locales.each do |locale|
+      record.merge!(
+        :"display_name_#{locale}" => send(:"display_name_#{locale}")
+      )
+    end
+
+    record
+  end
+
+  # TSVでのエクスポート
+  # @param [String] role 権限
+  # @param [String] col_sep 区切り文字
+  def self.export(role: 'Guest', col_sep: "\t")
+    file = Tempfile.create do |f|
+      f.write Event.csv_header(role: role).to_csv(col_sep: col_sep)
+      Event.find_each do |event|
+        f.write event.to_hash(role: role).values.to_csv(col_sep: col_sep)
+      end
+
+      f.rewind
+      f.read
     end
   end
 end
