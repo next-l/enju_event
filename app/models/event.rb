@@ -68,7 +68,6 @@ class Event < ApplicationRecord
   def to_hash(role: 'Guest')
     record = {
       name: name,
-      display_name: display_name,
       event_category: event_category.try(:name),
       library: library.try(:name),
       start_at: start_at,
@@ -78,6 +77,12 @@ class Event < ApplicationRecord
       created_at: created_at,
       updated_at: updated_at
     }
+
+    I18n.available_locales.each do |locale|
+      record.merge!(
+        :"display_name_#{locale}" => send(:"display_name_#{locale}")
+      )
+    end
 
     record
   end
