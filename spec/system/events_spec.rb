@@ -13,5 +13,10 @@ RSpec.describe 'Events', type: :system do
       visit events_path(query: 'test')
       expect(page).to have_link 'Kamata Library', href: events_path(library_id: 'kamata', query: 'test')
     end
+
+    it 'should export events in txt format' do
+      visit events_path(format: :txt)
+      expect(page).to have_content 'kamata'
+    end
   end
 end

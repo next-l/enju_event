@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_14_151124) do
+ActiveRecord::Schema.define(version: 2019_12_16_131755) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
+  enable_extension "plpgsql"
 
   create_table "accepts", force: :cascade do |t|
     t.integer "basket_id"
