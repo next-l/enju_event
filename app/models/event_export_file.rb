@@ -29,7 +29,9 @@ class EventExportFile < ApplicationRecord
     to: :state_machine
 
   def export!
+    role_name = user.try(:role).try(:name)
     tsv = Event.export(role: role_name)
+
     EventExportFile.transaction do
       transition_to!(:started)
       role_name = user.try(:role).try(:name)
