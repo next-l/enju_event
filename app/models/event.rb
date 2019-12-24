@@ -29,7 +29,6 @@ class Event < ApplicationRecord
   before_validation :set_display_name, on: :create
 
   paginates_per 10
-  translates :display_name
 
   def set_date
     if all_day
