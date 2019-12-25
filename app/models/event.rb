@@ -91,7 +91,7 @@ class Event < ApplicationRecord
   # @param [String] role 権限
   # @param [String] col_sep 区切り文字
   def self.export(role: 'Guest', col_sep: "\t")
-    file = Tempfile.create do |f|
+    file = Tempfile.create('event_export') do |f|
       f.write Event.csv_header(role: role).to_csv(col_sep: col_sep)
       Event.find_each do |event|
         f.write event.to_hash(role: role).values.to_csv(col_sep: col_sep)
