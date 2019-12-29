@@ -13,6 +13,7 @@ gemspec
 gem 'jquery-rails'
 gem 'sassc-rails'
 gem 'sprockets', '~> 3.7'
+gem 'jbuilder'
 
 # To use debugger
 # gem 'debugger'
