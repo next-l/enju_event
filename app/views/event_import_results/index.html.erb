@@ -1,6 +1,6 @@
-<div id="content_detail" class="ui-corner-all ui-widget-content">
-  <h1 class="title"><%= t('page.listing', model: t('activerecord.models.event_import_result')) -%></h1>
-  <div id="content_list">
+<div class="row">
+  <div class="col-md-9">
+    <h1 class="title"><%= t('page.listing', model: t('activerecord.models.event_import_result')) -%></h1>
     <% if @event_import_file %>
       <h2 class="event_title">
         <%= link_to @event_import_file.event_import.blob.filename, @event_import_file %>
@@ -33,7 +33,14 @@
     <%= paginate(@event_import_results) %>
 
   </div>
+
+<<<<<<< HEAD
+  <div class="col">
+  </div>
+=======
+</div>
 </div>
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
+>>>>>>> 7181d02... move event_import_result TSV link to event_import_file
 </div>
