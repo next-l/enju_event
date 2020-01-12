@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "accepts", force: :cascade do |t|
@@ -855,14 +856,13 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["manifestation_id"], name: "index_produces_on_manifestation_id"
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "locale"
-    t.string "user_number"
-    t.text "full_name"
-    t.text "note"
-    t.text "keyword_list"
-    t.bigint "required_role_id"
+  create_table "profiles", comment: "プロフィール", force: :cascade do |t|
+    t.string "locale", comment: "ロケール"
+    t.string "user_number", comment: "利用者番号"
+    t.text "full_name", comment: "氏名"
+    t.text "note", comment: "備考"
+    t.text "keyword_list", comment: "キーワードリスト"
+    t.bigint "required_role_id", comment: "参照に必要な権限"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "expired_at"
@@ -872,8 +872,8 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.bigint "user_group_id"
     t.bigint "library_id"
     t.index ["library_id"], name: "index_profiles_on_library_id"
+    t.index ["required_role_id"], name: "index_profiles_on_required_role_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
-    t.index ["user_id"], name: "index_profiles_on_user_id"
     t.index ["user_number"], name: "index_profiles_on_user_number", unique: true
   end
 
@@ -979,11 +979,10 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["resource_import_file_id"], name: "index_resource_import_results_on_resource_import_file_id"
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", comment: "権限", force: :cascade do |t|
     t.string "name", null: false
     t.string "display_name"
-    t.text "note"
-    t.integer "score", default: 0, null: false
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1181,7 +1180,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.datetime "confirmed_at"
-    t.bigint "profile_id"
+    t.bigint "profile_id", comment: "プロフィールID"
     t.index ["email"], name: "index_users_on_email"
     t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -1225,8 +1224,8 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
   add_foreign_key "periodical_and_manifestations", "periodicals"
   add_foreign_key "periodicals", "frequencies"
   add_foreign_key "profiles", "libraries"
+  add_foreign_key "profiles", "roles", column: "required_role_id"
   add_foreign_key "profiles", "user_groups"
-  add_foreign_key "profiles", "users"
   add_foreign_key "resource_import_files", "users"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "user_export_files", "users"
