@@ -48,7 +48,6 @@ class EventImportFile < ApplicationRecord
     check_field(rows.first)
     row_num = 1
 
-    EventImportResult.create!(event_import_file_id: id, body: rows.headers.join("\t"))
     rows.each do |row|
       row_num += 1
       next if row['dummy'].to_s.strip.present?
@@ -182,9 +181,7 @@ class EventImportFile < ApplicationRecord
 
   def open_import_file(tempfile)
     file = CSV.open(tempfile, col_sep: "\t")
-    header_columns = %w(
-      id name display_name library event_category start_at end_at all_day note dummy
-    )
+    header_columns = EventImportResult.header
     header = file.first
     ignored_columns = header - header_columns
     unless ignored_columns.empty?
