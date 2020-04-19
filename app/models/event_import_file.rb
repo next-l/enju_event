@@ -52,7 +52,7 @@ class EventImportFile < ApplicationRecord
     rows.each do |row|
       row_num += 1
       next if row['dummy'].to_s.strip.present?
-      EventImportResult.create!(event_import_file_id: id, body: row.fields.join("\t") })
+      EventImportResult.create!(event_import_file_id: id, body: row.fields.join("\t"))
 
       event = Event.new
       event.name = row['name'].to_s.strip
