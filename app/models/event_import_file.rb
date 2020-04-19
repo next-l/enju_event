@@ -51,12 +51,11 @@ class EventImportFile < ApplicationRecord
     check_field(rows.first)
     row_num = 1
 
+    EventImportResult.create!(event_import_file_id: id, body: rows.headers.join("\t"))
     rows.each do |row|
       row_num += 1
       next if row['dummy'].to_s.strip.present?
-      event_import_result = EventImportResult.new
-      event_import_result.assign_attributes({ event_import_file_id: id, body: row.fields.join("\t") })
-      event_import_result.save!
+      EventImportResult.create!(event_import_file_id: id, body: row.fields.join("\t") })
 
       event = Event.new
       event.name = row['name'].to_s.strip
