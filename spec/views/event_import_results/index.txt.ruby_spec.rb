@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "event_import_results/index.txt" do
+describe "event_import_results/index.txt.ruby" do
   fixtures :all
 
   before(:each) do
