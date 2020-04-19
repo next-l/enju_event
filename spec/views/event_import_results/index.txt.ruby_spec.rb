@@ -9,7 +9,6 @@ describe "event_import_results/index.txt.ruby" do
       default_library_id: 3,
       default_event_category: EventCategory.find(3),
       user: users(:admin)
-      )
     )
     file.import_start
     assign(:event_import_file_id, file.id)
