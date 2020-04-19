@@ -5,9 +5,9 @@ class EventImportResultsController < ApplicationController
   # GET /event_import_results
   # GET /event_import_results.json
   def index
-    @event_import_file = EventImportFile.where(id: params[:event_import_file_id]).first
+    @event_import_file = EventImportFile.find_by(id: params[:event_import_file_id])
     if @event_import_file
-      @event_import_results = @event_import_file.event_import_results.order(created_at: :desc).page(params[:page])
+      @event_import_results = @event_import_file.event_import_results.order(created_at: :asc).page(params[:page])
     else
       @event_import_results = EventImportResult.order(created_at: :desc).page(params[:page])
     end
