@@ -5,11 +5,12 @@ describe "event_import_results/index.txt" do
 
   before(:each) do
     file = EventImportFile.create!(
+      event_import: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"),
       default_library_id: 3,
       default_event_category: EventCategory.find(3),
       user: users(:admin)
+      )
     )
-    file.event_import.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), filename: 'attachment.txt')
     file.import_start
     assign(:event_import_file_id, file.id)
     assign(:event_import_results, EventImportFile.find(file.id).event_import_results)
