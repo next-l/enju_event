@@ -21,7 +21,7 @@ describe EventImportFile do
       @file.import_start.should eq({imported: 2, failed: 2})
       Event.count.should eq old_events_count + 2
       Event.closing_days.size.should eq closing_days_size + 1
-      EventImportResult.count.should eq old_import_results_count + 5
+      EventImportResult.count.should eq old_import_results_count + 6
       Event.order(:id).last.library.name.should eq 'hachioji'
       Event.order(:id).last.name.should eq 'event3'
       Event.where(name: 'event2').first.should be_nil
@@ -63,7 +63,7 @@ describe EventImportFile do
       @file.import_start
       Event.order('id DESC').first.name.should eq 'event3'
       Event.count.should eq old_event_count + 2
-      EventImportResult.count.should eq old_import_results_count + 5
+      EventImportResult.count.should eq old_import_results_count + 6
       Event.order('id DESC').first.start_at.should eq Time.zone.parse('2014-07-01').beginning_of_day
       Event.order('id DESC').first.end_at.should eq Time.zone.parse('2014-07-31 14:00')
     end
