@@ -35,7 +35,7 @@ class EventImportFile < ApplicationRecord
     rows.each do |row|
       row_num += 1
       next if row['dummy'].to_s.strip.present?
-      EventImportResult.create!(event_import_file_id: id, body: row.fields.join("\t"))
+      event_import_result = EventImportResult.new(event_import_file_id: id, body: row.fields.join("\t"))
 
       event = Event.new
       event.name = row['name'].to_s.strip
@@ -49,10 +49,10 @@ class EventImportFile < ApplicationRecord
       else
         event.all_day = false
       end
-      library = Library.where(name: row['library']).first
+      library = Library.find_by(name: row['library'])
       library = default_library || Library.web if library.blank?
       event.library = library
-      event_category = EventCategory.where(name: row['event_category']).first
+      event_category = EventCategory.find_by(name: row['event_category'])
       event_category = default_event_category if event_category.blank?
       event.event_category = event_category
 
@@ -95,7 +95,7 @@ class EventImportFile < ApplicationRecord
       event = Event.find(row['id'].to_s.strip)
       event_category = EventCategory.where(name: row['event_category'].to_s.strip).first
       event.event_category = event_category if event_category
-      library = Library.where(name: row['library'].to_s.strip).first
+      library = Library.find_by(name: row['library'].to_s.strip)
       event.library = library if library
       event.name = row['name'] if row['name'].to_s.strip.present?
       event.start_at = Time.zone.parse(row['start_at']) if row['start_at'].present?
