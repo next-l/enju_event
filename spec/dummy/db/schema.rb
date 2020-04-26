@@ -375,7 +375,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
   create_table "events", force: :cascade do |t|
     t.bigint "library_id", null: false
     t.bigint "event_category_id", null: false
-    t.string "name"
+    t.string "name", null: false
     t.text "note"
     t.datetime "start_at"
     t.datetime "end_at"

@@ -3,7 +3,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
     create_table :events do |t|
       t.references :library, index: true, null: false
       t.references :event_category, index: true, null: false
-      t.string :name
+      t.string :name, null: false
       t.text :note
       t.datetime :start_at
       t.datetime :end_at

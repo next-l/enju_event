@@ -32,7 +32,7 @@ end
 #  id                        :bigint           not null, primary key
 #  library_id                :bigint           not null
 #  event_category_id         :bigint           not null
-#  name                      :string
+#  name                      :string           not null
 #  note                      :text
 #  start_at                  :datetime
 #  end_at                    :datetime
