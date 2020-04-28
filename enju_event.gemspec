@@ -36,5 +36,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "selenium-webdriver"
   s.add_development_dependency "puma"
   s.add_development_dependency "annotate"
+  s.add_development_dependency "brakeman"
   s.add_development_dependency "rails", "~> 5.2"
 end
