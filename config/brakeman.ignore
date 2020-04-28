@@ -1,0 +1,66 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "0cc99b4df61bb345104e86e3061a1d3e8f23a8385c02a3f65a31701d5dd6e6a6",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/event_import_files_controller.rb",
+      "line": 34,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(EventImportFile.find(params[:id]).event_import.path, :filename => EventImportFile.find(params[:id]).event_import_file_name, :type => \"application/octet-stream\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "EventImportFilesController",
+        "method": "show"
+      },
+      "user_input": "EventImportFile.find(params[:id]).event_import.path",
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "43e943cb9bc901967fc76b8120d84c754d5872e0a955b507ef00d8f613342c86",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/event_export_files_controller.rb",
+      "line": 33,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(EventExportFile.find(params[:id]).event_export.path, :filename => EventExportFile.find(params[:id]).event_export_file_name, :type => \"application/octet-stream\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "EventExportFilesController",
+        "method": "show"
+      },
+      "user_input": "EventExportFile.find(params[:id]).event_export.path",
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "e304fcb4b88a6522a29c32c654cee5d0a59c5fcce2e0a9a8862768c237a8e72a",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/event_import_files_controller.rb",
+      "line": 32,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(EventImportFile.find(params[:id]).event_import.expiring_url(10))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "EventImportFilesController",
+        "method": "show"
+      },
+      "user_input": "EventImportFile.find(params[:id]).event_import.expiring_url(10)",
+      "confidence": "High",
+      "note": ""
+    }
+  ],
+  "updated": "2020-04-29 03:31:48 +0900",
+  "brakeman_version": "4.8.1"
+}
