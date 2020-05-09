@@ -7,7 +7,7 @@ class EventImportFile < ApplicationRecord
   scope :not_imported, -> {in_state(:pending)}
   scope :stucked, -> {in_state(:pending).where('event_import_files.created_at < ?', 1.hour.ago)}
 
-  has_one_attached :event_import
+  has_one_attached :attachment
   belongs_to :user
   belongs_to :default_library, class_name: 'Library', optional: true
   belongs_to :default_event_category, class_name: 'EventCategory', optional: true
@@ -27,7 +27,7 @@ class EventImportFile < ApplicationRecord
   def import
     transition_to!(:started)
     num = { imported: 0, failed: 0 }
-    rows = open_import_file(create_import_temp_file(event_import))
+    rows = open_import_file(create_import_temp_file(attachment))
     check_field(rows.first)
     row_num = 1
 
@@ -84,7 +84,7 @@ class EventImportFile < ApplicationRecord
 
   def modify
     transition_to!(:started)
-    rows = open_import_file(create_import_temp_file(event_import))
+    rows = open_import_file(create_import_temp_file(attachment))
     check_field(rows.first)
     row_num = 1
 
@@ -121,7 +121,7 @@ class EventImportFile < ApplicationRecord
 
   def remove
     transition_to!(:started)
-    rows = open_import_file(create_import_temp_file(event_import))
+    rows = open_import_file(create_import_temp_file(attachment))
     rows.shift
     row_num = 1
 

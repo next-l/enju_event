@@ -11,7 +11,7 @@ describe EventImportFile do
         default_event_category: EventCategory.find(3),
         user: users(:admin)
       )
-      @file.event_import.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), filename: 'attachment.txt')
+      @file.attachment.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), filename: 'attachment.txt')
     end
 
     it "should be imported" do
@@ -54,7 +54,7 @@ describe EventImportFile do
         default_event_category: EventCategory.find(3),
         user: users(:admin)
       )
-      @file.event_import.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample2.tsv"), filename: 'attachment.txt')
+      @file.attachment.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample2.tsv"), filename: 'attachment.txt')
     end
 
     it "should be imported" do
@@ -74,7 +74,7 @@ describe EventImportFile do
       @file = EventImportFile.create!(
         user: users(:admin)
       )
-      @file.event_import.attach(io: File.new("#{Rails.root.to_s}/../../examples/invalid_file.tsv"), filename: 'attachment.txt')
+      @file.attachment.attach(io: File.new("#{Rails.root.to_s}/../../examples/invalid_file.tsv"), filename: 'attachment.txt')
     end
 
     it "should not be imported" do
@@ -91,7 +91,7 @@ describe EventImportFile do
       file = EventImportFile.create!(
         user: users(:admin)
       )
-      file.event_import.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_update_file.tsv"), filename: 'attachment.txt')
+      file.attachment.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_update_file.tsv"), filename: 'attachment.txt')
       file.modify
       event1 = Event.find(1)
       event1.name.should eq '変更後のイベント名'
@@ -115,7 +115,7 @@ describe EventImportFile do
       file = EventImportFile.create!(
         user: users(:admin)
       )
-      file.event_import.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_destroy_file.tsv"), filename: 'attachment.txt')
+      file.attachment.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_destroy_file.tsv"), filename: 'attachment.txt')
       file.remove
       Event.count.should eq old_event_count - 2
     end
@@ -125,7 +125,7 @@ describe EventImportFile do
     file = EventImportFile.create!(
       user: users(:admin)
     )
-    file.event_import.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), filename: 'attachment.txt')
+    file.attachment.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), filename: 'attachment.txt')
     EventImportFileJob.perform_later(file).should be_truthy
   end
 end

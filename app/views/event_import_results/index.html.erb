@@ -3,7 +3,7 @@
     <h1 class="title"><%= t('page.listing', model: t('activerecord.models.event_import_result')) -%></h1>
     <% if @event_import_file %>
       <h2 class="event_title">
-        <%= link_to @event_import_file.event_import.blob.filename, @event_import_file %>
+        <%= link_to @event_import_file.attachment.blob.filename, @event_import_file %>
       </h2>
     <% end %>
 
@@ -17,7 +17,7 @@
       <% @event_import_results.each do |event_import_result| %>
         <tr class="line<%= cycle("0", "1") -%>">
           <td>
-            <%= link_to event_import_result.event_import_file.event_import.blob.filename, event_import_result.event_import_file if event_import_result.event_import_file.event_import.attached? %>
+            <%= link_to event_import_result.event_import_file.attachment.blob.filename, event_import_result.event_import_file if event_import_result.event_import_file.attachment.attached? %>
             <br />
             <%=l event_import_result.created_at %>
           </td>

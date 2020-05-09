@@ -5,7 +5,7 @@ class EventExportFile < ApplicationRecord
   ]
   include ExportFile
 
-  has_one_attached :event_export
+  has_one_attached :attachment
   has_many :event_export_file_transitions, autosave: false
 
   def state_machine
