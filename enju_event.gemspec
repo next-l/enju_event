@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "ri_cal"
   s.add_dependency "jbuilder"
 
-  s.add_development_dependency "enju_leaf", "~> 1.3.4.rc.1"
+  s.add_development_dependency "enju_leaf", "~> 1.3.4.rc.2"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "mysql2"
   s.add_development_dependency "pg"
@@ -38,4 +38,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "annotate"
   s.add_development_dependency "brakeman"
   s.add_development_dependency "rails", "~> 5.2"
+  s.add_development_dependency "sprockets", "~> 3.7"
 end
