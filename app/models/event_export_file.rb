@@ -19,7 +19,7 @@ class EventExportFile < ApplicationRecord
     transition_to!(:started)
     role_name = user.try(:role).try(:name)
     tsv = Event.export(role: role_name)
-    event_export.attach(io: StringIO.new(tsv), filename: "event_export.txt")
+    attachment.attach(io: StringIO.new(tsv), filename: "event_export.txt")
     save!
     transition_to!(:completed)
     mailer = EventExportMailer.completed(self)
