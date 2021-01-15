@@ -7,6 +7,7 @@ describe "event_export_files/show" do
   end
 
   it "renders attributes in <p>" do
+    allow(view).to receive(:back_to_index).and_return(nil)
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
   end

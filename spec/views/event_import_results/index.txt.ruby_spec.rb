@@ -9,7 +9,7 @@ describe "event_import_results/index.txt" do
       default_event_category: EventCategory.find(3),
       user: users(:admin)
     )
-    file.attachment.attach(io: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"), filename: 'attachment.txt')
+    file.attachment.attach(io: File.new("#{Rails.root}/../fixtures/files/event_import_file_sample1.tsv"), filename: 'attachment.txt')
     file.import_start
     assign(:event_import_file_id, file.id)
     assign(:event_import_results, EventImportFile.find(file.id).event_import_results)
