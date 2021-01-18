@@ -10,3 +10,4 @@ spec/dummy/private/
 spec/dummy/solr/
 spec/dummy/tmp/
 spec/cassette_library/
+node_modules

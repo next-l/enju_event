@@ -23,7 +23,7 @@ class EventImportFilesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @event_import_file }
       format.download {
-        send_data @event_import_file.event_import.download if @event_import_file.event_import.attached?
+        send_data @event_import_file.attachment.download, filename: @event_import_file.attachment.filename.to_s, type: @event_import_file.attachment.content_type
       }
     end
   end
