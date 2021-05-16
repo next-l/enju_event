@@ -4,7 +4,6 @@ class EventCategory < ApplicationRecord
   has_many :events
 
   paginates_per 10
-  translates :display_name
 end
 
 # == Schema Information

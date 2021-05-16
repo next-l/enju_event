@@ -9,10 +9,10 @@ end
 #
 # Table name: event_import_results
 #
-#  id                   :bigint           not null, primary key
-#  event_import_file_id :bigint
-#  event_id             :bigint
+#  id                   :integer          not null, primary key
+#  event_import_file_id :integer
+#  event_id             :integer
 #  body                 :text
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
+#  created_at           :datetime
+#  updated_at           :datetime
 #

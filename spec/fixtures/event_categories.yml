@@ -1,7 +1,7 @@
 --- 
 event_category_00001: 
-  name: unknown
-  display_name_translations: {"en": "(not specified)", "ja": "未定"}
+  name: unknown  
+  display_name: (not specified)
   updated_at: 2008-01-01 16:24:17.869192 +09:00
   id: 1
   note: ""
@@ -9,7 +9,7 @@ event_category_00001:
   position: 1
 event_category_00002: 
   name: closed
-  display_name_translations: {"en": "closed", "ja": "休館日"}
+  display_name: 休館日
   updated_at: 2008-01-01 16:24:32.561469 +09:00
   id: 2
   note: ""
@@ -17,7 +17,7 @@ event_category_00002:
   position: 2
 event_category_00003: 
   name: book_talk
-  display_name_translations: {"en": "talk event", "ja": "おはなし会"}
+  display_name: おはなし会
   updated_at: 2008-01-01 16:24:45.267241 +09:00
   id: 3
   note: ""
@@ -25,7 +25,7 @@ event_category_00003:
   position: 3
 event_category_00004: 
   name: movie_theater
-  display_name_translations: {"en": "screening", "ja": "上映会"}
+  display_name: 上映会
   updated_at: 2008-01-01 16:24:55.261682 +09:00
   id: 4
   note: ""
@@ -33,7 +33,7 @@ event_category_00004:
   position: 4
 event_category_00005: 
   name: talk_event
-  display_name_translations: {"en": "seminar", "ja": "講演会"}
+  display_name: 講演会
   updated_at: 2008-01-01 16:25:04.251141 +09:00
   id: 5
   note: ""
@@ -44,12 +44,11 @@ event_category_00005:
 #
 # Table name: event_categories
 #
-#  id                        :bigint           not null, primary key
-#  name                      :string           not null
-#  display_name              :text
-#  note                      :text
-#  position                  :integer
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
-#  display_name_translations :jsonb            not null
+#  id           :integer          not null, primary key
+#  name         :string           not null
+#  display_name :text
+#  note         :text
+#  position     :integer
+#  created_at   :datetime
+#  updated_at   :datetime
 #

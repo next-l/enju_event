@@ -29,7 +29,6 @@ class Event < ApplicationRecord
   before_validation :set_display_name, on: :create
 
   paginates_per 10
-  translates :display_name
 
   def set_date
     if all_day
@@ -66,7 +65,7 @@ class Event < ApplicationRecord
   # CSV出力用のハッシュ
   # @param [String] role 権限
   def to_hash(role: 'Guest')
-    record = {
+    {
       name: name,
       event_category: event_category.try(:name),
       library: library.try(:name),
@@ -75,16 +74,9 @@ class Event < ApplicationRecord
       all_day: all_day,
       note: note,
       created_at: created_at,
-      updated_at: updated_at
+      updated_at: updated_at,
+      display_name: display_name
     }
-
-    I18n.available_locales.each do |locale|
-      record.merge!(
-        :"display_name_#{locale}" => send(:"display_name_#{locale}")
-      )
-    end
-
-    record
   end
 
   # TSVでのエクスポート
