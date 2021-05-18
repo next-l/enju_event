@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "sunspot_solr", "~> 2.5"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "rspec-activemodel-mocks"
-  s.add_development_dependency "coveralls", '~> 0.8.23'
+  s.add_development_dependency "coveralls", "~> 0.8.23"
   s.add_development_dependency "resque"
   s.add_development_dependency "capybara"
   s.add_development_dependency "selenium-webdriver"
