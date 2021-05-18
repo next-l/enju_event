@@ -16,7 +16,7 @@ RSpec.describe 'Events', type: :system do
 
     it 'should export events in txt format' do
       visit events_path(format: :txt)
-      expect(page).to have_content 'Kamata Library'
+      expect(page).to have_content 'kamata'
     end
   end
 end

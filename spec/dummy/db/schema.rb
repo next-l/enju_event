@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_19_122214) do
+ActiveRecord::Schema.define(version: 2020_04_25_074822) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer "basket_id"
@@ -493,6 +493,27 @@ ActiveRecord::Schema.define(version: 2019_12_19_122214) do
     t.index ["body"], name: "index_isbn_records_on_body", unique: true
   end
 
+  create_table "item_custom_properties", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "display_name", null: false
+    t.text "note"
+    t.integer "position", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_item_custom_properties_on_name", unique: true
+  end
+
+  create_table "item_custom_values", force: :cascade do |t|
+    t.integer "item_custom_property_id", null: false
+    t.integer "item_id", null: false
+    t.text "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_custom_property_id", "item_id"], name: "index_item_custom_values_on_custom_item_property_and_item_id", unique: true
+    t.index ["item_custom_property_id"], name: "index_item_custom_values_on_custom_property_id"
+    t.index ["item_id"], name: "index_item_custom_values_on_item_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "call_number"
     t.string "item_identifier"
@@ -630,6 +651,27 @@ ActiveRecord::Schema.define(version: 2019_12_19_122214) do
     t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "manifestation_custom_properties", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "display_name", null: false
+    t.text "note"
+    t.integer "position", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_manifestation_custom_properties_on_name", unique: true
+  end
+
+  create_table "manifestation_custom_values", force: :cascade do |t|
+    t.integer "manifestation_custom_property_id", null: false
+    t.integer "manifestation_id", null: false
+    t.text "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["manifestation_custom_property_id", "manifestation_id"], name: "index_manifestation_custom_values_on_property_manifestation", unique: true
+    t.index ["manifestation_custom_property_id"], name: "index_manifestation_custom_values_on_custom_property_id"
+    t.index ["manifestation_id"], name: "index_manifestation_custom_values_on_manifestation_id"
   end
 
   create_table "manifestation_relationship_types", force: :cascade do |t|
