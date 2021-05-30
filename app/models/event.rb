@@ -5,8 +5,8 @@ class Event < ApplicationRecord
   scope :upcoming, lambda {|datetime| where('start_at >= ?', Time.zone.parse(datetime).beginning_of_day)}
   scope :at, lambda {|library| where(library_id: library.id)}
 
-  belongs_to :event_category, validate: true
-  belongs_to :library, validate: true
+  belongs_to :event_category
+  belongs_to :library
   belongs_to :place, optional: true
   has_many :picture_files, as: :picture_attachable
   has_many :participates, dependent: :destroy
@@ -22,8 +22,7 @@ class Event < ApplicationRecord
     time :end_at
   end
 
-  validates :name, :library, :event_category, :start_at, :end_at, presence: true
-  validates_associated :library, :event_category
+  validates :name, :start_at, :end_at, presence: true
   validate :check_date
   before_validation :set_date
   before_validation :set_display_name, on: :create
@@ -99,17 +98,17 @@ end
 #
 # Table name: events
 #
-#  id                        :bigint           not null, primary key
-#  library_id                :bigint           not null
-#  event_category_id         :bigint           not null
-#  name                      :string
-#  note                      :text
-#  start_at                  :datetime
-#  end_at                    :datetime
-#  all_day                   :boolean          default(FALSE), not null
-#  display_name              :text
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
-#  place_id                  :bigint
-#  display_name_translations :jsonb            not null
+#  id                :integer          not null, primary key
+#  library_id        :integer          not null
+#  event_category_id :integer          not null
+#  name              :string
+#  note              :text
+#  start_at          :datetime
+#  end_at            :datetime
+#  all_day           :boolean          default(FALSE), not null
+#  deleted_at        :datetime
+#  display_name      :text
+#  created_at        :datetime
+#  updated_at        :datetime
+#  place_id          :integer
 #

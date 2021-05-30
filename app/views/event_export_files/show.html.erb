@@ -5,7 +5,7 @@
 
     <p>
       <strong><%= t('activerecord.models.user') %></strong>
-      <%= @event_export_file.user.try(:username) %>
+      <%= @event_export_file.user&.username %>
     </p>
 
     <p>
