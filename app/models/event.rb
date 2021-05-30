@@ -26,6 +26,7 @@ class Event < ApplicationRecord
   validate :check_date
   before_validation :set_date
   before_validation :set_display_name, on: :create
+  translates :display_name
 
   paginates_per 10
 
@@ -98,17 +99,17 @@ end
 #
 # Table name: events
 #
-#  id                :integer          not null, primary key
-#  library_id        :integer          not null
-#  event_category_id :integer          not null
-#  name              :string
-#  note              :text
-#  start_at          :datetime
-#  end_at            :datetime
-#  all_day           :boolean          default(FALSE), not null
-#  deleted_at        :datetime
-#  display_name      :text
-#  created_at        :datetime
-#  updated_at        :datetime
-#  place_id          :integer
+#  id                        :integer          not null, primary key
+#  library_id                :integer          not null
+#  event_category_id         :integer          not null
+#  name                      :string
+#  note                      :text
+#  start_at                  :datetime
+#  end_at                    :datetime
+#  all_day                   :boolean          default(FALSE), not null
+#  display_name              :text
+#  created_at                :datetime
+#  updated_at                :datetime
+#  place_id                  :integer
+#  display_name_translations :jsonb            not null
 #

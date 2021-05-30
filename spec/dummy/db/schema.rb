@@ -325,6 +325,7 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.integer "position"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "event_export_file_transitions", id: :serial, force: :cascade do |t|
@@ -404,11 +405,11 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.boolean "all_day", default: false, null: false
-    t.datetime "deleted_at"
     t.text "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "place_id"
+    t.jsonb "display_name_translations", default: {}, null: false
     t.index ["event_category_id"], name: "index_events_on_event_category_id"
     t.index ["library_id"], name: "index_events_on_library_id"
     t.index ["place_id"], name: "index_events_on_place_id"
