@@ -5,7 +5,7 @@ describe "event_import_results/index.txt.ruby" do
 
   before(:each) do
     file = EventImportFile.create!(
-      event_import: File.new("#{Rails.root.to_s}/../../examples/event_import_file_sample1.tsv"),
+      event_import: File.new("#{Rails.root.to_s}/../fixtures/files/event_import_file_sample1.tsv"),
       default_library_id: 3,
       default_event_category: EventCategory.find(3),
       user: users(:admin)
