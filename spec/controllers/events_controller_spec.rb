@@ -55,8 +55,8 @@ describe EventsController do
         assigns(:events).should_not be_nil
       end
 
-      it "assigns all events as @events in txt format" do
-        get :index, format: 'txt'
+      it "assigns all events as @events in text format" do
+        get :index, format: :text
         assigns(:events).should_not be_nil
       end
 

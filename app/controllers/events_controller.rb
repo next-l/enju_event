@@ -51,7 +51,7 @@ class EventsController < ApplicationController
       format.html # index.html.erb
       format.json
       format.rss  { render layout: false }
-      format.txt
+      format.text
       format.atom
       format.ics
     end
