@@ -28,7 +28,7 @@ class EventImportFile < ApplicationRecord
     'application/vnd.ms-excel'
   ]
   validates_attachment_presence :event_import
-  belongs_to :user, validate: true
+  belongs_to :user
   belongs_to :default_library, class_name: 'Library', optional: true
   belongs_to :default_event_category, class_name: 'EventCategory', optional: true
   has_many :event_import_results
@@ -207,11 +207,11 @@ end
 #
 # Table name: event_import_files
 #
-#  id                        :bigint           not null, primary key
-#  parent_id                 :bigint
+#  id                        :integer          not null, primary key
+#  parent_id                 :integer
 #  content_type              :string
 #  size                      :integer
-#  user_id                   :bigint
+#  user_id                   :integer
 #  note                      :text
 #  executed_at               :datetime
 #  event_import_file_name    :string
@@ -219,11 +219,11 @@ end
 #  event_import_file_size    :integer
 #  event_import_updated_at   :datetime
 #  edit_mode                 :string
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
+#  created_at                :datetime
+#  updated_at                :datetime
 #  event_import_fingerprint  :string
 #  error_message             :text
 #  user_encoding             :string
-#  default_library_id        :bigint
-#  default_event_category_id :bigint
+#  default_library_id        :integer
+#  default_event_category_id :integer
 #

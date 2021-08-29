@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "event_export_files/show" do
   before(:each) do
-    @event_export_file = assign(:event_export_file, stub_model(EventExportFile))
+    @event_export_file = assign(:event_export_file, FactoryBot.create(:event_export_file))
     view.stub(:current_user).and_return(User.find(1))
   end
 
