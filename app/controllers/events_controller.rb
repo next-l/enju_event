@@ -52,7 +52,7 @@ class EventsController < ApplicationController
       format.html.phone
       format.json
       format.rss  { render layout: false }
-      format.txt
+      format.text
       format.atom
       format.ics
     end
