@@ -15,7 +15,7 @@ class EventImportResultsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @event_import_results }
-      format.txt
+      format.text
     end
   end
 
